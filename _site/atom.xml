@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>0xskar</title>
+    <description>Documenting my Learning and other Interesting things</description>
+    <link>http://localhost:9999</link>
+    <atom:link href="http://localhost:9999/feed.xml" rel="self" type="application/rss+xml" />
+    <author>
+      <name>0xskar</name>
+      <email>0xskar@proton.me</email>
+      <uri>https://0xskar.github.io</uri>
+    </author>
+    
+      <item>
+        <title>TryHackMe - IDORs - Insecure Direct Object Refrences</title>
+        <description>&lt;h1 id=&quot;idors---insecure-direct-object-refrences&quot;&gt;&lt;a href=&quot;#header-1&quot;&gt;&lt;/a&gt;IDORs - Insecure Direct Object Refrences&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&quot;https://tryhackme.com/room/idor&quot;&gt;https://tryhackme.com/room/idor&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Learn how to find and exploit IDOR vulnerabilities in a web application giving you access to data that you shouldn’t have.&lt;/p&gt;
+
+&lt;h2 id=&quot;task-1-what-is-an-idor&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 1 What is an IDOR?&lt;/h2&gt;
+&lt;p&gt;In this room, you’re going to learn what an IDOR vulnerability is, what they look like, how to find them and a practical task exploiting a real case scenario.
+What is an IDOR?
+IDOR stands for Insecure Direct Object Reference and is a type of access control vulnerability.
+This type of vulnerability can occur when a web server receives user-supplied input to retrieve objects (files, data, documents), too much trust has been placed on the input data, and it is not validated on the server-side to confirm the requested object belongs to the user requesting it.
+Answer the questions below
+What does IDOR stand for? Insecure Direct Object Reference&lt;/p&gt;
+
+&lt;h2 id=&quot;task-2-an-idor-example&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 2 An IDOR Example&lt;/h2&gt;
+&lt;p&gt;Imagine you’ve just signed up for an online service, and you want to change your profile information. The link you click on goes to http://online-service.thm/profile?user_id=1305, and you can see your information.&lt;/p&gt;
+
+&lt;p&gt;Curiosity gets the better of you, and you try changing the user_id value to 1000 instead (http://online-service.thm/profile?user_id=1000), and to your surprise, you can now see another user’s information. You’ve now discovered an IDOR vulnerability! Ideally, there should be a check on the website to confirm that the user information belongs to the user logged requesting it.&lt;/p&gt;
+
+&lt;p&gt;Using what you’ve learnt above, click on the View Site button and try and receive a flag by discovering and exploiting an IDOR vulnerability.&lt;/p&gt;
+
+&lt;p&gt;Answer the questions below
+What is the Flag from the IDOR example website?&lt;/p&gt;
+
+&lt;h2 id=&quot;task-3-finding-idors-in-encoded-ids&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 3 Finding IDORs in Encoded IDs&lt;/h2&gt;
+&lt;p&gt;Encoded IDs
+When passing data from page to page either by post data, query strings, or cookies, web developers will often first take the raw data and encode it. Encoding ensures that the receiving web server will be able to understand the contents. Encoding changes binary data into an ASCII string commonly using the a-z, A-Z, 0-9 and = character for padding. The most common encoding technique on the web is base64 encoding and can usually be pretty easy to spot. You can use websites like https://www.base64decode.org/ to decode the string, then edit the data and re-encode it again using https://www.base64encode.org/ and then resubmit the web request to see if there is a change in the response.&lt;/p&gt;
+
+&lt;p&gt;See the image below as a graphical example of this process:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/idor_encoded-ids.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Answer the questions below
+What is a common type of encoding used by websites?&lt;/p&gt;
+
+&lt;h2 id=&quot;task-4-finding-idors-in-hashed-ids&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 4 Finding IDORs in Hashed IDs&lt;/h2&gt;
+&lt;p&gt;Hashed IDs
+Hashed IDs are a little bit more complicated to deal with than encoded ones, but they may follow a predictable pattern, such as being the hashed version of the integer value. For example, the Id number 123 would become 202cb962ac59075b964b07152d234b70 if md5 hashing were in use.&lt;/p&gt;
+
+&lt;p&gt;It’s worthwhile putting any discovered hashes through a web service such as https://crackstation.net/ (which has a database of billions of hash to value results) to see if we can find any matches.
+Answer the questions below
+What is a common algorithm used for hashing IDs?&lt;/p&gt;
+
+&lt;h2 id=&quot;task-5-finding-idors-in-unpredictable-ids&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 5 Finding IDORs in Unpredictable IDs&lt;/h2&gt;
+&lt;p&gt;Unpredictable IDs
+If the Id cannot be detected using the above methods, an excellent method of IDOR detection is to create two accounts and swap the Id numbers between them. If you can view the other users’ content using their Id number while still being logged in with a different account (or not logged in at all), you’ve found a valid IDOR vulnerability.
+Answer the questions below
+What is the minimum number of accounts you need to create to check for IDORs between accounts? 2&lt;/p&gt;
+
+&lt;h2 id=&quot;task-6-where-are-idors-located&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 6 Where are IDORs located&lt;/h2&gt;
+&lt;p&gt;Where are they located?
+The vulnerable endpoint you’re targeting may not always be something you see in the address bar. It could be content your browser loads in via an AJAX request or something that you find referenced in a JavaScript file.&lt;/p&gt;
+
+&lt;p&gt;Sometimes endpoints could have an unreferenced parameter that may have been of some use during development and got pushed to production. For example, you may notice a call to /user/details displaying your user information (authenticated through your session). But through an attack known as parameter mining, you discover a parameter called user_id that you can use to display other users’ information, for example, /user/details?user_id=123.&lt;/p&gt;
+
+&lt;h2 id=&quot;task-7-a-practical-idor-example&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 7 A Practical IDOR Example&lt;/h2&gt;
+&lt;p&gt;Begin by pressing the Start Machine button; once started, click the below link and open it in a new browser tab:&lt;/p&gt;
+
+&lt;p&gt;https://LAB_WEB_URL.p.thmlabs.com&lt;/p&gt;
+
+&lt;p&gt;Firstly you’ll need to log in. To do this, click on the customer’s section and create an account. Once logged in, click on the Your Account tab.&lt;/p&gt;
+
+&lt;p&gt;The Your Account section gives you the ability to change your information such as username, email address and password. You’ll notice the username and email fields pre-filled in with your information.&lt;/p&gt;
+
+&lt;p&gt;We’ll start by investigating how this information gets pre-filled. If you open your browser developer tools, select the network tab and then refresh the page, you’ll see a call to an endpoint with the path /api/v1/customer?id={user_id}.&lt;/p&gt;
+
+&lt;p&gt;This page returns in JSON format your user id, username and email address. We can see from the path that the user information shown is taken from the query string’s id parameter (see below image).&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/idor_example.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You can try testing this id parameter for an IDOR vulnerability by changing the id to another user’s id. Try selecting users with IDs 1 and 3 and then answer the questions below.
+Answer the questions below
+What is the username for user id 1?
+What is the email address for user id 3?&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 09 Jun 2022 00:00:00 -0700</pubDate>
+        <link>http://localhost:9999//TryHackMe-IDOR</link>
+        <link href="http://localhost:9999/TryHackMe-IDOR"/>
+        <guid isPermaLink="true">http://localhost:9999/TryHackMe-IDOR</guid>
+      </item>
+    
+  </channel>
+</rss>
