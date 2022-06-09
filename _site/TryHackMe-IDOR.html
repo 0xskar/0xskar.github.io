@@ -15,17 +15,17 @@
 <meta property="og:title" content="TryHackMe - IDORs - Insecure Direct Object Refrences" />
 <meta name="author" content="0xskar" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="IDORs - Insecure Direct Object Refrences https://tryhackme.com/room/idor" />
-<meta property="og:description" content="IDORs - Insecure Direct Object Refrences https://tryhackme.com/room/idor" />
-<link rel="canonical" href="http://localhost:9999/TryHackMe-IDOR" />
-<meta property="og:url" content="http://localhost:9999/TryHackMe-IDOR" />
+<meta name="description" content="https://tryhackme.com/room/idor" />
+<meta property="og:description" content="https://tryhackme.com/room/idor" />
+<link rel="canonical" href="http://localhost:4000/TryHackMe-IDOR" />
+<meta property="og:url" content="http://localhost:4000/TryHackMe-IDOR" />
 <meta property="og:site_name" content="0xskar" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2022-06-09T00:00:00-07:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="TryHackMe - IDORs - Insecure Direct Object Refrences" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"0xskar","url":"https://0xskar.github.io"},"dateModified":"2022-06-09T00:00:00-07:00","datePublished":"2022-06-09T00:00:00-07:00","description":"IDORs - Insecure Direct Object Refrences https://tryhackme.com/room/idor","headline":"TryHackMe - IDORs - Insecure Direct Object Refrences","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:9999/TryHackMe-IDOR"},"url":"http://localhost:9999/TryHackMe-IDOR"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"0xskar","url":"https://0xskar.github.io"},"dateModified":"2022-06-09T00:00:00-07:00","datePublished":"2022-06-09T00:00:00-07:00","description":"https://tryhackme.com/room/idor","headline":"TryHackMe - IDORs - Insecure Direct Object Refrences","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/TryHackMe-IDOR"},"url":"http://localhost:4000/TryHackMe-IDOR"}</script>
 <!-- End Jekyll SEO tag -->
 
 </head>
@@ -50,30 +50,30 @@
         <article>
   <h2>TryHackMe - IDORs - Insecure Direct Object Refrences</h2>
   <time datetime="2022-06-09T00:00:00-07:00" class="by-line">09 Jun 2022</time>
-  <h1 id="idors---insecure-direct-object-refrences"><a href="#header-1"></a>IDORs - Insecure Direct Object Refrences</h1>
-<p><a href="https://tryhackme.com/room/idor">https://tryhackme.com/room/idor</a></p>
+  <p><a href="https://tryhackme.com/room/idor">https://tryhackme.com/room/idor</a></p>
 
 <p>Learn how to find and exploit IDOR vulnerabilities in a web application giving you access to data that you shouldn’t have.</p>
 
-<h2 id="task-1-what-is-an-idor"><a href="#header-2"></a>Task 1 What is an IDOR?</h2>
-<p>In this room, you’re going to learn what an IDOR vulnerability is, what they look like, how to find them and a practical task exploiting a real case scenario.
-What is an IDOR?
-IDOR stands for Insecure Direct Object Reference and is a type of access control vulnerability.
-This type of vulnerability can occur when a web server receives user-supplied input to retrieve objects (files, data, documents), too much trust has been placed on the input data, and it is not validated on the server-side to confirm the requested object belongs to the user requesting it.
-Answer the questions below
-What does IDOR stand for? Insecure Direct Object Reference</p>
+<h2 id="task-1-what-is-an-idor"><a href="#header-3"></a>Task 1 What is an IDOR?</h2>
+<p>IDOR stands for Insecure Direct Object Reference and is a type of access control vulnerability.
+This type of vulnerability can occur when a web server receives user-supplied input to retrieve objects (files, data, documents), too much trust has been placed on the input data, and it is not validated on the server-side to confirm the requested object belongs to the user requesting it.</p>
 
-<h2 id="task-2-an-idor-example"><a href="#header-2"></a>Task 2 An IDOR Example</h2>
+<p><strong>Answer the questions below</strong></p>
+
+<p>What does IDOR stand for? Insecure Direct Object Reference</p>
+
+<h2 id="task-2-an-idor-example"><a href="#header-3"></a>Task 2 An IDOR Example</h2>
 <p>Imagine you’ve just signed up for an online service, and you want to change your profile information. The link you click on goes to http://online-service.thm/profile?user_id=1305, and you can see your information.</p>
 
 <p>Curiosity gets the better of you, and you try changing the user_id value to 1000 instead (http://online-service.thm/profile?user_id=1000), and to your surprise, you can now see another user’s information. You’ve now discovered an IDOR vulnerability! Ideally, there should be a check on the website to confirm that the user information belongs to the user logged requesting it.</p>
 
 <p>Using what you’ve learnt above, click on the View Site button and try and receive a flag by discovering and exploiting an IDOR vulnerability.</p>
 
-<p>Answer the questions below
-What is the Flag from the IDOR example website?</p>
+<p><strong>Answer the questions below</strong></p>
 
-<h2 id="task-3-finding-idors-in-encoded-ids"><a href="#header-2"></a>Task 3 Finding IDORs in Encoded IDs</h2>
+<p>What is the Flag from the IDOR example website?</p>
+
+<h2 id="task-3-finding-idors-in-encoded-ids"><a href="#header-3"></a>Task 3 Finding IDORs in Encoded IDs</h2>
 <p>Encoded IDs
 When passing data from page to page either by post data, query strings, or cookies, web developers will often first take the raw data and encode it. Encoding ensures that the receiving web server will be able to understand the contents. Encoding changes binary data into an ASCII string commonly using the a-z, A-Z, 0-9 and = character for padding. The most common encoding technique on the web is base64 encoding and can usually be pretty easy to spot. You can use websites like https://www.base64decode.org/ to decode the string, then edit the data and re-encode it again using https://www.base64encode.org/ and then resubmit the web request to see if there is a change in the response.</p>
 
@@ -81,30 +81,35 @@ When passing data from page to page either by post data, query strings, or cooki
 
 <p><img src="/assets/idor_encoded-ids.png" alt="" /></p>
 
-<p>Answer the questions below
-What is a common type of encoding used by websites?</p>
+<p><strong>Answer the questions below</strong></p>
 
-<h2 id="task-4-finding-idors-in-hashed-ids"><a href="#header-2"></a>Task 4 Finding IDORs in Hashed IDs</h2>
+<p>What is a common type of encoding used by websites?</p>
+
+<h2 id="task-4-finding-idors-in-hashed-ids"><a href="#header-3"></a>Task 4 Finding IDORs in Hashed IDs</h2>
 <p>Hashed IDs
 Hashed IDs are a little bit more complicated to deal with than encoded ones, but they may follow a predictable pattern, such as being the hashed version of the integer value. For example, the Id number 123 would become 202cb962ac59075b964b07152d234b70 if md5 hashing were in use.</p>
 
-<p>It’s worthwhile putting any discovered hashes through a web service such as https://crackstation.net/ (which has a database of billions of hash to value results) to see if we can find any matches.
-Answer the questions below
-What is a common algorithm used for hashing IDs?</p>
+<p>It’s worthwhile putting any discovered hashes through a web service such as https://crackstation.net/ (which has a database of billions of hash to value results) to see if we can find any matches.</p>
 
-<h2 id="task-5-finding-idors-in-unpredictable-ids"><a href="#header-2"></a>Task 5 Finding IDORs in Unpredictable IDs</h2>
+<p><strong>Answer the questions below</strong></p>
+
+<p>What is a common algorithm used for hashing IDs?</p>
+
+<h2 id="task-5-finding-idors-in-unpredictable-ids"><a href="#header-3"></a>Task 5 Finding IDORs in Unpredictable IDs</h2>
 <p>Unpredictable IDs
-If the Id cannot be detected using the above methods, an excellent method of IDOR detection is to create two accounts and swap the Id numbers between them. If you can view the other users’ content using their Id number while still being logged in with a different account (or not logged in at all), you’ve found a valid IDOR vulnerability.
-Answer the questions below
-What is the minimum number of accounts you need to create to check for IDORs between accounts? 2</p>
+If the Id cannot be detected using the above methods, an excellent method of IDOR detection is to create two accounts and swap the Id numbers between them. If you can view the other users’ content using their Id number while still being logged in with a different account (or not logged in at all), you’ve found a valid IDOR vulnerability.</p>
 
-<h2 id="task-6-where-are-idors-located"><a href="#header-2"></a>Task 6 Where are IDORs located</h2>
+<p><strong>Answer the questions below</strong></p>
+
+<p>What is the minimum number of accounts you need to create to check for IDORs between accounts? 2</p>
+
+<h2 id="task-6-where-are-idors-located"><a href="#header-3"></a>Task 6 Where are IDORs located</h2>
 <p>Where are they located?
 The vulnerable endpoint you’re targeting may not always be something you see in the address bar. It could be content your browser loads in via an AJAX request or something that you find referenced in a JavaScript file.</p>
 
 <p>Sometimes endpoints could have an unreferenced parameter that may have been of some use during development and got pushed to production. For example, you may notice a call to /user/details displaying your user information (authenticated through your session). But through an attack known as parameter mining, you discover a parameter called user_id that you can use to display other users’ information, for example, /user/details?user_id=123.</p>
 
-<h2 id="task-7-a-practical-idor-example"><a href="#header-2"></a>Task 7 A Practical IDOR Example</h2>
+<h2 id="task-7-a-practical-idor-example"><a href="#header-3"></a>Task 7 A Practical IDOR Example</h2>
 <p>Begin by pressing the Start Machine button; once started, click the below link and open it in a new browser tab:</p>
 
 <p>https://LAB_WEB_URL.p.thmlabs.com</p>
@@ -119,10 +124,13 @@ The vulnerable endpoint you’re targeting may not always be something you see i
 
 <p><img src="/assets/idor_example.png" alt="" /></p>
 
-<p>You can try testing this id parameter for an IDOR vulnerability by changing the id to another user’s id. Try selecting users with IDs 1 and 3 and then answer the questions below.
-Answer the questions below
-What is the username for user id 1?
-What is the email address for user id 3?</p>
+<p>You can try testing this id parameter for an IDOR vulnerability by changing the id to another user’s id. Try selecting users with IDs 1 and 3 and then answer the questions below.</p>
+
+<p><strong>Answer the questions below</strong></p>
+
+<p>What is the username for user id 1?</p>
+
+<p>What is the email address for user id 3?</p>
 
 
 </article>

