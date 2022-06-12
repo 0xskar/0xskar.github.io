@@ -78,7 +78,7 @@
 
 <p>Also known as Directory traversal, a web security vulnerability allows an attacker to read operating system resources, such as local files on the server running an application. The attacker exploits this vulnerability by manipulating and abusing the web application’s URL to locate and access files or directories stored outside the application’s root directory.</p>
 
-<p>Path traversal vulnerabilities occur when the user’s input is passed to a function such as file_get_contents in PHP. It’s important to note that the function is not the main contributor to the vulnerability. Often poor input validation or filtering is the cause of the vulnerability. In PHP, you can use the file_get_contents to read the content of a file. You can find more information about the function here.</p>
+<p>Path traversal vulnerabilities occur when the user’s input is passed to a function such as <code class="language-plaintext highlighter-rouge">file_get_contents</code> in PHP. It’s important to note that the function is not the main contributor to the vulnerability. Often poor input validation or filtering is the cause of the vulnerability. In PHP, you can use the file_get_contents to read the content of a file. You can find more information about the function here.</p>
 
 <p>The following graph shows how a web application stores files in /var/www/app. The happy path would be the user requesting the contents of userCV.pdf from a defined path /var/www/app/CVs.</p>
 
@@ -96,9 +96,9 @@
 
 <p>Similarly, if the web application runs on a Windows server, the attacker needs to provide Windows paths. For example, if the attacker wants to read the boot.ini file located in c:\boot.ini, then the attacker can try the following depending on the target OS version:</p>
 
-<p>http://webapp.thm/get.php?file=../../../../boot.ini or</p>
+<p><code class="language-plaintext highlighter-rouge">http://webapp.thm/get.php?file=../../../../boot.ini</code> or</p>
 
-<p>http://webapp.thm/get.php?file=../../../../windows/win.ini</p>
+<p><code class="language-plaintext highlighter-rouge">http://webapp.thm/get.php?file=../../../../windows/win.ini</code></p>
 
 <p>The same concept applies here as with Linux operating systems, where we climb up directories until it reaches the root directory, which is usually c:.</p>
 
@@ -184,7 +184,7 @@
 
 <p>The PHP code above uses a GET request via the URL parameter lang to include the file of the page. The call can be done by sending the following HTTP request as follows: http://webapp.thm/index.php?lang=EN.php to load the English page or http://webapp.thm/index.php?lang=AR.php to load the Arabic page, where EN.php and AR.php files exist in the same directory.</p>
 
-<p>Theoretically, we can access and display any readable file on the server from the code above if there isn’t any input validation. Let’s say we want to read the /etc/passwd file, which contains sensitive information about the users of the Linux operating system, we can try the following: http://webapp.thm/get.php?file=/etc/passwd</p>
+<p>Theoretically, we can access and display any readable file on the server from the code above if there isn’t any input validation. Let’s say we want to read the /etc/passwd file, which contains sensitive information about the users of the Linux operating system, we can try the following: <code class="language-plaintext highlighter-rouge">http://webapp.thm/get.php?file=/etc/passwd</code></p>
 
 <p>In this case, it works because there isn’t a directory specified in the include function and no input validation.</p>
 
@@ -207,7 +207,7 @@
 
 <p>Again the payload looks similar to the path traversal, but the include function allows us to include any called files into the current page. The following will be the exploit:</p>
 
-<p>http://webapp.thm/index.php?lang=../../../../etc/passwd</p>
+<p><code class="language-plaintext highlighter-rouge">http://webapp.thm/index.php?lang=../../../../etc/passwd</code></p>
 
 <p>Now apply what we discussed, try to read files within the server, and figure out the directory specified in the include function and answer question #2 below.</p>
 
@@ -238,7 +238,7 @@
 
 <p>To exploit this, we need to use the ../ trick, as described in the directory traversal section, to get out the current folder. Let’s try the following:</p>
 
-<p>http://webapp.thm/index.php?lang=../../../../etc/passwd</p>
+<p><code class="language-plaintext highlighter-rouge">http://webapp.thm/index.php?lang=../../../../etc/passwd</code></p>
 
 <p>Note that we used 4 ../ because we know the path has four levels /var/www/html/THM-4. But we still receive the following error:</p>
 
@@ -256,17 +256,13 @@
 
 <p>Now apply what we showed in Lab #3, and try to read files /etc/passwd, answer question #1 below.</p>
 
-<ol>
-  <li>In this section, the developer decided to filter keywords to avoid disclosing sensitive information! The /etc/passwd file is being filtered. There are two possible methods to bypass the filter. First, by using the NullByte %00 or the current directory trick at the end of the filtered keyword /.. The exploit will be similar to http://webapp.thm/index.php?lang=/etc/passwd/. We could also use http://webapp.thm/index.php?lang=/etc/passwd%00.</li>
-</ol>
+<p>In this section, the developer decided to filter keywords to avoid disclosing sensitive information! The /etc/passwd file is being filtered. There are two possible methods to bypass the filter. First, by using the NullByte %00 or the current directory trick at the end of the filtered keyword /.. The exploit will be similar to http://webapp.thm/index.php?lang=/etc/passwd/. We could also use http://webapp.thm/index.php?lang=/etc/passwd%00.</p>
 
 <p>To make it clearer, if we try this concept in the file system using cd .., it will get you back one step; however, if you do cd ., It stays in the current directory.  Similarly, if we try  /etc/passwd/.., it results to be  /etc/ and that’s because we moved one to the root.  Now if we try  /etc/passwd/., the result will be  /etc/passwd since dot refers to the current directory.</p>
 
 <p>Now apply this technique in Lab #4 and figure out to read /etc/passwd.</p>
 
-<ol>
-  <li>Next, in the following scenarios, the developer starts to use input validation by filtering some keywords. Let’s test out and check the error message!</li>
-</ol>
+<p>Next, in the following scenarios, the developer starts to use input validation by filtering some keywords. Let’s test out and check the error message!</p>
 
 <p>http://webapp.thm/index.php?lang=../../../../etc/passwd</p>
 
@@ -284,9 +280,7 @@
 
 <p>Try out Lab #5 and try to read /etc/passwd and bypass the filter!</p>
 
-<ol>
-  <li>Finally, we’ll discuss the case where the developer forces the include to read from a defined directory! For example, if the web application asks to supply input that has to include a directory such as: http://webapp.thm/index.php?lang=languages/EN.php then, to exploit this, we need to include the directory in the payload like so: ?lang=languages/../../../../../etc/passwd.</li>
-</ol>
+<p>Finally, we’ll discuss the case where the developer forces the include to read from a defined directory! For example, if the web application asks to supply input that has to include a directory such as: http://webapp.thm/index.php?lang=languages/EN.php then, to exploit this, we need to include the directory in the payload like so: ?lang=languages/../../../../../etc/passwd.</p>
 
 <p>Try this out in Lab #6 and figure what the directory that has to be present in the input field is.</p>
 
@@ -331,14 +325,58 @@
 
 <p>As a developer, it’s important to be aware of web application vulnerabilities, how to find them, and prevention methods. To prevent the file inclusion vulnerabilities, some common suggestions include:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. Keep system and services, including web application frameworks, updated with the latest version.
-2. Turn off PHP errors to avoid leaking the path of the application and other potentially revealing information.
-3. A Web Application Firewall (WAF) is a good option to help mitigate web application attacks.
-4. Disable some PHP features that cause file inclusion vulnerabilities if your web app doesn't need them, such as allow_url_fopen on and allow_url_include.
-5. Carefully analyze the web application and allow only protocols and PHP wrappers that are in need.
-6. Never trust user input, and make sure to implement proper input validation against file inclusion.
-7. Implement whitelisting for file names and locations as well as blacklisting.
-</code></pre></div></div>
+<ol>
+  <li>Keep system and services, including web application frameworks, updated with the latest version.</li>
+  <li>Turn off PHP errors to avoid leaking the path of the application and other potentially revealing information.</li>
+  <li>A Web Application Firewall (WAF) is a good option to help mitigate web application attacks.</li>
+  <li>Disable some PHP features that cause file inclusion vulnerabilities if your web app doesn’t need them, such as allow_url_fopen on and allow_url_include.</li>
+  <li>Carefully analyze the web application and allow only protocols and PHP wrappers that are in need.</li>
+  <li>Never trust user input, and make sure to implement proper input validation against file inclusion.</li>
+  <li>Implement whitelisting for file names and locations as well as blacklisting.</li>
+</ol>
+
+<h3 id="task-8-challenge"><a href="#header-3"></a>Task 8 Challenge</h3>
+
+<p>Great Job! Now apply the techniques you’ve learned to capture the flags! Familiarizing yourself with HTTP Web basics could help you complete these challenges.</p>
+
+<p>Make sure the attached VM is up and running then visit: http://10.10.77.73/challenges/index.php
+Steps for testing for LFI</p>
+
+<ol>
+  <li>Find an entry point that could be via GET, POST, COOKIE, or HTTP header values!</li>
+  <li>Enter a valid input to see how the web server behaves.</li>
+  <li>Enter invalid inputs, including special characters and common file names.</li>
+  <li>Don’t always trust what you supply in input forms is what you intended! Use either a browser address bar or a tool such as Burpsuite.</li>
+  <li>Look for errors while entering invalid input to disclose the current path of the web application; if there are no errors, then trial and error might be your best option.</li>
+  <li>Understand the input validation and if there are any filters!</li>
+  <li>Try the inject a valid entry to read sensitive files</li>
+</ol>
+
+<p><strong>Answer the questions below</strong></p>
+
+<p><strong>Capture Flag1 at /etc/flag1</strong></p>
+
+<p>In order to get this flag we have to edit change the MIME to post and the Media Type as well. This is a compolation of all of these we can choose from:</p>
+
+<p>https://www.iana.org/assignments/media-types/media-types.xhtml</p>
+
+<p>Adding <code class="language-plaintext highlighter-rouge">Content-Encoding: application/x-www-form-urlencoded</code> and then changing from <code class="language-plaintext highlighter-rouge">GET</code> to <code class="language-plaintext highlighter-rouge">POST</code> and using the paramater <code class="language-plaintext highlighter-rouge">file=../../../etc/flag1</code> will get us our first flag. See pic below.</p>
+
+<p><img src="/assets/fileinc-flag1.png" alt="" /></p>
+
+<p><strong>Capture Flag2 at /etc/flag2</strong></p>
+
+<p>“Only admins can access this page!” And checking the hint we need to adjust the cookies in order to get this flag.</p>
+
+<p>The file include function is telling us it is grabbing a php and messing with the cookie in the storage tab of the developer tools and adding a null byte at the end gets us our flag.</p>
+
+<p><strong>Capture Flag3 at /etc/flag3</strong></p>
+
+<p>curl -X POST http://10.10.179.213/challenges/chall3.php -d ‘method=POST&amp;file=../../../../etc/flag3%00’ –output -</p>
+
+<p>Gain RCE in Lab #Playground /playground.php with RFI to execute the hostname command. What is the output? We did this above already.</p>
+
+<p>Booted up a simple http server and called it</p>
 
 
 </article>

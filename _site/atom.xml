@@ -12,6 +12,113 @@
     </author>
     
       <item>
+        <title>TryHackMe - Server-Side Request Forgery (SSRF)</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://tryhackme.com/room/ssrfqi&quot;&gt;https://tryhackme.com/room/ssrfqi&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;How to exploit Server-Side Request Forgery (SSRF) vulnerabilities, allowing you to access internal server resources.&lt;/p&gt;
+
+&lt;h2 id=&quot;task-1-what-is-an-ssrf&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 1 What is an SSRF?&lt;/h2&gt;
+
+&lt;p&gt;A vulnerability that allows users to modify server requests to get access to files or information that they shouldn’t have access to.&lt;/p&gt;
+
+&lt;p&gt;Types of SSRF&lt;/p&gt;
+
+&lt;p&gt;There are two types of SSRF vulnerability; the first is a regular SSRF where data is returned to the attacker’s screen. The second is a Blind SSRF vulnerability where an SSRF occurs, but no information is returned to the attacker’s screen.
+What’s the impact?&lt;/p&gt;
+
+&lt;p&gt;A successful SSRF attack can result in any of the following:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Access to unauthorised areas.&lt;/li&gt;
+  &lt;li&gt;Access to customer/organisational data.&lt;/li&gt;
+  &lt;li&gt;Ability to Scale to internal networks.&lt;/li&gt;
+  &lt;li&gt;Reveal authentication tokens/credentials.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;task-2-ssrf-examples&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 2 SSRF Examples&lt;/h2&gt;
+
+&lt;p&gt;Viewing the site takes us through some examples and shows us how to take advantage of simple SSRF. Using the url we are looking for and ending it with &amp;amp; will give us our flag.&lt;/p&gt;
+
+&lt;h2 id=&quot;task-3-finding-an-ssrf&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 3 Finding an SSRF&lt;/h2&gt;
+
+&lt;p&gt;Here we see we can spot SSRF Vulns when we can see a full URL is a parameter in the address bar (pic below):&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/ssrf-example1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Or hiding in a form field:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/ssrf-example2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Or a partial URL or a path in the URL&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/ssrf-example3.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We are also told that these examples are easiar to exploit than others, and will require a lot of trial and error to find a payload that works.&lt;/p&gt;
+
+&lt;p&gt;Also if we are trying to access blind SSRFs (SSRF Requests that cannot be seen or is not reflected back to us), we will need to use external tools like &lt;a href=&quot;http://requestbin.com&quot;&gt;requestbin.com&lt;/a&gt;, or our own HTTP server like Burp Suites Collaborator Client.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Answer the questions below:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;What website can be used to catch HTTP requests from a server?&lt;/p&gt;
+
+&lt;p&gt;Requestbin.com&lt;/p&gt;
+
+&lt;h2 id=&quot;task-4-defeating-common-ssrf-defences&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 4 Defeating Common SSRF Defences&lt;/h2&gt;
+
+&lt;p&gt;This task goes over the common approaches that developers aware of SSRF vulerabilities take to protect their servers. Two approaches, deny, or allow lists.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Deny List&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;A Deny List is where all requests are accepted apart from resources specified in a list or matching a particular pattern. A Web Application may employ a deny list to protect sensitive endpoints, IP addresses or domains from being accessed by the public while still allowing access to other locations. A specific endpoint to restrict access is the localhost, which may contain server performance data or further sensitive information, so domain names such as localhost and 127.0.0.1 would appear on a deny list. Attackers can bypass a Deny List by using alternative localhost references such as 0, 0.0.0.0, 0000, 127.1, 127.&lt;em&gt;.&lt;/em&gt;.*, 2130706433, 017700000001 or subdomains that have a DNS record which resolves to the IP Address 127.0.0.1 such as 127.0.0.1.nip.io.&lt;/p&gt;
+
+&lt;p&gt;Also, in a cloud environment, it would be beneficial to block access to the IP address 169.254.169.254, which contains metadata for the deployed cloud server, including possibly sensitive information. An attacker can bypass this by registering a subdomain on their own domain with a DNS record that points to the IP Address 169.254.169.254.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Allow List&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;An allow list is where all requests get denied unless they appear on a list or match a particular pattern, such as a rule that an URL used in a parameter must begin with https://website.thm. An attacker could quickly circumvent this rule by creating a subdomain on an attacker’s domain name, such as https://website.thm.attackers-domain.thm. The application logic would now allow this input and let an attacker control the internal HTTP request.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Open Redirect&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;If the above bypasses do not work, there is one more trick up the attacker’s sleeve, the &lt;strong&gt;open redirect&lt;/strong&gt;. An open redirect is an endpoint on the server where the website visitor gets automatically redirected to another website address. Take, for example, the link https://website.thm/link?url=https://tryhackme.com. This endpoint was created to record the number of times visitors have clicked on this link for advertising/marketing purposes. But imagine there was a potential SSRF vulnerability with stringent rules which only allowed URLs beginning with https://website.thm/. An attacker could utilise the above feature to redirect the internal HTTP request to a domain of the attacker’s choice.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Answer the questions below&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;What method can be used to bypass strict rules?
+Open Redirect&lt;/p&gt;
+
+&lt;p&gt;What IP address may contain sensitive data in a cloud environment? 169.254.169.254&lt;/p&gt;
+
+&lt;p&gt;What type of list is used to permit only certain input? Allow List&lt;/p&gt;
+
+&lt;p&gt;What type of list is used to stop certain input? Deny List&lt;/p&gt;
+
+&lt;h2 id=&quot;-task-5-ssrf-practical&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt; Task 5 SSRF Practical&lt;/h2&gt;
+
+&lt;p&gt;Time to put what we learned to use in a fictional scenario.&lt;/p&gt;
+
+&lt;p&gt;We know a few things:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Two endpoints we found during content discovery&lt;/li&gt;
+  &lt;li&gt;/private - which gives us an error message explaining we cant view the page with our IP address&lt;/li&gt;
+  &lt;li&gt;/customers/new-account-page - has a feature that allows customers to choose an avatar for their account&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We are givin the steps to complete this task. By viewing the source and seeing that the hidden fields are actually calling a URL and editing that element to “x/../private” we can call our flag and decode the base64 format to get the answer below.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Answer the questions below&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;What is the flag from the /private directory?&lt;/p&gt;
+
+&lt;p&gt;THM{YOU_WORKED_OUT_THE_SSRF}&lt;/p&gt;
+</description>
+        <pubDate>Sat, 11 Jun 2022 00:00:00 -0700</pubDate>
+        <link>http://localhost:4000//TryHackMe-SSRF</link>
+        <link href="http://localhost:4000/TryHackMe-SSRF"/>
+        <guid isPermaLink="true">http://localhost:4000/TryHackMe-SSRF</guid>
+      </item>
+    
+      <item>
         <title>TryHackMe - IDORs - Insecure Direct Object Refrences</title>
         <description>&lt;p&gt;&lt;a href=&quot;https://tryhackme.com/room/idor&quot;&gt;https://tryhackme.com/room/idor&lt;/a&gt;&lt;/p&gt;
 
@@ -132,7 +239,7 @@ The vulnerable endpoint you’re targeting may not always be something you see i
 
 &lt;p&gt;Also known as Directory traversal, a web security vulnerability allows an attacker to read operating system resources, such as local files on the server running an application. The attacker exploits this vulnerability by manipulating and abusing the web application’s URL to locate and access files or directories stored outside the application’s root directory.&lt;/p&gt;
 
-&lt;p&gt;Path traversal vulnerabilities occur when the user’s input is passed to a function such as file_get_contents in PHP. It’s important to note that the function is not the main contributor to the vulnerability. Often poor input validation or filtering is the cause of the vulnerability. In PHP, you can use the file_get_contents to read the content of a file. You can find more information about the function here.&lt;/p&gt;
+&lt;p&gt;Path traversal vulnerabilities occur when the user’s input is passed to a function such as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;file_get_contents&lt;/code&gt; in PHP. It’s important to note that the function is not the main contributor to the vulnerability. Often poor input validation or filtering is the cause of the vulnerability. In PHP, you can use the file_get_contents to read the content of a file. You can find more information about the function here.&lt;/p&gt;
 
 &lt;p&gt;The following graph shows how a web application stores files in /var/www/app. The happy path would be the user requesting the contents of userCV.pdf from a defined path /var/www/app/CVs.&lt;/p&gt;
 
@@ -150,9 +257,9 @@ The vulnerable endpoint you’re targeting may not always be something you see i
 
 &lt;p&gt;Similarly, if the web application runs on a Windows server, the attacker needs to provide Windows paths. For example, if the attacker wants to read the boot.ini file located in c:\boot.ini, then the attacker can try the following depending on the target OS version:&lt;/p&gt;
 
-&lt;p&gt;http://webapp.thm/get.php?file=../../../../boot.ini or&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http://webapp.thm/get.php?file=../../../../boot.ini&lt;/code&gt; or&lt;/p&gt;
 
-&lt;p&gt;http://webapp.thm/get.php?file=../../../../windows/win.ini&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http://webapp.thm/get.php?file=../../../../windows/win.ini&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;The same concept applies here as with Linux operating systems, where we climb up directories until it reaches the root directory, which is usually c:.&lt;/p&gt;
 
@@ -238,7 +345,7 @@ The vulnerable endpoint you’re targeting may not always be something you see i
 
 &lt;p&gt;The PHP code above uses a GET request via the URL parameter lang to include the file of the page. The call can be done by sending the following HTTP request as follows: http://webapp.thm/index.php?lang=EN.php to load the English page or http://webapp.thm/index.php?lang=AR.php to load the Arabic page, where EN.php and AR.php files exist in the same directory.&lt;/p&gt;
 
-&lt;p&gt;Theoretically, we can access and display any readable file on the server from the code above if there isn’t any input validation. Let’s say we want to read the /etc/passwd file, which contains sensitive information about the users of the Linux operating system, we can try the following: http://webapp.thm/get.php?file=/etc/passwd&lt;/p&gt;
+&lt;p&gt;Theoretically, we can access and display any readable file on the server from the code above if there isn’t any input validation. Let’s say we want to read the /etc/passwd file, which contains sensitive information about the users of the Linux operating system, we can try the following: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http://webapp.thm/get.php?file=/etc/passwd&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;In this case, it works because there isn’t a directory specified in the include function and no input validation.&lt;/p&gt;
 
@@ -261,7 +368,7 @@ The vulnerable endpoint you’re targeting may not always be something you see i
 
 &lt;p&gt;Again the payload looks similar to the path traversal, but the include function allows us to include any called files into the current page. The following will be the exploit:&lt;/p&gt;
 
-&lt;p&gt;http://webapp.thm/index.php?lang=../../../../etc/passwd&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http://webapp.thm/index.php?lang=../../../../etc/passwd&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;Now apply what we discussed, try to read files within the server, and figure out the directory specified in the include function and answer question #2 below.&lt;/p&gt;
 
@@ -292,7 +399,7 @@ The vulnerable endpoint you’re targeting may not always be something you see i
 
 &lt;p&gt;To exploit this, we need to use the ../ trick, as described in the directory traversal section, to get out the current folder. Let’s try the following:&lt;/p&gt;
 
-&lt;p&gt;http://webapp.thm/index.php?lang=../../../../etc/passwd&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http://webapp.thm/index.php?lang=../../../../etc/passwd&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;Note that we used 4 ../ because we know the path has four levels /var/www/html/THM-4. But we still receive the following error:&lt;/p&gt;
 
@@ -310,17 +417,13 @@ The vulnerable endpoint you’re targeting may not always be something you see i
 
 &lt;p&gt;Now apply what we showed in Lab #3, and try to read files /etc/passwd, answer question #1 below.&lt;/p&gt;
 
-&lt;ol&gt;
-  &lt;li&gt;In this section, the developer decided to filter keywords to avoid disclosing sensitive information! The /etc/passwd file is being filtered. There are two possible methods to bypass the filter. First, by using the NullByte %00 or the current directory trick at the end of the filtered keyword /.. The exploit will be similar to http://webapp.thm/index.php?lang=/etc/passwd/. We could also use http://webapp.thm/index.php?lang=/etc/passwd%00.&lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;In this section, the developer decided to filter keywords to avoid disclosing sensitive information! The /etc/passwd file is being filtered. There are two possible methods to bypass the filter. First, by using the NullByte %00 or the current directory trick at the end of the filtered keyword /.. The exploit will be similar to http://webapp.thm/index.php?lang=/etc/passwd/. We could also use http://webapp.thm/index.php?lang=/etc/passwd%00.&lt;/p&gt;
 
 &lt;p&gt;To make it clearer, if we try this concept in the file system using cd .., it will get you back one step; however, if you do cd ., It stays in the current directory.  Similarly, if we try  /etc/passwd/.., it results to be  /etc/ and that’s because we moved one to the root.  Now if we try  /etc/passwd/., the result will be  /etc/passwd since dot refers to the current directory.&lt;/p&gt;
 
 &lt;p&gt;Now apply this technique in Lab #4 and figure out to read /etc/passwd.&lt;/p&gt;
 
-&lt;ol&gt;
-  &lt;li&gt;Next, in the following scenarios, the developer starts to use input validation by filtering some keywords. Let’s test out and check the error message!&lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;Next, in the following scenarios, the developer starts to use input validation by filtering some keywords. Let’s test out and check the error message!&lt;/p&gt;
 
 &lt;p&gt;http://webapp.thm/index.php?lang=../../../../etc/passwd&lt;/p&gt;
 
@@ -338,9 +441,7 @@ The vulnerable endpoint you’re targeting may not always be something you see i
 
 &lt;p&gt;Try out Lab #5 and try to read /etc/passwd and bypass the filter!&lt;/p&gt;
 
-&lt;ol&gt;
-  &lt;li&gt;Finally, we’ll discuss the case where the developer forces the include to read from a defined directory! For example, if the web application asks to supply input that has to include a directory such as: http://webapp.thm/index.php?lang=languages/EN.php then, to exploit this, we need to include the directory in the payload like so: ?lang=languages/../../../../../etc/passwd.&lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;Finally, we’ll discuss the case where the developer forces the include to read from a defined directory! For example, if the web application asks to supply input that has to include a directory such as: http://webapp.thm/index.php?lang=languages/EN.php then, to exploit this, we need to include the directory in the payload like so: ?lang=languages/../../../../../etc/passwd.&lt;/p&gt;
 
 &lt;p&gt;Try this out in Lab #6 and figure what the directory that has to be present in the input field is.&lt;/p&gt;
 
@@ -385,20 +486,236 @@ The vulnerable endpoint you’re targeting may not always be something you see i
 
 &lt;p&gt;As a developer, it’s important to be aware of web application vulnerabilities, how to find them, and prevention methods. To prevent the file inclusion vulnerabilities, some common suggestions include:&lt;/p&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1. Keep system and services, including web application frameworks, updated with the latest version.
-2. Turn off PHP errors to avoid leaking the path of the application and other potentially revealing information.
-3. A Web Application Firewall (WAF) is a good option to help mitigate web application attacks.
-4. Disable some PHP features that cause file inclusion vulnerabilities if your web app doesn&apos;t need them, such as allow_url_fopen on and allow_url_include.
-5. Carefully analyze the web application and allow only protocols and PHP wrappers that are in need.
-6. Never trust user input, and make sure to implement proper input validation against file inclusion.
-7. Implement whitelisting for file names and locations as well as blacklisting.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ol&gt;
+  &lt;li&gt;Keep system and services, including web application frameworks, updated with the latest version.&lt;/li&gt;
+  &lt;li&gt;Turn off PHP errors to avoid leaking the path of the application and other potentially revealing information.&lt;/li&gt;
+  &lt;li&gt;A Web Application Firewall (WAF) is a good option to help mitigate web application attacks.&lt;/li&gt;
+  &lt;li&gt;Disable some PHP features that cause file inclusion vulnerabilities if your web app doesn’t need them, such as allow_url_fopen on and allow_url_include.&lt;/li&gt;
+  &lt;li&gt;Carefully analyze the web application and allow only protocols and PHP wrappers that are in need.&lt;/li&gt;
+  &lt;li&gt;Never trust user input, and make sure to implement proper input validation against file inclusion.&lt;/li&gt;
+  &lt;li&gt;Implement whitelisting for file names and locations as well as blacklisting.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;task-8-challenge&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 8 Challenge&lt;/h3&gt;
+
+&lt;p&gt;Great Job! Now apply the techniques you’ve learned to capture the flags! Familiarizing yourself with HTTP Web basics could help you complete these challenges.&lt;/p&gt;
+
+&lt;p&gt;Make sure the attached VM is up and running then visit: http://10.10.77.73/challenges/index.php
+Steps for testing for LFI&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Find an entry point that could be via GET, POST, COOKIE, or HTTP header values!&lt;/li&gt;
+  &lt;li&gt;Enter a valid input to see how the web server behaves.&lt;/li&gt;
+  &lt;li&gt;Enter invalid inputs, including special characters and common file names.&lt;/li&gt;
+  &lt;li&gt;Don’t always trust what you supply in input forms is what you intended! Use either a browser address bar or a tool such as Burpsuite.&lt;/li&gt;
+  &lt;li&gt;Look for errors while entering invalid input to disclose the current path of the web application; if there are no errors, then trial and error might be your best option.&lt;/li&gt;
+  &lt;li&gt;Understand the input validation and if there are any filters!&lt;/li&gt;
+  &lt;li&gt;Try the inject a valid entry to read sensitive files&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;Answer the questions below&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Capture Flag1 at /etc/flag1&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;In order to get this flag we have to edit change the MIME to post and the Media Type as well. This is a compolation of all of these we can choose from:&lt;/p&gt;
+
+&lt;p&gt;https://www.iana.org/assignments/media-types/media-types.xhtml&lt;/p&gt;
+
+&lt;p&gt;Adding &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Content-Encoding: application/x-www-form-urlencoded&lt;/code&gt; and then changing from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;GET&lt;/code&gt; to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;POST&lt;/code&gt; and using the paramater &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;file=../../../etc/flag1&lt;/code&gt; will get us our first flag. See pic below.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/fileinc-flag1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Capture Flag2 at /etc/flag2&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;“Only admins can access this page!” And checking the hint we need to adjust the cookies in order to get this flag.&lt;/p&gt;
+
+&lt;p&gt;The file include function is telling us it is grabbing a php and messing with the cookie in the storage tab of the developer tools and adding a null byte at the end gets us our flag.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Capture Flag3 at /etc/flag3&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;curl -X POST http://10.10.179.213/challenges/chall3.php -d ‘method=POST&amp;amp;file=../../../../etc/flag3%00’ –output -&lt;/p&gt;
+
+&lt;p&gt;Gain RCE in Lab #Playground /playground.php with RFI to execute the hostname command. What is the output? We did this above already.&lt;/p&gt;
+
+&lt;p&gt;Booted up a simple http server and called it&lt;/p&gt;
 
 </description>
         <pubDate>Thu, 09 Jun 2022 00:00:00 -0700</pubDate>
         <link>http://localhost:4000//TryHackMe-File-Inclusion</link>
         <link href="http://localhost:4000/TryHackMe-File-Inclusion"/>
         <guid isPermaLink="true">http://localhost:4000/TryHackMe-File-Inclusion</guid>
+      </item>
+    
+      <item>
+        <title>Sample Page</title>
+        <description>&lt;p&gt;Text can be &lt;strong&gt;bold&lt;/strong&gt;, &lt;em&gt;italic&lt;/em&gt;, &lt;del&gt;strikethrough&lt;/del&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;keyword&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;another-page&quot;&gt;Link to another page&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;There should be whitespace between paragraphs.&lt;/p&gt;
+
+&lt;p&gt;There should be whitespace between paragraphs. We recommend including a README, or a file with information about your project.&lt;/p&gt;
+
+&lt;h1 id=&quot;header-1&quot;&gt;&lt;a href=&quot;#header-1&quot;&gt;&lt;/a&gt;Header 1&lt;/h1&gt;
+
+&lt;p&gt;This is a normal paragraph following a header. GitHub is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere.&lt;/p&gt;
+
+&lt;h2 id=&quot;header-2&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Header 2&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;This is a blockquote following a header.&lt;/p&gt;
+
+  &lt;p&gt;When something is important enough, you do it even if the odds are not in your favor.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;header-3&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Header 3&lt;/h3&gt;
+
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Javascript code with syntax highlighting.&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;lang&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;dateformat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i18n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;./lang/&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Ruby code with syntax highlighting&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;GitHubPages&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Dependencies&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;gems&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;add_dependency&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;= &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;header-4&quot;&gt;&lt;a href=&quot;#header-4&quot;&gt;&lt;/a&gt;Header 4&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;This is an unordered list following a header.&lt;/li&gt;
+  &lt;li&gt;This is an unordered list following a header.&lt;/li&gt;
+  &lt;li&gt;This is an unordered list following a header.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;header-5&quot;&gt;&lt;a href=&quot;#header-5&quot;&gt;&lt;/a&gt;Header 5&lt;/h5&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;This is an ordered list following a header.&lt;/li&gt;
+  &lt;li&gt;This is an ordered list following a header.&lt;/li&gt;
+  &lt;li&gt;This is an ordered list following a header.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h6 id=&quot;header-6&quot;&gt;&lt;a href=&quot;#header-6&quot;&gt;&lt;/a&gt;Header 6&lt;/h6&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;head1&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;head two&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;three&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;ok&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;good swedish fish&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;nice&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;out of stock&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;good and plenty&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;nice&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;ok&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;good &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;oreos&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;hmm&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;ok&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;good &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;zoute&lt;/code&gt; drop&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;yumm&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;theres-a-horizontal-rule-below-this&quot;&gt;There’s a horizontal rule below this.&lt;/h3&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;here-is-an-unordered-list&quot;&gt;Here is an unordered list:&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Item foo&lt;/li&gt;
+  &lt;li&gt;Item bar&lt;/li&gt;
+  &lt;li&gt;Item baz&lt;/li&gt;
+  &lt;li&gt;Item zip&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;and-an-ordered-list&quot;&gt;And an ordered list:&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Item one&lt;/li&gt;
+  &lt;li&gt;Item two&lt;/li&gt;
+  &lt;li&gt;Item three&lt;/li&gt;
+  &lt;li&gt;Item four&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;and-a-nested-list&quot;&gt;And a nested list:&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;level 1 item
+    &lt;ul&gt;
+      &lt;li&gt;level 2 item&lt;/li&gt;
+      &lt;li&gt;level 2 item
+        &lt;ul&gt;
+          &lt;li&gt;level 3 item&lt;/li&gt;
+          &lt;li&gt;level 3 item&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;level 1 item
+    &lt;ul&gt;
+      &lt;li&gt;level 2 item&lt;/li&gt;
+      &lt;li&gt;level 2 item&lt;/li&gt;
+      &lt;li&gt;level 2 item&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;level 1 item
+    &lt;ul&gt;
+      &lt;li&gt;level 2 item&lt;/li&gt;
+      &lt;li&gt;level 2 item&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;level 1 item&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;small-image&quot;&gt;Small image&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://assets-cdn.github.com/images/icons/emoji/octocat.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;large-image&quot;&gt;Large image&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://guides.github.com/activities/hello-world/branching.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;definition-lists-can-be-used-with-html-syntax&quot;&gt;Definition lists can be used with HTML syntax.&lt;/h3&gt;
+
+&lt;dl&gt;
+&lt;dt&gt;Name&lt;/dt&gt;
+&lt;dd&gt;Godzilla&lt;/dd&gt;
+&lt;dt&gt;Born&lt;/dt&gt;
+&lt;dd&gt;1952&lt;/dd&gt;
+&lt;dt&gt;Birthplace&lt;/dt&gt;
+&lt;dd&gt;Japan&lt;/dd&gt;
+&lt;dt&gt;Color&lt;/dt&gt;
+&lt;dd&gt;Green&lt;/dd&gt;
+&lt;/dl&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;The final element.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Tue, 12 Dec 2017 00:00:00 -0800</pubDate>
+        <link>http://localhost:4000//Sample-Page</link>
+        <link href="http://localhost:4000/Sample-Page"/>
+        <guid isPermaLink="true">http://localhost:4000/Sample-Page</guid>
       </item>
     
   </channel>

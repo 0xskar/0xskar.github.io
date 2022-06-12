@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://localhost:4000/Sample-Page</loc>
+<lastmod>2017-12-12T00:00:00-08:00</lastmod>
+</url>
+<url>
 <loc>http://localhost:4000/TryHackMe-File-Inclusion</loc>
 <lastmod>2022-06-09T00:00:00-07:00</lastmod>
 </url>
 <url>
 <loc>http://localhost:4000/TryHackMe-IDOR</loc>
 <lastmod>2022-06-09T00:00:00-07:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/TryHackMe-SSRF</loc>
+<lastmod>2022-06-11T00:00:00-07:00</lastmod>
 </url>
 <url>
 <loc>http://localhost:4000/404</loc>
@@ -19,5 +27,8 @@
 </url>
 <url>
 <loc>http://localhost:4000/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/page/2/</loc>
 </url>
 </urlset>
