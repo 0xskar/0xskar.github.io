@@ -72,9 +72,135 @@
 
 &lt;p&gt;Which JavaScript method is often used as a Proof Of Concept?&lt;/p&gt;
 
-&lt;p&gt;From our first example “alert”. We can use &lt;script&gt;alert(&apos;XSS&apos;);&lt;/script&gt; to see if we can xss.&lt;/p&gt;
+&lt;p&gt;From our first example “alert”. We can use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;script&amp;gt;alert(&apos;XSS&apos;);&amp;lt;/script&amp;gt;&lt;/code&gt; to see if we can xss.&lt;/p&gt;
 
-&lt;h2&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;-task-3-reflected-xss&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt; Task 3 Reflected XSS&lt;/h2&gt;
+
+&lt;p&gt;Reflected XSS happens when user-supplied data in an HTTP request is included in the webpage source without any validation.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;How to test for Reflected XSS:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;You’ll need to test every possible point of entry; these include:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;- Parameters in the URL Query String
+- URL File Path
+- Sometimes HTTP Headers (although unlikely exploitable in practice)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Once you’ve found some data which is being reflected in the web application, you’ll then need to confirm that you can successfully run your JavaScript payload; your payload will be dependent on where in the application your code is reflected (you’ll learn more about this in task 6).&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Answer the questions below&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Where in an URL is a good place to test for reflected XSS? Parameters.&lt;/p&gt;
+
+&lt;h2 id=&quot;-task-4-stored-xss&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt; Task 4 Stored XSS&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/xssgi-example1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;How to test for Stored XSS:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;You’ll need to test every possible point of entry where it seems data is stored and then shown back in areas that other users have access to; a small example of these could be:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Comments on a blog&lt;/li&gt;
+  &lt;li&gt;User profile information&lt;/li&gt;
+  &lt;li&gt;Website Listings&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Sometimes developers think limiting input values on the client-side is good enough protection, so changing values to something the web application wouldn’t be expecting is a good source of discovering stored XSS, for example, an age field that is expecting an integer from a dropdown menu, but instead, you manually send the request rather than using the form allowing you to try malicious payloads.&lt;/p&gt;
+
+&lt;p&gt;Once you’ve found some data which is being stored in the web application,  you’ll then need to confirm that you can successfully run your JavaScript payload; your payload will be dependent on where in the application your code is reflected (you’ll learn more about this in task 6).&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Answer the questions below&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;How are stored XSS payloads usually stored on a website? Usually in a database.&lt;/p&gt;
+
+&lt;h2 id=&quot;-task-5-dom-based-xss&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt; Task 5 DOM Based XSS&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/xssgi-example2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;DOM = Document Object Moden and is a programming interface for HTML and XML documents. If you want to learn more about the DOM and gain a deeper understanding &lt;a href=&quot;https://www.w3.org/TR/REC-DOM-Level-1/introduction.html&quot;&gt;w3.org&lt;/a&gt; have a great resource.&lt;/p&gt;
+
+&lt;p&gt;How to test for Dom Based XSS:&lt;/p&gt;
+
+&lt;p&gt;DOM Based XSS can be challenging to test for and requires a certain amount of knowledge of JavaScript to read the source code. You’d need to look for parts of the code that access certain variables that an attacker can have control over, such as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;window.location.x&lt;/code&gt; parameters.&lt;/p&gt;
+
+&lt;p&gt;When you’ve found those bits of code, you’d then need to see how they are handled and whether the values are ever written to the web page’s DOM or passed to unsafe JavaScript methods such as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;eval()&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Answer the questions below&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;What unsafe JavaScript method is good to look for in source code? &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;eval()&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;-task-6-blind-xss&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt; Task 6 Blind XSS&lt;/h2&gt;
+
+&lt;p&gt;Blind XSS is similar to a stored XSS (which we covered in task 4) in that your payload gets stored on the website for another user to view, but in this instance, you can’t see the payload working or be able to test it against yourself first.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Example Scenario:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;A website has a contact form where you can message a member of staff. The message content doesn’t get checked for any malicious code, which allows the attacker to enter anything they wish. These messages then get turned into support tickets which staff view on a private web portal.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Potential Impact:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Using the correct payload, the attacker’s JavaScript could make calls back to an attacker’s website, revealing the staff portal URL, the staff member’s cookies, and even the contents of the portal page that is being viewed. Now the attacker could potentially hijack the staff member’s session and have access to the private portal.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;How to test for Blind XSS:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;When testing for Blind XSS vulnerabilities, you need to ensure your payload has a call back (usually an HTTP request). This way, you know if and when your code is being executed.&lt;/p&gt;
+
+&lt;p&gt;A popular tool for Blind XSS attacks is &lt;a href=&quot;https://xsshunter.com/&quot;&gt;xsshunter&lt;/a&gt;. Although it’s possible to make your own tool in JavaScript, this tool will automatically capture cookies, URLs, page contents and more.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Answer the questions below&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;What tool can you use to test for Blind XSS? xsshunter&lt;/p&gt;
+
+&lt;p&gt;What type of XSS is very similar to Blind XSS? stored xss&lt;/p&gt;
+
+&lt;h2 id=&quot;-task-7-perfecting-your-payload&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt; Task 7 Perfecting your Payload&lt;/h2&gt;
+
+&lt;p&gt;This task we executre XSS payloads to proceed to the next task.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Level One:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;we use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;script&amp;gt;alert(&apos;THM&apos;);&amp;lt;/script&amp;gt;&lt;/code&gt; 
+&lt;img src=&quot;/assets/xssgi-level1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Level Two:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;End the input field &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&quot;&amp;gt;&amp;lt;script&amp;gt;alert(&apos;THM&apos;);&amp;lt;/script&amp;gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Level Three&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;End the textarea &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;/textarea&amp;gt;&amp;lt;script&amp;gt;alert(&apos;THM&apos;);&amp;lt;/script&amp;gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Level Four&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;End the javascript and comment our the rest of the code &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&apos;;alert(&apos;THM&apos;);//&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Level Five&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;This has a filter we have to bypass&lt;/p&gt;
+
+&lt;p&gt;Original Payload:
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;sscriptcript&amp;gt;alert(&apos;THM&apos;);&amp;lt;/sscriptcript&amp;gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Final Payload (after passing the filter):
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;script&amp;gt;alert(&apos;THM&apos;);&amp;lt;/script&amp;gt;&lt;/code&gt;`&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Level Six&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Characters are filtered such as &amp;lt; and &amp;gt; we can get around this by using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/images/cat.jpg&quot; onload=&quot;alert(&apos;THM&apos;);&lt;/code&gt; as a payload.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Polyglots:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;An XSS polyglot is a string of text which can escape attributes, tags and bypass filters all in one. You could have used the below polyglot on all six levels you’ve just completed, and it would have executed the code successfully.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jaVasCript:/*-/*`/*\`/*&apos;/*&quot;/**/(/* */onerror=alert(&apos;THM&apos;) )//%0D%0A%0d%0a//&amp;lt;/stYle/&amp;lt;/titLe/&amp;lt;/teXtarEa/&amp;lt;/scRipt/--!&amp;gt;\x3csVg/&amp;lt;sVg/oNloAd=alert(&apos;THM&apos;)//&amp;gt;\x3e&lt;/code&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;-task-8-practical-example-blind-xss&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt; Task 8 Practical Example (Blind XSS)&lt;/h1&gt;
+
+&lt;p&gt;This will only work on the Tryhackme attack box.&lt;/p&gt;
+
+&lt;p&gt;c3RhZmYtc2Vzc2lvbj00QUIzMDVFNTU5NTUxOTc2OTNGMDFENkY4RkQyRDMyMQ&lt;/p&gt;
 
 </description>
         <pubDate>Sun, 12 Jun 2022 00:00:00 -0700</pubDate>
