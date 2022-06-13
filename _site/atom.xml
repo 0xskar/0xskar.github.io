@@ -44,6 +44,24 @@
 
 &lt;h2 id=&quot;task-3---exploiting-command-injection&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 3 - Exploiting Command Injection&lt;/h2&gt;
 
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Method&lt;/th&gt;
+      &lt;th&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Blind&lt;/td&gt;
+      &lt;td&gt;This type of injection is where there is no direct output from the application when testing payloads. You will have to investigate the behaviours of the application to determine whether or not your payload was successful.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Verbose&lt;/td&gt;
+      &lt;td&gt;This type of injection is where there is direct feedback from the application once you have tested a payload. For example, running the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;whoami&lt;/code&gt; command to see what user the application is running under. The web application will output the username on the page directly.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 </description>
         <pubDate>Mon, 13 Jun 2022 00:00:00 -0700</pubDate>
         <link>http://localhost:4000//TryHackMe-Command-Injection</link>

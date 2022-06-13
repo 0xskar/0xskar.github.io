@@ -32,3 +32,7 @@ If I wanted to execute the id command in the Python code snippet, what route wou
 
 ## [](#header-3)Task 3 - Exploiting Command Injection
 
+| Method | Description|
+|--------|------------|
+| Blind | This type of injection is where there is no direct output from the application when testing payloads. You will have to investigate the behaviours of the application to determine whether or not your payload was successful. |
+| Verbose | This type of injection is where there is direct feedback from the application once you have tested a payload. For example, running the ``whoami`` command to see what user the application is running under. The web application will output the username on the page directly. |
