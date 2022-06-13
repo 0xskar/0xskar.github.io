@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <meta name="generator" content="Jekyll">
+
+  <title>TryHackMe - Command Injection</title>
+
+  <link rel="stylesheet" href="/css/main.css">
+  
+  <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed" /> <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TryHackMe - Command Injection | 0xskar</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="TryHackMe - Command Injection" />
+<meta name="author" content="0xskar" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="https://tryhackme.com/room/oscommandinjection" />
+<meta property="og:description" content="https://tryhackme.com/room/oscommandinjection" />
+<link rel="canonical" href="http://localhost:4000/TryHackMe-Command-Injection" />
+<meta property="og:url" content="http://localhost:4000/TryHackMe-Command-Injection" />
+<meta property="og:site_name" content="0xskar" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-06-13T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TryHackMe - Command Injection" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"0xskar","url":"https://0xskar.github.io"},"dateModified":"2022-06-13T00:00:00-07:00","datePublished":"2022-06-13T00:00:00-07:00","description":"https://tryhackme.com/room/oscommandinjection","headline":"TryHackMe - Command Injection","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/TryHackMe-Command-Injection"},"url":"http://localhost:4000/TryHackMe-Command-Injection"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <header>
+  <div>
+    <a href="/">
+    
+    <h1>0xskar@home:~$</h1>
+    </a>
+    <div class="header-links">
+      <a href="/archive"><h2 class="header-link">Archive</h2></a>
+<a href="/about"><h2 class="header-link">About</h2></a>
+<a href="/atom.xml"><h2 class="header-link">RSS</h2></a>
+    </div>
+  </div>
+</header>
+    <div class="container">
+      <section id="main_content">
+        <article>
+  <h2>TryHackMe - Command Injection</h2>
+  <time datetime="2022-06-13T00:00:00-07:00" class="by-line">13 Jun 2022</time>
+  <p><a href="https://tryhackme.com/room/oscommandinjection">https://tryhackme.com/room/oscommandinjection</a></p>
+
+<p>Learn how to detect and exploit XSS vulnerabilities, giving you control of other visitor’s browsers.</p>
+
+<h2 id="task-1---what-is-command-injection"><a href="#header-3"></a>Task 1 - What is Command Injection</h2>
+
+<p>This room goes over:</p>
+
+<ul>
+  <li>How to discover the command injection vulnerability</li>
+  <li>How to test and exploit this vulnerability using payloads designed for different operating systems</li>
+  <li>How to prevent this vulnerability in an application</li>
+  <li>Lastly, you’ll get to apply theory into practice learning in a practical at the end of the room.</li>
+</ul>
+
+<p>Command injection is the abuse of an application’s behaviour to execute commands on the operating system, using the same privileges that the application on a device is running with. This is also known as <strong>Remote Code Executions</strong> (RCE)</p>
+
+<p>For example, being able to abuse an application to perform the command whoami to list what user account the application is running will be an example of command injection.</p>
+
+<h2 id="task-2---discovering-command-injection"><a href="#header-3"></a>Task 2 - Discovering Command Injection</h2>
+
+<p><strong>Answer the questions below</strong></p>
+
+<p>What variable stores the user’s input in the PHP code snippet in this task? $title</p>
+
+<p>What HTTP method is used to retrieve data submitted by a user in the PHP code snippet? GET</p>
+
+<p>If I wanted to execute the id command in the Python code snippet, what route would I need to visit? /id</p>
+
+<h2 id="task-3---exploiting-command-injection"><a href="#header-3"></a>Task 3 - Exploiting Command Injection</h2>
+
+
+</article>
+      </section>
+    </div>
+  </div>
+
+   <footer>
+  <a href="https://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+    <span>
+        <b>0xskar</b>
+    </span>
+    
+    <span>© 2022</span>
+  </a>
+</footer>
+
+  
+</body>
+
+</html>

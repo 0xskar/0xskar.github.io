@@ -12,6 +12,46 @@
     </author>
     
       <item>
+        <title>TryHackMe - Command Injection</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://tryhackme.com/room/oscommandinjection&quot;&gt;https://tryhackme.com/room/oscommandinjection&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Learn how to detect and exploit XSS vulnerabilities, giving you control of other visitor’s browsers.&lt;/p&gt;
+
+&lt;h2 id=&quot;task-1---what-is-command-injection&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 1 - What is Command Injection&lt;/h2&gt;
+
+&lt;p&gt;This room goes over:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;How to discover the command injection vulnerability&lt;/li&gt;
+  &lt;li&gt;How to test and exploit this vulnerability using payloads designed for different operating systems&lt;/li&gt;
+  &lt;li&gt;How to prevent this vulnerability in an application&lt;/li&gt;
+  &lt;li&gt;Lastly, you’ll get to apply theory into practice learning in a practical at the end of the room.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Command injection is the abuse of an application’s behaviour to execute commands on the operating system, using the same privileges that the application on a device is running with. This is also known as &lt;strong&gt;Remote Code Executions&lt;/strong&gt; (RCE)&lt;/p&gt;
+
+&lt;p&gt;For example, being able to abuse an application to perform the command whoami to list what user account the application is running will be an example of command injection.&lt;/p&gt;
+
+&lt;h2 id=&quot;task-2---discovering-command-injection&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 2 - Discovering Command Injection&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Answer the questions below&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;What variable stores the user’s input in the PHP code snippet in this task? $title&lt;/p&gt;
+
+&lt;p&gt;What HTTP method is used to retrieve data submitted by a user in the PHP code snippet? GET&lt;/p&gt;
+
+&lt;p&gt;If I wanted to execute the id command in the Python code snippet, what route would I need to visit? /id&lt;/p&gt;
+
+&lt;h2 id=&quot;task-3---exploiting-command-injection&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 3 - Exploiting Command Injection&lt;/h2&gt;
+
+</description>
+        <pubDate>Mon, 13 Jun 2022 00:00:00 -0700</pubDate>
+        <link>http://localhost:4000//TryHackMe-Command-Injection</link>
+        <link href="http://localhost:4000/TryHackMe-Command-Injection"/>
+        <guid isPermaLink="true">http://localhost:4000/TryHackMe-Command-Injection</guid>
+      </item>
+    
+      <item>
         <title>TryHackMe - Cross-Site Scripting (XSS)</title>
         <description>&lt;p&gt;&lt;a href=&quot;https://tryhackme.com/room/xssgi&quot;&gt;https://tryhackme.com/room/xssgi&lt;/a&gt;&lt;/p&gt;
 
