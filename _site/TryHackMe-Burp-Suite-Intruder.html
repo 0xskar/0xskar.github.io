@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <meta name="generator" content="Jekyll">
+
+  <title>TryHackMe - Burp Suite Intruder</title>
+
+  <link rel="stylesheet" href="/css/main.css">
+  
+  <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed" /> <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TryHackMe - Burp Suite Intruder | 0xskar</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="TryHackMe - Burp Suite Intruder" />
+<meta name="author" content="0xskar" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="https://tryhackme.com/room/burpsuiteintruder" />
+<meta property="og:description" content="https://tryhackme.com/room/burpsuiteintruder" />
+<link rel="canonical" href="http://localhost:4000/TryHackMe-Burp-Suite-Intruder" />
+<meta property="og:url" content="http://localhost:4000/TryHackMe-Burp-Suite-Intruder" />
+<meta property="og:site_name" content="0xskar" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-06-14T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TryHackMe - Burp Suite Intruder" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"0xskar","url":"https://0xskar.github.io"},"dateModified":"2022-06-14T00:00:00-07:00","datePublished":"2022-06-14T00:00:00-07:00","description":"https://tryhackme.com/room/burpsuiteintruder","headline":"TryHackMe - Burp Suite Intruder","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/TryHackMe-Burp-Suite-Intruder"},"url":"http://localhost:4000/TryHackMe-Burp-Suite-Intruder"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <header>
+  <div>
+    <a href="/">
+    
+    <h1>0xskar@home:~$</h1>
+    </a>
+    <div class="header-links">
+      <a href="/archive"><h2 class="header-link">Archive</h2></a>
+<a href="/about"><h2 class="header-link">About</h2></a>
+<a href="/atom.xml"><h2 class="header-link">RSS</h2></a>
+    </div>
+  </div>
+</header>
+    <div class="container">
+      <section id="main_content">
+        <article>
+  <h2>TryHackMe - Burp Suite Intruder</h2>
+  <time datetime="2022-06-14T00:00:00-07:00" class="by-line">14 Jun 2022</time>
+  <p><a href="https://tryhackme.com/room/burpsuiteintruder">https://tryhackme.com/room/burpsuiteintruder</a></p>
+
+<p>Learn how to use Intruder to automate requests in Burp Suite</p>
+
+<hr />
+
+<h1 id="task-1---introduction-room-outline"><a href="#header-3"></a>Task 1 - Introduction Room Outline</h1>
+
+<p>Intruder allows us to automate requests, which is very useful when fuzzing or bruteforcing. We will be looking at how to use Intruder to perform both of these functions in conjunction with the other tools we have already covered.</p>
+
+<hr />
+
+<h1 id="task-2---intruder---what-is-intruder"><a href="#header-3"></a>Task 2 - Intruder - What is Intruder</h1>
+
+<p>Intruder is Burp Suite’s in-built fuzzing tool.</p>
+
+<p><strong>Answer the questions below</strong></p>
+
+<p><strong>Which section of the Options sub-tab allows you to control what information will be captured in the Intruder results?</strong> Attack Results</p>
+
+<p><strong>In which Intruder sub-tab can we define the “Attack type” for our planned attack?</strong> Positions</p>
+
+<hr />
+
+<h1 id="task-3---intruder---positions"><a href="#header-3"></a>Task 3 - Intruder - Positions</h1>
+
+<p>Positions tell Intruder where to insert payloads. Burp will attempt to determine the most likely places we may wish to insert a payload automatically – these are highlighted in green and surrounded by silcrows <code class="language-plaintext highlighter-rouge">§</code>.</p>
+
+<hr />
+
+<h1 id="task-4---attack-types---introduction"><a href="#header-3"></a>Task 4 - Attack Types - Introduction</h1>
+
+<p>There are four attack types available:</p>
+
+<ul>
+  <li>Sniper</li>
+  <li>Battering ram</li>
+  <li>Pitchfork</li>
+  <li>Cluster bomb</li>
+</ul>
+
+<p>We will look at each of these in turn.</p>
+
+<hr />
+
+<h1 id="task-5---attack-types---sniper"><a href="#header-3"></a>Task 5 - Attack Types - Sniper</h1>
+
+<p>Sniper is the first and most common attack type.</p>
+
+<p>When conducting a sniper attack, we provide one set of payloads. For example, this could be a single file containing a wordlist or a range of numbers. From here on out, we will refer to a list of items to be slotted into requests using the Burp Suite terminology of a “Payload Set”. Intruder will take each payload in a payload set and put it into each defined position in turn.</p>
+
+<p><strong>If you were using Sniper to fuzz three parameters in a request, with a wordlist containing 100 words, how many requests would Burp Suite need to send to complete the attack?</strong> 300</p>
+
+<p><strong>How many sets of payloads will Sniper accept for conducting an attack?</strong> 1</p>
+
+<p><strong>Sniper is good for attacks where we are only attacking a single parameter, aye or nay?</strong> aye</p>
+
+<hr />
+
+<h1 id="task-6---attack-types---battering-ram"><a href="#header-3"></a>Task 6 - Attack Types - Battering Ram</h1>
+
+<p>Like Sniper, Battering ram takes one set of payloads (e.g. one wordlist). Unlike Sniper, the Battering ram puts the same payload in every position rather than in each position in turn.</p>
+
+<p>As a hypothetical question: you need to perform a Battering Ram Intruder attack on the example request above.</p>
+
+<p>If you have a wordlist with two words in it (admin and Guest) and the positions in the request template look like this:</p>
+
+<p><code class="language-plaintext highlighter-rouge">username=§pentester§&amp;password=§Expl01ted§</code></p>
+
+<p><strong>What would the body parameters of the first request that Burp Suite sends be?</strong> username=admin&amp;password=admin</p>
+
+<hr />
+
+<h1 id="task-7---attack-types---pitchfork"><a href="#header-3"></a>Task 7 - Attack Types - Pitchfork</h1>
+
+<p>Pitchfork is the attack type you are most likely to use. It may help to think of Pitchfork as being like having numerous Snipers running simultaneously. Where Sniper uses one payload set (which it uses on every position simultaneously), Pitchfork uses one payload set per position (up to a maximum of 20) and iterates through them all at once.</p>
+
+<p><strong>What is the maximum number of payload sets we can load into Intruder in Pitchfork mode?</strong> 20</p>
+
+<hr />
+
+<h1 id="task-8---attack-types---cluster-bomb"><a href="#header-3"></a>Task 8 - Attack Types - Cluster Bomb</h1>
+
+<p>Like Pitchfork, Cluster bomb allows us to choose multiple payload sets: one per position, up to a maximum of 20; however, whilst Pitchfork iterates through each payload set simultaneously, Cluster bomb iterates through each payload set individually, making sure that every possible combination of payloads is tested.</p>
+
+<p><strong>We have three payload sets. The first set contains 100 lines; the second contains 2 lines; and the third contains 30 lines. How many requests will Intruder make using these payload sets in a Cluster Bomb attack?</strong> 6000</p>
+
+<hr />
+
+<h1 id="task-9---intruder---payloads"><a href="#header-3"></a>Task 9 - Intruder - Payloads</h1>
+
+<p><strong>Which payload type lets us load a list of words into a payload set?</strong> Simple list.</p>
+
+<p><strong>Which Payload Processing rule could we use to add characters at the end of each payload in the set?</strong> Add suffix.</p>
+
+<hr />
+
+<h1 id="task-10---practical---example"><a href="#header-3"></a>Task 10 - Practical - Example</h1>
+
+
+</article>
+      </section>
+    </div>
+  </div>
+
+   <footer>
+  <a href="https://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+    <span>
+        <b>0xskar</b>
+    </span>
+    
+    <span>© 2022</span>
+  </a>
+</footer>
+
+  
+</body>
+
+</html>

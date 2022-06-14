@@ -218,6 +218,114 @@
       </item>
     
       <item>
+        <title>TryHackMe - Burp Suite Intruder</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://tryhackme.com/room/burpsuiteintruder&quot;&gt;https://tryhackme.com/room/burpsuiteintruder&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Learn how to use Intruder to automate requests in Burp Suite&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;task-1---introduction-room-outline&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 1 - Introduction Room Outline&lt;/h1&gt;
+
+&lt;p&gt;Intruder allows us to automate requests, which is very useful when fuzzing or bruteforcing. We will be looking at how to use Intruder to perform both of these functions in conjunction with the other tools we have already covered.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;task-2---intruder---what-is-intruder&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 2 - Intruder - What is Intruder&lt;/h1&gt;
+
+&lt;p&gt;Intruder is Burp Suite’s in-built fuzzing tool.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Answer the questions below&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Which section of the Options sub-tab allows you to control what information will be captured in the Intruder results?&lt;/strong&gt; Attack Results&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;In which Intruder sub-tab can we define the “Attack type” for our planned attack?&lt;/strong&gt; Positions&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;task-3---intruder---positions&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 3 - Intruder - Positions&lt;/h1&gt;
+
+&lt;p&gt;Positions tell Intruder where to insert payloads. Burp will attempt to determine the most likely places we may wish to insert a payload automatically – these are highlighted in green and surrounded by silcrows &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;§&lt;/code&gt;.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;task-4---attack-types---introduction&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 4 - Attack Types - Introduction&lt;/h1&gt;
+
+&lt;p&gt;There are four attack types available:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Sniper&lt;/li&gt;
+  &lt;li&gt;Battering ram&lt;/li&gt;
+  &lt;li&gt;Pitchfork&lt;/li&gt;
+  &lt;li&gt;Cluster bomb&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We will look at each of these in turn.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;task-5---attack-types---sniper&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 5 - Attack Types - Sniper&lt;/h1&gt;
+
+&lt;p&gt;Sniper is the first and most common attack type.&lt;/p&gt;
+
+&lt;p&gt;When conducting a sniper attack, we provide one set of payloads. For example, this could be a single file containing a wordlist or a range of numbers. From here on out, we will refer to a list of items to be slotted into requests using the Burp Suite terminology of a “Payload Set”. Intruder will take each payload in a payload set and put it into each defined position in turn.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;If you were using Sniper to fuzz three parameters in a request, with a wordlist containing 100 words, how many requests would Burp Suite need to send to complete the attack?&lt;/strong&gt; 300&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;How many sets of payloads will Sniper accept for conducting an attack?&lt;/strong&gt; 1&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Sniper is good for attacks where we are only attacking a single parameter, aye or nay?&lt;/strong&gt; aye&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;task-6---attack-types---battering-ram&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 6 - Attack Types - Battering Ram&lt;/h1&gt;
+
+&lt;p&gt;Like Sniper, Battering ram takes one set of payloads (e.g. one wordlist). Unlike Sniper, the Battering ram puts the same payload in every position rather than in each position in turn.&lt;/p&gt;
+
+&lt;p&gt;As a hypothetical question: you need to perform a Battering Ram Intruder attack on the example request above.&lt;/p&gt;
+
+&lt;p&gt;If you have a wordlist with two words in it (admin and Guest) and the positions in the request template look like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;username=§pentester§&amp;amp;password=§Expl01ted§&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;What would the body parameters of the first request that Burp Suite sends be?&lt;/strong&gt; username=admin&amp;amp;password=admin&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;task-7---attack-types---pitchfork&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 7 - Attack Types - Pitchfork&lt;/h1&gt;
+
+&lt;p&gt;Pitchfork is the attack type you are most likely to use. It may help to think of Pitchfork as being like having numerous Snipers running simultaneously. Where Sniper uses one payload set (which it uses on every position simultaneously), Pitchfork uses one payload set per position (up to a maximum of 20) and iterates through them all at once.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;What is the maximum number of payload sets we can load into Intruder in Pitchfork mode?&lt;/strong&gt; 20&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;task-8---attack-types---cluster-bomb&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 8 - Attack Types - Cluster Bomb&lt;/h1&gt;
+
+&lt;p&gt;Like Pitchfork, Cluster bomb allows us to choose multiple payload sets: one per position, up to a maximum of 20; however, whilst Pitchfork iterates through each payload set simultaneously, Cluster bomb iterates through each payload set individually, making sure that every possible combination of payloads is tested.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;We have three payload sets. The first set contains 100 lines; the second contains 2 lines; and the third contains 30 lines. How many requests will Intruder make using these payload sets in a Cluster Bomb attack?&lt;/strong&gt; 6000&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;task-9---intruder---payloads&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 9 - Intruder - Payloads&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;Which payload type lets us load a list of words into a payload set?&lt;/strong&gt; Simple list.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Which Payload Processing rule could we use to add characters at the end of each payload in the set?&lt;/strong&gt; Add suffix.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;task-10---practical---example&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 10 - Practical - Example&lt;/h1&gt;
+
+</description>
+        <pubDate>Tue, 14 Jun 2022 00:00:00 -0700</pubDate>
+        <link>http://localhost:4000//TryHackMe-Burp-Suite-Intruder</link>
+        <link href="http://localhost:4000/TryHackMe-Burp-Suite-Intruder"/>
+        <guid isPermaLink="true">http://localhost:4000/TryHackMe-Burp-Suite-Intruder</guid>
+      </item>
+    
+      <item>
         <title>TryHackMe - Command Injection</title>
         <description>&lt;p&gt;&lt;a href=&quot;https://tryhackme.com/room/oscommandinjection&quot;&gt;https://tryhackme.com/room/oscommandinjection&lt;/a&gt;&lt;/p&gt;
 
