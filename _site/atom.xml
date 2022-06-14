@@ -17,6 +17,8 @@
 
 &lt;p&gt;Learn how to detect and exploit XSS vulnerabilities, giving you control of other visitor’s browsers.&lt;/p&gt;
 
+&lt;hr /&gt;
+
 &lt;h2 id=&quot;task-1---what-is-command-injection&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 1 - What is Command Injection&lt;/h2&gt;
 
 &lt;p&gt;This room goes over:&lt;/p&gt;
@@ -32,6 +34,8 @@
 
 &lt;p&gt;For example, being able to abuse an application to perform the command whoami to list what user account the application is running will be an example of command injection.&lt;/p&gt;
 
+&lt;hr /&gt;
+
 &lt;h2 id=&quot;task-2---discovering-command-injection&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 2 - Discovering Command Injection&lt;/h2&gt;
 
 &lt;p&gt;&lt;strong&gt;Answer the questions below&lt;/strong&gt;&lt;/p&gt;
@@ -42,7 +46,16 @@
 
 &lt;p&gt;If I wanted to execute the id command in the Python code snippet, what route would I need to visit? /id&lt;/p&gt;
 
+&lt;hr /&gt;
+
 &lt;h2 id=&quot;task-3---exploiting-command-injection&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 3 - Exploiting Command Injection&lt;/h2&gt;
+
+&lt;p&gt;Command Injection can be detected in mostly one of two ways:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Blind command injection&lt;/li&gt;
+  &lt;li&gt;Verbose command injection&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;table&gt;
   &lt;thead&gt;
@@ -62,6 +75,105 @@
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
+
+&lt;p&gt;&lt;strong&gt;Useful Payloads Linux&lt;/strong&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Payload&lt;/th&gt;
+      &lt;th&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;whoami&lt;/td&gt;
+      &lt;td&gt;See what user the application is running under.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;ls&lt;/td&gt;
+      &lt;td&gt;List the contents of the current directory. You may be able to find files such as configuration files, environment files (tokens and application keys), and many more valuable things.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;ping&lt;/td&gt;
+      &lt;td&gt;This command will invoke the application to hang. This will be useful in testing an application for blind command injection.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;sleep&lt;/td&gt;
+      &lt;td&gt;This is another useful payload in testing an application for blind command injection, where the machine does not have ping installed.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;nc&lt;/td&gt;
+      &lt;td&gt;Netcat can be used to spawn a reverse shell onto the vulnerable application. You can use this foothold to navigate around the target machine for other services, files, or potential means of escalating privileges.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;&lt;strong&gt;Useful Payloads Windows&lt;/strong&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Payload&lt;/th&gt;
+      &lt;th&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;whoami&lt;/td&gt;
+      &lt;td&gt;See what user the application is running under.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;dir&lt;/td&gt;
+      &lt;td&gt;List the contents of the current directory. You may be able to find files such as configuration files, environment files (tokens and application keys), and many more valuable things.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;ping&lt;/td&gt;
+      &lt;td&gt;This command will invoke the application to hang. This will be useful in testing an application for blind command injection.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;timeout&lt;/td&gt;
+      &lt;td&gt;This command will also invoke the application to hang. It is also useful for testing an application for blind command injection if the ping command is not installed.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;&lt;strong&gt;Answer the questions below&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;What payload would I use if I wanted to determine what user the application is running as? whoami&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;What popular network tool would I use to test for blind command injection on a Linux machine? ping&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;What payload would I use to test a Windows machine for blind command injection? timeout&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;task-4---remediating-command-injection&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 4 - Remediating Command Injection&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;Answer the questions below&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;What is the term for the process of “cleaning” user input that is provided to an application? Input Sanitisation&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;task-5---practical-command-injection-deploy&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 5 - Practical: Command Injection (Deploy)&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;Answer the questions below&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;What user is this application running as?&lt;/p&gt;
+
+&lt;p&gt;Typing in the IP we see this machine is running ping. Using &amp;amp; we can run multiple commands. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;amp; whoami&lt;/code&gt; this application is www-data&lt;/p&gt;
+
+&lt;p&gt;What are the contents of the flag located in /home/tryhackme/flag.txt?&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;amp; cat /home/tryhackme/flag.txt&lt;/code&gt;&lt;/p&gt;
+
 </description>
         <pubDate>Mon, 13 Jun 2022 00:00:00 -0700</pubDate>
         <link>http://localhost:4000//TryHackMe-Command-Injection</link>

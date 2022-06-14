@@ -54,6 +54,8 @@
 
 <p>Learn how to detect and exploit XSS vulnerabilities, giving you control of other visitor’s browsers.</p>
 
+<hr />
+
 <h2 id="task-1---what-is-command-injection"><a href="#header-3"></a>Task 1 - What is Command Injection</h2>
 
 <p>This room goes over:</p>
@@ -69,6 +71,8 @@
 
 <p>For example, being able to abuse an application to perform the command whoami to list what user account the application is running will be an example of command injection.</p>
 
+<hr />
+
 <h2 id="task-2---discovering-command-injection"><a href="#header-3"></a>Task 2 - Discovering Command Injection</h2>
 
 <p><strong>Answer the questions below</strong></p>
@@ -79,7 +83,16 @@
 
 <p>If I wanted to execute the id command in the Python code snippet, what route would I need to visit? /id</p>
 
+<hr />
+
 <h2 id="task-3---exploiting-command-injection"><a href="#header-3"></a>Task 3 - Exploiting Command Injection</h2>
+
+<p>Command Injection can be detected in mostly one of two ways:</p>
+
+<ul>
+  <li>Blind command injection</li>
+  <li>Verbose command injection</li>
+</ul>
 
 <table>
   <thead>
@@ -99,6 +112,105 @@
     </tr>
   </tbody>
 </table>
+
+<p><strong>Useful Payloads Linux</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Payload</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>whoami</td>
+      <td>See what user the application is running under.</td>
+    </tr>
+    <tr>
+      <td>ls</td>
+      <td>List the contents of the current directory. You may be able to find files such as configuration files, environment files (tokens and application keys), and many more valuable things.</td>
+    </tr>
+    <tr>
+      <td>ping</td>
+      <td>This command will invoke the application to hang. This will be useful in testing an application for blind command injection.</td>
+    </tr>
+    <tr>
+      <td>sleep</td>
+      <td>This is another useful payload in testing an application for blind command injection, where the machine does not have ping installed.</td>
+    </tr>
+    <tr>
+      <td>nc</td>
+      <td>Netcat can be used to spawn a reverse shell onto the vulnerable application. You can use this foothold to navigate around the target machine for other services, files, or potential means of escalating privileges.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Useful Payloads Windows</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Payload</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>whoami</td>
+      <td>See what user the application is running under.</td>
+    </tr>
+    <tr>
+      <td>dir</td>
+      <td>List the contents of the current directory. You may be able to find files such as configuration files, environment files (tokens and application keys), and many more valuable things.</td>
+    </tr>
+    <tr>
+      <td>ping</td>
+      <td>This command will invoke the application to hang. This will be useful in testing an application for blind command injection.</td>
+    </tr>
+    <tr>
+      <td>timeout</td>
+      <td>This command will also invoke the application to hang. It is also useful for testing an application for blind command injection if the ping command is not installed.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Answer the questions below</strong></p>
+
+<ul>
+  <li>
+    <p>What payload would I use if I wanted to determine what user the application is running as? whoami</p>
+  </li>
+  <li>
+    <p>What popular network tool would I use to test for blind command injection on a Linux machine? ping</p>
+  </li>
+  <li>
+    <p>What payload would I use to test a Windows machine for blind command injection? timeout</p>
+  </li>
+</ul>
+
+<hr />
+
+<h1 id="task-4---remediating-command-injection"><a href="#header-3"></a>Task 4 - Remediating Command Injection</h1>
+
+<p><strong>Answer the questions below</strong></p>
+
+<p>What is the term for the process of “cleaning” user input that is provided to an application? Input Sanitisation</p>
+
+<hr />
+
+<h1 id="task-5---practical-command-injection-deploy"><a href="#header-3"></a>Task 5 - Practical: Command Injection (Deploy)</h1>
+
+<p><strong>Answer the questions below</strong></p>
+
+<p>What user is this application running as?</p>
+
+<p>Typing in the IP we see this machine is running ping. Using &amp; we can run multiple commands. <code class="language-plaintext highlighter-rouge">&amp; whoami</code> this application is www-data</p>
+
+<p>What are the contents of the flag located in /home/tryhackme/flag.txt?</p>
+
+<p><code class="language-plaintext highlighter-rouge">&amp; cat /home/tryhackme/flag.txt</code></p>
+
 
 </article>
       </section>
