@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>0xskar</title>
-    <description>Documenting my Learning and other Interesting things</description>
+    <description>Documenting my TryHackMe experience.</description>
     <link>http://localhost:4000</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
     <author>
@@ -317,6 +317,46 @@
 &lt;hr /&gt;
 
 &lt;h1 id=&quot;task-10---practical---example&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 10 - Practical - Example&lt;/h1&gt;
+
+&lt;p&gt;Here we just go over task files, gain access to the support portal at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/support/login&lt;/code&gt; and prepare for our challenge.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;task-11---practical---challenge&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 11 - Practical - Challenge&lt;/h1&gt;
+
+&lt;p&gt;In the previous task, we gained access to the support system. Now it’s time to see what we can do with it!&lt;/p&gt;
+
+&lt;p&gt;The home interface shows us a table of tickets – if we click on any of the rows in the table, we get redirected to a page where we can view the full ticket. Looking at the URL, we can see that these pages are numbered, e.g.:
+http://10.10.251.92/support/ticket/NUMBER&lt;/p&gt;
+
+&lt;p&gt;So, what does this mean?&lt;/p&gt;
+
+&lt;p&gt;The numbering means that we know the tickets aren’t being identified by hard-to-guess IDs – they are simply assigned an integer identifier.&lt;/p&gt;
+
+&lt;p&gt;What happens if we use intruder to fuzz the/support/ticket/NUMBER  endpoint? One of two things will happen:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;The endpoint has been set up correctly only to allow us to view tickets that are assigned to our current user, or&lt;/li&gt;
+  &lt;li&gt;The endpoint has not had the correct access controls set, which would allow us to read all of the existing tickets! If this is the case, then a vulnerability called an IDOR (Insecure Direct Object References) is present.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Let’s try fuzzing this endpoint!&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Which attack type is best suited for this task?&lt;/strong&gt; Sniper&lt;/p&gt;
+
+&lt;p&gt;Configure an appropriate position and payload (the tickets are stored at values between 1 and 100), then start the attack. You should find that at least five tickets will be returned with a status code of 200, indicating that they exist.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Either using the Response tab in the Attack Results window or by looking at each successful (i.e. 200 code) request manually in your browser, find the ticket that contains the flag. What is the flag?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/burpsuiteintruder1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;task-12---extra-mile---csrf-token-bypass&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 12 - Extra Mile - CSRF Token Bypass&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/burpsuiteintruder2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
 
 </description>
         <pubDate>Tue, 14 Jun 2022 00:00:00 -0700</pubDate>

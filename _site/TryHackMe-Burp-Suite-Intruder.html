@@ -149,6 +149,46 @@
 
 <h1 id="task-10---practical---example"><a href="#header-3"></a>Task 10 - Practical - Example</h1>
 
+<p>Here we just go over task files, gain access to the support portal at <code class="language-plaintext highlighter-rouge">/support/login</code> and prepare for our challenge.</p>
+
+<hr />
+
+<h1 id="task-11---practical---challenge"><a href="#header-3"></a>Task 11 - Practical - Challenge</h1>
+
+<p>In the previous task, we gained access to the support system. Now it’s time to see what we can do with it!</p>
+
+<p>The home interface shows us a table of tickets – if we click on any of the rows in the table, we get redirected to a page where we can view the full ticket. Looking at the URL, we can see that these pages are numbered, e.g.:
+http://10.10.251.92/support/ticket/NUMBER</p>
+
+<p>So, what does this mean?</p>
+
+<p>The numbering means that we know the tickets aren’t being identified by hard-to-guess IDs – they are simply assigned an integer identifier.</p>
+
+<p>What happens if we use intruder to fuzz the/support/ticket/NUMBER  endpoint? One of two things will happen:</p>
+
+<ol>
+  <li>The endpoint has been set up correctly only to allow us to view tickets that are assigned to our current user, or</li>
+  <li>The endpoint has not had the correct access controls set, which would allow us to read all of the existing tickets! If this is the case, then a vulnerability called an IDOR (Insecure Direct Object References) is present.</li>
+</ol>
+
+<p>Let’s try fuzzing this endpoint!</p>
+
+<p><strong>Which attack type is best suited for this task?</strong> Sniper</p>
+
+<p>Configure an appropriate position and payload (the tickets are stored at values between 1 and 100), then start the attack. You should find that at least five tickets will be returned with a status code of 200, indicating that they exist.</p>
+
+<p><strong>Either using the Response tab in the Attack Results window or by looking at each successful (i.e. 200 code) request manually in your browser, find the ticket that contains the flag. What is the flag?</strong></p>
+
+<p><img src="/assets/burpsuiteintruder1.png" alt="" /></p>
+
+<hr />
+
+<h1 id="task-12---extra-mile---csrf-token-bypass"><a href="#header-3"></a>Task 12 - Extra Mile - CSRF Token Bypass</h1>
+
+<p><img src="/assets/burpsuiteintruder2.png" alt="" /></p>
+
+<hr />
+
 
 </article>
       </section>

@@ -100,6 +100,45 @@ Like Pitchfork, Cluster bomb allows us to choose multiple payload sets: one per 
 
 # [](#header-3)Task 10 - Practical - Example
 
+Here we just go over task files, gain access to the support portal at ``/support/login`` and prepare for our challenge.
+
+* * * 
+
+# [](#header-3)Task 11 - Practical - Challenge 
+
+In the previous task, we gained access to the support system. Now it's time to see what we can do with it!
+
+The home interface shows us a table of tickets -- if we click on any of the rows in the table, we get redirected to a page where we can view the full ticket. Looking at the URL, we can see that these pages are numbered, e.g.:
+http://10.10.251.92/support/ticket/NUMBER
+
+So, what does this mean?
+
+The numbering means that we know the tickets aren't being identified by hard-to-guess IDs -- they are simply assigned an integer identifier.
+
+What happens if we use intruder to fuzz the/support/ticket/NUMBER  endpoint? One of two things will happen:
+
+   1. The endpoint has been set up correctly only to allow us to view tickets that are assigned to our current user, or
+   2. The endpoint has not had the correct access controls set, which would allow us to read all of the existing tickets! If this is the case, then a vulnerability called an IDOR (Insecure Direct Object References) is present.
+
+Let's try fuzzing this endpoint!
+
+**Which attack type is best suited for this task?** Sniper
+
+Configure an appropriate position and payload (the tickets are stored at values between 1 and 100), then start the attack. You should find that at least five tickets will be returned with a status code of 200, indicating that they exist.
+
+**Either using the Response tab in the Attack Results window or by looking at each successful (i.e. 200 code) request manually in your browser, find the ticket that contains the flag. What is the flag?**
+
+![](/assets/burpsuiteintruder1.png)
+
+* * *
+
+# [](#header-3)Task 12 - Extra Mile - CSRF Token Bypass 
+
+![](/assets/burpsuiteintruder2.png)
+
+* * *
+
+
 
 
 
