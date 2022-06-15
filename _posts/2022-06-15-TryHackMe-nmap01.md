@@ -20,8 +20,6 @@ When we want to target a network, we want to find an efficient tool to help us h
 
 ## [](#header-2)Task 2 - Subnetworks 
 
-
-
 Send a packet with the following:
 
    - From computer1
@@ -29,9 +27,9 @@ Send a packet with the following:
    - Packet Type: “ARP Request”
    - Data: computer6 (because we are asking for computer6 MAC address using ARP Request)
 
-How many devices can see the ARP Request?
+**How many devices can see the ARP Request?** 4
 
-Did computer6 receive the ARP Request? (Y/N)
+**Did computer6 receive the ARP Request? (Y/N)** n
 
 Send a packet with the following:
 
@@ -40,10 +38,20 @@ Send a packet with the following:
    - Packet Type: “ARP Request”
    - Data: computer6 (because we are asking for computer6 MAC address using ARP Request)
 
-How many devices can see the ARP Request?
+**How many devices can see the ARP Request?** 4
 
-Did computer6 reply to the ARP Request? (Y/N)
+**Did computer6 reply to the ARP Request? (Y/N)** y
 
 * * * 
 
+## [](#header-2)Task 3 Enumerating Targets 
 
+**What is the first IP address Nmap would scan if you provided 10.10.12.13/29 as your target?** 
+
+``nmap -sL -n 10.10.12.13/29`` 10.10.12.8
+
+**How many IP addresses will Nmap scan if you provide the following range 10.10.0-255.101-125?** 
+
+``nmap -sL -n 10.10.0-255.101-125`` 6400
+
+* * * 

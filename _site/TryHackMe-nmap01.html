@@ -78,9 +78,9 @@
   <li>Data: computer6 (because we are asking for computer6 MAC address using ARP Request)</li>
 </ul>
 
-<p>How many devices can see the ARP Request?</p>
+<p><strong>How many devices can see the ARP Request?</strong> 4</p>
 
-<p>Did computer6 receive the ARP Request? (Y/N)</p>
+<p><strong>Did computer6 receive the ARP Request? (Y/N)</strong> n</p>
 
 <p>Send a packet with the following:</p>
 
@@ -91,12 +91,23 @@
   <li>Data: computer6 (because we are asking for computer6 MAC address using ARP Request)</li>
 </ul>
 
-<p>How many devices can see the ARP Request?</p>
+<p><strong>How many devices can see the ARP Request?</strong> 4</p>
 
-<p>Did computer6 reply to the ARP Request? (Y/N)</p>
+<p><strong>Did computer6 reply to the ARP Request? (Y/N)</strong> y</p>
 
 <hr />
 
+<h2 id="task-3-enumerating-targets"><a href="#header-2"></a>Task 3 Enumerating Targets</h2>
+
+<p><strong>What is the first IP address Nmap would scan if you provided 10.10.12.13/29 as your target?</strong></p>
+
+<p><code class="language-plaintext highlighter-rouge">nmap -sL -n 10.10.12.13/29</code> 10.10.12.8</p>
+
+<p><strong>How many IP addresses will Nmap scan if you provide the following range 10.10.0-255.101-125?</strong></p>
+
+<p><code class="language-plaintext highlighter-rouge">nmap -sL -n 10.10.0-255.101-125</code> 6400</p>
+
+<hr />
 
 </article>
       </section>
