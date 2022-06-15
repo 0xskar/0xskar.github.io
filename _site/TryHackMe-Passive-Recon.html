@@ -81,6 +81,152 @@
 
 <h1 id="task-2---passive-versus-active-recon"><a href="#header-3"></a>Task 2 - Passive Versus Active Recon</h1>
 
+<p>In passive reconnaissance, you rely on publicly available knowledge. It is the knowledge that you can access from publicly available resources without directly engaging with the target.</p>
+
+<ul>
+  <li>Looking up DNS records of a domain from a public DNS server.</li>
+  <li>Checking job ads related to the target website.</li>
+  <li>Reading news articles about the target company.</li>
+</ul>
+
+<p>Active reconnaissance, on the other hand, cannot be achieved so discreetly. It requires direct engagement with the target. Think of it like you check the locks on the doors and windows, among other potential entry points.</p>
+
+<ul>
+  <li>Connecting to one of the company servers such as HTTP, FTP, and SMTP.</li>
+  <li>Calling the company in an attempt to get information (social engineering).</li>
+  <li>Entering company premises pretending to be a repairman.</li>
+</ul>
+
+<p><strong>You visit the Facebook page of the target company, hoping to get some of their employee names. What kind of reconnaissance activity is this? (A for active, P for passive)</strong> Passive</p>
+
+<p><strong>You ping the IP address of the company webserver to check if ICMP traffic is blocked. What kind of reconnaissance activity is this? (A for active, P for passive)</strong> Active</p>
+
+<p><strong>You happen to meet the IT administrator of the target company at a party. You try to use social engineering to get more information about their systems and network infrastructure. What kind of reconnaissance activity is this? (A for active, P for passive)</strong> Active</p>
+
+<h1 id="task-3---whois"><a href="#header-3"></a>Task 3 - Whois</h1>
+
+<p><img src="/assets/passiverecon1.png" alt="" /></p>
+
+<p><strong>When was TryHackMe.com registered?</strong> 20180705</p>
+
+<p><strong>What is the registrar of TryHackMe.com?</strong> namecheap.com</p>
+
+<p><strong>Which company is TryHackMe.com using for name servers?</strong> cloudflare.com</p>
+
+<hr />
+
+<h1 id="task-4---nslookup-and-dig"><a href="#header-3"></a>Task 4 - nslookup and dig</h1>
+
+<p>Name Server Look Up (<code class="language-plaintext highlighter-rouge">nslookup -type=OPTIONS DOMAIN_NAME</code>) where OPTIONS is a query from the table below:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Query type</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>A</td>
+      <td>IPv4 Addresses</td>
+    </tr>
+    <tr>
+      <td>AAAA</td>
+      <td>IPv6 Addresses</td>
+    </tr>
+    <tr>
+      <td>CNAME</td>
+      <td>Canonical Name</td>
+    </tr>
+    <tr>
+      <td>MX</td>
+      <td>Mail Servers</td>
+    </tr>
+    <tr>
+      <td>SOA</td>
+      <td>Start of Authority</td>
+    </tr>
+    <tr>
+      <td>TXT</td>
+      <td>TXT Records</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Domain Information Groper (<code class="language-plaintext highlighter-rouge">dig DOMAIN_NAME OPIONS</code>)</p>
+
+<p><strong>Answer the questions below</strong></p>
+
+<p><strong>Check the TXT records of thmlabs.com. What is the flag there?</strong> <code class="language-plaintext highlighter-rouge">dig thmlabs.com TXT</code> or <code class="language-plaintext highlighter-rouge">nslookup -type=TXT thmlabs.com</code></p>
+
+<hr />
+
+<h1 id="task-5---dnsdumpster"><a href="#header-3"></a>Task 5 - DNSDumpster</h1>
+
+<p>Pretty useful took for helping map out sub domain structures and other DNS queries.</p>
+
+<p><strong>Lookup tryhackme.com on DNSDumpster. What is one interesting subdomain that you would discover in addition to www and blog?</strong> remote.</p>
+
+<hr />
+
+<h1 id="task-6---shodanio"><a href="#header-3"></a>Task 6 - Shodan.io</h1>
+
+<p>Shodan gathers information about all devices directly connected to the Internet. If a device is directly hooked up to the Internet then Shodan queries it for various publicly-available information. The types of devices that are indexed can vary tremendously: ranging from small desktops up to nuclear power plants and everything in between.</p>
+
+<p><strong>According to Shodan.io, what is the 2nd country in the world in terms of the number of publicly accessible Apache servers?</strong> Germany</p>
+
+<p><strong>Based on Shodan.io, what is the 3rd most common port used for Apache?</strong> 8080</p>
+
+<p><strong>Based on Shodan.io, what is the 3rd most common port used for nginx?</strong> 8888</p>
+
+<hr />
+
+<h1 id="task-7---summary"><a href="#header-3"></a>Task 7 - Summary</h1>
+
+<p>We covered command-line tools, whois, nslookup, and dig. We also discussed two publicly available services DNSDumpster and Shodan.io.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Purpose</th>
+      <th>Commandline Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Lookup WHOIS record</td>
+      <td>whois tryhackme.com</td>
+    </tr>
+    <tr>
+      <td>Lookup DNS A records</td>
+      <td>nslookup -type=A tryhackme.com</td>
+    </tr>
+    <tr>
+      <td>Lookup DNS MX records at DNS server</td>
+      <td>nslookup -type=MX tryhackme.com 1.1.1.1</td>
+    </tr>
+    <tr>
+      <td>Lookup DNS TXT records</td>
+      <td>nslookup -type=TXT tryhackme.com</td>
+    </tr>
+    <tr>
+      <td>Lookup DNS A records</td>
+      <td>dig tryhackme.com A</td>
+    </tr>
+    <tr>
+      <td>Lookup DNS MX records at DNS server</td>
+      <td>dig @1.1.1.1 tryhackme.com MX</td>
+    </tr>
+    <tr>
+      <td>Lookup DNS TXT records</td>
+      <td>dig tryhackme.com TXT</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
 </article>
       </section>
     </div>
