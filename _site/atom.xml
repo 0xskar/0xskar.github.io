@@ -218,6 +218,74 @@
       </item>
     
       <item>
+        <title>TryHackMe - Burp Suite - Other Modules</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://tryhackme.com/room/burpsuiteom&quot;&gt;https://tryhackme.com/room/burpsuiteom&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Take a dive into some of Burp Suite’s lesser known modules&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;task-1---introduction---room-outline&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 1 - Introduction - Room Outline&lt;/h1&gt;
+
+&lt;p&gt;Specifically, we will be looking at the Decoder, Comparer and Sequencer tools. These allow us to: work with encoded text; compare sets of text; and analyse the randomness of captured tokens, respectively. Being able to perform these relatively straightforward tasks directly within Burp Suite can save a lot of time, so it is well worth the time spent learning to use these modules efficiently.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;task-2---decoder---overview&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 2 - Decoder - Overview&lt;/h1&gt;
+
+&lt;p&gt;Just familiarising with the Decoder Interface.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;task-3---decodingencoding&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 3 - Decoding/Encoding&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;Base64 encode the phrase: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Let&apos;s Start Simple&lt;/code&gt;.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;What is the base64 encoded version of this text?&lt;/strong&gt; TGV0J3MgU3RhcnQgU2ltcGxl&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;URL Decode this data:&lt;/strong&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;%4e%65%78%74%3a%20%44%65%63%6f%64%69%6e%67&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;What is the plaintext returned?&lt;/strong&gt; Next: Decoding&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Use Smart Decode to decode this data:&lt;/strong&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;amp;#x25;&amp;amp;#x33;&amp;amp;#x34;&amp;amp;#x25;&amp;amp;#x33;&amp;amp;#x37;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;What is the decoded text?&lt;/strong&gt; 47&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Encode this phrase:&lt;/strong&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Encoding Challenge&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Start with base64 encoding. Take the output of this and convert it into ASCII Hex. Finally, encode the hex string into octal.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;What is the final string?&lt;/strong&gt; 24034214a720270024142d541357471232250253552c1162d1206c&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;task-4---decoder---hashing&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 4 - Decoder - Hashing&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;Using Decoder, what is the SHA-256 hashsum of the phrase: Let’s get Hashing!?
+Convert this into an ASCII Hex string for the answer to this question.&lt;/strong&gt; 6b72350e719a8ef5af560830164b13596cb582757437e21d1879502072238abe&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Generate an MD4 hashsum of the phrase: Insecure Algorithms. Encode this as base64 (not ASCII Hex) before submitting.&lt;/strong&gt; TcV4QGZZN7y7lwYFRMMoeA==&lt;/p&gt;
+
+&lt;p&gt;Let’s look at an in-context example:&lt;/p&gt;
+
+&lt;p&gt;First, download the file attached to this task.&lt;/p&gt;
+
+&lt;p&gt;Note: This file can also be downloaded from the deployed VM with  wget http://10.10.117.71:9999/AlteredKeys.zip – you may find this useful if you are using the AttackBox.&lt;/p&gt;
+
+&lt;p&gt;Now read the problem specification below:&lt;/p&gt;
+
+&lt;p&gt;“Some joker has messed with my SSH key! There are four keys in the directory, and I have no idea which is the real one. The MD5 hashsum for my key is 3166226048d6ad776370dc105d40d9f8 – could you find it for me?”&lt;/p&gt;
+
+&lt;p&gt;Submit the correct key name as your answer.&lt;/p&gt;
+
+</description>
+        <pubDate>Tue, 14 Jun 2022 00:00:00 -0700</pubDate>
+        <link>http://localhost:4000//TryHackMe-Burp-Suite-OM</link>
+        <link href="http://localhost:4000/TryHackMe-Burp-Suite-OM"/>
+        <guid isPermaLink="true">http://localhost:4000/TryHackMe-Burp-Suite-OM</guid>
+      </item>
+    
+      <item>
         <title>TryHackMe - Burp Suite Intruder</title>
         <description>&lt;p&gt;&lt;a href=&quot;https://tryhackme.com/room/burpsuiteintruder&quot;&gt;https://tryhackme.com/room/burpsuiteintruder&lt;/a&gt;&lt;/p&gt;
 

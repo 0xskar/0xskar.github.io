@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <meta name="generator" content="Jekyll">
+
+  <title>TryHackMe - Burp Suite - Other Modules</title>
+
+  <link rel="stylesheet" href="/css/main.css">
+  
+  <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed" /> <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TryHackMe - Burp Suite - Other Modules | 0xskar</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="TryHackMe - Burp Suite - Other Modules" />
+<meta name="author" content="0xskar" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="https://tryhackme.com/room/burpsuiteom" />
+<meta property="og:description" content="https://tryhackme.com/room/burpsuiteom" />
+<link rel="canonical" href="http://localhost:4000/TryHackMe-Burp-Suite-OM" />
+<meta property="og:url" content="http://localhost:4000/TryHackMe-Burp-Suite-OM" />
+<meta property="og:site_name" content="0xskar" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-06-14T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TryHackMe - Burp Suite - Other Modules" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"0xskar","url":"https://0xskar.github.io"},"dateModified":"2022-06-14T00:00:00-07:00","datePublished":"2022-06-14T00:00:00-07:00","description":"https://tryhackme.com/room/burpsuiteom","headline":"TryHackMe - Burp Suite - Other Modules","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/TryHackMe-Burp-Suite-OM"},"url":"http://localhost:4000/TryHackMe-Burp-Suite-OM"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <header>
+  <div>
+    <a href="/">
+    
+    <h1>0xskar@home:~$</h1>
+    </a>
+    <div class="header-links">
+      <a href="/archive"><h2 class="header-link">Archive</h2></a>
+<a href="/about"><h2 class="header-link">About</h2></a>
+<a href="/atom.xml"><h2 class="header-link">RSS</h2></a>
+    </div>
+  </div>
+</header>
+    <div class="container">
+      <section id="main_content">
+        <article>
+  <h2>TryHackMe - Burp Suite - Other Modules</h2>
+  <time datetime="2022-06-14T00:00:00-07:00" class="by-line">14 Jun 2022</time>
+  <p><a href="https://tryhackme.com/room/burpsuiteom">https://tryhackme.com/room/burpsuiteom</a></p>
+
+<p>Take a dive into some of Burp Suite’s lesser known modules</p>
+
+<hr />
+
+<h1 id="task-1---introduction---room-outline"><a href="#header-3"></a>Task 1 - Introduction - Room Outline</h1>
+
+<p>Specifically, we will be looking at the Decoder, Comparer and Sequencer tools. These allow us to: work with encoded text; compare sets of text; and analyse the randomness of captured tokens, respectively. Being able to perform these relatively straightforward tasks directly within Burp Suite can save a lot of time, so it is well worth the time spent learning to use these modules efficiently.</p>
+
+<hr />
+
+<h1 id="task-2---decoder---overview"><a href="#header-3"></a>Task 2 - Decoder - Overview</h1>
+
+<p>Just familiarising with the Decoder Interface.</p>
+
+<hr />
+
+<h1 id="task-3---decodingencoding"><a href="#header-3"></a>Task 3 - Decoding/Encoding</h1>
+
+<p><strong>Base64 encode the phrase: <code class="language-plaintext highlighter-rouge">Let's Start Simple</code>.</strong></p>
+
+<p><strong>What is the base64 encoded version of this text?</strong> TGV0J3MgU3RhcnQgU2ltcGxl</p>
+
+<p><strong>URL Decode this data:</strong> <code class="language-plaintext highlighter-rouge">%4e%65%78%74%3a%20%44%65%63%6f%64%69%6e%67</code>.</p>
+
+<p><strong>What is the plaintext returned?</strong> Next: Decoding</p>
+
+<p><strong>Use Smart Decode to decode this data:</strong> <code class="language-plaintext highlighter-rouge">&amp;#x25;&amp;#x33;&amp;#x34;&amp;#x25;&amp;#x33;&amp;#x37;</code>.</p>
+
+<p><strong>What is the decoded text?</strong> 47</p>
+
+<p><strong>Encode this phrase:</strong> <code class="language-plaintext highlighter-rouge">Encoding Challenge</code>.</p>
+
+<p><strong>Start with base64 encoding. Take the output of this and convert it into ASCII Hex. Finally, encode the hex string into octal.</strong></p>
+
+<p><strong>What is the final string?</strong> 24034214a720270024142d541357471232250253552c1162d1206c</p>
+
+<hr />
+
+<h1 id="task-4---decoder---hashing"><a href="#header-3"></a>Task 4 - Decoder - Hashing</h1>
+
+<p><strong>Using Decoder, what is the SHA-256 hashsum of the phrase: Let’s get Hashing!?
+Convert this into an ASCII Hex string for the answer to this question.</strong> 6b72350e719a8ef5af560830164b13596cb582757437e21d1879502072238abe</p>
+
+<p><strong>Generate an MD4 hashsum of the phrase: Insecure Algorithms. Encode this as base64 (not ASCII Hex) before submitting.</strong> TcV4QGZZN7y7lwYFRMMoeA==</p>
+
+<p>Let’s look at an in-context example:</p>
+
+<p>First, download the file attached to this task.</p>
+
+<p>Note: This file can also be downloaded from the deployed VM with  wget http://10.10.117.71:9999/AlteredKeys.zip – you may find this useful if you are using the AttackBox.</p>
+
+<p>Now read the problem specification below:</p>
+
+<p>“Some joker has messed with my SSH key! There are four keys in the directory, and I have no idea which is the real one. The MD5 hashsum for my key is 3166226048d6ad776370dc105d40d9f8 – could you find it for me?”</p>
+
+<p>Submit the correct key name as your answer.</p>
+
+
+</article>
+      </section>
+    </div>
+  </div>
+
+   <footer>
+  <a href="https://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+    <span>
+        <b>0xskar</b>
+    </span>
+    
+    <span>© 2022</span>
+  </a>
+</footer>
+
+  
+</body>
+
+</html>
