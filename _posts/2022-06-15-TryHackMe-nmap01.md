@@ -11,11 +11,39 @@ Learn how to use Nmap to discover live hosts using ARP scan, ICMP scan, and TCP/
 
 ## [](#header-2)Task 1 - Introduction
 
-Focus on active reconnaissance and the essential tools related to it. We learn to use a web browser to collect more information about our target. Moreover, we discuss using simple tools such as ping, traceroute, telnet, and nc to gather information about the network, system, and services.
+When we want to target a network, we want to find an efficient tool to help us handle repetitive tasks and answer the following questions:
 
-Active reconnaissance requires you to make some kind of contact with your target. This contact can be a phone call or a visit to the target company under some pretence to gather more information, usually as part of social engineering. Alternatively, it can be a direct connection to the target system, whether visiting their website or checking if their firewall has an SSH port open. 
+   - Which systems are up?
+   - What services are running on these systems?
 
 * * * 
 
+## [](#header-2)Task 2 - Subnetworks 
+
+
+
+Send a packet with the following:
+
+   - From computer1
+   - To computer1 (to indicate it is broadcast)
+   - Packet Type: “ARP Request”
+   - Data: computer6 (because we are asking for computer6 MAC address using ARP Request)
+
+How many devices can see the ARP Request?
+
+Did computer6 receive the ARP Request? (Y/N)
+
+Send a packet with the following:
+
+   - From computer4
+   - To computer4 (to indicate it is broadcast)
+   - Packet Type: “ARP Request”
+   - Data: computer6 (because we are asking for computer6 MAC address using ARP Request)
+
+How many devices can see the ARP Request?
+
+Did computer6 reply to the ARP Request? (Y/N)
+
+* * * 
 
 

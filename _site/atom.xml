@@ -21,9 +21,42 @@
 
 &lt;h2 id=&quot;task-1---introduction&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 1 - Introduction&lt;/h2&gt;
 
-&lt;p&gt;Focus on active reconnaissance and the essential tools related to it. We learn to use a web browser to collect more information about our target. Moreover, we discuss using simple tools such as ping, traceroute, telnet, and nc to gather information about the network, system, and services.&lt;/p&gt;
+&lt;p&gt;When we want to target a network, we want to find an efficient tool to help us handle repetitive tasks and answer the following questions:&lt;/p&gt;
 
-&lt;p&gt;Active reconnaissance requires you to make some kind of contact with your target. This contact can be a phone call or a visit to the target company under some pretence to gather more information, usually as part of social engineering. Alternatively, it can be a direct connection to the target system, whether visiting their website or checking if their firewall has an SSH port open.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Which systems are up?&lt;/li&gt;
+  &lt;li&gt;What services are running on these systems?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;task-2---subnetworks&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 2 - Subnetworks&lt;/h2&gt;
+
+&lt;p&gt;Send a packet with the following:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;From computer1&lt;/li&gt;
+  &lt;li&gt;To computer1 (to indicate it is broadcast)&lt;/li&gt;
+  &lt;li&gt;Packet Type: “ARP Request”&lt;/li&gt;
+  &lt;li&gt;Data: computer6 (because we are asking for computer6 MAC address using ARP Request)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;How many devices can see the ARP Request?&lt;/p&gt;
+
+&lt;p&gt;Did computer6 receive the ARP Request? (Y/N)&lt;/p&gt;
+
+&lt;p&gt;Send a packet with the following:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;From computer4&lt;/li&gt;
+  &lt;li&gt;To computer4 (to indicate it is broadcast)&lt;/li&gt;
+  &lt;li&gt;Packet Type: “ARP Request”&lt;/li&gt;
+  &lt;li&gt;Data: computer6 (because we are asking for computer6 MAC address using ARP Request)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;How many devices can see the ARP Request?&lt;/p&gt;
+
+&lt;p&gt;Did computer6 reply to the ARP Request? (Y/N)&lt;/p&gt;
 
 &lt;hr /&gt;
 

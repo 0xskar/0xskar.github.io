@@ -58,9 +58,42 @@
 
 <h2 id="task-1---introduction"><a href="#header-2"></a>Task 1 - Introduction</h2>
 
-<p>Focus on active reconnaissance and the essential tools related to it. We learn to use a web browser to collect more information about our target. Moreover, we discuss using simple tools such as ping, traceroute, telnet, and nc to gather information about the network, system, and services.</p>
+<p>When we want to target a network, we want to find an efficient tool to help us handle repetitive tasks and answer the following questions:</p>
 
-<p>Active reconnaissance requires you to make some kind of contact with your target. This contact can be a phone call or a visit to the target company under some pretence to gather more information, usually as part of social engineering. Alternatively, it can be a direct connection to the target system, whether visiting their website or checking if their firewall has an SSH port open.</p>
+<ul>
+  <li>Which systems are up?</li>
+  <li>What services are running on these systems?</li>
+</ul>
+
+<hr />
+
+<h2 id="task-2---subnetworks"><a href="#header-2"></a>Task 2 - Subnetworks</h2>
+
+<p>Send a packet with the following:</p>
+
+<ul>
+  <li>From computer1</li>
+  <li>To computer1 (to indicate it is broadcast)</li>
+  <li>Packet Type: “ARP Request”</li>
+  <li>Data: computer6 (because we are asking for computer6 MAC address using ARP Request)</li>
+</ul>
+
+<p>How many devices can see the ARP Request?</p>
+
+<p>Did computer6 receive the ARP Request? (Y/N)</p>
+
+<p>Send a packet with the following:</p>
+
+<ul>
+  <li>From computer4</li>
+  <li>To computer4 (to indicate it is broadcast)</li>
+  <li>Packet Type: “ARP Request”</li>
+  <li>Data: computer6 (because we are asking for computer6 MAC address using ARP Request)</li>
+</ul>
+
+<p>How many devices can see the ARP Request?</p>
+
+<p>Did computer6 reply to the ARP Request? (Y/N)</p>
 
 <hr />
 
