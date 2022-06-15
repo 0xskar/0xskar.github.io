@@ -12,6 +12,105 @@
     </author>
     
       <item>
+        <title>TryHackMe - Passive Reconniassance</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://tryhackme.com/room/passiverecon&quot;&gt;https://tryhackme.com/room/passiverecon&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Learn about the essential tools for passive reconnaissance, such as whois, nslookup, and dig.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;task-1---introduction&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 1 - Introduction&lt;/h1&gt;
+
+&lt;p&gt;In this room, after we define passive reconnaissance and active reconnaissance, we focus on essential tools related to passive reconnaissance. We will learn three command-line tools:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;whois to query WHOIS servers&lt;/li&gt;
+  &lt;li&gt;nslookup to query DNS servers&lt;/li&gt;
+  &lt;li&gt;dig to query DNS servers&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We use whois to query WHOIS records, while we use nslookup and dig to query DNS database records. These are all publicly available records and hence do not alert the target.&lt;/p&gt;
+
+&lt;p&gt;We will also learn the usage of two online services:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://dnsdumpster.com/&quot;&gt;DNSDumpster&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.shodan.io/&quot;&gt;Shodan.io&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These two online services allow us to collect information about our target without directly connecting to it.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;task-2---passive-versus-active-recon&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 2 - Passive Versus Active Recon&lt;/h1&gt;
+</description>
+        <pubDate>Wed, 15 Jun 2022 00:00:00 -0700</pubDate>
+        <link>http://localhost:4000//TryHackMe-Passive-Recon</link>
+        <link href="http://localhost:4000/TryHackMe-Passive-Recon"/>
+        <guid isPermaLink="true">http://localhost:4000/TryHackMe-Passive-Recon</guid>
+      </item>
+    
+      <item>
+        <title>TryHackMe - Burp Suite - Extender</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://tryhackme.com/room/burpsuiteextender&quot;&gt;https://tryhackme.com/room/burpsuiteextender&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Learn how to use Extender to broaden the functionality of Burp Suite&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;task-1---introduction---outline&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 1 - Introduction - Outline&lt;/h1&gt;
+
+&lt;p&gt;This room will focus on Burp Suite’s modular aspects: the exposed functionality, which allows developers to craft extra additional modules for the framework.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;task-2---extender---the-extender-interface&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 2 - Extender - The Extender Interface&lt;/h1&gt;
+
+&lt;p&gt;Extensions are invoked in descending order based on this list. In other words: all traffic passing through Burp Suite will be passed through each extension in order, starting at the top of the list and working down. This can be very important when dealing with extensions that modify the requests as some may counteract or otherwise hinder one another.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Answer the questions below&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Familiarise yourself with the Extender management interface.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Are extensions invoked in ascending (A) or descending (D) order?&lt;/strong&gt; Descending&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;task-3---extender---the-bapp-store&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 3 - Extender - The BApp Store&lt;/h1&gt;
+
+&lt;p&gt;Look through the list of apps in the BApp store and install at least one other that catches your fancy.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;task-4---extender---jython&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 4 - Extender - Jython&lt;/h1&gt;
+
+&lt;p&gt;If we want to use Python modules in Burp Suite, we need to have downloaded and included the separate Jython Interpreter JAR file. The Jython interpreter is a Java implementation of Python.&lt;/p&gt;
+
+&lt;p&gt;Here we install Jython, and Ruby.&lt;/p&gt;
+
+&lt;p&gt;[Bonus Question – Optional] Add JRuby to your Burp Suite install. A download link can be found here. The process for this is exactly the same as with Jython.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;task-5---extender---the-burp-suite-api&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 5 - Extender - The Burp Suite API&lt;/h1&gt;
+
+&lt;p&gt;Nothing here.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;task-6---conclusion---room-conclusion&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 6 - Conclusion - Room Conclusion&lt;/h1&gt;
+
+&lt;p&gt;I can use Burp Suite Extender!&lt;/p&gt;
+
+&lt;hr /&gt;
+</description>
+        <pubDate>Wed, 15 Jun 2022 00:00:00 -0700</pubDate>
+        <link>http://localhost:4000//TryHackMe-Burp-Suite-Extender</link>
+        <link href="http://localhost:4000/TryHackMe-Burp-Suite-Extender"/>
+        <guid isPermaLink="true">http://localhost:4000/TryHackMe-Burp-Suite-Extender</guid>
+      </item>
+    
+      <item>
         <title>TryHackMe - SQL Injection</title>
         <description>&lt;p&gt;&lt;a href=&quot;https://tryhackme.com/room/sqlinjectionlm&quot;&gt;https://tryhackme.com/room/sqlinjectionlm&lt;/a&gt;&lt;/p&gt;
 
@@ -1370,178 +1469,6 @@ Steps for testing for LFI&lt;/p&gt;
         <link>http://localhost:4000//TryHackMe-File-Inclusion</link>
         <link href="http://localhost:4000/TryHackMe-File-Inclusion"/>
         <guid isPermaLink="true">http://localhost:4000/TryHackMe-File-Inclusion</guid>
-      </item>
-    
-      <item>
-        <title>Sample Page</title>
-        <description>&lt;p&gt;Text can be &lt;strong&gt;bold&lt;/strong&gt;, &lt;em&gt;italic&lt;/em&gt;, &lt;del&gt;strikethrough&lt;/del&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;keyword&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;another-page&quot;&gt;Link to another page&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;There should be whitespace between paragraphs.&lt;/p&gt;
-
-&lt;p&gt;There should be whitespace between paragraphs. We recommend including a README, or a file with information about your project.&lt;/p&gt;
-
-&lt;h1 id=&quot;header-1&quot;&gt;&lt;a href=&quot;#header-1&quot;&gt;&lt;/a&gt;Header 1&lt;/h1&gt;
-
-&lt;p&gt;This is a normal paragraph following a header. GitHub is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere.&lt;/p&gt;
-
-&lt;h2 id=&quot;header-2&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Header 2&lt;/h2&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;This is a blockquote following a header.&lt;/p&gt;
-
-  &lt;p&gt;When something is important enough, you do it even if the odds are not in your favor.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;header-3&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Header 3&lt;/h3&gt;
-
-&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Javascript code with syntax highlighting.&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;lang&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;dateformat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i18n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;./lang/&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Ruby code with syntax highlighting&lt;/span&gt;
-&lt;span class=&quot;no&quot;&gt;GitHubPages&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Dependencies&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;gems&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;add_dependency&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;= &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;header-4&quot;&gt;&lt;a href=&quot;#header-4&quot;&gt;&lt;/a&gt;Header 4&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;This is an unordered list following a header.&lt;/li&gt;
-  &lt;li&gt;This is an unordered list following a header.&lt;/li&gt;
-  &lt;li&gt;This is an unordered list following a header.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h5 id=&quot;header-5&quot;&gt;&lt;a href=&quot;#header-5&quot;&gt;&lt;/a&gt;Header 5&lt;/h5&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;This is an ordered list following a header.&lt;/li&gt;
-  &lt;li&gt;This is an ordered list following a header.&lt;/li&gt;
-  &lt;li&gt;This is an ordered list following a header.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h6 id=&quot;header-6&quot;&gt;&lt;a href=&quot;#header-6&quot;&gt;&lt;/a&gt;Header 6&lt;/h6&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;head1&lt;/th&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;head two&lt;/th&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;three&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;ok&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;good swedish fish&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;nice&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;out of stock&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;good and plenty&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;nice&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;ok&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;good &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;oreos&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;hmm&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;ok&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;good &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;zoute&lt;/code&gt; drop&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;yumm&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h3 id=&quot;theres-a-horizontal-rule-below-this&quot;&gt;There’s a horizontal rule below this.&lt;/h3&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;here-is-an-unordered-list&quot;&gt;Here is an unordered list:&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Item foo&lt;/li&gt;
-  &lt;li&gt;Item bar&lt;/li&gt;
-  &lt;li&gt;Item baz&lt;/li&gt;
-  &lt;li&gt;Item zip&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;and-an-ordered-list&quot;&gt;And an ordered list:&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Item one&lt;/li&gt;
-  &lt;li&gt;Item two&lt;/li&gt;
-  &lt;li&gt;Item three&lt;/li&gt;
-  &lt;li&gt;Item four&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;and-a-nested-list&quot;&gt;And a nested list:&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;level 1 item
-    &lt;ul&gt;
-      &lt;li&gt;level 2 item&lt;/li&gt;
-      &lt;li&gt;level 2 item
-        &lt;ul&gt;
-          &lt;li&gt;level 3 item&lt;/li&gt;
-          &lt;li&gt;level 3 item&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;level 1 item
-    &lt;ul&gt;
-      &lt;li&gt;level 2 item&lt;/li&gt;
-      &lt;li&gt;level 2 item&lt;/li&gt;
-      &lt;li&gt;level 2 item&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;level 1 item
-    &lt;ul&gt;
-      &lt;li&gt;level 2 item&lt;/li&gt;
-      &lt;li&gt;level 2 item&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;level 1 item&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;small-image&quot;&gt;Small image&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://assets-cdn.github.com/images/icons/emoji/octocat.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;large-image&quot;&gt;Large image&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://guides.github.com/activities/hello-world/branching.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;definition-lists-can-be-used-with-html-syntax&quot;&gt;Definition lists can be used with HTML syntax.&lt;/h3&gt;
-
-&lt;dl&gt;
-&lt;dt&gt;Name&lt;/dt&gt;
-&lt;dd&gt;Godzilla&lt;/dd&gt;
-&lt;dt&gt;Born&lt;/dt&gt;
-&lt;dd&gt;1952&lt;/dd&gt;
-&lt;dt&gt;Birthplace&lt;/dt&gt;
-&lt;dd&gt;Japan&lt;/dd&gt;
-&lt;dt&gt;Color&lt;/dt&gt;
-&lt;dd&gt;Green&lt;/dd&gt;
-&lt;/dl&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;The final element.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-</description>
-        <pubDate>Tue, 12 Dec 2017 00:00:00 -0800</pubDate>
-        <link>http://localhost:4000//Sample-Page</link>
-        <link href="http://localhost:4000/Sample-Page"/>
-        <guid isPermaLink="true">http://localhost:4000/Sample-Page</guid>
       </item>
     
   </channel>
