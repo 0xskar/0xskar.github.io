@@ -55,3 +55,113 @@ Send a packet with the following:
 ``nmap -sL -n 10.10.0-255.101-125`` 6400
 
 * * * 
+
+## [](#header-2)Task 4 - Discovering Live Hosts 
+
+Send a packet with the following:
+
+   - From computer1
+   - To computer3
+   - Packet Type: “Ping Request”
+
+**What is the type of packet that computer1 sent before the ping?** ARP request
+
+**What is the type of packet that computer1 received before being able to send the ping?** ARP Response
+
+**How many computers responded to the ping request?** 1
+
+Send a packet with the following:
+
+   - From computer2
+   - To computer5
+   - Packet Type: “Ping Request”
+
+**What is the name of the first device that responded to the first ARP Request?** Router
+
+**What is the name of the first device that responded to the second ARP Request?** Computer 5
+
+**Send another Ping Request. Did it require new ARP Requests? (Y/N)** N
+
+* * * 
+
+## [](#header-2)Task 5 - Nmap Host Discovery Using ARP 
+
+We learn to use a few useful tools here:
+
+- ``sudo arp-scan -l`` will send ARP queries to all IP address on local network
+- ``sudo arp-scan -I eth0 -l``
+
+We will be sending broadcast ARP Requests packets with the following options:
+
+   - From computer1
+   - To computer1 (to indicate it is broadcast)
+   - Packet Type: “ARP Request”
+   - Data: try all the possible eight devices (other than computer1) in the network: computer2, computer3, computer4, computer5, computer6, switch1, switch2, and router.
+
+**How many devices are you able to discover using ARP requests?** 3
+
+* * * 
+
+## [](#header-2)Task 6 - Nmap Host Discovery Using ICMP 
+
+We learn a few new flags for Nmap host discovery:
+
+- ``-PP`` tells nmap to use ICMP Timestamp to discover live hosts
+- ``-PM`` tells nmap to use ICMP address mask to discover live hosts
+- ``-PE`` tells nmap to use ICMP echo to discover live hosts
+
+* * * 
+
+## [](#header-2)Task 7 - Nmap Host Discovery Using TCP and UDP 
+
+More useful flags
+
+- ``-PS#`` tells nmap to use TCP/SYN ping where # is the port
+- ``-PA#`` tells nmap to use TCP/ACK ping 
+- ``-PU`` for UDP ping
+
+Also ``masscan`` can be used for all of the above but need a port specified.
+
+**Which TCP ping scan does not require a privileged account?** TCP SYN Ping
+
+**Which TCP ping scan requires a privileged account?** TCP ACK Ping
+
+**What option do you need to add to Nmap to run a TCP SYN ping scan on the telnet port?** -PS23
+
+* * * 
+
+## [](#header-2)Task 8 - Using Reverse-DNS Lookup 
+
+By default, Nmap will look up online hosts; however, you can use the option ``-R`` to query the DNS server even for offline hosts. If you want to use a specific DNS server, you can add the ``--dns-servers DNS_SERVER`` option.
+
+* * * 
+
+## [](#header-2)Task 9 - Summary 
+
+List of useful commands and options from this room:
+
+| Scan Type | Example Command |
+|-----------|-----------------|
+| ARP Scan | ``sudo nmap -PR -sn MACHINE_IP/24`` |
+| ICMP Echo Scan | ``sudo nmap -PE -sn MACHINE_IP/24`` |
+| ICMP Timestamp Scan | ``sudo nmap -PP -sn MACHINE_IP/24`` |
+| ICMP Address Mask Scan | ``sudo nmap -PM -sn MACHINE_IP/24`` |
+| TCP SYN Ping Scan | ``sudo nmap -PS22,80,443 -sn MACHINE_IP/30`` |
+| TCP ACK Ping Scan | ``sudo nmap -PA22,80,443 -sn MACHINE_IP/30`` |
+| UDP Ping Scan | ``sudo nmap -PU53,161,162 -sn MACHINE_IP/30`` |
+
+Remember to add -sn if you are only interested in host discovery without port-scanning. Omitting -sn will let Nmap default to port-scanning the live hosts.
+
+| Option | Purpose |
+|--------|---------|
+| -n | no DNS lookup |
+| -R | reverse-DNS lookup for all hosts |
+| -sn | host discovery only |
+
+* * * 
+
+
+
+
+
+

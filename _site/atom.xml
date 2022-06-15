@@ -71,6 +71,169 @@
 &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nmap -sL -n 10.10.0-255.101-125&lt;/code&gt; 6400&lt;/p&gt;
 
 &lt;hr /&gt;
+
+&lt;h2 id=&quot;task-4---discovering-live-hosts&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 4 - Discovering Live Hosts&lt;/h2&gt;
+
+&lt;p&gt;Send a packet with the following:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;From computer1&lt;/li&gt;
+  &lt;li&gt;To computer3&lt;/li&gt;
+  &lt;li&gt;Packet Type: “Ping Request”&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;What is the type of packet that computer1 sent before the ping?&lt;/strong&gt; ARP request&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;What is the type of packet that computer1 received before being able to send the ping?&lt;/strong&gt; ARP Response&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;How many computers responded to the ping request?&lt;/strong&gt; 1&lt;/p&gt;
+
+&lt;p&gt;Send a packet with the following:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;From computer2&lt;/li&gt;
+  &lt;li&gt;To computer5&lt;/li&gt;
+  &lt;li&gt;Packet Type: “Ping Request”&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;What is the name of the first device that responded to the first ARP Request?&lt;/strong&gt; Router&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;What is the name of the first device that responded to the second ARP Request?&lt;/strong&gt; Computer 5&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Send another Ping Request. Did it require new ARP Requests? (Y/N)&lt;/strong&gt; N&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;task-5---nmap-host-discovery-using-arp&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 5 - Nmap Host Discovery Using ARP&lt;/h2&gt;
+
+&lt;p&gt;We learn to use a few useful tools here:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo arp-scan -l&lt;/code&gt; will send ARP queries to all IP address on local network&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo arp-scan -I eth0 -l&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We will be sending broadcast ARP Requests packets with the following options:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;From computer1&lt;/li&gt;
+  &lt;li&gt;To computer1 (to indicate it is broadcast)&lt;/li&gt;
+  &lt;li&gt;Packet Type: “ARP Request”&lt;/li&gt;
+  &lt;li&gt;Data: try all the possible eight devices (other than computer1) in the network: computer2, computer3, computer4, computer5, computer6, switch1, switch2, and router.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;How many devices are you able to discover using ARP requests?&lt;/strong&gt; 3&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;task-6---nmap-host-discovery-using-icmp&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 6 - Nmap Host Discovery Using ICMP&lt;/h2&gt;
+
+&lt;p&gt;We learn a few new flags for Nmap host discovery:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-PP&lt;/code&gt; tells nmap to use ICMP Timestamp to discover live hosts&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-PM&lt;/code&gt; tells nmap to use ICMP address mask to discover live hosts&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-PE&lt;/code&gt; tells nmap to use ICMP echo to discover live hosts&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;task-7---nmap-host-discovery-using-tcp-and-udp&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 7 - Nmap Host Discovery Using TCP and UDP&lt;/h2&gt;
+
+&lt;p&gt;More useful flags&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-PS#&lt;/code&gt; tells nmap to use TCP/SYN ping where # is the port&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-PA#&lt;/code&gt; tells nmap to use TCP/ACK ping&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-PU&lt;/code&gt; for UDP ping&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Also &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;masscan&lt;/code&gt; can be used for all of the above but need a port specified.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Which TCP ping scan does not require a privileged account?&lt;/strong&gt; TCP SYN Ping&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Which TCP ping scan requires a privileged account?&lt;/strong&gt; TCP ACK Ping&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;What option do you need to add to Nmap to run a TCP SYN ping scan on the telnet port?&lt;/strong&gt; -PS23&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;task-8---using-reverse-dns-lookup&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 8 - Using Reverse-DNS Lookup&lt;/h2&gt;
+
+&lt;p&gt;By default, Nmap will look up online hosts; however, you can use the option &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-R&lt;/code&gt; to query the DNS server even for offline hosts. If you want to use a specific DNS server, you can add the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--dns-servers DNS_SERVER&lt;/code&gt; option.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;task-9---summary&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 9 - Summary&lt;/h2&gt;
+
+&lt;p&gt;List of useful commands and options from this room:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Scan Type&lt;/th&gt;
+      &lt;th&gt;Example Command&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;ARP Scan&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo nmap -PR -sn MACHINE_IP/24&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;ICMP Echo Scan&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo nmap -PE -sn MACHINE_IP/24&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;ICMP Timestamp Scan&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo nmap -PP -sn MACHINE_IP/24&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;ICMP Address Mask Scan&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo nmap -PM -sn MACHINE_IP/24&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;TCP SYN Ping Scan&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo nmap -PS22,80,443 -sn MACHINE_IP/30&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;TCP ACK Ping Scan&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo nmap -PA22,80,443 -sn MACHINE_IP/30&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;UDP Ping Scan&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo nmap -PU53,161,162 -sn MACHINE_IP/30&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Remember to add -sn if you are only interested in host discovery without port-scanning. Omitting -sn will let Nmap default to port-scanning the live hosts.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Option&lt;/th&gt;
+      &lt;th&gt;Purpose&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;-n&lt;/td&gt;
+      &lt;td&gt;no DNS lookup&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;-R&lt;/td&gt;
+      &lt;td&gt;reverse-DNS lookup for all hosts&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;-sn&lt;/td&gt;
+      &lt;td&gt;host discovery only&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;hr /&gt;
+
 </description>
         <pubDate>Wed, 15 Jun 2022 00:00:00 -0700</pubDate>
         <link>http://localhost:4000//TryHackMe-nmap01</link>
