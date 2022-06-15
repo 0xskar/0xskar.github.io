@@ -266,17 +266,53 @@ Convert this into an ASCII Hex string for the answer to this question.&lt;/stron
 
 &lt;p&gt;&lt;strong&gt;Generate an MD4 hashsum of the phrase: Insecure Algorithms. Encode this as base64 (not ASCII Hex) before submitting.&lt;/strong&gt; TcV4QGZZN7y7lwYFRMMoeA==&lt;/p&gt;
 
-&lt;p&gt;Let’s look at an in-context example:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Let’s look at an in-context example:&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;First, download the file attached to this task.&lt;/p&gt;
+&lt;p&gt;**First, download the file attached to this task.&lt;/p&gt;
 
-&lt;p&gt;Note: This file can also be downloaded from the deployed VM with  wget http://10.10.117.71:9999/AlteredKeys.zip – you may find this useful if you are using the AttackBox.&lt;/p&gt;
+&lt;p&gt;Note: This file can also be downloaded from the deployed VM with  wget http://10.10.117.71:9999/AlteredKeys.zip – you may find this useful if you are using the AttackBox.**&lt;/p&gt;
 
-&lt;p&gt;Now read the problem specification below:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Now read the problem specification below:&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;“Some joker has messed with my SSH key! There are four keys in the directory, and I have no idea which is the real one. The MD5 hashsum for my key is 3166226048d6ad776370dc105d40d9f8 – could you find it for me?”&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;“Some joker has messed with my SSH key! There are four keys in the directory, and I have no idea which is the real one. The MD5 hashsum for my key is 3166226048d6ad776370dc105d40d9f8 – could you find it for me?” Submit the correct key name as your answer.&lt;/strong&gt; Key3&lt;/p&gt;
 
-&lt;p&gt;Submit the correct key name as your answer.&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;task-5---comparer---overview&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 5 - Comparer - Overview&lt;/h1&gt;
+
+&lt;p&gt;Familiarize ourselves with the comparer.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;task-6---comparer---example&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 6 - Comparer - Example&lt;/h1&gt;
+
+&lt;p&gt;Familiarize outselves with the comparer.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;task-7---sequencer---overview&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 7 - Sequencer - Overview&lt;/h1&gt;
+
+&lt;p&gt;Familiarise yourself with the Live capture and Manual load interfaces.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;task-8---sequencer---live-capture&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 8 - Sequencer - Live Capture&lt;/h1&gt;
+
+&lt;p&gt;Follow the steps above to perform entropy analysis on the loginToken set by the /admin/login route of our target web app.&lt;/p&gt;
+
+&lt;p&gt;[Bonus Question – Optional] Try performing the capture again, but this time monitor your requests in Wireshark. Can you see why live capturing the requests for this analysis can be described as “loud”?&lt;/p&gt;
+
+&lt;h1 id=&quot;task-9---sequencer---analysis&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 9 - Sequencer - Analysis&lt;/h1&gt;
+
+&lt;p&gt;Take some time to look through the tests that Burp used to generate its summary. You don’t need to understand all of these, but it is important to know that they exist.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;task-10---conclusion---room-conclusion&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Task 10 - Conclusion - Room Conclusion&lt;/h1&gt;
+
+&lt;p&gt;Decoder, Sequencer, and Comparer may not be as well known as Proxy, Repeater or Intruder; however, they are still very useful tools.&lt;/p&gt;
+
+&lt;hr /&gt;
 
 </description>
         <pubDate>Tue, 14 Jun 2022 00:00:00 -0700</pubDate>
