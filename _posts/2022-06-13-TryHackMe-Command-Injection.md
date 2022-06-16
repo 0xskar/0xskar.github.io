@@ -9,7 +9,7 @@ Learn how to detect and exploit XSS vulnerabilities, giving you control of other
 
 * * *
 
-### [](#header-2)Task 1 - What is Command Injection
+## [](#header-2)Task 1 - What is Command Injection
 
 This room goes over:
 
@@ -24,7 +24,7 @@ For example, being able to abuse an application to perform the command whoami to
 
 * * * 
 
-### [](#header-2)Task 2 - Discovering Command Injection
+## [](#header-2)Task 2 - Discovering Command Injection
 
 ##### [](#header-5)Answer the questions below
 
@@ -36,7 +36,7 @@ If I wanted to execute the id command in the Python code snippet, what route wou
 
 * * *
 
-### [](#header-2)Task 3 - Exploiting Command Injection
+## [](#header-2)Task 3 - Exploiting Command Injection
 
 Command Injection can be detected in mostly one of two ways:
 

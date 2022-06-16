@@ -7,7 +7,7 @@ published: true
 
 How to exploit Server-Side Request Forgery (SSRF) vulnerabilities, allowing you to access internal server resources.
 
-### [](#header-2)Task 1 What is an SSRF?
+## [](#header-2)Task 1 What is an SSRF?
 
 A vulnerability that allows users to modify server requests to get access to files or information that they shouldn't have access to.
 
@@ -23,11 +23,11 @@ A successful SSRF attack can result in any of the following:
    - Ability to Scale to internal networks.
    - Reveal authentication tokens/credentials.
 
-### [](#header-2)Task 2 SSRF Examples
+## [](#header-2)Task 2 SSRF Examples
 
 Viewing the site takes us through some examples and shows us how to take advantage of simple SSRF. Using the url we are looking for and ending it with & will give us our flag.
 
-### [](#header-2)Task 3 Finding an SSRF
+## [](#header-2)Task 3 Finding an SSRF
 
 Here we see we can spot SSRF Vulns when we can see a full URL is a parameter in the address bar (pic below):
 
@@ -51,7 +51,7 @@ What website can be used to catch HTTP requests from a server?
 
 Requestbin.com
 
-### [](#header-2)Task 4 Defeating Common SSRF Defences
+## [](#header-2)Task 4 Defeating Common SSRF Defences
 
 This task goes over the common approaches that developers aware of SSRF vulerabilities take to protect their servers. Two approaches, deny, or allow lists.
 
@@ -82,7 +82,7 @@ What type of list is used to permit only certain input? Allow List
 
 What type of list is used to stop certain input? Deny List
 
-### [](#header-2) Task 5 SSRF Practical 
+## [](#header-2) Task 5 SSRF Practical 
 
 Time to put what we learned to use in a fictional scenario.
 

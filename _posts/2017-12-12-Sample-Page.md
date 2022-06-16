@@ -13,21 +13,7 @@ Room Description
 
 We will cover the following types of port scans:
 
-   - Null Scan
-   - FIN Scan
-   - Xmas Scan
-   - Maimon Scan
-   - ACK Scan
-   - Window Scan
-   - Custom Scan
 
-Moreover, we will cover the following:
-
-   - Spoofing IP
-   - Spoofing MAC
-   - Decoy Scan
-   - Fragmented Packets
-   - Idle/Zombie Scan
 
 ##### [](#header-5)Answer the questions below
 
