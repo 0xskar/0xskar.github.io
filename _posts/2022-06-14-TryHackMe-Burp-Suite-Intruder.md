@@ -9,17 +9,17 @@ Learn how to use Intruder to automate requests in Burp Suite
 
 * * *
 
-# [](#header-3)Task 1 - Introduction Room Outline 
+## [](#header-2)Task 1 - Introduction Room Outline 
 
 Intruder allows us to automate requests, which is very useful when fuzzing or bruteforcing. We will be looking at how to use Intruder to perform both of these functions in conjunction with the other tools we have already covered.
 
 * * * 
 
-# [](#header-3)Task 2 - Intruder - What is Intruder
+## [](#header-2)Task 2 - Intruder - What is Intruder
 
 Intruder is Burp Suite's in-built fuzzing tool.
 
-**Answer the questions below**
+##### [](#header-5)Answer the questions below
 
 **Which section of the Options sub-tab allows you to control what information will be captured in the Intruder results?** Attack Results
 
@@ -27,13 +27,13 @@ Intruder is Burp Suite's in-built fuzzing tool.
 
 * * *
 
-# [](#header-3)Task 3 - Intruder - Positions 
+## [](#header-2)Task 3 - Intruder - Positions 
 
 Positions tell Intruder where to insert payloads. Burp will attempt to determine the most likely places we may wish to insert a payload automatically -- these are highlighted in green and surrounded by silcrows ``§``.
 
 * * * 
 
-# [](#header-3)Task 4 - Attack Types - Introduction 
+## [](#header-2)Task 4 - Attack Types - Introduction 
 
 There are four attack types available:
 
@@ -46,7 +46,7 @@ We will look at each of these in turn.
 
 * * * 
 
-# [](#header-3)Task 5 - Attack Types - Sniper 
+## [](#header-2)Task 5 - Attack Types - Sniper 
 
 Sniper is the first and most common attack type.
 
@@ -60,7 +60,7 @@ When conducting a sniper attack, we provide one set of payloads. For example, th
 
 * * *
 
-# [](#header-3)Task 6 - Attack Types - Battering Ram 
+## [](#header-2)Task 6 - Attack Types - Battering Ram 
 
 Like Sniper, Battering ram takes one set of payloads (e.g. one wordlist). Unlike Sniper, the Battering ram puts the same payload in every position rather than in each position in turn.
 
@@ -74,7 +74,7 @@ If you have a wordlist with two words in it (admin and Guest) and the positions 
 
 * * * 
 
-# [](#header-3)Task 7 - Attack Types - Pitchfork 
+## [](#header-2)Task 7 - Attack Types - Pitchfork 
 
 Pitchfork is the attack type you are most likely to use. It may help to think of Pitchfork as being like having numerous Snipers running simultaneously. Where Sniper uses one payload set (which it uses on every position simultaneously), Pitchfork uses one payload set per position (up to a maximum of 20) and iterates through them all at once.
 
@@ -82,7 +82,7 @@ Pitchfork is the attack type you are most likely to use. It may help to think of
 
 * * * 
 
-# [](#header-3)Task 8 - Attack Types - Cluster Bomb
+## [](#header-2)Task 8 - Attack Types - Cluster Bomb
 
 Like Pitchfork, Cluster bomb allows us to choose multiple payload sets: one per position, up to a maximum of 20; however, whilst Pitchfork iterates through each payload set simultaneously, Cluster bomb iterates through each payload set individually, making sure that every possible combination of payloads is tested.
 
@@ -90,7 +90,7 @@ Like Pitchfork, Cluster bomb allows us to choose multiple payload sets: one per 
 
 * * * 
 
-# [](#header-3)Task 9 - Intruder - Payloads
+## [](#header-2)Task 9 - Intruder - Payloads
 
 **Which payload type lets us load a list of words into a payload set?** Simple list.
 
@@ -98,13 +98,13 @@ Like Pitchfork, Cluster bomb allows us to choose multiple payload sets: one per 
 
 * * * 
 
-# [](#header-3)Task 10 - Practical - Example
+## [](#header-2)Task 10 - Practical - Example
 
 Here we just go over task files, gain access to the support portal at ``/support/login`` and prepare for our challenge.
 
 * * * 
 
-# [](#header-3)Task 11 - Practical - Challenge 
+## [](#header-2)Task 11 - Practical - Challenge 
 
 In the previous task, we gained access to the support system. Now it's time to see what we can do with it!
 
@@ -132,7 +132,7 @@ Configure an appropriate position and payload (the tickets are stored at values 
 
 * * *
 
-# [](#header-3)Task 12 - Extra Mile - CSRF Token Bypass 
+## [](#header-2)Task 12 - Extra Mile - CSRF Token Bypass 
 
 ![](/assets/burpsuiteintruder2.png)
 

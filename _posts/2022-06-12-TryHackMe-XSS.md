@@ -7,7 +7,7 @@ published: true
 
 Learn how to detect and exploit XSS vulnerabilities, giving you control of other visitor's browsers.
 
-## [](#header-3)Task 1 Room Brief
+### [](#header-2)Task 1 Room Brief
 
 Cross-Site Scripting, better known as XSS in the cybersecurity community, is classified as an injection attack where malicious JavaScript gets injected into a web application with the intention of being executed by other users. In this room, you'll learn about the different XSS types, how to create XSS payloads, how to modify your payloads to evade filters, and then end with a practical lab where you can try out your new skills.
 
@@ -19,11 +19,11 @@ Cross-site scripting vulnerabilities are extremely common. Below are a few repor
    - $2,500 for XSS in HackerOne
    - XSS found in Infogram
 
-**Answer the questions below**
+##### [](#header-5)Answer the questions below
 
 What does XSS stand for? Cross-site Scripting
 
-## [](#header-3)Task 2 XSS Payloads
+### [](#header-2)Task 2 XSS Payloads
 
 **Proof Of Concept:**
 
@@ -53,7 +53,7 @@ Now that the email address for the account has changed, the attacker may perform
 
 The next four tasks are going to cover the different types of XSS Vulnerabilities, all requiring slightly different attack payloads and user interaction.
 
-**Answer the questions below**
+##### [](#header-5)Answer the questions below
 
 Which document property could contain the user's session token? 
 
@@ -63,7 +63,7 @@ Which JavaScript method is often used as a Proof Of Concept?
 
 From our first example "alert". We can use ``<script>alert('XSS');</script>`` to see if we can xss.
 
-## [](#header-3) Task 3 Reflected XSS
+### [](#header-2) Task 3 Reflected XSS
 
 Reflected XSS happens when user-supplied data in an HTTP request is included in the webpage source without any validation.
 
@@ -77,11 +77,11 @@ You'll need to test every possible point of entry; these include:
 
 Once you've found some data which is being reflected in the web application, you'll then need to confirm that you can successfully run your JavaScript payload; your payload will be dependent on where in the application your code is reflected (you'll learn more about this in task 6).
 
-**Answer the questions below**
+##### [](#header-5)Answer the questions below
 
 Where in an URL is a good place to test for reflected XSS? Parameters.
 
-## [](#header-3) Task 4 Stored XSS 
+### [](#header-2) Task 4 Stored XSS 
 
 ![](/assets/xssgi-example1.png)
 
@@ -97,11 +97,11 @@ Sometimes developers think limiting input values on the client-side is good enou
 
 Once you've found some data which is being stored in the web application,  you'll then need to confirm that you can successfully run your JavaScript payload; your payload will be dependent on where in the application your code is reflected (you'll learn more about this in task 6).
 
-**Answer the questions below**
+##### [](#header-5)Answer the questions below
 
 How are stored XSS payloads usually stored on a website? Usually in a database.
 
-## [](#header-3) Task 5 DOM Based XSS 
+### [](#header-2) Task 5 DOM Based XSS 
 
 ![](/assets/xssgi-example2.png)
 
@@ -113,11 +113,11 @@ DOM Based XSS can be challenging to test for and requires a certain amount of kn
 
 When you've found those bits of code, you'd then need to see how they are handled and whether the values are ever written to the web page's DOM or passed to unsafe JavaScript methods such as ``eval()``.
 
-**Answer the questions below**
+##### [](#header-5)Answer the questions below
 
 What unsafe JavaScript method is good to look for in source code? ``eval()``
 
-## [](#header-3) Task 6 Blind XSS
+### [](#header-2) Task 6 Blind XSS
 
 Blind XSS is similar to a stored XSS (which we covered in task 4) in that your payload gets stored on the website for another user to view, but in this instance, you can't see the payload working or be able to test it against yourself first.
 
@@ -135,13 +135,13 @@ When testing for Blind XSS vulnerabilities, you need to ensure your payload has 
 
 A popular tool for Blind XSS attacks is [xsshunter](https://xsshunter.com/). Although it's possible to make your own tool in JavaScript, this tool will automatically capture cookies, URLs, page contents and more.
 
-**Answer the questions below**
+##### [](#header-5)Answer the questions below
 
 What tool can you use to test for Blind XSS? xsshunter
 
 What type of XSS is very similar to Blind XSS? stored xss
 
-## [](#header-3) Task 7 Perfecting your Payload 
+### [](#header-2) Task 7 Perfecting your Payload 
 
 This task we executre XSS payloads to proceed to the next task.
 
@@ -183,7 +183,7 @@ An XSS polyglot is a string of text which can escape attributes, tags and bypass
 
 ``jaVasCript:/*-/*`/*\`/*'/*"/**/(/* */onerror=alert('THM') )//%0D%0A%0d%0a//</stYle/</titLe/</teXtarEa/</scRipt/--!>\x3csVg/<sVg/oNloAd=alert('THM')//>\x3e``
 
-# [](#header-3) Task 8 Practical Example (Blind XSS) 
+## [](#header-2) Task 8 Practical Example (Blind XSS) 
 
 This will only work on the Tryhackme attack box.
 

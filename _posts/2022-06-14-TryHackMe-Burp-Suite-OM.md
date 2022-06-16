@@ -9,19 +9,19 @@ Take a dive into some of Burp Suite's lesser known modules
 
 * * *
 
-# [](#header-3)Task 1 - Introduction - Room Outline 
+## [](#header-2)Task 1 - Introduction - Room Outline 
 
 Specifically, we will be looking at the Decoder, Comparer and Sequencer tools. These allow us to: work with encoded text; compare sets of text; and analyse the randomness of captured tokens, respectively. Being able to perform these relatively straightforward tasks directly within Burp Suite can save a lot of time, so it is well worth the time spent learning to use these modules efficiently.
 
 * * * 
 
-# [](#header-3)Task 2 - Decoder - Overview
+## [](#header-2)Task 2 - Decoder - Overview
 
 Just familiarising with the Decoder Interface.
 
 * * * 
 
-# [](#header-3)Task 3 - Decoding/Encoding
+## [](#header-2)Task 3 - Decoding/Encoding
 
 **Base64 encode the phrase: ``Let's Start Simple``.**
 
@@ -43,7 +43,7 @@ Just familiarising with the Decoder Interface.
 
 * * * 
 
-# [](#header-3)Task 4 - Decoder - Hashing
+## [](#header-2)Task 4 - Decoder - Hashing
 
 **Using Decoder, what is the SHA-256 hashsum of the phrase: Let's get Hashing!?
 Convert this into an ASCII Hex string for the answer to this question.** 6b72350e719a8ef5af560830164b13596cb582757437e21d1879502072238abe
@@ -62,37 +62,37 @@ Note: This file can also be downloaded from the deployed VM with  wget http://10
 
 * * * 
 
-# [](#header-3)Task 5 - Comparer - Overview 
+## [](#header-2)Task 5 - Comparer - Overview 
 
 Familiarize ourselves with the comparer.
 
 * * * 
 
-# [](#header-3)Task 6 - Comparer - Example 
+## [](#header-2)Task 6 - Comparer - Example 
 
 Familiarize outselves with the comparer.
 
 * * * 
 
-# [](#header-3)Task 7 - Sequencer - Overview
+## [](#header-2)Task 7 - Sequencer - Overview
 
 Familiarise yourself with the Live capture and Manual load interfaces.
 
 * * * 
 
-# [](#header-3)Task 8 - Sequencer - Live Capture
+## [](#header-2)Task 8 - Sequencer - Live Capture
 
 Follow the steps above to perform entropy analysis on the loginToken set by the /admin/login route of our target web app.
 
 [Bonus Question -- Optional] Try performing the capture again, but this time monitor your requests in Wireshark. Can you see why live capturing the requests for this analysis can be described as "loud"?
 
-# [](#header-3)Task 9 - Sequencer - Analysis 
+## [](#header-2)Task 9 - Sequencer - Analysis 
 
 Take some time to look through the tests that Burp used to generate its summary. You don't need to understand all of these, but it is important to know that they exist.
 
 * * * 
 
-# [](#header-3)Task 10 - Conclusion - Room Conclusion
+## [](#header-2)Task 10 - Conclusion - Room Conclusion
 
 Decoder, Sequencer, and Comparer may not be as well known as Proxy, Repeater or Intruder; however, they are still very useful tools.
 

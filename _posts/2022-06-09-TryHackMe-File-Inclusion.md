@@ -7,7 +7,7 @@ published: true
 
 File inclusion vulnerabilities, including Local File Inclusion (LFI), Remote File Inclusion (RFI), and directory traversal.
 
-## [](#header-3)Task 1 What is File Inclusion?
+### [](#header-2)Task 1 What is File Inclusion?
 
 Information about file inclusion vulnerabilities; Local File Inclusions (LFIs), Remote File Inclusions (RFIs), and directory traversal. 
 
@@ -23,11 +23,11 @@ File inclusion vulnerabilities are commonly found and exploited in various progr
 
 If the attacker can use file inclusion vulnerabilities to read sensitive data. In that case, the successful attack causes to leak of sensitive data, including code and files related to the web application, credentials for back-end systems. Moreover, if the attacker somehow can write to the server such as  /tmp directory, then it is possible to gain remote command execution RCE. However, it won't be effective if file inclusion vulnerability is found with no access to sensitive data and no writing ability to the server.
 
-## [](#header-3)Task 2 Deploy the VM
+### [](#header-2)Task 2 Deploy the VM
 
 ![](/assets/file-inclusion-lab-1.png)
 
-## [](#header-3)Task 3 Path Traversal
+### [](#header-2)Task 3 Path Traversal
 
 Also known as Directory traversal, a web security vulnerability allows an attacker to read operating system resources, such as local files on the server running an application. The attacker exploits this vulnerability by manipulating and abusing the web application's URL to locate and access files or directories stored outside the application's root directory.
 
@@ -72,11 +72,11 @@ Sometimes, developers will add filters to limit access to only certain files or 
 | /var/log/apache2/access.log | the accessed requests for Apache  webserver |
 | C:\boot.ini | contains the boot options for computers with BIOS firmware |
 
-_**Answer the questions below**_
+_##### [](#header-5)Answer the questions below_
 
 What function causes path traversal vulnerabilities in PHP?
 
-## [](#header-3) Task 4 Local File Inclusion - LFI
+### [](#header-2) Task 4 Local File Inclusion - LFI
 
 LFI attacks against web applications are often due to a developers' lack of security awareness. With PHP, using functions such as include, require, include_once, and require_once often contribute to vulnerable web applications. In this room, we'll be picking on PHP, but it's worth noting LFI vulnerabilities also occur when using other languages such as ASP, JSP, or even in Node.js apps. LFI exploits follow the same concepts as path traversal.
 
@@ -118,13 +118,13 @@ Again the payload looks similar to the path traversal, but the include function 
 
 Now apply what we discussed, try to read files within the server, and figure out the directory specified in the include function and answer question #2 below.
 
-**Answer the questions below**
+##### [](#header-5)Answer the questions below
 
 Give Lab #1 a try to read /etc/passwd. What would the request URI be? /etc/passwd (easy) or ../../../etc/passwd
 
 In Lab #2, what is the directory specified in the include function? ../../../../etc/passwd
 
-### [](#header-3)Task 5 Local File Inclusion - LFI #2
+#### [](#header-2)Task 5 Local File Inclusion - LFI #2
 
 In this task, we go a little bit deeper into LFI. We discussed a couple of techniques to bypass the filter within the include function.
 
@@ -194,7 +194,7 @@ Finally, we'll discuss the case where the developer forces the include to read f
 
 Try this out in Lab #6 and figure what the directory that has to be present in the input field is.
 
-**Answer the questions below**
+##### [](#header-5)Answer the questions below
 
 Give Lab #3 a try to read /etc/passwd. What is the request look like? /lab3.php?file=../../../../etc/passwd%00
 
@@ -204,7 +204,7 @@ Try out Lab #6 and check what is the directory that has to be in the input field
 
 Try out Lab #6 and read /etc/os-release. What is the VERSION_ID value? THM-profile/../../../../etc/os-release 12.04
 
-### [](#header-3)Task 6 Remote File Inclusion - RFI
+#### [](#header-2)Task 6 Remote File Inclusion - RFI
 
 Remote File Inclusion (RFI) is a technique to include remote files and into a vulnerable application. Like LFI, the RFI occurs when improperly sanitizing user input, allowing an attacker to inject an external URL into include function. One requirement for RFI is that the allow_url_fopen option needs to be on.
 
@@ -233,7 +233,7 @@ Visit the following lab URL: http://10.10.77.73/playground.php to try out an RFI
 
 Save and host a php reverse shell from pentestmonkey and setup a netcat listener.
 
-### [](#header-3)Task 7 Remediation
+#### [](#header-2)Task 7 Remediation
 
 As a developer, it's important to be aware of web application vulnerabilities, how to find them, and prevention methods. To prevent the file inclusion vulnerabilities, some common suggestions include:
 
@@ -245,7 +245,7 @@ As a developer, it's important to be aware of web application vulnerabilities, h
 6. Never trust user input, and make sure to implement proper input validation against file inclusion.
 7. Implement whitelisting for file names and locations as well as blacklisting.
 
-### [](#header-3)Task 8 Challenge
+#### [](#header-2)Task 8 Challenge
 
 Great Job! Now apply the techniques you've learned to capture the flags! Familiarizing yourself with HTTP Web basics could help you complete these challenges.
 
@@ -260,7 +260,7 @@ Steps for testing for LFI
 6. Understand the input validation and if there are any filters!
 7. Try the inject a valid entry to read sensitive files
 
-**Answer the questions below**
+##### [](#header-5)Answer the questions below
 
 **Capture Flag1 at /etc/flag1**
 

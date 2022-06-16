@@ -9,7 +9,7 @@ Learn about the essential tools for passive reconnaissance, such as whois, nsloo
 
 * * *
 
-# [](#header-3)Task 1 - Introduction
+## [](#header-2)Task 1 - Introduction
 
 In this room, after we define passive reconnaissance and active reconnaissance, we focus on essential tools related to passive reconnaissance. We will learn three command-line tools:
 
@@ -28,7 +28,7 @@ These two online services allow us to collect information about our target witho
 
 * * * 
 
-# [](#header-3)Task 2 - Passive Versus Active Recon 
+## [](#header-2)Task 2 - Passive Versus Active Recon 
 
 In passive reconnaissance, you rely on publicly available knowledge. It is the knowledge that you can access from publicly available resources without directly engaging with the target.
 
@@ -48,7 +48,7 @@ Active reconnaissance, on the other hand, cannot be achieved so discreetly. It r
 
 **You happen to meet the IT administrator of the target company at a party. You try to use social engineering to get more information about their systems and network infrastructure. What kind of reconnaissance activity is this? (A for active, P for passive)** Active
 
-# [](#header-3)Task 3 - Whois 
+## [](#header-2)Task 3 - Whois 
 
 ![](/assets/passiverecon1.png)
 
@@ -60,7 +60,7 @@ Active reconnaissance, on the other hand, cannot be achieved so discreetly. It r
 
 * * * 
  
-# [](#header-3)Task 4 - nslookup and dig 
+## [](#header-2)Task 4 - nslookup and dig 
 
 Name Server Look Up (``nslookup -type=OPTIONS DOMAIN_NAME``) where OPTIONS is a query from the table below:
 
@@ -75,13 +75,13 @@ Name Server Look Up (``nslookup -type=OPTIONS DOMAIN_NAME``) where OPTIONS is a 
 
 Domain Information Groper (``dig DOMAIN_NAME OPIONS``)
 
-**Answer the questions below**
+##### [](#header-5)Answer the questions below
 
 **Check the TXT records of thmlabs.com. What is the flag there?** ``dig thmlabs.com TXT`` or ``nslookup -type=TXT thmlabs.com``
 
 * * * 
 
-# [](#header-3)Task 5 - DNSDumpster 
+## [](#header-2)Task 5 - DNSDumpster 
 
 Pretty useful took for helping map out sub domain structures and other DNS queries.
 
@@ -89,7 +89,7 @@ Pretty useful took for helping map out sub domain structures and other DNS queri
 
 * * * 
 
-# [](#header-3)Task 6 - Shodan.io 
+## [](#header-2)Task 6 - Shodan.io 
 
 Shodan gathers information about all devices directly connected to the Internet. If a device is directly hooked up to the Internet then Shodan queries it for various publicly-available information. The types of devices that are indexed can vary tremendously: ranging from small desktops up to nuclear power plants and everything in between.
 
@@ -101,7 +101,7 @@ Shodan gathers information about all devices directly connected to the Internet.
 
 * * * 
 
-# [](#header-3)Task 7 - Summary 
+## [](#header-2)Task 7 - Summary 
 
 We covered command-line tools, whois, nslookup, and dig. We also discussed two publicly available services DNSDumpster and Shodan.io. 
 

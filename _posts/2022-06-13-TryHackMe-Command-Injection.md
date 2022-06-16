@@ -9,7 +9,7 @@ Learn how to detect and exploit XSS vulnerabilities, giving you control of other
 
 * * *
 
-## [](#header-3)Task 1 - What is Command Injection
+### [](#header-2)Task 1 - What is Command Injection
 
 This room goes over:
 
@@ -24,9 +24,9 @@ For example, being able to abuse an application to perform the command whoami to
 
 * * * 
 
-## [](#header-3)Task 2 - Discovering Command Injection
+### [](#header-2)Task 2 - Discovering Command Injection
 
-**Answer the questions below**
+##### [](#header-5)Answer the questions below
 
 What variable stores the user's input in the PHP code snippet in this task? $title
 
@@ -36,7 +36,7 @@ If I wanted to execute the id command in the Python code snippet, what route wou
 
 * * *
 
-## [](#header-3)Task 3 - Exploiting Command Injection
+### [](#header-2)Task 3 - Exploiting Command Injection
 
 Command Injection can be detected in mostly one of two ways:
 
@@ -68,7 +68,7 @@ Command Injection can be detected in mostly one of two ways:
 | timeout | This command will also invoke the application to hang. It is also useful for testing an application for blind command injection if the ping command is not installed. |
 
 
-**Answer the questions below**
+##### [](#header-5)Answer the questions below
 
 - What payload would I use if I wanted to determine what user the application is running as? whoami
 
@@ -78,17 +78,17 @@ Command Injection can be detected in mostly one of two ways:
 
 * * *
 
-# [](#header-3)Task 4 - Remediating Command Injection 
+## [](#header-2)Task 4 - Remediating Command Injection 
 
-**Answer the questions below**
+##### [](#header-5)Answer the questions below
 
 What is the term for the process of "cleaning" user input that is provided to an application? Input Sanitisation
 
 * * * 
 
-# [](#header-3)Task 5 - Practical: Command Injection (Deploy)
+## [](#header-2)Task 5 - Practical: Command Injection (Deploy)
 
-**Answer the questions below**
+##### [](#header-5)Answer the questions below
 
 What user is this application running as?
 

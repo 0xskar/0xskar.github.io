@@ -9,7 +9,7 @@ Learn how to detect and exploit SQL Injection vulnerabilities
 
 * * *
 
-# [](#header-3)Task 1 - Brief
+## [](#header-2)Task 1 - Brief
 
 SQL (Structured Query Language) Injection, mostly referred to as SQLi, is an attack on a web application database server that causes malicious queries to be executed. When a web application communicates with a database using input from a user that hasn't been properly validated, there runs the potential of an attacker being able to steal, delete or alter private and customer data and also attack the web applications authentication methods to private or customer areas. This is why as well as SQLi being one of the oldest web application vulnerabilities, it also can be the most damaging.
 
@@ -29,15 +29,15 @@ This type of SQL Injection is the most useful for easily obtaining information a
 
 This type of Injection utilises the SQL UNION operator alongside a SELECT statement to return additional results to the page. This method is the most common way of extracting large amounts of data via an SQL Injection vulnerability.
 
-**Answer the questions below**
+##### [](#header-5)Answer the questions below
 
 What does SQL stand for? Structured Query Language.
 
 * * * 
 
-# [](#header-3)Task 2 - What is a Database?
+## [](#header-2)Task 2 - What is a Database?
 
-**Answer the questions below**
+##### [](#header-5)Answer the questions below
 
 What is the acronym for the software that controls a database? DBMS (Database Management Systems)
 
@@ -45,9 +45,9 @@ What is the name of the grid-like structure which holds the data? Table
 
 * * * 
 
-# [](#header-3)Task 3 - What is SQL? 
+## [](#header-2)Task 3 - What is SQL? 
 
-**Answer the questions below**
+##### [](#header-5)Answer the questions below
 
 What SQL statement is used to retrieve data? select
 
@@ -57,15 +57,15 @@ What SQL statement is used to add data? insert
 
 * * * 
 
-# [](#header-3)Task 4 - What is SQL Injection? 
+## [](#header-2)Task 4 - What is SQL Injection? 
 
-**Answer the questions below**
+##### [](#header-5)Answer the questions below
 
 What character signifies the end of an SQL query? ``;``
 
 * * *
 
-# [](#header-3)Task 5 - In-Band SQL
+## [](#header-2)Task 5 - In-Band SQL
 
 What is the flag after completing level 1? 
 
@@ -91,7 +91,7 @@ THM{SQL_INJECTION_3840}
 
 * * * 
 
-# [](#header-3) Task 6 - Blind SQLi - Authentication Bypass
+## [](#header-2) Task 6 - Blind SQLi - Authentication Bypass
 
 One of the most straightforward Blind SQL Injection techniques is when bypassing authentication methods such as login forms. In this instance, we aren't that interested in retrieving data from the database; We just want to get past the login. 
 
@@ -107,7 +107,7 @@ Using ``' OR 1=1;--`` We can get to the next level and recieve our flag which is
 
 * * * 
 
-# [](#header-3) Task 7 - Blind SQLi - Boolean Based 
+## [](#header-2) Task 7 - Blind SQLi - Boolean Based 
 
 Boolean based SQL Injection refers to the response we receive back from our injection attempts which could be a true/false, yes/no, on/off, 1/0 or any response which can only ever have two outcomes. That outcome confirms to us that our SQL Injection payload was either successful or not. On the first inspection, you may feel like this limited response can't provide much information. Still, in fact, with just these two responses, it's possible to enumerate a whole database structure and contents.
 
@@ -129,7 +129,7 @@ What is the level 3 flag? THM{SQL_INJECTION_1093}
 
 * * * 
 
-# [](#header-3) Task 8 - Blind SQLi - Time Based
+## [](#header-2) Task 8 - Blind SQLi - Time Based
 
 A time-based blind SQL Injection is very similar to the above Boolean based, in that the same requests are sent, but there is no visual indicator of your queries being wrong or right this time. Instead, your indicator of a correct query is based on the time the query takes to complete. This time delay is introduced by using built-in methods such as SLEEP(x) alongside the UNION statement. The SLEEP() method will only ever get executed upon a successful UNION SELECT statement. 
 
@@ -159,7 +159,7 @@ THM{SQL_INJECTION_MASTER}
 
 * * * 
 
-# [](#header-3) Task 9 - Out-of-Band SQLi 
+## [](#header-2) Task 9 - Out-of-Band SQLi 
 
 Out-of-Band SQL Injection isn't as common as it either depends on specific features being enabled on the database server or the web application's business logic, which makes some kind of external network call based on the results from an SQL query.
 
@@ -171,13 +171,13 @@ An Out-Of-Band attack is classified by having two different communication channe
 
 3) The payload contains a request which forces an HTTP request back to the hacker's machine containing data from the database.
 
-**Answer the questions below**
+##### [](#header-5)Answer the questions below
 
 Name a protocol beginning with D that can be used to exfiltrate data from a database. DNS
 
 * * *
 
-# [](#header-3) Task 10 - Remediation 
+## [](#header-2) Task 10 - Remediation 
 
 As impactful as SQL Injection vulnerabilities are, developers do have a way to protect their web applications from them by following the below advice:
 
@@ -193,7 +193,7 @@ Input validation can go a long way to protecting what gets put into an SQL query
 
 Allowing user input containing characters such as ' " $ \ can cause SQL Queries to break or, even worse, as we've learnt, open them up for injection attacks. Escaping user input is the method of prepending a backslash (\) to these characters, which then causes them to be parsed just as a regular string and not a special character.
 
-**Answer the questions below**
+##### [](#header-5)Answer the questions below
 
 Name a method of protecting yourself from an SQL Injection exploit.
 
