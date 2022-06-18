@@ -196,7 +196,7 @@ EXPORTS
 
 #### [](#header-4)Repeat with Reverse Shell To get Flag
 
-1. redo proxy.c
+1. ncshell.c
 
 ```c
 #include <windows.h>
