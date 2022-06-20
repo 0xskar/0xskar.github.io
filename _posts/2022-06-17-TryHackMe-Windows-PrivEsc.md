@@ -213,8 +213,4 @@ BOOL WINAPI DllMain(HMODULE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 
 2. compile dll again/copy over, repeat VNC repair after setting up netcat listener on kali machine.
 
-##### [](#header-5)Answer the questions below
-
-
-
 * * * 
