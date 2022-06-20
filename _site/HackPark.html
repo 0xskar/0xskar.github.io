@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <meta name="generator" content="Jekyll">
+
+  <title>TryHackMe - HackPark</title>
+
+  <link rel="stylesheet" href="/css/main.css">
+  
+  <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed" /> <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TryHackMe - HackPark | 0xskar</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="TryHackMe - HackPark" />
+<meta name="author" content="0xskar" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="https://tryhackme.com/room/hackpark" />
+<meta property="og:description" content="https://tryhackme.com/room/hackpark" />
+<link rel="canonical" href="http://localhost:4000/HackPark" />
+<meta property="og:url" content="http://localhost:4000/HackPark" />
+<meta property="og:site_name" content="0xskar" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-06-20T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TryHackMe - HackPark" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"0xskar","url":"https://0xskar.github.io"},"dateModified":"2022-06-20T00:00:00-07:00","datePublished":"2022-06-20T00:00:00-07:00","description":"https://tryhackme.com/room/hackpark","headline":"TryHackMe - HackPark","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/HackPark"},"url":"http://localhost:4000/HackPark"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <header>
+  <div>
+    <a href="/">
+    
+    <h1>0xskar@home:~$</h1>
+    </a>
+    <div class="header-links">
+      <a href="/archive"><h2 class="header-link">Archive</h2></a>
+<a href="/about"><h2 class="header-link">About</h2></a>
+<a href="/atom.xml"><h2 class="header-link">RSS</h2></a>
+    </div>
+  </div>
+</header>
+    <div class="container">
+      <section id="main_content">
+        <article>
+  <h2>TryHackMe - HackPark</h2>
+  <time datetime="2022-06-20T00:00:00-07:00" class="by-line">20 Jun 2022</time>
+  <p><a href="https://tryhackme.com/room/hackpark">https://tryhackme.com/room/hackpark</a></p>
+
+<p>Bruteforce a websites login with Hydra, identify and use a public exploit then escalate your privileges on this Windows machine!</p>
+
+<p><img src="/assets/hackpark02.png" alt="" /></p>
+
+<hr />
+
+<h2 id="task-1---deploy-the-vulnerable-windows-machine"><a href="#header-2"></a>Task 1 - Deploy the vulnerable Windows machine</h2>
+
+<p>This room will cover brute-forcing an accounts credentials, handling public exploits, using the Metasploit framework and privilege escalation on Windows.</p>
+
+<h5 id="answer-the-questions-below"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>Deploy the machine and access its web server.</strong></p>
+
+<p><strong>Whats the name of the clown displayed on the homepage?</strong></p>
+
+<ul>
+  <li>Pennywise (reverse image search)</li>
+</ul>
+
+<hr />
+
+<h2 id="task-2---using-hydra-to-brute-force-a-login"><a href="#header-2"></a>Task 2 - Using Hydra to brute-force a login</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">hydra -P &lt;wordlist&gt; -v &lt;ip&gt; &lt;protocol&gt;</code></td>
+      <td>Brute force against a protocol of your choice</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">hydra -v -V -u -L &lt;username list&gt; -P &lt;password list&gt; -t 1 -u &lt;ip&gt; &lt;protocol&gt;</code></td>
+      <td>You can use Hydra to bruteforce usernames as well as passwords. It will loop through every combination in your lists. (-vV = verbose mode, showing login attempts)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">hydra -t 1 -V -f -l &lt;username&gt; -P &lt;wordlist&gt; rdp://&lt;ip&gt;</code></td>
+      <td>Attack a Windows Remote Desktop with a password list.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">hydra -l &lt;username&gt; -P .&lt;password list&gt; $ip -V http-form-post '/wp-login.php:log=^USER^&amp;pwd=^PASS^&amp;wp-submit=Log In&amp;testcookie=1:S=Location'</code></td>
+      <td>Craft a more specific request for Hydra to brute force.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="answer-the-questions-below-1"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>What request type is the Windows website login form using?</strong></p>
+
+<ul>
+  <li>POST</li>
+</ul>
+
+<p><strong>Guess a username, choose a password wordlist and gain credentials to a user account!</strong></p>
+
+<ul>
+  <li>Craft hydra</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hydra -t 16 -l admin -P /usr/share/seclists/Passwords/xato-net-10-million-passwords-10000.txt 10.10.85.208 http-post-form "/Account/login.aspx:__VIEWSTATE=DwoboO4H6Lg0TVWgRpjNYIfKsqKTMsi6KZ%2FrLpvJsIRyXNLRSf3AR8CTQMQTYcdrLBGAP%2FYDhPf8rKSl4hOkXldcWG7BXJ9ELa5Rq8rH0osikXzZMXuVA17TmDJ6KPlI3BFrN31Tw8troT51IiMPW9VhjPvhT96NGMusiERE9NDv1Hnfqv19MQnu2jmwQCefYRSh1T5mSmXl%2FDzykSgz6WRGKNFo8666FszWs1GgT%2FRDfl8PEOgpJIlYI5WQ3BpiM76RCqXETcYlPzjFDuHgR0OWP1QrrPCM8vf6YJozaosZ%2BWjlbQiCbqxkcXixtvfHE0kfoVNVr66Z%2FtNXfRDr67%2Fzz77%2FM6ywjkRiBN1%2Fdg5x7WeK&amp;__EVENTVALIDATION=O%2FQ9GaTABmLsQKQUlAi8Z0FcLkfY6na0%2Fx4VNKOEmfdxE89nHewkLLaJzx96uT1fyeQFoIQYNtTiYaByuOlt682ZQ9ukMSDtwo7Mi9HYOdgj2zrPzayN2T9TYjl%2F8nWx2K1JetpiiOI1e0vO2FhO9OTKLgeOocGzPM1WciR5gWrO34MZ&amp;ctl00%24MainContent%24LoginUser%24UserName=^USER^&amp;ctl00%24MainContent%24LoginUser%24Password=^PASS^&amp;ctl00%24MainContent%24LoginUser%24LoginButton=Log+in:Login failed"
+</code></pre></div></div>
+
+<p><img src="/assets/hackpark01.png" alt="" /></p>
+
+<hr />
+
+<h2 id="task-3-compromise-the-machine"><a href="#header-2"></a>Task 3 Compromise the machine</h2>
+
+<p>In this task, you will identify and execute a public exploit (from exploit-db.com) to get initial access on this Windows machine!</p>
+
+<p>Exploit-Database is a CVE (common vulnerability and exposures) archive of public exploits and corresponding vulnerable software, developed for the use of penetration testers and vulnerability researches. It is owned by Offensive Security (who are responsible for OSCP and Kali)</p>
+
+<h5 id="answer-the-questions-below-2"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>Now you have logged into the website, are you able to identify the version of the BlogEngine?</strong></p>
+
+<ul>
+  <li>Visiting About Page we find Version 3.3.6.0</li>
+</ul>
+
+<p><strong>Use the exploit database archive to find an exploit to gain a reverse shell on this system.</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">searchsploit blog engine</code></li>
+</ul>
+
+<p><strong>What is the CVE?</strong></p>
+
+<ul>
+  <li>CVE-2019-6714</li>
+</ul>
+
+<p><strong>Using the public exploit, gain initial access to the server.</strong></p>
+
+<ul>
+  <li>Visit <code class="language-plaintext highlighter-rouge">10.10.85.208/admin/app/editor/editpost.cshtml</code> and use file manager to upload edited <code class="language-plaintext highlighter-rouge">46353.cs</code> as <code class="language-plaintext highlighter-rouge">PostView.ascx</code></li>
+  <li>Access file @ <code class="language-plaintext highlighter-rouge">http://10.10.85.208/?theme=../../App_Data/files</code></li>
+</ul>
+
+<p><strong>Who is the webserver running as?</strong></p>
+
+<ul>
+  <li>iis apppool\blog</li>
+</ul>
+
+<p><img src="/assets/hackpack03.png" alt="" /></p>
+
+<hr />
+
+<h2 id="task-4---windows-privilege-escalation"><a href="#header-2"></a>Task 4 - Windows Privilege Escalation</h2>
+
+<p><strong>Our netcat session is a little unstable, so lets generate another reverse shell using msfvenom.</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">systeminfo</code> to find system type for msfvenom</li>
+</ul>
+
+<h5 id="answer-the-questions-below-3"><a href="#header-5"></a>Answer the questions below</h5>
+
+<hr />
+
+
+</article>
+      </section>
+    </div>
+  </div>
+
+   <footer>
+  <a href="https://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+    <span>
+        <b>0xskar</b>
+    </span>
+    
+    <span>© 2022</span>
+  </a>
+</footer>
+
+  
+</body>
+
+</html>

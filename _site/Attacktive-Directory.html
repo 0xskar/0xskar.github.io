@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <meta name="generator" content="Jekyll">
+
+  <title>TryHackMe - Attacktive Directory</title>
+
+  <link rel="stylesheet" href="/css/main.css">
+  
+  <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed" /> <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TryHackMe - Attacktive Directory | 0xskar</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="TryHackMe - Attacktive Directory" />
+<meta name="author" content="0xskar" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="https://tryhackme.com/room/attacktivedirectory" />
+<meta property="og:description" content="https://tryhackme.com/room/attacktivedirectory" />
+<link rel="canonical" href="http://localhost:4000/Attacktive-Directory" />
+<meta property="og:url" content="http://localhost:4000/Attacktive-Directory" />
+<meta property="og:site_name" content="0xskar" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-06-20T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TryHackMe - Attacktive Directory" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"0xskar","url":"https://0xskar.github.io"},"dateModified":"2022-06-20T00:00:00-07:00","datePublished":"2022-06-20T00:00:00-07:00","description":"https://tryhackme.com/room/attacktivedirectory","headline":"TryHackMe - Attacktive Directory","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/Attacktive-Directory"},"url":"http://localhost:4000/Attacktive-Directory"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <header>
+  <div>
+    <a href="/">
+    
+    <h1>0xskar@home:~$</h1>
+    </a>
+    <div class="header-links">
+      <a href="/archive"><h2 class="header-link">Archive</h2></a>
+<a href="/about"><h2 class="header-link">About</h2></a>
+<a href="/atom.xml"><h2 class="header-link">RSS</h2></a>
+    </div>
+  </div>
+</header>
+    <div class="container">
+      <section id="main_content">
+        <article>
+  <h2>TryHackMe - Attacktive Directory</h2>
+  <time datetime="2022-06-20T00:00:00-07:00" class="by-line">20 Jun 2022</time>
+  <p><a href="https://tryhackme.com/room/attacktivedirectory">https://tryhackme.com/room/attacktivedirectory</a></p>
+
+<p>99% of Corporate networks run off of AD. But can you exploit a vulnerable Domain Controller?</p>
+
+<p><img src="/assets/rpnessusredux.png" alt="" /></p>
+
+<hr />
+
+<h2 id="task-3---welcome-to-attacktive-directory"><a href="#header-2"></a>Task 3 - Welcome to Attacktive Directory</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>┌──(0xskar㉿cocokali)-[~/thm/AttacktiveDirectory]
+└─$ nmap -sV -sC -T4 10.10.132.136 -p- -oN initial
+Starting Nmap 7.92 ( https://nmap.org ) at 2022-06-20 06:44 PDT
+Nmap scan report for 10.10.132.136
+Host is up (0.20s latency).
+Not shown: 65508 closed tcp ports (conn-refused)
+PORT      STATE SERVICE       VERSION
+53/tcp    open  domain        Simple DNS Plus
+80/tcp    open  http          Microsoft IIS httpd 10.0
+| http-methods: 
+|_  Potentially risky methods: TRACE
+|_http-server-header: Microsoft-IIS/10.0
+|_http-title: IIS Windows Server
+88/tcp    open  kerberos-sec  Microsoft Windows Kerberos (server time: 2022-06-20 13:52:51Z)
+135/tcp   open  msrpc         Microsoft Windows RPC
+139/tcp   open  netbios-ssn   Microsoft Windows netbios-ssn
+389/tcp   open  ldap          Microsoft Windows Active Directory LDAP (Domain: spookysec.local0., Site: Default-First-Site-Name)
+445/tcp   open  microsoft-ds?
+464/tcp   open  kpasswd5?
+593/tcp   open  ncacn_http    Microsoft Windows RPC over HTTP 1.0
+636/tcp   open  tcpwrapped
+3268/tcp  open  ldap          Microsoft Windows Active Directory LDAP (Domain: spookysec.local0., Site: Default-First-Site-Name)
+3269/tcp  open  tcpwrapped
+3389/tcp  open  ms-wbt-server Microsoft Terminal Services
+|_ssl-date: 2022-06-20T13:53:52+00:00; 0s from scanner time.
+| rdp-ntlm-info: 
+|   Target_Name: THM-AD
+|   NetBIOS_Domain_Name: THM-AD
+|   NetBIOS_Computer_Name: ATTACKTIVEDIREC
+|   DNS_Domain_Name: spookysec.local
+|   DNS_Computer_Name: AttacktiveDirectory.spookysec.local
+|   Product_Version: 10.0.17763
+|_  System_Time: 2022-06-20T13:53:44+00:00
+| ssl-cert: Subject: commonName=AttacktiveDirectory.spookysec.local
+| Not valid before: 2022-06-19T13:26:08
+|_Not valid after:  2022-12-19T13:26:08
+5985/tcp  open  http          Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Not Found
+9389/tcp  open  mc-nmf        .NET Message Framing
+47001/tcp open  http          Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Not Found
+49664/tcp open  msrpc         Microsoft Windows RPC
+49665/tcp open  msrpc         Microsoft Windows RPC
+49666/tcp open  msrpc         Microsoft Windows RPC
+49669/tcp open  msrpc         Microsoft Windows RPC
+49672/tcp open  ncacn_http    Microsoft Windows RPC over HTTP 1.0
+49673/tcp open  msrpc         Microsoft Windows RPC
+49674/tcp open  msrpc         Microsoft Windows RPC
+49678/tcp open  msrpc         Microsoft Windows RPC
+49684/tcp open  msrpc         Microsoft Windows RPC
+49695/tcp open  msrpc         Microsoft Windows RPC
+49806/tcp open  msrpc         Microsoft Windows RPC
+Service Info: Host: ATTACKTIVEDIREC; OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+| smb2-security-mode: 
+|   3.1.1: 
+|_    Message signing enabled and required
+| smb2-time: 
+|   date: 2022-06-20T13:53:46
+|_  start_date: N/A
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 576.98 seconds
+</code></pre></div></div>
+
+<h5 id="answer-the-questions-below"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>What tool will allow us to enumerate port 139/445?</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">enum4linux -a 10.10.132.136 -R 139,445</code></li>
+  <li>enum4linux</li>
+</ul>
+
+<p><strong>What is the NetBIOS-Domain Name of the machine?</strong></p>
+
+<ul>
+  <li>THM-AD</li>
+</ul>
+
+<p><strong>What invalid TLD do people commonly use for their Active Directory Domain?</strong></p>
+
+<ul>
+  <li>.local</li>
+</ul>
+
+<hr />
+
+<h2 id="task-3---welcome-to-attacktive-directory-1"><a href="#header-2"></a>Task 3 - Welcome to Attacktive Directory</h2>
+
+<h5 id="answer-the-questions-below-1"><a href="#header-5"></a>Answer the questions below</h5>
+
+
+</article>
+      </section>
+    </div>
+  </div>
+
+   <footer>
+  <a href="https://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+    <span>
+        <b>0xskar</b>
+    </span>
+    
+    <span>© 2022</span>
+  </a>
+</footer>
+
+  
+</body>
+
+</html>

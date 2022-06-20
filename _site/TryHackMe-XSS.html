@@ -54,7 +54,7 @@
 
 <p>Learn how to detect and exploit XSS vulnerabilities, giving you control of other visitor’s browsers.</p>
 
-<h2 id="task-1-room-brief"><a href="#header-3"></a>Task 1 Room Brief</h2>
+<h2 id="task-1-room-brief"><a href="#header-2"></a>Task 1 Room Brief</h2>
 
 <p>Cross-Site Scripting, better known as XSS in the cybersecurity community, is classified as an injection attack where malicious JavaScript gets injected into a web application with the intention of being executed by other users. In this room, you’ll learn about the different XSS types, how to create XSS payloads, how to modify your payloads to evade filters, and then end with a practical lab where you can try out your new skills.</p>
 
@@ -67,11 +67,11 @@
   <li>XSS found in Infogram</li>
 </ul>
 
-<p><strong>Answer the questions below</strong></p>
+<h5 id="answer-the-questions-below"><a href="#header-5"></a>Answer the questions below</h5>
 
 <p>What does XSS stand for? Cross-site Scripting</p>
 
-<h2 id="task-2-xss-payloads"><a href="#header-3"></a>Task 2 XSS Payloads</h2>
+<h2 id="task-2-xss-payloads"><a href="#header-2"></a>Task 2 XSS Payloads</h2>
 
 <p><strong>Proof Of Concept:</strong></p>
 
@@ -101,7 +101,7 @@
 
 <p>The next four tasks are going to cover the different types of XSS Vulnerabilities, all requiring slightly different attack payloads and user interaction.</p>
 
-<p><strong>Answer the questions below</strong></p>
+<h5 id="answer-the-questions-below-1"><a href="#header-5"></a>Answer the questions below</h5>
 
 <p>Which document property could contain the user’s session token?</p>
 
@@ -111,7 +111,7 @@
 
 <p>From our first example “alert”. We can use <code class="language-plaintext highlighter-rouge">&lt;script&gt;alert('XSS');&lt;/script&gt;</code> to see if we can xss.</p>
 
-<h2 id="-task-3-reflected-xss"><a href="#header-3"></a> Task 3 Reflected XSS</h2>
+<h2 id="-task-3-reflected-xss"><a href="#header-2"></a> Task 3 Reflected XSS</h2>
 
 <p>Reflected XSS happens when user-supplied data in an HTTP request is included in the webpage source without any validation.</p>
 
@@ -126,11 +126,11 @@
 
 <p>Once you’ve found some data which is being reflected in the web application, you’ll then need to confirm that you can successfully run your JavaScript payload; your payload will be dependent on where in the application your code is reflected (you’ll learn more about this in task 6).</p>
 
-<p><strong>Answer the questions below</strong></p>
+<h5 id="answer-the-questions-below-2"><a href="#header-5"></a>Answer the questions below</h5>
 
 <p>Where in an URL is a good place to test for reflected XSS? Parameters.</p>
 
-<h2 id="-task-4-stored-xss"><a href="#header-3"></a> Task 4 Stored XSS</h2>
+<h2 id="-task-4-stored-xss"><a href="#header-2"></a> Task 4 Stored XSS</h2>
 
 <p><img src="/assets/xssgi-example1.png" alt="" /></p>
 
@@ -148,11 +148,11 @@
 
 <p>Once you’ve found some data which is being stored in the web application,  you’ll then need to confirm that you can successfully run your JavaScript payload; your payload will be dependent on where in the application your code is reflected (you’ll learn more about this in task 6).</p>
 
-<p><strong>Answer the questions below</strong></p>
+<h5 id="answer-the-questions-below-3"><a href="#header-5"></a>Answer the questions below</h5>
 
 <p>How are stored XSS payloads usually stored on a website? Usually in a database.</p>
 
-<h2 id="-task-5-dom-based-xss"><a href="#header-3"></a> Task 5 DOM Based XSS</h2>
+<h2 id="-task-5-dom-based-xss"><a href="#header-2"></a> Task 5 DOM Based XSS</h2>
 
 <p><img src="/assets/xssgi-example2.png" alt="" /></p>
 
@@ -164,11 +164,11 @@
 
 <p>When you’ve found those bits of code, you’d then need to see how they are handled and whether the values are ever written to the web page’s DOM or passed to unsafe JavaScript methods such as <code class="language-plaintext highlighter-rouge">eval()</code>.</p>
 
-<p><strong>Answer the questions below</strong></p>
+<h5 id="answer-the-questions-below-4"><a href="#header-5"></a>Answer the questions below</h5>
 
 <p>What unsafe JavaScript method is good to look for in source code? <code class="language-plaintext highlighter-rouge">eval()</code></p>
 
-<h2 id="-task-6-blind-xss"><a href="#header-3"></a> Task 6 Blind XSS</h2>
+<h2 id="-task-6-blind-xss"><a href="#header-2"></a> Task 6 Blind XSS</h2>
 
 <p>Blind XSS is similar to a stored XSS (which we covered in task 4) in that your payload gets stored on the website for another user to view, but in this instance, you can’t see the payload working or be able to test it against yourself first.</p>
 
@@ -186,13 +186,13 @@
 
 <p>A popular tool for Blind XSS attacks is <a href="https://xsshunter.com/">xsshunter</a>. Although it’s possible to make your own tool in JavaScript, this tool will automatically capture cookies, URLs, page contents and more.</p>
 
-<p><strong>Answer the questions below</strong></p>
+<h5 id="answer-the-questions-below-5"><a href="#header-5"></a>Answer the questions below</h5>
 
 <p>What tool can you use to test for Blind XSS? xsshunter</p>
 
 <p>What type of XSS is very similar to Blind XSS? stored xss</p>
 
-<h2 id="-task-7-perfecting-your-payload"><a href="#header-3"></a> Task 7 Perfecting your Payload</h2>
+<h2 id="-task-7-perfecting-your-payload"><a href="#header-2"></a> Task 7 Perfecting your Payload</h2>
 
 <p>This task we executre XSS payloads to proceed to the next task.</p>
 
@@ -233,7 +233,7 @@
 
 <p><code class="language-plaintext highlighter-rouge">jaVasCript:/*-/*`/*\`/*'/*"/**/(/* */onerror=alert('THM') )//%0D%0A%0d%0a//&lt;/stYle/&lt;/titLe/&lt;/teXtarEa/&lt;/scRipt/--!&gt;\x3csVg/&lt;sVg/oNloAd=alert('THM')//&gt;\x3e</code></p>
 
-<h1 id="-task-8-practical-example-blind-xss"><a href="#header-3"></a> Task 8 Practical Example (Blind XSS)</h1>
+<h2 id="-task-8-practical-example-blind-xss"><a href="#header-2"></a> Task 8 Practical Example (Blind XSS)</h2>
 
 <p>This will only work on the Tryhackme attack box.</p>
 

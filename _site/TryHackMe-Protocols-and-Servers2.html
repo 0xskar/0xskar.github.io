@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <meta name="generator" content="Jekyll">
+
+  <title>TryHackMe - Protocols and Servers 2</title>
+
+  <link rel="stylesheet" href="/css/main.css">
+  
+  <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed" /> <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TryHackMe - Protocols and Servers 2 | 0xskar</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="TryHackMe - Protocols and Servers 2" />
+<meta name="author" content="0xskar" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="https://tryhackme.com/room/protocolsandservers2" />
+<meta property="og:description" content="https://tryhackme.com/room/protocolsandservers2" />
+<link rel="canonical" href="http://localhost:4000/TryHackMe-Protocols-and-Servers2" />
+<meta property="og:url" content="http://localhost:4000/TryHackMe-Protocols-and-Servers2" />
+<meta property="og:site_name" content="0xskar" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-06-16T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TryHackMe - Protocols and Servers 2" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"0xskar","url":"https://0xskar.github.io"},"dateModified":"2022-06-16T00:00:00-07:00","datePublished":"2022-06-16T00:00:00-07:00","description":"https://tryhackme.com/room/protocolsandservers2","headline":"TryHackMe - Protocols and Servers 2","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/TryHackMe-Protocols-and-Servers2"},"url":"http://localhost:4000/TryHackMe-Protocols-and-Servers2"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <header>
+  <div>
+    <a href="/">
+    
+    <h1>0xskar@home:~$</h1>
+    </a>
+    <div class="header-links">
+      <a href="/archive"><h2 class="header-link">Archive</h2></a>
+<a href="/about"><h2 class="header-link">About</h2></a>
+<a href="/atom.xml"><h2 class="header-link">RSS</h2></a>
+    </div>
+  </div>
+</header>
+    <div class="container">
+      <section id="main_content">
+        <article>
+  <h2>TryHackMe - Protocols and Servers 2</h2>
+  <time datetime="2022-06-16T00:00:00-07:00" class="by-line">16 Jun 2022</time>
+  <p><a href="https://tryhackme.com/room/protocolsandservers2">https://tryhackme.com/room/protocolsandservers2</a></p>
+
+<p>Learn about attacks against passwords and cleartext traffic; explore options for mitigation via SSH and SSL/TLS.</p>
+
+<hr />
+
+<h2 id="task-1---introduction"><a href="#header-2"></a>Task 1 - Introduction</h2>
+
+<p>This room will focus on how a protocol can be upgraded or replaced to protect against disclosure and alteration, i.e. protecting the confidentiality and integrity of the transmitted data. We will be recommending other modules that cover additional topics.</p>
+
+<p>And we get to use Hydra to find weak passwords.</p>
+
+<hr />
+
+<h2 id="task-2---sniffing-attack"><a href="#header-2"></a>Task 2 - Sniffing Attack</h2>
+
+<p>There are many programs available to capture network packets. We consider the following:</p>
+
+<ol>
+  <li>Tcpdump is a free open source command-line interface (CLI) program that has been ported to work on many operating systems.</li>
+  <li>Wireshark is a free open source graphical user interface (GUI) program available for several operating systems, including Linux, macOS and MS Windows.</li>
+  <li>Tshark is a CLI alternative to Wireshark.</li>
+</ol>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">sudo tcpdump port 110 -A</code> would capture a username and password of a user checking their email messages using POP3. This would also require access to the network traffic via a wiretap or a switch with port mirroring. We need <code class="language-plaintext highlighter-rouge">sudo</code> as capturing packets requires root, POP3 uses <code class="language-plaintext highlighter-rouge">port 110</code> and to display captures packes in ACSII we need the <code class="language-plaintext highlighter-rouge">-A</code> flag.</li>
+</ul>
+
+<p>This type of attack if only possible on TELNET and nobody uses TELNET anymore but if they do for some reason here we go.</p>
+
+<h5 id="answer-the-questions-below"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>What do you need to add to the command <code class="language-plaintext highlighter-rouge">sudo tcpdump</code> to capture only Telnet traffic?</strong> port 23</p>
+
+<p><strong>What is the simplest display filter you can use with Wireshark to show only IMAP traffic?</strong> imap</p>
+
+<hr />
+
+<h2 id="task-3---man-in-the-middle-mitm-attack"><a href="#header-2"></a>Task 3 - Man-in-the-Middle (MITM) Attack</h2>
+
+<p>Any time you browse over HTTP, you are susceptible to a MITM attack, and the scary thing is that you cannot recognize it. Many tools would aid you in carrying out such an attack, such as <a href="https://www.ettercap-project.org/">Ettercap</a> and <a href="https://www.bettercap.org/">Bettercap</a>.</p>
+
+<h5 id="answer-the-questions-below-1"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>How many different interfaces does Ettercap offer?</strong> Ettercap offers three interfaces, traditional command line, GUI and ncurses</p>
+
+<p><strong>In how many ways can you invoke Bettercap?</strong> 3</p>
+
+<hr />
+
+<h2 id="task-4---transport-layer-security-tls"><a href="#header-2"></a>Task 4 - Transport Layer Security (TLS)</h2>
+
+<p>The common protocols we have covered so far send the data in cleartext; this makes it possible for anyone with access to the network to capture, save and analyze the exchanged messages. The image below shows the ISO/OSI network layers. The protocols we have covered so far in this room are on the application layer. Consider the ISO/OSI model; we can add encryption to our protocols via the presentation layer. Consequently, data will be presented in an encrypted format (ciphertext) instead of its original form.</p>
+
+<p><img src="/assets/protocolsandservers01.png" alt="" /></p>
+
+<p>TLS is more secure than SSL, and it has practically replaced SSL. We could have dropped SSL and just written TLS instead of SSL/TLS, but we will continue to mention the two to avoid any ambiguity because the term SSL is still in wide use. However, we can expect all modern servers to be using TLS.</p>
+
+<p>An existing cleartext protocol can be upgraded to use encryption via SSL/TLS. We can use TLS to upgrade HTTP, FTP, SMTP, POP3, and IMAP, to name a few. The following table lists the protocols we have covered and their default ports before and after the encryption upgrade via SSL/TLS. The list is not exhaustive; however, the purpose is to help us better understand the process.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Protocol</th>
+      <th>Default Port</th>
+      <th>Secured Protocol</th>
+      <th>Default Port with TLS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>HTTP</td>
+      <td>80</td>
+      <td>HTTPS</td>
+      <td>443</td>
+    </tr>
+    <tr>
+      <td>FTP</td>
+      <td>21</td>
+      <td>FTPS</td>
+      <td>990</td>
+    </tr>
+    <tr>
+      <td>SMTP</td>
+      <td>25</td>
+      <td>SMTPS</td>
+      <td>465</td>
+    </tr>
+    <tr>
+      <td>POP3</td>
+      <td>110</td>
+      <td>POP3S</td>
+      <td>995</td>
+    </tr>
+    <tr>
+      <td>IMAP</td>
+      <td>143</td>
+      <td>IMAPS</td>
+      <td>993</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>To establish an SSL/TLS connection, the client needs to perform the proper handshake with the server. Based on RFC 6101, the SSL connection establishment will look like the figure below.</p>
+
+<p><img src="/assets/protocolsandservers02.png" alt="" /></p>
+
+<h5 id="answer-the-questions-below-2"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>DNS can also be secured using TLS. What is the three-letter acronym of the DNS protocol that uses TLS?</strong></p>
+
+<p>DoT = DNS over TLS</p>
+
+<hr />
+
+<h2 id="task-5---secure-shell-ssh"><a href="#header-2"></a>Task 5 - Secure Shell (SSH)</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">scp user@target:/directory/file ~/location</code> this will copy a file from the target to our specified location on our machine.</li>
+  <li><code class="language-plaintext highlighter-rouge">scp ~/location user@target:/directory/</code> this will copy a file from our machine to our target</li>
+</ul>
+
+<p>FTP could be secured using SSL/TLS by using the FTPS protocol which uses port 990. It is worth mentioning that FTP can also be secured using the SSH protocol which is the SFTP protocol. By default this service listens on port 22, just like SSH.</p>
+
+<h5 id="answer-the-questions-below-3"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>Use SSH to connect to 10.10.127.14 as mark with the password XBtc49AB. Using uname -r, find the Kernel release?</strong> 5.4.0-84-generic</p>
+
+<p><strong>Use SSH to download the file book.txt from the remote system. How many KBs did scp display as download size?</strong> 415KB</p>
+
+<hr />
+
+<h2 id="task-6---password-attack"><a href="#header-2"></a>Task 6 - Password Attack</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">hydra -l username -P wordlist.txt server service</code></li>
+</ul>
+
+<p>Where</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">-l</code> username: <code class="language-plaintext highlighter-rouge">-l</code> should precede the username, i.e. the login name of the target.</li>
+  <li><code class="language-plaintext highlighter-rouge">-P wordlist.txt</code>: <code class="language-plaintext highlighter-rouge">-P</code> precedes the wordlist.txt file, which is a text file containing the list of passwords you want to try with the provided username.</li>
+  <li><code class="language-plaintext highlighter-rouge">server</code> is the hostname or IP address of the target server.</li>
+  <li><code class="language-plaintext highlighter-rouge">service</code> indicates the service which you are trying to launch the dictionary attack. which can also be specified with ftp:// or http://</li>
+</ul>
+
+<p>Extra optional arguments that you can add:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">-s</code> PORT to specify a non-default port for the service in question.</li>
+  <li><code class="language-plaintext highlighter-rouge">-V</code> or <code class="language-plaintext highlighter-rouge">-vV</code>, for verbose, makes Hydra show the username and password combinations that are being tried. This verbosity is very convenient to see the progress, especially if you are still not confident of your command-line syntax.</li>
+  <li><code class="language-plaintext highlighter-rouge">-t</code> n where n is the number of parallel connections to the target. <code class="language-plaintext highlighter-rouge">-t 16</code> will create 16 threads used to connect to the target.</li>
+  <li><code class="language-plaintext highlighter-rouge">-d</code>, for debugging, to get more detailed information about what’s going on. The debugging output can save you much frustration; for instance, if Hydra tries to connect to a closed port and timing out, <code class="language-plaintext highlighter-rouge">-d</code> will reveal this right away.</li>
+</ul>
+
+<p>In summary, attacks against login systems can be carried out efficiently using a tool, such as THC Hydra combined with a suitable word list. Mitigation against such attacks can be sophisticated and depends on the target system. A few of the approaches include:</p>
+
+<ul>
+  <li>Password Policy: Enforces minimum complexity constraints on the passwords set by the user.</li>
+  <li>Account Lockout: Locks the account after a certain number of failed attempts.</li>
+  <li>Throttling Authentication Attempts: Delays the response to a login attempt. A couple of seconds of delay is tolerable for someone who knows the password, but they can severely hinder automated tools.</li>
+  <li>Using CAPTCHA: Requires solving a question difficult for machines. It works well if the login page is via a graphical user interface (GUI). (Note that CAPTCHA stands for Completely Automated Public Turing test to tell Computers and Humans Apart.)</li>
+  <li>Requiring the use of a public certificate for authentication. This approach works well with SSH, for instance.</li>
+  <li>Two-Factor Authentication: Ask the user to provide a code available via other means, such as email, smartphone app or SMS.</li>
+  <li>There are many other approaches that are more sophisticated or might require some established knowledge about the user, such as IP-based geolocation.</li>
+</ul>
+
+<h5 id="answer-the-questions-below-4"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>We learned that one of the email accounts is lazie. What is the password used to access the IMAP service on 10.10.140.139?</strong></p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">nmap -sC -sV 10.10.140.139 -T 4 -F</code> IMAP service is on port 143</li>
+  <li><code class="language-plaintext highlighter-rouge">hydra -t 16 -l lazie -P /usr/share/wordlists/rockyou.txt imap://10.10.140.139</code></li>
+  <li><code class="language-plaintext highlighter-rouge">[143][imap] host: 10.10.140.139   login: lazie   password: butterfly</code></li>
+</ol>
+
+<hr />
+
+<h2 id="task-7---summary"><a href="#header-2"></a>Task 7 - Summary</h2>
+
+<p>It is good to remember the default port number for common protocols.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Protocol</th>
+      <th>TCP Port</th>
+      <th>Application(s)</th>
+      <th>Data Security</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>FTP</td>
+      <td>21</td>
+      <td>File Transfer</td>
+      <td>Cleartext</td>
+    </tr>
+    <tr>
+      <td>FTPS</td>
+      <td>990</td>
+      <td>File Transfer</td>
+      <td>Encrypted</td>
+    </tr>
+    <tr>
+      <td>HTTP</td>
+      <td>80</td>
+      <td>Worldwide Web</td>
+      <td>Cleartext</td>
+    </tr>
+    <tr>
+      <td>HTTPS</td>
+      <td>443</td>
+      <td>Worldwide Web</td>
+      <td>Encrypted</td>
+    </tr>
+    <tr>
+      <td>IMAP</td>
+      <td>143</td>
+      <td>Email (MDA)</td>
+      <td>Cleartext</td>
+    </tr>
+    <tr>
+      <td>IMAPS</td>
+      <td>993</td>
+      <td>Email (MDA)</td>
+      <td>Encrypted</td>
+    </tr>
+    <tr>
+      <td>POP3</td>
+      <td>110</td>
+      <td>Email (MDA)</td>
+      <td>Cleartext</td>
+    </tr>
+    <tr>
+      <td>POP3S</td>
+      <td>995</td>
+      <td>Email (MDA)</td>
+      <td>Encrypted</td>
+    </tr>
+    <tr>
+      <td>SFTP</td>
+      <td>22</td>
+      <td>File Transfer</td>
+      <td>Encrypted</td>
+    </tr>
+    <tr>
+      <td>SSH</td>
+      <td>22</td>
+      <td>Remote Access and File Transfer</td>
+      <td>Encrypted</td>
+    </tr>
+    <tr>
+      <td>SMTP</td>
+      <td>25</td>
+      <td>Email (MTA)</td>
+      <td>Cleartext</td>
+    </tr>
+    <tr>
+      <td>SMTPS</td>
+      <td>465</td>
+      <td>Email (MTA)</td>
+      <td>Encrypted</td>
+    </tr>
+    <tr>
+      <td>Telnet</td>
+      <td>23</td>
+      <td>Remote Access</td>
+      <td>Cleartext</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Hydra remains a very efficient tool that you can launch from the terminal to try the different passwords. We summarize its main options in the following table.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Option</th>
+      <th>Explanation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-l username</code></td>
+      <td>Provide the login name</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-P WordList.txt</code></td>
+      <td>Specify the password list to use</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">server service</code></td>
+      <td>Set the server address and service to attack</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-s PORT</code></td>
+      <td>Use in case of non-default service port number</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-V</code> or <code class="language-plaintext highlighter-rouge">-vV</code></td>
+      <td>Show the username and password combinations being tried</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-d</code></td>
+      <td>Display debugging output if the verbose output is not helping</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+
+</article>
+      </section>
+    </div>
+  </div>
+
+   <footer>
+  <a href="https://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+    <span>
+        <b>0xskar</b>
+    </span>
+    
+    <span>© 2022</span>
+  </a>
+</footer>
+
+  
+</body>
+
+</html>

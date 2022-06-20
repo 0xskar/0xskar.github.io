@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <meta name="generator" content="Jekyll">
+
+  <title>TryHackMe - Nessus</title>
+
+  <link rel="stylesheet" href="/css/main.css">
+  
+  <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed" /> <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TryHackMe - Nessus | 0xskar</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="TryHackMe - Nessus" />
+<meta name="author" content="0xskar" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="https://tryhackme.com/room/rpnessusredux" />
+<meta property="og:description" content="https://tryhackme.com/room/rpnessusredux" />
+<link rel="canonical" href="http://localhost:4000/Nessus" />
+<meta property="og:url" content="http://localhost:4000/Nessus" />
+<meta property="og:site_name" content="0xskar" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-06-20T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TryHackMe - Nessus" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"0xskar","url":"https://0xskar.github.io"},"dateModified":"2022-06-20T00:00:00-07:00","datePublished":"2022-06-20T00:00:00-07:00","description":"https://tryhackme.com/room/rpnessusredux","headline":"TryHackMe - Nessus","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/Nessus"},"url":"http://localhost:4000/Nessus"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <header>
+  <div>
+    <a href="/">
+    
+    <h1>0xskar@home:~$</h1>
+    </a>
+    <div class="header-links">
+      <a href="/archive"><h2 class="header-link">Archive</h2></a>
+<a href="/about"><h2 class="header-link">About</h2></a>
+<a href="/atom.xml"><h2 class="header-link">RSS</h2></a>
+    </div>
+  </div>
+</header>
+    <div class="container">
+      <section id="main_content">
+        <article>
+  <h2>TryHackMe - Nessus</h2>
+  <time datetime="2022-06-20T00:00:00-07:00" class="by-line">20 Jun 2022</time>
+  <p><a href="https://tryhackme.com/room/rpnessusredux">https://tryhackme.com/room/rpnessusredux</a></p>
+
+<p>Learn how to set up and use Nessus, a popular vulnerability scanner.</p>
+
+<p><img src="/assets/rpnessusredux.png" alt="" /></p>
+
+<hr />
+
+<h2 id="task-4---scanning"><a href="#header-2"></a>Task 4 - Scanning!</h2>
+
+<h5 id="answer-the-questions-below"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>Create a new ‘Basic Network Scan’ targeting the deployed VM. What option can we set under ‘BASIC’ (on the left) to set a time for this scan to run? This can be very useful when network congestion is an issue.</strong></p>
+
+<ul>
+  <li>Schedule</li>
+</ul>
+
+<p><strong>Under ‘DISCOVERY’ (on the left) set the ‘Scan Type’ to cover ports 1-65535. What is this type called?</strong></p>
+
+<ul>
+  <li>Port Scan (All Ports)</li>
+</ul>
+
+<p><strong>What ‘Scan Type’ can we change to under ‘ADVANCED’ for lower bandwidth connection?</strong></p>
+
+<ul>
+  <li>scan low bandwidth links</li>
+</ul>
+
+<p><strong>After the scan completes, which ‘Vulnerability’ in the ‘Port scanners’ family can we view the details of to see the open ports on this host?</strong></p>
+
+<ul>
+  <li>Nessus SYN Scanner</li>
+</ul>
+
+<p><strong>What Apache HTTP Server Version is reported by Nessus?</strong></p>
+
+<ul>
+  <li>2.4.99</li>
+</ul>
+
+<hr />
+
+<h2 id="task-5---scanning-a-web-application"><a href="#header-2"></a>Task 5 - Scanning a Web Application</h2>
+
+<h5 id="answer-the-questions-below-1"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>What is the plugin id of the plugin that determines the HTTP server type and version?</strong></p>
+
+<ul>
+  <li>10107</li>
+</ul>
+
+<p><strong>What authentication page is discovered by the scanner that transmits credentials in cleartext?</strong></p>
+
+<ul>
+  <li>login.php</li>
+</ul>
+
+<p><strong>What is the file extension of the config backup?</strong></p>
+
+<ul>
+  <li>.bak</li>
+</ul>
+
+<p><strong>Which directory contains example documents? (This will be in a php directory)</strong></p>
+
+<ul>
+  <li>/external/phpids/0.6/docs/examples/</li>
+</ul>
+
+<p><strong>What vulnerability is this application susceptible to that is associated with X-Frame-Options?</strong></p>
+
+<ul>
+  <li>clickjacking</li>
+</ul>
+
+<hr />
+
+</article>
+      </section>
+    </div>
+  </div>
+
+   <footer>
+  <a href="https://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+    <span>
+        <b>0xskar</b>
+    </span>
+    
+    <span>© 2022</span>
+  </a>
+</footer>
+
+  
+</body>
+
+</html>

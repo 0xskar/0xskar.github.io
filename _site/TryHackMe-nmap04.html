@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <meta name="generator" content="Jekyll">
+
+  <title>TryHackMe - Nmap Post Port Scans</title>
+
+  <link rel="stylesheet" href="/css/main.css">
+  
+  <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed" /> <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TryHackMe - Nmap Post Port Scans | 0xskar</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="TryHackMe - Nmap Post Port Scans" />
+<meta name="author" content="0xskar" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="https://tryhackme.com/room/nmap04" />
+<meta property="og:description" content="https://tryhackme.com/room/nmap04" />
+<link rel="canonical" href="http://localhost:4000/TryHackMe-nmap04" />
+<meta property="og:url" content="http://localhost:4000/TryHackMe-nmap04" />
+<meta property="og:site_name" content="0xskar" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-06-16T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TryHackMe - Nmap Post Port Scans" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"0xskar","url":"https://0xskar.github.io"},"dateModified":"2022-06-16T00:00:00-07:00","datePublished":"2022-06-16T00:00:00-07:00","description":"https://tryhackme.com/room/nmap04","headline":"TryHackMe - Nmap Post Port Scans","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/TryHackMe-nmap04"},"url":"http://localhost:4000/TryHackMe-nmap04"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <header>
+  <div>
+    <a href="/">
+    
+    <h1>0xskar@home:~$</h1>
+    </a>
+    <div class="header-links">
+      <a href="/archive"><h2 class="header-link">Archive</h2></a>
+<a href="/about"><h2 class="header-link">About</h2></a>
+<a href="/atom.xml"><h2 class="header-link">RSS</h2></a>
+    </div>
+  </div>
+</header>
+    <div class="container">
+      <section id="main_content">
+        <article>
+  <h2>TryHackMe - Nmap Post Port Scans</h2>
+  <time datetime="2022-06-16T00:00:00-07:00" class="by-line">16 Jun 2022</time>
+  <p><a href="https://tryhackme.com/room/nmap04">https://tryhackme.com/room/nmap04</a></p>
+
+<p>How to leverage Nmap for service and OS detection, use Nmap Scripting Engine (NSE), and save the results.</p>
+
+<hr />
+
+<h2 id="task-1---introduction"><a href="#header-2"></a>Task 1 - Introduction</h2>
+
+<p>We will cover the following:</p>
+
+<ul>
+  <li>Detect versions of the running services (on all open ports)</li>
+  <li>Detect the OS based on any signs revealed by the target</li>
+  <li>Run Nmap’s traceroute</li>
+  <li>Run select Nmap scripts</li>
+  <li>Save the scan results in various formats</li>
+</ul>
+
+<hr />
+
+<h2 id="task-2---service-detection"><a href="#header-2"></a>Task 2 - Service Detection</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">-sV</code> to your Nmap command will collect and determine service and version information for the open ports.</li>
+</ul>
+
+<h5 id="answer-the-questions-below"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>Start the target machine for this task and launch the AttackBox. Run nmap -sV –version-light 10.10.101.238 via the AttackBox. What is the detected version for port 143?</strong> dovecot imapd</p>
+
+<p><strong>Which service did not have a version detected with –version-light?</strong> rpcbind</p>
+
+<hr />
+
+<h2 id="task-3---os-detection-and-traceroute"><a href="#header-2"></a>Task 3 - OS Detection and Traceroute</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">-O</code> - Exampe <code class="language-plaintext highlighter-rouge">nmap -sS -O 10.10.101.238</code> Nmap can decept the Operating System, based on behaviour and responses.</li>
+  <li><code class="language-plaintext highlighter-rouge">--traceroute</code> If you want Nmap to find the routers betwen you and the target. For example <code class="language-plaintext highlighter-rouge">nmap -sS --traceroute 10.10.101.238</code></li>
+</ul>
+
+<h5 id="answer-the-questions-below-1"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>Run nmap with -O option against 10.10.101.238. What OS did Nmap detect?</strong> linux</p>
+
+<hr />
+
+<h2 id="task-4---nmap-scripting-engine-nse"><a href="#header-2"></a>Task 4 - Nmap Scripting Engine (NSE)</h2>
+
+<p>Nmap default installation can easily contain close to 600 scripts. On my Kali Linux this is <code class="language-plaintext highlighter-rouge">/usr/share/nmap/scripts</code> we can run the default scripts with <code class="language-plaintext highlighter-rouge">-sC</code> which is equal to <code class="language-plaintext highlighter-rouge">--script=default</code>. We can choose different categories from the table below with this flag. Or even specific scripts with <code class="language-plaintext highlighter-rouge">--script "SCRIPT-NAME"</code></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Script Category</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>auth</td>
+      <td>Authentication related scripts</td>
+    </tr>
+    <tr>
+      <td>broadcast</td>
+      <td>Discover hosts by sending broadcast messages</td>
+    </tr>
+    <tr>
+      <td>brute</td>
+      <td>Performs brute-force password auditing against logins</td>
+    </tr>
+    <tr>
+      <td>default</td>
+      <td>Default scripts, same as -sC</td>
+    </tr>
+    <tr>
+      <td>discovery</td>
+      <td>Retrieve accessible information, such as database tables and DNS names</td>
+    </tr>
+    <tr>
+      <td>dos</td>
+      <td>Detects servers vulnerable to Denial of Service (DoS)</td>
+    </tr>
+    <tr>
+      <td>exploit</td>
+      <td>Attempts to exploit various vulnerable services</td>
+    </tr>
+    <tr>
+      <td>external</td>
+      <td>Checks using a third-party service, such as Geoplugin and Virustotal</td>
+    </tr>
+    <tr>
+      <td>fuzzer</td>
+      <td>Launch fuzzing attacks</td>
+    </tr>
+    <tr>
+      <td>intrusive</td>
+      <td>Intrusive scripts such as brute-force attacks and exploitation</td>
+    </tr>
+    <tr>
+      <td>malware</td>
+      <td>Scans for backdoors</td>
+    </tr>
+    <tr>
+      <td>safe</td>
+      <td>Safe scripts that won’t crash the target</td>
+    </tr>
+    <tr>
+      <td>version</td>
+      <td>Retrieve service versions</td>
+    </tr>
+    <tr>
+      <td>vuln</td>
+      <td>Checks for vulnerabilities or exploit vulnerable services</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="answer-the-questions-below-2"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>Knowing that Nmap scripts are saved in /usr/share/nmap/scripts on the AttackBox. What does the script http-robots.txt check for?</strong> disallowed entries</p>
+
+<p><strong>Can you figure out the name for the script that checks for the remote code execution vulnerability MS15-034 (CVE2015-2015-1635)?</strong> http-vuln-cve2015-1635</p>
+
+<p><strong>Launch the AttackBox if you haven’t already. After you ensure you have terminated the VM from Task 2, start the target machine for this task. On the AttackBox, run Nmap with the default scripts -sC against 10.10.101.238. You will notice that there is a service listening on port 53. What is its full version value?</strong> 9.9.5-9+deb8u19-Debian</p>
+
+<p><strong>Based on its description, the script ssh2-enum-algos “reports the number of algorithms (for encryption, compression, etc.) that the target SSH2 server offers.” What is the name of the key exchange algorithms (kex_algorithms) that relies upon “sha1” and is supported by 10.10.101.238?</strong> diffie-hellman-group14-sha1</p>
+
+<hr />
+
+<h2 id="task-5---saving-the-output"><a href="#header-2"></a>Task 5 - Saving the Output</h2>
+
+<p>The three main formats are:</p>
+
+<ul>
+  <li>Normal <code class="language-plaintext highlighter-rouge">-oN FILENAME</code></li>
+  <li>Grepable (grepable) <code class="language-plaintext highlighter-rouge">-oG FILENAME</code></li>
+  <li>XML <code class="language-plaintext highlighter-rouge">-oX FILENAME</code></li>
+</ul>
+
+<h5 id="answer-the-questions-below-3"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p>Terminate the target machine of the previous task and start the target machine for this task. On the AttackBox terminal, issue the command scp pentester@MACHINE_IP:/home/pentester/* . to download the Nmap reports in normal and grepable formats from the target virtual machine.</p>
+
+<p>Note that the username pentester has the password THM17577</p>
+
+<p><strong>Check the attached Nmap logs. How many systems are listening on the HTTPS port?</strong> <code class="language-plaintext highlighter-rouge">cat scan_172_17_network.gnmap | grep https</code> there are 3</p>
+
+<p><strong>What is the IP address of the system listening on port 8089?</strong> <code class="language-plaintext highlighter-rouge">cat scan_172_17_network.gnmap | grep 8089</code> 172.17.20.147</p>
+
+<hr />
+
+<h2 id="task-6---summary"><a href="#header-2"></a>Task 6 - Summary</h2>
+
+<p>Familiarized ourselves with Nmap. Here is a list of options/flags we learned to use.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Option</th>
+      <th>Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>-sV</td>
+      <td>determine service/version info on open ports</td>
+    </tr>
+    <tr>
+      <td>-sV –version-light</td>
+      <td>try the most likely probes (2)</td>
+    </tr>
+    <tr>
+      <td>-sV –version-all</td>
+      <td>try all available probes (9)</td>
+    </tr>
+    <tr>
+      <td>-O</td>
+      <td>detect OS</td>
+    </tr>
+    <tr>
+      <td>–traceroute</td>
+      <td>run traceroute to target</td>
+    </tr>
+    <tr>
+      <td>–script=SCRIPTS</td>
+      <td>Nmap scripts to run</td>
+    </tr>
+    <tr>
+      <td>-sC or –script=default</td>
+      <td>run default scripts</td>
+    </tr>
+    <tr>
+      <td>-A</td>
+      <td>equivalent to -sV -O -sC –traceroute</td>
+    </tr>
+    <tr>
+      <td>-oN</td>
+      <td>save output in normal format</td>
+    </tr>
+    <tr>
+      <td>-oG</td>
+      <td>save output in grepable format</td>
+    </tr>
+    <tr>
+      <td>-oX</td>
+      <td>save output in XML format</td>
+    </tr>
+    <tr>
+      <td>-oA</td>
+      <td>save output in normal, XML and Grepable formats</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+</article>
+      </section>
+    </div>
+  </div>
+
+   <footer>
+  <a href="https://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+    <span>
+        <b>0xskar</b>
+    </span>
+    
+    <span>© 2022</span>
+  </a>
+</footer>
+
+  
+</body>
+
+</html>

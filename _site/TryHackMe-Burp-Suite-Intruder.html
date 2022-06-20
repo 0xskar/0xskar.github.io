@@ -56,17 +56,17 @@
 
 <hr />
 
-<h1 id="task-1---introduction-room-outline"><a href="#header-3"></a>Task 1 - Introduction Room Outline</h1>
+<h2 id="task-1---introduction-room-outline"><a href="#header-2"></a>Task 1 - Introduction Room Outline</h2>
 
 <p>Intruder allows us to automate requests, which is very useful when fuzzing or bruteforcing. We will be looking at how to use Intruder to perform both of these functions in conjunction with the other tools we have already covered.</p>
 
 <hr />
 
-<h1 id="task-2---intruder---what-is-intruder"><a href="#header-3"></a>Task 2 - Intruder - What is Intruder</h1>
+<h2 id="task-2---intruder---what-is-intruder"><a href="#header-2"></a>Task 2 - Intruder - What is Intruder</h2>
 
 <p>Intruder is Burp Suite’s in-built fuzzing tool.</p>
 
-<p><strong>Answer the questions below</strong></p>
+<h5 id="answer-the-questions-below"><a href="#header-5"></a>Answer the questions below</h5>
 
 <p><strong>Which section of the Options sub-tab allows you to control what information will be captured in the Intruder results?</strong> Attack Results</p>
 
@@ -74,13 +74,13 @@
 
 <hr />
 
-<h1 id="task-3---intruder---positions"><a href="#header-3"></a>Task 3 - Intruder - Positions</h1>
+<h2 id="task-3---intruder---positions"><a href="#header-2"></a>Task 3 - Intruder - Positions</h2>
 
 <p>Positions tell Intruder where to insert payloads. Burp will attempt to determine the most likely places we may wish to insert a payload automatically – these are highlighted in green and surrounded by silcrows <code class="language-plaintext highlighter-rouge">§</code>.</p>
 
 <hr />
 
-<h1 id="task-4---attack-types---introduction"><a href="#header-3"></a>Task 4 - Attack Types - Introduction</h1>
+<h2 id="task-4---attack-types---introduction"><a href="#header-2"></a>Task 4 - Attack Types - Introduction</h2>
 
 <p>There are four attack types available:</p>
 
@@ -95,7 +95,7 @@
 
 <hr />
 
-<h1 id="task-5---attack-types---sniper"><a href="#header-3"></a>Task 5 - Attack Types - Sniper</h1>
+<h2 id="task-5---attack-types---sniper"><a href="#header-2"></a>Task 5 - Attack Types - Sniper</h2>
 
 <p>Sniper is the first and most common attack type.</p>
 
@@ -109,7 +109,7 @@
 
 <hr />
 
-<h1 id="task-6---attack-types---battering-ram"><a href="#header-3"></a>Task 6 - Attack Types - Battering Ram</h1>
+<h2 id="task-6---attack-types---battering-ram"><a href="#header-2"></a>Task 6 - Attack Types - Battering Ram</h2>
 
 <p>Like Sniper, Battering ram takes one set of payloads (e.g. one wordlist). Unlike Sniper, the Battering ram puts the same payload in every position rather than in each position in turn.</p>
 
@@ -123,7 +123,7 @@
 
 <hr />
 
-<h1 id="task-7---attack-types---pitchfork"><a href="#header-3"></a>Task 7 - Attack Types - Pitchfork</h1>
+<h2 id="task-7---attack-types---pitchfork"><a href="#header-2"></a>Task 7 - Attack Types - Pitchfork</h2>
 
 <p>Pitchfork is the attack type you are most likely to use. It may help to think of Pitchfork as being like having numerous Snipers running simultaneously. Where Sniper uses one payload set (which it uses on every position simultaneously), Pitchfork uses one payload set per position (up to a maximum of 20) and iterates through them all at once.</p>
 
@@ -131,7 +131,7 @@
 
 <hr />
 
-<h1 id="task-8---attack-types---cluster-bomb"><a href="#header-3"></a>Task 8 - Attack Types - Cluster Bomb</h1>
+<h2 id="task-8---attack-types---cluster-bomb"><a href="#header-2"></a>Task 8 - Attack Types - Cluster Bomb</h2>
 
 <p>Like Pitchfork, Cluster bomb allows us to choose multiple payload sets: one per position, up to a maximum of 20; however, whilst Pitchfork iterates through each payload set simultaneously, Cluster bomb iterates through each payload set individually, making sure that every possible combination of payloads is tested.</p>
 
@@ -139,7 +139,7 @@
 
 <hr />
 
-<h1 id="task-9---intruder---payloads"><a href="#header-3"></a>Task 9 - Intruder - Payloads</h1>
+<h2 id="task-9---intruder---payloads"><a href="#header-2"></a>Task 9 - Intruder - Payloads</h2>
 
 <p><strong>Which payload type lets us load a list of words into a payload set?</strong> Simple list.</p>
 
@@ -147,13 +147,13 @@
 
 <hr />
 
-<h1 id="task-10---practical---example"><a href="#header-3"></a>Task 10 - Practical - Example</h1>
+<h2 id="task-10---practical---example"><a href="#header-2"></a>Task 10 - Practical - Example</h2>
 
 <p>Here we just go over task files, gain access to the support portal at <code class="language-plaintext highlighter-rouge">/support/login</code> and prepare for our challenge.</p>
 
 <hr />
 
-<h1 id="task-11---practical---challenge"><a href="#header-3"></a>Task 11 - Practical - Challenge</h1>
+<h2 id="task-11---practical---challenge"><a href="#header-2"></a>Task 11 - Practical - Challenge</h2>
 
 <p>In the previous task, we gained access to the support system. Now it’s time to see what we can do with it!</p>
 
@@ -183,7 +183,7 @@ http://10.10.251.92/support/ticket/NUMBER</p>
 
 <hr />
 
-<h1 id="task-12---extra-mile---csrf-token-bypass"><a href="#header-3"></a>Task 12 - Extra Mile - CSRF Token Bypass</h1>
+<h2 id="task-12---extra-mile---csrf-token-bypass"><a href="#header-2"></a>Task 12 - Extra Mile - CSRF Token Bypass</h2>
 
 <p><img src="/assets/burpsuiteintruder2.png" alt="" /></p>
 

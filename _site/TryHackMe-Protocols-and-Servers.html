@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <meta name="generator" content="Jekyll">
+
+  <title>TryHackMe - Protocols and Servers</title>
+
+  <link rel="stylesheet" href="/css/main.css">
+  
+  <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed" /> <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TryHackMe - Protocols and Servers | 0xskar</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="TryHackMe - Protocols and Servers" />
+<meta name="author" content="0xskar" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="https://tryhackme.com/room/protocolsandservers" />
+<meta property="og:description" content="https://tryhackme.com/room/protocolsandservers" />
+<link rel="canonical" href="http://localhost:4000/TryHackMe-Protocols-and-Servers" />
+<meta property="og:url" content="http://localhost:4000/TryHackMe-Protocols-and-Servers" />
+<meta property="og:site_name" content="0xskar" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-06-16T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TryHackMe - Protocols and Servers" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"0xskar","url":"https://0xskar.github.io"},"dateModified":"2022-06-16T00:00:00-07:00","datePublished":"2022-06-16T00:00:00-07:00","description":"https://tryhackme.com/room/protocolsandservers","headline":"TryHackMe - Protocols and Servers","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/TryHackMe-Protocols-and-Servers"},"url":"http://localhost:4000/TryHackMe-Protocols-and-Servers"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <header>
+  <div>
+    <a href="/">
+    
+    <h1>0xskar@home:~$</h1>
+    </a>
+    <div class="header-links">
+      <a href="/archive"><h2 class="header-link">Archive</h2></a>
+<a href="/about"><h2 class="header-link">About</h2></a>
+<a href="/atom.xml"><h2 class="header-link">RSS</h2></a>
+    </div>
+  </div>
+</header>
+    <div class="container">
+      <section id="main_content">
+        <article>
+  <h2>TryHackMe - Protocols and Servers</h2>
+  <time datetime="2022-06-16T00:00:00-07:00" class="by-line">16 Jun 2022</time>
+  <p><a href="https://tryhackme.com/room/protocolsandservers">https://tryhackme.com/room/protocolsandservers</a></p>
+
+<p>Learn about common protocols such as HTTP, FTP, POP3, SMTP and IMAP, along with related insecurities.</p>
+
+<hr />
+
+<h2 id="task-1---introduction"><a href="#header-2"></a>Task 1 - Introduction</h2>
+
+<p>Introduces the user to a few protocols commonly used, such as:</p>
+
+<ul>
+  <li>HTTP</li>
+  <li>FTP</li>
+  <li>POP3</li>
+  <li>SMTP</li>
+  <li>IMAP</li>
+</ul>
+
+<hr />
+
+<h2 id="task-2---telnet"><a href="#header-2"></a>Task 2 - Telnet</h2>
+
+<p>Telnet is no longer considered a secure option, especially that anyone capturing your network traffic will be able to discover your usernames and passwords, which would grant them access to the remote system. The secure alternative is SSH, which we present in the next room.</p>
+
+<h5 id="answer-the-questions-below"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>To which port will the telnet command with the default parameters try to connect?</strong></p>
+
+<p>Port 23</p>
+
+<hr />
+
+<h2 id="task-3---hypertext-transfer-protocol-http"><a href="#header-2"></a>Task 3 - Hypertext Transfer Protocol (HTTP)</h2>
+
+<h5 id="answer-the-questions-below-1"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>Launch the attached VM. From the AttackBox terminal, connect using Telnet to MACHINE_IP 80 and retrieve the file flag.thm. What does it contain?</strong></p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">telnet 10.10.12.91 80</code></li>
+  <li><code class="language-plaintext highlighter-rouge">GET /flag.thm</code></li>
+  <li>THM{e3eb0a1df437f3f97a64aca5952c8ea0}</li>
+</ol>
+
+<hr />
+
+<h2 id="task-4---file-transfer-protocol-ftp"><a href="#header-2"></a>Task 4 - File Transfer Protocol (FTP)</h2>
+
+<h5 id="answer-the-questions-below-2"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>Using an FTP client, connect to the VM and try to recover the flag file. What is the flag? Username: frank Password: D2xc9CgD</strong></p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">ftp frank@10.10.12.91</code></li>
+  <li>ls</li>
+  <li>get ftp_flag.thm</li>
+  <li>exit</li>
+  <li>cat ftp_flag.thm</li>
+  <li>THM{364db6ad0e3ddfe7bf0b1870fb06fbdf}</li>
+</ol>
+
+<hr />
+
+<h2 id="task-5---simple-mail-transfer-protocol-smtp"><a href="#header-2"></a>Task 5 - Simple Mail Transfer Protocol (SMTP)</h2>
+
+<h5 id="answer-the-questions-below-3"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>Using the AttackBox terminal, connect to the SMTP port of the target VM. What is the flag that you can get?</strong></p>
+
+<p><code class="language-plaintext highlighter-rouge">telnet 10.10.12.91 25</code> THM{5b31ddfc0c11d81eba776e983c35e9b5}</p>
+
+<hr />
+
+<h2 id="task-6---post-office-protocol-3-pop3"><a href="#header-2"></a>Task 6 - Post Office Protocol 3 (POP3)</h2>
+
+<h5 id="answer-the-questions-below-4"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>Connect to the VM (10.10.12.91) at the POP3 port. Authenticate using the username frank and password D2xc9CgD. What is the response you get to STAT?</strong> +OK 0 0</p>
+
+<p><strong>How many email messages are available to download via IMAP on 10.10.12.91?</strong> 0</p>
+
+<hr />
+
+<h2 id="task-7-internet-message-access-protocol-imap"><a href="#header-2"></a>Task 7 Internet Message Access Protocol (IMAP)</h2>
+
+<h5 id="answer-the-questions-below-5"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong><em>What is the default port used by IMAP?</em></strong> 143</p>
+
+<hr />
+
+<h2 id="task-8---summary"><a href="#header-2"></a>Task 8 - Summary</h2>
+
+<p>It is good to remember the default port number for common protocols. Below is a summary of the protocols we covered, sorted in alphabetical order, along with their default port numbers.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Protocol</th>
+      <th>TCP Port</th>
+      <th>Application(s)</th>
+      <th>Data Security</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>FTP</td>
+      <td>21</td>
+      <td>File Transfer</td>
+      <td>Cleartext</td>
+    </tr>
+    <tr>
+      <td>HTTP</td>
+      <td>80</td>
+      <td>Worldwide Web</td>
+      <td>Cleartext</td>
+    </tr>
+    <tr>
+      <td>IMAP</td>
+      <td>143</td>
+      <td>Email (MDA)</td>
+      <td>Cleartext</td>
+    </tr>
+    <tr>
+      <td>POP3</td>
+      <td>110</td>
+      <td>Email (MDA)</td>
+      <td>Cleartext</td>
+    </tr>
+    <tr>
+      <td>SMTP</td>
+      <td>25</td>
+      <td>Email (MTA)</td>
+      <td>Cleartext</td>
+    </tr>
+    <tr>
+      <td>Telnet</td>
+      <td>23</td>
+      <td>Remote Access</td>
+      <td>Cleartext</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+</article>
+      </section>
+    </div>
+  </div>
+
+   <footer>
+  <a href="https://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+    <span>
+        <b>0xskar</b>
+    </span>
+    
+    <span>© 2022</span>
+  </a>
+</footer>
+
+  
+</body>
+
+</html>

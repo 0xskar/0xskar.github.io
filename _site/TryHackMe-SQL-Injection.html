@@ -56,7 +56,7 @@
 
 <hr />
 
-<h1 id="task-1---brief"><a href="#header-3"></a>Task 1 - Brief</h1>
+<h2 id="task-1---brief"><a href="#header-2"></a>Task 1 - Brief</h2>
 
 <p>SQL (Structured Query Language) Injection, mostly referred to as SQLi, is an attack on a web application database server that causes malicious queries to be executed. When a web application communicates with a database using input from a user that hasn’t been properly validated, there runs the potential of an attacker being able to steal, delete or alter private and customer data and also attack the web applications authentication methods to private or customer areas. This is why as well as SQLi being one of the oldest web application vulnerabilities, it also can be the most damaging.</p>
 
@@ -74,15 +74,15 @@
 
 <p>This type of Injection utilises the SQL UNION operator alongside a SELECT statement to return additional results to the page. This method is the most common way of extracting large amounts of data via an SQL Injection vulnerability.</p>
 
-<p><strong>Answer the questions below</strong></p>
+<h5 id="answer-the-questions-below"><a href="#header-5"></a>Answer the questions below</h5>
 
 <p>What does SQL stand for? Structured Query Language.</p>
 
 <hr />
 
-<h1 id="task-2---what-is-a-database"><a href="#header-3"></a>Task 2 - What is a Database?</h1>
+<h2 id="task-2---what-is-a-database"><a href="#header-2"></a>Task 2 - What is a Database?</h2>
 
-<p><strong>Answer the questions below</strong></p>
+<h5 id="answer-the-questions-below-1"><a href="#header-5"></a>Answer the questions below</h5>
 
 <p>What is the acronym for the software that controls a database? DBMS (Database Management Systems)</p>
 
@@ -90,9 +90,9 @@
 
 <hr />
 
-<h1 id="task-3---what-is-sql"><a href="#header-3"></a>Task 3 - What is SQL?</h1>
+<h2 id="task-3---what-is-sql"><a href="#header-2"></a>Task 3 - What is SQL?</h2>
 
-<p><strong>Answer the questions below</strong></p>
+<h5 id="answer-the-questions-below-2"><a href="#header-5"></a>Answer the questions below</h5>
 
 <p>What SQL statement is used to retrieve data? select</p>
 
@@ -102,15 +102,15 @@
 
 <hr />
 
-<h1 id="task-4---what-is-sql-injection"><a href="#header-3"></a>Task 4 - What is SQL Injection?</h1>
+<h2 id="task-4---what-is-sql-injection"><a href="#header-2"></a>Task 4 - What is SQL Injection?</h2>
 
-<p><strong>Answer the questions below</strong></p>
+<h5 id="answer-the-questions-below-3"><a href="#header-5"></a>Answer the questions below</h5>
 
 <p>What character signifies the end of an SQL query? <code class="language-plaintext highlighter-rouge">;</code></p>
 
 <hr />
 
-<h1 id="task-5---in-band-sql"><a href="#header-3"></a>Task 5 - In-Band SQL</h1>
+<h2 id="task-5---in-band-sql"><a href="#header-2"></a>Task 5 - In-Band SQL</h2>
 
 <p>What is the flag after completing level 1?</p>
 
@@ -147,7 +147,7 @@
 
 <hr />
 
-<h1 id="-task-6---blind-sqli---authentication-bypass"><a href="#header-3"></a> Task 6 - Blind SQLi - Authentication Bypass</h1>
+<h2 id="-task-6---blind-sqli---authentication-bypass"><a href="#header-2"></a> Task 6 - Blind SQLi - Authentication Bypass</h2>
 
 <p>One of the most straightforward Blind SQL Injection techniques is when bypassing authentication methods such as login forms. In this instance, we aren’t that interested in retrieving data from the database; We just want to get past the login.</p>
 
@@ -161,7 +161,7 @@
 
 <hr />
 
-<h1 id="-task-7---blind-sqli---boolean-based"><a href="#header-3"></a> Task 7 - Blind SQLi - Boolean Based</h1>
+<h2 id="-task-7---blind-sqli---boolean-based"><a href="#header-2"></a> Task 7 - Blind SQLi - Boolean Based</h2>
 
 <p>Boolean based SQL Injection refers to the response we receive back from our injection attempts which could be a true/false, yes/no, on/off, 1/0 or any response which can only ever have two outcomes. That outcome confirms to us that our SQL Injection payload was either successful or not. On the first inspection, you may feel like this limited response can’t provide much information. Still, in fact, with just these two responses, it’s possible to enumerate a whole database structure and contents.</p>
 
@@ -185,7 +185,7 @@
 
 <hr />
 
-<h1 id="-task-8---blind-sqli---time-based"><a href="#header-3"></a> Task 8 - Blind SQLi - Time Based</h1>
+<h2 id="-task-8---blind-sqli---time-based"><a href="#header-2"></a> Task 8 - Blind SQLi - Time Based</h2>
 
 <p>A time-based blind SQL Injection is very similar to the above Boolean based, in that the same requests are sent, but there is no visual indicator of your queries being wrong or right this time. Instead, your indicator of a correct query is based on the time the query takes to complete. This time delay is introduced by using built-in methods such as SLEEP(x) alongside the UNION statement. The SLEEP() method will only ever get executed upon a successful UNION SELECT statement.</p>
 
@@ -209,7 +209,7 @@
 
 <hr />
 
-<h1 id="-task-9---out-of-band-sqli"><a href="#header-3"></a> Task 9 - Out-of-Band SQLi</h1>
+<h2 id="-task-9---out-of-band-sqli"><a href="#header-2"></a> Task 9 - Out-of-Band SQLi</h2>
 
 <p>Out-of-Band SQL Injection isn’t as common as it either depends on specific features being enabled on the database server or the web application’s business logic, which makes some kind of external network call based on the results from an SQL query.</p>
 
@@ -221,13 +221,13 @@
 
 <p>3) The payload contains a request which forces an HTTP request back to the hacker’s machine containing data from the database.</p>
 
-<p><strong>Answer the questions below</strong></p>
+<h5 id="answer-the-questions-below-4"><a href="#header-5"></a>Answer the questions below</h5>
 
 <p>Name a protocol beginning with D that can be used to exfiltrate data from a database. DNS</p>
 
 <hr />
 
-<h1 id="-task-10---remediation"><a href="#header-3"></a> Task 10 - Remediation</h1>
+<h2 id="-task-10---remediation"><a href="#header-2"></a> Task 10 - Remediation</h2>
 
 <p>As impactful as SQL Injection vulnerabilities are, developers do have a way to protect their web applications from them by following the below advice:</p>
 
@@ -243,7 +243,7 @@
 
 <p>Allowing user input containing characters such as ‘ “ $ \ can cause SQL Queries to break or, even worse, as we’ve learnt, open them up for injection attacks. Escaping user input is the method of prepending a backslash () to these characters, which then causes them to be parsed just as a regular string and not a special character.</p>
 
-<p><strong>Answer the questions below</strong></p>
+<h5 id="answer-the-questions-below-5"><a href="#header-5"></a>Answer the questions below</h5>
 
 <p>Name a method of protecting yourself from an SQL Injection exploit.</p>
 

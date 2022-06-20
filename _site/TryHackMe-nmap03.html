@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <meta name="generator" content="Jekyll">
+
+  <title>TryHackMe - Nmap Advanced Port Scans</title>
+
+  <link rel="stylesheet" href="/css/main.css">
+  
+  <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed" /> <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TryHackMe - Nmap Advanced Port Scans | 0xskar</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="TryHackMe - Nmap Advanced Port Scans" />
+<meta name="author" content="0xskar" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="https://tryhackme.com/room/nmap03" />
+<meta property="og:description" content="https://tryhackme.com/room/nmap03" />
+<link rel="canonical" href="http://localhost:4000/TryHackMe-nmap03" />
+<meta property="og:url" content="http://localhost:4000/TryHackMe-nmap03" />
+<meta property="og:site_name" content="0xskar" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-06-16T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TryHackMe - Nmap Advanced Port Scans" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"0xskar","url":"https://0xskar.github.io"},"dateModified":"2022-06-16T00:00:00-07:00","datePublished":"2022-06-16T00:00:00-07:00","description":"https://tryhackme.com/room/nmap03","headline":"TryHackMe - Nmap Advanced Port Scans","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/TryHackMe-nmap03"},"url":"http://localhost:4000/TryHackMe-nmap03"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <header>
+  <div>
+    <a href="/">
+    
+    <h1>0xskar@home:~$</h1>
+    </a>
+    <div class="header-links">
+      <a href="/archive"><h2 class="header-link">Archive</h2></a>
+<a href="/about"><h2 class="header-link">About</h2></a>
+<a href="/atom.xml"><h2 class="header-link">RSS</h2></a>
+    </div>
+  </div>
+</header>
+    <div class="container">
+      <section id="main_content">
+        <article>
+  <h2>TryHackMe - Nmap Advanced Port Scans</h2>
+  <time datetime="2022-06-16T00:00:00-07:00" class="by-line">16 Jun 2022</time>
+  <p><a href="https://tryhackme.com/room/nmap03">https://tryhackme.com/room/nmap03</a></p>
+
+<p>Advanced techniques such as null, FIN, Xmas, and idle (zombie) scans, spoofing, in addition to FW and IDS evasion.</p>
+
+<hr />
+
+<h2 id="task-1---introduction"><a href="#header-2"></a>Task 1 - Introduction</h2>
+
+<p>We will cover the following types of port scans:</p>
+
+<ul>
+  <li>Null Scan</li>
+  <li>FIN Scan</li>
+  <li>Xmas Scan</li>
+  <li>Maimon Scan</li>
+  <li>ACK Scan</li>
+  <li>Window Scan</li>
+  <li>Custom Scan</li>
+</ul>
+
+<p>Moreover, we will cover the following:</p>
+
+<ul>
+  <li>Spoofing IP</li>
+  <li>Spoofing MAC</li>
+  <li>Decoy Scan</li>
+  <li>Fragmented Packets</li>
+  <li>Idle/Zombie Scan</li>
+</ul>
+
+<hr />
+
+<h2 id="task-2-tcp-null-scan-fin-scan-and-xmas-scan"><a href="#header-2"></a>Task 2 TCP Null Scan, FIN Scan, and Xmas Scan</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">-sN</code> Null scan - The null scan does not set any flag; all six flag bits are set to zero.</li>
+  <li><code class="language-plaintext highlighter-rouge">-sF</code> FIN scan - The FIN scan sends a TCP packet with the FIN flag set.</li>
+  <li><code class="language-plaintext highlighter-rouge">-sX</code> Xmas scan - An Xmas scan sets the FIN, PSH, and URG flags simultaneously.</li>
+</ul>
+
+<p>On scenario where these three scan types can be efficient is when scanning a target behind a stateless (non-stateful) firewall. A stateless firewall will check if the incoming packet has the SYN flag set to detect a connection attempt. Using a flag combination that does not match the SYN packet makes it possible to deceive the firewall and reach the system behind it. However, a stateful firewall will practically block all such crafted packets and render this kind of scan useless.</p>
+
+<h5 id="answer-the-questions-below"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>In a null scan, how many flags are set to 1?</strong> 0</p>
+
+<p><strong>In a FIN scan, how many flags are set to 1?</strong> 1</p>
+
+<p><strong>In a Xmas scan, how many flags are set to 1?</strong> 3</p>
+
+<p><strong>Start the VM and load the AttackBox. Once both are ready, open the terminal on the AttackBox and use nmap to launch a FIN scan against the target VM. How many ports appear as open/filtered?</strong> 7</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>**Repeat your scan launching a null scan against the target VM. How many ports appear as open</td>
+      <td>filtered?** 7</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="task-3---tcp-maimon-scan"><a href="#header-2"></a>Task 3 - TCP Maimon Scan</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">-sM</code> In this scan, the FIN and ACK bits are set. The target should send an RST packet as a response. This scan won’t work on most targets encountered in modern networks.</li>
+</ul>
+
+<h5 id="answer-the-questions-below-1"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>In the Maimon scan, how many flags are set?</strong> 2</p>
+
+<hr />
+
+<h2 id="task-4---tcp-ack-window-and-custom-scan"><a href="#header-2"></a>Task 4 - TCP ACK, Window, and Custom Scan</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">-sA</code> TCP ACK scan. As the name implies, an ACK scan will send a TCP packet with the ACK flag set. This scan won’t tell us whether the target port is open in a simple setup. This kind of scan would be helpful <strong>if there is a firewall in front of the target</strong>.</li>
+  <li><code class="language-plaintext highlighter-rouge">-sW</code> TCP Window scan. On specific systems, this can reveal that the port is open. Similarly, launching a TCP window scan against a Linux system with no firewall will not provide much information. However, as you would expect, if we repeat our TCP window scan against a server behind a firewall, we expect to get more satisfying results.</li>
+  <li><code class="language-plaintext highlighter-rouge">-scanflags CUSTOM_FLAGS</code>  if you want to set SYN, RST, and FIN simultaneously, you can do so.</li>
+</ul>
+
+<p>It is essential to note that the ACK scan and the window scan were very efficient at helping us map out the firewall rules. However, it is vital to remember that just because a firewall is not blocking a specific port, it does not necessarily mean that a service is listening on that port. For example, there is a possibility that the firewall rules need to be updated to reflect recent service changes. Hence, ACK and window scans are exposing the firewall rules, not the services.</p>
+
+<h5 id="answer-the-questions-below-2"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>In TCP Window scan, how many flags are set?</strong> 1</p>
+
+<p><strong>You decided to experiment with a custom TCP scan that has the reset flag set. What would you add after <code class="language-plaintext highlighter-rouge">--scanflags</code>?</strong> RST</p>
+
+<p><strong>The VM received an update to its firewall ruleset. A new port is now allowed by the firewall. After you make sure that you have terminated the VM from Task 2, start the VM for this task. Launch the AttackBox if you haven’t done that already. Once both are ready, open the terminal on the AttackBox and use Nmap to launch an ACK scan against the target VM. How many ports appear unfiltered?</strong> 4</p>
+
+<p><strong>What is the new port number that appeared?</strong> 443</p>
+
+<p><strong>Is there any service behind the newly discovered port number? (Y/N)</strong> No</p>
+
+<hr />
+
+<h2 id="task-5---spoofing-and-decoys"><a href="#header-2"></a>Task 5 - Spoofing and Decoys</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">nmap -e NET_INTERFACE -Pn -S SPOOFED_IP 10.10.141.22</code> We can scan target systems with spoofed IP addresses and MAC addresses. For this scan to work and give accurate results, the attacker needs to monitor the network traffic to analyze the replies. Specify the network interface using <code class="language-plaintext highlighter-rouge">-e</code> and to explicitly disable ping scan <code class="language-plaintext highlighter-rouge">-Pn</code>.</li>
+</ul>
+
+<p>When you are on the same subnet as the target machine, you would be able to spoof your MAC address as well. You can specify the source MAC address using –spoof-mac SPOOFED_MAC. This address spoofing is only possible if the attacker and the target machine are on the same Ethernet (802.3) network or same WiFi (802.11).</p>
+
+<p>You can launch a decoy scan by specifying a specific or random IP address -D example: <code class="language-plaintext highlighter-rouge">nmap -D 10.10.0.1,10.10.0.2,RND,RND,ME 10.10.141.22</code></p>
+
+<h5 id="answer-the-questions-below-3"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>What do you need to add to the command sudo nmap 10.10.141.22 to make the scan appear as if coming from the source IP address 10.10.10.11 instead of your IP address?</strong> <code class="language-plaintext highlighter-rouge">-S 10.10.10.11</code></p>
+
+<p><strong>What do you need to add to the command sudo nmap 10.10.141.22 to make the scan appear as if coming from the source IP addresses 10.10.20.21 and 10.10.20.28 in addition to your IP address?</strong> <code class="language-plaintext highlighter-rouge">-D 10.10.20.21,10.10.20.28,ME</code></p>
+
+<hr />
+
+<h2 id="task-6---fragmented-packets"><a href="#header-2"></a>Task 6 - Fragmented Packets</h2>
+
+<p>Nmap provides the option <code class="language-plaintext highlighter-rouge">-f</code> to fragment packets. Once chosen, the IP data will be divided into 8 bytes or less. Adding another <code class="language-plaintext highlighter-rouge">-f</code> (<code class="language-plaintext highlighter-rouge">-f -f</code> or <code class="language-plaintext highlighter-rouge">-ff</code>) will split the data into 16 byte-fragments instead of 8.</p>
+
+<p>To properly understand fragmentation, we need to look at the IP header in the figure below.</p>
+
+<p><img src="/assets/nmap02.png" alt="" /></p>
+
+<h5 id="answer-the-questions-below-4"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>If the TCP segment has a size of 64, and -ff option is being used, how many IP fragments will you get?</strong> If you added -ff (or -f -f), the fragmentation of the data will be multiples of 16.</p>
+
+<hr />
+
+<h2 id="task-7---idlezombie-scan"><a href="#header-2"></a>Task 7 - Idle/Zombie Scan</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">nmap -sI ZOMBIE_IP 10.10.141.22</code>, where ZOMBIE_IP is the IP address of the idle host (zombie).</li>
+</ul>
+
+<p>The idle (zombie) scan requires the following three steps to discover whether a port is open:</p>
+
+<ol>
+  <li>Trigger the idle host to respond so that you can record the current IP ID on the idle host.</li>
+  <li>Send a SYN packet to a TCP port on the target. The packet should be spoofed to appear as if it was coming from the idle host (zombie) IP address.</li>
+  <li>Trigger the idle machine again to respond so that you can compare the new IP ID with the one received earlier.</li>
+</ol>
+
+<h5 id="answer-the-questions-below-5"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>You discovered a rarely-used network printer with the IP address 10.10.5.5, and you decide to use it as a zombie in your idle scan. What argument should you add to your Nmap command?</strong> -sI 10.10.5.5</p>
+
+<hr />
+
+<h2 id="task-8---getting-more-details"><a href="#header-2"></a>Task 8 - Getting More Details</h2>
+
+<p><code class="language-plaintext highlighter-rouge">--reason</code> if you want Nmap to provide more details regarding its reasoning and conclusions. This flag gives us the explicit reason why Nmap concluded that the system is up or a particular port is open. For more detailed output, you can consider using <code class="language-plaintext highlighter-rouge">-v</code> for verbose output or <code class="language-plaintext highlighter-rouge">-vv</code> for even more verbosity.</p>
+
+<p>If <code class="language-plaintext highlighter-rouge">-vv</code> does not satisfy your curiosity, you can use <code class="language-plaintext highlighter-rouge">-d</code> for debugging details or <code class="language-plaintext highlighter-rouge">-dd</code> for even more details. <strong>You can guarantee that using -d will create an output that extends beyond a single screen.</strong></p>
+
+<h5 id="answer-the-questions-below-6"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>Launch the AttackBox if you haven’t done so already. After you make sure that you have terminated the VM from Task 4, start the VM for this task. Wait for it to load completely, then open the terminal on the AttackBox and use Nmap with nmap -sS -F –reason 10.10.237.236 to scan the VM. What is the reason provided for the stated port(s) being open?</strong> SYN-ACK</p>
+
+<hr />
+
+<h2 id="task-9---summary"><a href="#header-2"></a>Task 9 - Summary</h2>
+
+<p>This room covered the following types of scans.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Port Scan Type</th>
+      <th>Example Command</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>TCP Null Scan</td>
+      <td><code class="language-plaintext highlighter-rouge">sudo nmap -sN 10.10.203.92</code></td>
+    </tr>
+    <tr>
+      <td>TCP FIN Scan</td>
+      <td><code class="language-plaintext highlighter-rouge">sudo nmap -sF 10.10.203.92</code></td>
+    </tr>
+    <tr>
+      <td>TCP Xmas Scan</td>
+      <td><code class="language-plaintext highlighter-rouge">sudo nmap -sX 10.10.203.92</code></td>
+    </tr>
+    <tr>
+      <td>TCP Maimon Scan</td>
+      <td><code class="language-plaintext highlighter-rouge">sudo nmap -sM 10.10.203.92</code></td>
+    </tr>
+    <tr>
+      <td>TCP ACK Scan</td>
+      <td><code class="language-plaintext highlighter-rouge">sudo nmap -sA 10.10.203.92</code></td>
+    </tr>
+    <tr>
+      <td>TCP Window Scan</td>
+      <td><code class="language-plaintext highlighter-rouge">sudo nmap -sW 10.10.203.92</code></td>
+    </tr>
+    <tr>
+      <td>Custom TCP Scan</td>
+      <td><code class="language-plaintext highlighter-rouge">sudo nmap --scanflags URGACKPSHRSTSYNFIN 10.10.203.92</code></td>
+    </tr>
+    <tr>
+      <td>Spoofed Source IP</td>
+      <td><code class="language-plaintext highlighter-rouge">sudo nmap -S SPOOFED_IP 10.10.203.92</code></td>
+    </tr>
+    <tr>
+      <td>Spoofed MAC Address</td>
+      <td><code class="language-plaintext highlighter-rouge">--spoof-mac SPOOFED_MAC</code></td>
+    </tr>
+    <tr>
+      <td>Decoy Scan</td>
+      <td><code class="language-plaintext highlighter-rouge">nmap -D DECOY_IP,ME 10.10.203.92</code></td>
+    </tr>
+    <tr>
+      <td>Idle (Zombie) Scan</td>
+      <td><code class="language-plaintext highlighter-rouge">sudo nmap -sI ZOMBIE_IP 10.10.203.92</code></td>
+    </tr>
+    <tr>
+      <td>Fragment IP data into 8 bytes</td>
+      <td><code class="language-plaintext highlighter-rouge">-f</code></td>
+    </tr>
+    <tr>
+      <td>Fragment IP data into 16 bytes</td>
+      <td><code class="language-plaintext highlighter-rouge">-ff</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>Option</th>
+      <th>Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">--source-port PORT_NUM</code></td>
+      <td>specify source port number</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">--data-length NUM</code></td>
+      <td>append random data to reach given length</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>These scan types rely on setting TCP flags in unexpected ways to prompt ports for a reply. Null, FIN, and Xmas scan provoke a response from closed ports, while Maimon, ACK, and Window scans provoke a response from open and closed ports.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Option</th>
+      <th>Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">--reason</code></td>
+      <td>explains how Nmap made its conclusion</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-v</code></td>
+      <td>verbose</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-vv</code></td>
+      <td>very verbose</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-d</code></td>
+      <td>debugging</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-dd</code></td>
+      <td>more details for debugging</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+
+</article>
+      </section>
+    </div>
+  </div>
+
+   <footer>
+  <a href="https://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+    <span>
+        <b>0xskar</b>
+    </span>
+    
+    <span>© 2022</span>
+  </a>
+</footer>
+
+  
+</body>
+
+</html>

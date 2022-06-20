@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <meta name="generator" content="Jekyll">
+
+  <title>TryHackMe - Vulnerabilities 101</title>
+
+  <link rel="stylesheet" href="/css/main.css">
+  
+  <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed" /> <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TryHackMe - Vulnerabilities 101 | 0xskar</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="TryHackMe - Vulnerabilities 101" />
+<meta name="author" content="0xskar" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="https://tryhackme.com/room/vulnerabilities101" />
+<meta property="og:description" content="https://tryhackme.com/room/vulnerabilities101" />
+<link rel="canonical" href="http://localhost:4000/TryHackMe-Vulnerabilities101" />
+<meta property="og:url" content="http://localhost:4000/TryHackMe-Vulnerabilities101" />
+<meta property="og:site_name" content="0xskar" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-06-16T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TryHackMe - Vulnerabilities 101" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"0xskar","url":"https://0xskar.github.io"},"dateModified":"2022-06-16T00:00:00-07:00","datePublished":"2022-06-16T00:00:00-07:00","description":"https://tryhackme.com/room/vulnerabilities101","headline":"TryHackMe - Vulnerabilities 101","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/TryHackMe-Vulnerabilities101"},"url":"http://localhost:4000/TryHackMe-Vulnerabilities101"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <header>
+  <div>
+    <a href="/">
+    
+    <h1>0xskar@home:~$</h1>
+    </a>
+    <div class="header-links">
+      <a href="/archive"><h2 class="header-link">Archive</h2></a>
+<a href="/about"><h2 class="header-link">About</h2></a>
+<a href="/atom.xml"><h2 class="header-link">RSS</h2></a>
+    </div>
+  </div>
+</header>
+    <div class="container">
+      <section id="main_content">
+        <article>
+  <h2>TryHackMe - Vulnerabilities 101</h2>
+  <time datetime="2022-06-16T00:00:00-07:00" class="by-line">16 Jun 2022</time>
+  <p><a href="https://tryhackme.com/room/vulnerabilities101">https://tryhackme.com/room/vulnerabilities101</a></p>
+
+<p>Understand the flaws of an application and apply your researching skills on some vulnerability databases.</p>
+
+<hr />
+
+<h2 id="task-1---introduction"><a href="#header-2"></a>Task 1 - Introduction</h2>
+
+<ul>
+  <li>What vulnerabilities are</li>
+  <li>Why they’re worthy of learning about</li>
+  <li>How are vulnerabilities rated</li>
+  <li>Databases for vulnerability research</li>
+  <li>A showcase of how vulnerability research is used on ACKme’s engagement</li>
+</ul>
+
+<hr />
+
+<h2 id="task-2---introduction-to-vulnerabilities"><a href="#header-2"></a>Task 2 - Introduction to Vulnerabilities</h2>
+
+<p>NIST defines a vulnerability as “weakness in an information system, system security procedures, internal controls, or implementation that could be exploited or triggered by a threat source”.</p>
+
+<p>There are arguably five main categories of vulnerabilities:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Vulnerability</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Operating System</td>
+      <td>These types of vulnerabilities are found within Operating Systems (OSs) and often result in privilege escalation.</td>
+    </tr>
+    <tr>
+      <td>(Mis)Configuration-based</td>
+      <td>These types of vulnerability stem from an incorrectly configured application or service. For example, a website exposing customer details.</td>
+    </tr>
+    <tr>
+      <td>Weak or Default Credentials</td>
+      <td>Applications and services that have an element of authentication will come with default credentials when installed. For example, an administrator dashboard may have the username and password of “admin”. These are easy to guess by an attacker.</td>
+    </tr>
+    <tr>
+      <td>Application Logic</td>
+      <td>These vulnerabilities are a result of poorly designed applications. For example, poorly implemented authentication mechanisms that may result in an attacker being able to impersonate a user.</td>
+    </tr>
+    <tr>
+      <td>Human-Factor</td>
+      <td>Human-Factor vulnerabilities are vulnerabilities that leverage human behaviour. For example, phishing emails are designed to trick humans into believing they are legitimate.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="answer-the-questions-below"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>An attacker has been able to upgrade the permissions of their system account from “user” to “administrator”. What type of vulnerability is this?</strong></p>
+
+<ul>
+  <li>operating system</li>
+</ul>
+
+<p><strong>You manage to bypass a login panel using cookies to authenticate. What type of vulnerability is this?</strong></p>
+
+<ul>
+  <li>application logic</li>
+</ul>
+
+<hr />
+
+<h2 id="task-3---scoring-vulnerabilities-cvss--vpr"><a href="#header-2"></a>Task 3 - Scoring Vulnerabilities (CVSS &amp; VPR)</h2>
+
+<p><strong>CVSS Common Vulnerability Scoring System</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Advantages of CVSS</th>
+      <th>Disadvantages of CVSS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>CVSS has been around for a long time.</td>
+      <td>CVSS was never designed to help prioritise vulnerabilities, instead, just assign a value of severity.</td>
+    </tr>
+    <tr>
+      <td>CVSS is popular in organisations.</td>
+      <td>CVSS heavily assesses vulnerabilities on an exploit being available. However, only 20% of all vulnerabilities have an exploit available (Tenable., 2020).</td>
+    </tr>
+    <tr>
+      <td>CVSS is a free framework to adopt and recommended by organisations such as NIST.</td>
+      <td>Vulnerabilities rarely change scoring after assessment despite the fact that new developments such as exploits may be found.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>VPR Vulnerability Priority Rating</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Advantages of VPR</th>
+      <th>Disadvantages of VPR</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>VPR is a modern framework that is real-world.</td>
+      <td>VPR is not open-source like some other vulnerability management frameworks.</td>
+    </tr>
+    <tr>
+      <td>VPR considers over 150 factors when calculating risk.</td>
+      <td>VPR can only be adopted apart of a commercial platform.</td>
+    </tr>
+    <tr>
+      <td>VPR is risk-driven and used by organisations to help prioritise patching vulnerabilities.</td>
+      <td>VPR does not consider the CIA triad to the extent that CVSS does; meaning that risk to the confidentiality, integrity and availability of data does not play a large factor in scoring vulnerabilities when using VPR.</td>
+    </tr>
+    <tr>
+      <td>Scorings are not final and are very dynamic, meaning the priority a vulnerability should be given can change as the vulnerability ages.</td>
+      <td>Intentionally left blank.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="answer-the-questions-below-1"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>What year was the first iteration of CVSS published?</strong></p>
+
+<ul>
+  <li>2005</li>
+</ul>
+
+<p><strong>If you wanted to assess vulnerability based on the risk it poses to an organisation, what framework would you use? Note: We are looking for the acronym here.</strong></p>
+
+<ul>
+  <li>VPR</li>
+</ul>
+
+<p><strong>If you wanted to use a framework that was free and open-source, what framework would that be? Note: We are looking for the acronym here.</strong></p>
+
+<ul>
+  <li>CVSS</li>
+</ul>
+
+<hr />
+
+<h2 id="task-4---vulnerability-databases"><a href="#header-2"></a>Task 4 - Vulnerability Databases</h2>
+
+<ul>
+  <li><a href="https://nvd.nist.gov/vuln/full-listing">NVD Nation Vulnerability Database</a></li>
+  <li><a href="http://exploit-db.com/">Exploit-DB</a></li>
+</ul>
+
+<h5 id="answer-the-questions-below-2"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>Using NVD, how many CVEs were submitted in July 2021?</strong></p>
+
+<ul>
+  <li>1585</li>
+</ul>
+
+<p><strong>Who is the author of Exploit-DB?</strong></p>
+
+<ul>
+  <li><a href="https://www.offensive-security.com/community-projects/">Offensive Security</a></li>
+</ul>
+
+<hr />
+
+<h2 id="task-5---an-example-of-finding-a-vulnerability"><a href="#header-2"></a>Task 5 - An Example of Finding a Vulnerability</h2>
+
+<h5 id="answer-the-questions-below-3"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>What type of vulnerability did we use to find the name and version of the application in this example?</strong></p>
+
+<ul>
+  <li>Version Disclosure</li>
+</ul>
+
+<hr />
+
+<h2 id="task-6---showcase-exploiting-ackmes-application"><a href="#header-2"></a>Task 6 - Showcase: Exploiting Ackme’s Application</h2>
+
+<h5 id="answer-the-questions-below-4"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>Follow along with the showcase of exploiting ACKme’s application to the end to retrieve a flag. What is this flag?</strong></p>
+
+<ul>
+  <li>THM{ACKME_ENGAGEMENT}</li>
+</ul>
+
+<hr />
+
+
+</article>
+      </section>
+    </div>
+  </div>
+
+   <footer>
+  <a href="https://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+    <span>
+        <b>0xskar</b>
+    </span>
+    
+    <span>© 2022</span>
+  </a>
+</footer>
+
+  
+</body>
+
+</html>
