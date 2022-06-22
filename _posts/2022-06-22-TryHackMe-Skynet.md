@@ -1,0 +1,170 @@
+---
+title: Practical - SkyNet
+published: true
+---
+
+[https://tryhackme.com/room/skynet](https://tryhackme.com/room/skynet)
+
+Hacking a vulnerable Terminator themed Linux machine.
+
+![](/assets/skynet.webp)
+
+* * *
+
+## [](#header-2)Task 1 - Deploy the Vulerable Machine
+
+1. Initial Nmap Scans
+
+```shell
+sudo nmap -Pn -sS -T4 -p- 10.10.70.205 -oN nmap_initial.txt
+Nmap scan report for 10.10.70.205
+Host is up (0.18s latency).
+Not shown: 65529 closed tcp ports (reset)
+PORT    STATE SERVICE
+22/tcp  open  ssh
+80/tcp  open  http
+110/tcp open  pop3
+139/tcp open  netbios-ssn
+143/tcp open  imap
+445/tcp open  microsoft-ds
+````
+
+```shell
+sudo nmap -sC -sV -T4 10.10.70.205 -p22,80,110,139,143,445 -oN nmap_second.txt
+Starting Nmap 7.92 ( https://nmap.org ) at 2022-06-22 10:06 PDT
+Nmap scan report for 10.10.70.205
+Host is up (0.18s latency).
+
+PORT    STATE SERVICE     VERSION
+22/tcp  open  ssh         OpenSSH 7.2p2 Ubuntu 4ubuntu2.8 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   2048 99:23:31:bb:b1:e9:43:b7:56:94:4c:b9:e8:21:46:c5 (RSA)
+|   256 57:c0:75:02:71:2d:19:31:83:db:e4:fe:67:96:68:cf (ECDSA)
+|_  256 46:fa:4e:fc:10:a5:4f:57:57:d0:6d:54:f6:c3:4d:fe (ED25519)
+80/tcp  open  http        Apache httpd 2.4.18 ((Ubuntu))
+|_http-server-header: Apache/2.4.18 (Ubuntu)
+|_http-title: Skynet
+110/tcp open  pop3        Dovecot pop3d
+|_pop3-capabilities: RESP-CODES SASL PIPELINING CAPA TOP UIDL AUTH-RESP-CODE
+139/tcp open  netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)
+143/tcp open  imap        Dovecot imapd
+|_imap-capabilities: capabilities ENABLE Pre-login LITERAL+ ID LOGIN-REFERRALS SASL-IR post-login IMAP4rev1 have OK IDLE more listed LOGINDISABLEDA0001
+445/tcp open  netbios-ssn Samba smbd 4.3.11-Ubuntu (workgroup: WORKGROUP)
+Service Info: Host: SKYNET; OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Host script results:
+|_clock-skew: mean: 1h40m00s, deviation: 2h53m13s, median: 0s
+|_nbstat: NetBIOS name: SKYNET, NetBIOS user: <unknown>, NetBIOS MAC: <unknown> (unknown)
+| smb-security-mode: 
+|   account_used: guest
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: disabled (dangerous, but default)
+| smb2-time: 
+|   date: 2022-06-22T17:06:34
+|_  start_date: N/A
+| smb2-security-mode: 
+|   3.1.1: 
+|_    Message signing enabled but not required
+| smb-os-discovery: 
+|   OS: Windows 6.1 (Samba 4.3.11-Ubuntu)
+|   Computer name: skynet
+|   NetBIOS computer name: SKYNET\x00
+|   Domain name: \x00
+|   FQDN: skynet
+|_  System time: 2022-06-22T12:06:34-05:00
+```
+
+### [](#header-3)Enum4Linux
+
+- ``enum4linux -a 10.10.70.205 -R 139,445``
+- Notes from Scan:
+
+```shell
+[+] Got OS info for 10.10.70.205 from srvinfo:                                                          SKYNET         Wk Sv PrQ Unx NT SNT skynet server (Samba, Ubuntu) 
+ =======================================( Users on 10.10.70.205 )=======================================
+index: 0x1 RID: 0x3e8 acb: 0x00000010 Account: milesdyson       Name:   Desc:                                                                                              
+user:[milesdyson] rid:[0x3e8]
+==================================( Share Enumeration on 10.10.70.205 )=================================
+        Sharename       Type      Comment
+        ---------       ----      -------
+        print$          Disk      Printer Drivers
+        anonymous       Disk      Skynet Anonymous Share
+        milesdyson      Disk      Miles Dyson Personal Share
+        IPC$            IPC       IPC Service (skynet server (Samba, Ubuntu))
+
+        Server               Comment
+        ---------            -------
+        Workgroup            Master
+        ---------            -------
+        WORKGROUP            SKYNET
+
+[+] Attempting to map shares on 10.10.70.205                                                            //10.10.70.205/print$   Mapping: DENIED Listing: N/A Writing: N/A                                                                                                 
+//10.10.70.205/anonymous        Mapping: OK Listing: OK Writing: N/A
+//10.10.70.205/milesdyson       Mapping: DENIED Listing: N/A Writing: N/A
+
+[E] Cant understand response                                                                                                                                            
+NT_STATUS_OBJECT_NAME_NOT_FOUND listing 
+
+//10.10.70.205/IPC$     Mapping: N/A Listing: N/A Writing: N/A
+
+[+] Enumerating users using SID S-1-22-1 and logon username '', password ''                                                                                                
+S-1-5-21-2393614426-3774336851-1116533619-501 SKYNET\nobody (Local User)                                                                                                 
+S-1-5-21-2393614426-3774336851-1116533619-513 SKYNET\None (Domain Group)
+S-1-5-21-2393614426-3774336851-1116533619-1000 SKYNET\milesdyson (Local User)
+```
+
+### [](#header-3)SMB Client
+
+- ``smbclient //10.10.70.205/anonymous -U nobody -p 139 --workgroup=SKYNET`` - log into smbclient with user nobody 
+- get all the loot ``log1.txt`` is a wordlist maybe something useful.
+
+Connect to miles SMB
+
+```shell
+smbclient '\\server\share'
+mask ""
+recurse ON
+prompt OFF
+mget *
+```
+
+### [](#header-3)Gobuster
+
+- gobuster dir -u http://10.10.70.205:80/ -w /usr/share/seclists/Discovery/Web-Content/directory-list-lowercase-2.3-medium.txt -t 100 -e
+
+```shell
+http://10.10.70.205:80/admin                (Status: 301) [Size: 312] [--> http://10.10.70.205/admin/]
+http://10.10.70.205:80/css                  (Status: 301) [Size: 310] [--> http://10.10.70.205/css/]  
+http://10.10.70.205:80/js                   (Status: 301) [Size: 309] [--> http://10.10.70.205/js/]   
+http://10.10.70.205:80/config               (Status: 301) [Size: 313] [--> http://10.10.70.205/config/]
+http://10.10.70.205:80/ai                   (Status: 301) [Size: 309] [--> http://10.10.70.205/ai/]    
+http://10.10.70.205:80/squirrelmail         (Status: 301) [Size: 319] [--> http://10.10.70.205/squirrelmail/]
+```
+
+
+##### [](#header-5)Answer the questions below
+
+**What is Miles password for his emails?**
+
+- Capture in burpsuite proxy and insert log1.txt for password list ``cyborg007haloterminator``
+- here we get milesdysons new samba password ``)s{A&2Z=F^n_E.B``
+
+**What is the hidden directory?**
+
+- checking the /notes/ folder in miles SMB i found ``important.txt``
+- /45kra24zxs28v3yd
+
+**What is the vulnerability called when you can include a remote file for malicious purposes?**
+
+- remote file inclusion
+
+**What is the user flag?**
+
+
+
+**What is the root flag?**
+
+
+
+* * * 
