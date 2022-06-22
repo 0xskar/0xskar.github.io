@@ -11,7 +11,7 @@ title: Resources
 
 ## [](#header-2)Misc Tools
 
-- [https://filesec.io/](FileSEC.io) - latest file extensions being used by attackers 
+- [FileSEC.io](https://filesec.io/) - latest file extensions being used by attackers 
 - [LOTS Project](https://lots-project.com/) - Attackers are using popular legitimate domains when conducting phishing, C&C, exfiltration and downloading tools to evade detection. The list of websites below allow attackers to use their domain or subdomain.
 
 
