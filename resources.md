@@ -29,10 +29,17 @@ title: Resources
 ## [](#header-2)SQL Tools
 
 - [SQLMap](https://github.com/sqlmapproject/sqlmap) - Preinstalled on Kali. Automatic SQL injection and database takeover tool.
+- 
 
 ## [](#header-2)DNS Queries
 
 - ``nslookup --type=CNAME website`` also ``--type=A``, ``--type=MX``, ``--type=TXT``
 
+## [](#header-2)HTTP Scanners
+
+- ``joomscan -u target`` - scans joomla CMS's
+- ``shodan``
+- ``theHarvester``
+- [joomblah](https://github.com/stefanlucas/Exploit-Joomla/blob/master/README.md)
 
 * * *
