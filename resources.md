@@ -18,9 +18,10 @@ title: Resources
 
 - [hashcat wiki](https://hashcat.net/wiki/doku.php?id=example_hashes) - hash types and examples
 
-## [](#header-2)Enumeration
+## [](#header-2)Privilege Escalation
 
 - [Hacktricks Windows Local Privilege Escalation Checklist](https://book.hacktricks.xyz/windows-hardening/checklist-windows-privilege-escalation)
+- [Hacktricks Windows Linux Privilege Escalation Checklist](https://book.hacktricks.xyz/linux-hardening/linux-privilege-escalation-checklist)
 
 ## [](#header-2)Command Line
 
