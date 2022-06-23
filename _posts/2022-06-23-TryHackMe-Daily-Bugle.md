@@ -1,5 +1,5 @@
 ---
-title: TryHackMe - Daily Bugle
+title: Practical - Daily Bugle
 published: true
 ---
 
