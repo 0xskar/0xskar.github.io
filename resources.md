@@ -21,7 +21,7 @@ title: Resources
 ## [](#header-2)Privilege Escalation
 
 - [Hacktricks Windows Local Privilege Escalation Checklist](https://book.hacktricks.xyz/windows-hardening/checklist-windows-privilege-escalation)
-- [Hacktricks Windows Linux Privilege Escalation Checklist](https://book.hacktricks.xyz/linux-hardening/linux-privilege-escalation-checklist)
+- [Hacktricks Linux Privilege Escalation Checklist](https://book.hacktricks.xyz/linux-hardening/linux-privilege-escalation-checklist)
 
 ## [](#header-2)Command Line
 

