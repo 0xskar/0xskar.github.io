@@ -1,5 +1,5 @@
 ---
-title: TryHackMe - Server-Side Request Forgery (SSRF)
+title: Server-Side Request Forgery (SSRF)
 published: true
 ---
 

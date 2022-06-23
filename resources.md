@@ -30,4 +30,9 @@ title: Resources
 
 - [SQLMap](https://github.com/sqlmapproject/sqlmap) - Preinstalled on Kali. Automatic SQL injection and database takeover tool.
 
+## [](#header-2)DNS Queries
+
+- ``nslookup --type=CNAME website`` also ``--type=A``, ``--type=MX``, ``--type=TXT``
+
+
 * * *

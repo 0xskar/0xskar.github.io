@@ -1,5 +1,5 @@
 ---
-title: TryHackMe - Linux PrivEsc
+title: Linux PrivEsc
 published: true
 ---
 

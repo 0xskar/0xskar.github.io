@@ -1,5 +1,5 @@
 ---
-title: TryHackMe - Net Sec Challenge
+title: Net Sec Challenge
 published: true
 ---
 

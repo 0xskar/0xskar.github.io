@@ -1,5 +1,5 @@
 ---
-title: TryHackMe - Attacktive Directory
+title: Attacktive Directory
 published: true
 ---
 

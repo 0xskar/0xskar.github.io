@@ -1,5 +1,5 @@
 ---
-title: TryHackMe - Attacking Kerberos
+title: Attacking Kerberos
 published: true
 ---
 

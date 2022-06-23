@@ -1,5 +1,5 @@
 ---
-title: TryHackMe - Command Injection
+title: Command Injection
 published: true
 ---
 

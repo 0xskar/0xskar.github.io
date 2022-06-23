@@ -1,5 +1,5 @@
 ---
-title: TryHackMe - Vulnerabilities 101
+title: Vulnerabilities 101
 published: true
 ---
 

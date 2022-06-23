@@ -1,5 +1,5 @@
 ---
-title: TryHackMe - Cross-Site Scripting (XSS)
+title: Cross-Site Scripting (XSS)
 published: true
 ---
 

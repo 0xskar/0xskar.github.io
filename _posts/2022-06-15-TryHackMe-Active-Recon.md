@@ -1,5 +1,5 @@
 ---
-title: TryHackMe - Active Reconniassance
+title: Active Reconniassance
 published: true
 ---
 

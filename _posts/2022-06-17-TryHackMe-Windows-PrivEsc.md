@@ -1,5 +1,5 @@
 ---
-title: TryHackMe - Windows Privilege Escalation
+title: Windows Privilege Escalation
 published: true
 ---
 

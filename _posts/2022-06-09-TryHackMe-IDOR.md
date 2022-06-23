@@ -1,5 +1,5 @@
 ---
-title: TryHackMe - IDORs - Insecure Direct Object Refrences
+title: IDORs - Insecure Direct Object Refrences
 published: true
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: TryHackMe - SQL Injection
+title: SQL Injection
 published: true
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: TryHackMe - Protocols and Servers
+title: Protocols and Servers
 published: true
 ---
 

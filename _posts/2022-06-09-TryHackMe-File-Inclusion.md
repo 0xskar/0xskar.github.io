@@ -1,5 +1,5 @@
 ---
-title: TryHackMe - File Inclusion 
+title: File Inclusion 
 published: true
 ---
 

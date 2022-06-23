@@ -1,5 +1,5 @@
 ---
-title: TryHackMe - Nmap Advanced Port Scans
+title: Nmap Advanced Port Scans
 published: true
 ---
 

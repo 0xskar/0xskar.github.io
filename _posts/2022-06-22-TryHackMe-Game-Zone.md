@@ -1,5 +1,5 @@
 ---
-title: TryHackMe - Game Zone
+title: Practical - Game Zone
 published: true
 ---
 

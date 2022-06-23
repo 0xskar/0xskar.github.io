@@ -1,5 +1,5 @@
 ---
-title: TryHackMe - Burp Suite - Other Modules
+title: Burp Suite - Other Modules
 published: true
 ---
 

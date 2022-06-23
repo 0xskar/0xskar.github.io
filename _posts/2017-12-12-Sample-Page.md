@@ -1,5 +1,5 @@
 ---
-title: TryHackMe - Sample Page
+title: Sample Page
 published: false
 ---
 

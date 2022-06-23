@@ -1,5 +1,5 @@
 ---
-title: TryHackMe - Nmap Live Host Discovery
+title: Nmap Live Host Discovery
 published: true
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: TryHackMe - Nmap Post Port Scans
+title: Nmap Post Port Scans
 published: true
 ---
 

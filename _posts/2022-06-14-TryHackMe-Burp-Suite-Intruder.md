@@ -1,5 +1,5 @@
 ---
-title: TryHackMe - Burp Suite Intruder
+title: Burp Suite Intruder
 published: true
 ---
 

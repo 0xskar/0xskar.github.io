@@ -1,5 +1,5 @@
 ---
-title: TryHackMe - Burp Suite - Extender
+title: Burp Suite - Extender
 published: true
 ---
 
