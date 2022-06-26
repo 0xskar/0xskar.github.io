@@ -53,10 +53,10 @@ PORT   STATE SERVICE REASON         VERSION
 
 1. ``python3 ~/scripts/ssh-audit-2.5.0/ssh-audit.py -p 22 10.10.224.66`` finds us:
 ```shell
-# security
+security
 (cve) CVE-2018-15473 -- (CVSSv2: 5.3) enumerate usernames due to timing discrepencies
 
-# fingerprints
+fingerprints
 (fin) ssh-ed25519: SHA256:seRYczfyDrkweytt6CJT/aBCJZMIcvlYYrTgoGxeHs4
 (fin) ssh-rsa: SHA256:LLo2z4GtCCjYQ+qvcJ2OuH4jVMdsvnQVuWekzUWnfq4
 ```
@@ -71,14 +71,15 @@ PORT   STATE SERVICE REASON         VERSION
 
 - Main internal.thm gives us an Apache2 Ubuntu Default Page
 - WPScan gives us Server: Apache/2.4.29 (Ubuntu)
+- WordPress version 5.4.2 identified (Insecure, released on 2020-06-10).
 
 1. Gobuster ``gobuster dir -u http://internal.thm -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 100 -e``  
 ```shell
-http://internal.thm/wordpress            (Status: 301) [Size: 316] [--> http://internal.thm/wordpress/]
-http://internal.thm/javascript           (Status: 301) [Size: 317] [--> http://internal.thm/javascript/]
-http://internal.thm/blog                 (Status: 301) [Size: 311] [--> http://internal.thm/blog/]      
-http://internal.thm/phpmyadmin           (Status: 301) [Size: 317] [--> http://internal.thm/phpmyadmin/]
-http://internal.thm/server-status        (Status: 403) [Size: 277]                                      
+http://internal.thm/wordpress       (Status: 301) [Size: 316] [--> http://internal.thm/wordpress/]
+http://internal.thm/javascript      (Status: 301) [Size: 317] [--> http://internal.thm/javascript/]
+http://internal.thm/blog            (Status: 301) [Size: 311] [--> http://internal.thm/blog/]      
+http://internal.thm/phpmyadmin      (Status: 301) [Size: 317] [--> http://internal.thm/phpmyadmin/]
+http://internal.thm/server-status   (Status: 403) [Size: 277]                                      
 ```                                                                       
 
 2. Since we can see a wordpress site we can run wpscan and enumerate. ``wpscan --url http://internal.thm/wordpress/ -v -e vp`` and we get 12 vulnerabilities:  
@@ -94,6 +95,19 @@ http://internal.thm/server-status        (Status: 403) [Size: 277]
     - WordPress 4.1-5.8.2 - SQL Injection via WP_Meta_Query
     - WordPress < 5.8.3 - Super Admin Object Injection in Multisites
     - WordPress < 5.9.2 - Prototype Pollution in jQuery
+
+
+[+] XML-RPC seems to be enabled: http://internal.thm/wordpress/xmlrpc.php
+
+
+
+### [](###header-3)Privilege Escalation Vulnerabilities
+
+- Found during ``wpscan`` - Apache 2.4.17 < 2.4.38 - 'apache2ctl graceful' 'logrotate' Local Privilege Escalation | linux/local/46676.php
+
+
+
+
 
 
 ##### [](#header-5)Answer the questions below

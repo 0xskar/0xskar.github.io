@@ -40,7 +40,6 @@ title: Resources
 
 ## [](#header-2)HTTP Scanners
 
-- ``wpscan`` - scans WordPress CMS'
 - ``joomscan`` - scans Joomla CMS'
 - ``shodan`` - search for various types of servers connected to the internet using a variety of filters.
 - ``theHarvester`` - a tool for gathering subdomain names, e-mail addresses, virtual hosts, open ports/ banners, and employee names from different public sources
@@ -50,5 +49,9 @@ title: Resources
 
 - [crackmapexec](https://mpgn.gitbook.io/crackmapexec/) - Preinstalled on Kali - Post-exploitation tool that helps automate assessing security of large Active Directory networks and find misconfigurations.
 
+## [](#header-2)Wordpress
+
+- ``wpscan`` - preinstalled on kali - scans WordPress CMS'
+- [wpxploit](https://github.com/relarizky/wpxploit/blob/master/README.md) - if XML-RPC is enabled
 
 * * *
