@@ -7,6 +7,7 @@ title: Resources
 
 - [GTFO Bins](https://gtfobins.github.io/) - Linux Binaries
 - [LOLBAS](https://lolbas-project.github.io/#) - GTFO Bins for Windows
+- [RevShells](https://www.revshells.com/) - Reverse Shell Generator 
 
 
 ## [](#header-2)Misc Tools
