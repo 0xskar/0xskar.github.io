@@ -51,7 +51,7 @@ PORT   STATE SERVICE REASON         VERSION
 
 ### [](###header-3)Port 22 SSH Audit
 
-1. ``python3 ~/scripts/ssh-audit-2.5.0/ssh-audit.py -p 22 10.10.224.66``
+1. ``python3 ~/scripts/ssh-audit-2.5.0/ssh-audit.py -p 22 10.10.224.66`` finds us:
 ```shell
 # security
 (cve) CVE-2018-15473 -- (CVSSv2: 5.3) enumerate usernames due to timing discrepencies
@@ -61,7 +61,7 @@ PORT   STATE SERVICE REASON         VERSION
 (fin) ssh-rsa: SHA256:LLo2z4GtCCjYQ+qvcJ2OuH4jVMdsvnQVuWekzUWnfq4
 ```
 
-2. ``ssh-keyscan -t rsa 10.10.224.66 -p 22``
+2. ``ssh-keyscan -t rsa 10.10.224.66 -p 22``   
 ```shell
 10.10.224.66:22 SSH-2.0-OpenSSH_7.6p1 Ubuntu-4ubuntu0.3
 10.10.224.66 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCzpZTvmUlaHPpKH8X2SHMndoS+GsVlbhABHJt4TN/nKUSYeFEHbNzutQnj+DrUEwNMauqaWCY7vNeYguQUXLx4LM5ukMEC8IuJo0rcuKNmlyYrgBlFws3q2956v8urY7/McCFf5IsItQxurCDyfyU/erO7fO02n2iT5k7Bw2UWf8FPvM9/jahisbkA9/FQKou3mbaSANb5nSrPc7p9FbqKs1vGpFopdUTI2dl4OQ3TkQWNXpvaFl0j1ilRynu5zLr6FetD5WWZXAuCNHNmcRo/aPdoX9JXaPKGCcVywqMM/Qy+gSiiIKvmavX6rYlnRFWEp25EifIPuHQ0s8hSXqx5
@@ -70,8 +70,9 @@ PORT   STATE SERVICE REASON         VERSION
 ### [](###header-3)Port 80 Web Pentest
 
 - Main internal.thm gives us an Apache2 Ubuntu Default Page
+- WPScan gives us Server: Apache/2.4.29 (Ubuntu)
 
-1. Gobuster ``gobuster dir -u http://internal.thm -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 100 -e``
+1. Gobuster ``gobuster dir -u http://internal.thm -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 100 -e``  
 ```shell
 http://internal.thm/wordpress            (Status: 301) [Size: 316] [--> http://internal.thm/wordpress/]
 http://internal.thm/javascript           (Status: 301) [Size: 317] [--> http://internal.thm/javascript/]
@@ -80,19 +81,19 @@ http://internal.thm/phpmyadmin           (Status: 301) [Size: 317] [--> http://i
 http://internal.thm/server-status        (Status: 403) [Size: 277]                                      
 ```                                                                       
 
-2. Since we can see a wordpress site we can run wpscan and enumerate. ``wpscan --url http://internal.thm/wordpress/ -v -e vp``
-```shell
-Server: Apache/2.4.29 (Ubuntu)
-[+] XML-RPC seems to be enabled: http://internal.thm/wordpress/xmlrpc.php
- | Found By: Direct Access (Aggressive Detection)
- | Confidence: 100%
- | References:
- |  - http://codex.wordpress.org/XML-RPC_Pingback_API
- |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_ghost_scanner/
- |  - https://www.rapid7.com/db/modules/auxiliary/dos/http/wordpress_xmlrpc_dos/
- |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_xmlrpc_login/
- |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_pingback_access/
-``` 
+2. Since we can see a wordpress site we can run wpscan and enumerate. ``wpscan --url http://internal.thm/wordpress/ -v -e vp`` and we get 12 vulnerabilities:  
+    - WordPress 4.7-5.7 - Authenticated Password Protected Pages Exposure
+    - WordPress 3.7 to 5.7.1 - Object Injection in PHPMailer
+    - WordPress 5.4 to 5.8 -  Lodash Library Update
+    - WordPress 5.4 to 5.8 - Authenticated XSS in Block Editor
+    - WordPress 5.4 to 5.8 - Data Exposure via REST API
+    - WordPress < 5.8.2 - Expired DST Root CA X3 Certificate
+    - WordPress < 5.8 - Plugin Confusion
+    - WordPress < 5.8.3 - SQL Injection via WP_Query
+    - WordPress < 5.8.3 - Author+ Stored XSS via Post Slugs
+    - WordPress 4.1-5.8.2 - SQL Injection via WP_Meta_Query
+    - WordPress < 5.8.3 - Super Admin Object Injection in Multisites
+    - WordPress < 5.9.2 - Prototype Pollution in jQuery
 
 
 ##### [](#header-5)Answer the questions below
