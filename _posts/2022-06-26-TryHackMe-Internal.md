@@ -52,7 +52,6 @@ PORT   STATE SERVICE REASON         VERSION
 ### [](###header-3)Port 22 SSH Audit
 
 1. ``python3 ~/scripts/ssh-audit-2.5.0/ssh-audit.py -p 22 10.10.224.66``
-
 ```shell
 # security
 (cve) CVE-2018-15473 -- (CVSSv2: 5.3) enumerate usernames due to timing discrepencies
@@ -63,7 +62,6 @@ PORT   STATE SERVICE REASON         VERSION
 ```
 
 2. ``ssh-keyscan -t rsa 10.10.224.66 -p 22``
-
 ```shell
 10.10.224.66:22 SSH-2.0-OpenSSH_7.6p1 Ubuntu-4ubuntu0.3
 10.10.224.66 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCzpZTvmUlaHPpKH8X2SHMndoS+GsVlbhABHJt4TN/nKUSYeFEHbNzutQnj+DrUEwNMauqaWCY7vNeYguQUXLx4LM5ukMEC8IuJo0rcuKNmlyYrgBlFws3q2956v8urY7/McCFf5IsItQxurCDyfyU/erO7fO02n2iT5k7Bw2UWf8FPvM9/jahisbkA9/FQKou3mbaSANb5nSrPc7p9FbqKs1vGpFopdUTI2dl4OQ3TkQWNXpvaFl0j1ilRynu5zLr6FetD5WWZXAuCNHNmcRo/aPdoX9JXaPKGCcVywqMM/Qy+gSiiIKvmavX6rYlnRFWEp25EifIPuHQ0s8hSXqx5
@@ -81,6 +79,21 @@ http://internal.thm/blog                 (Status: 301) [Size: 311] [--> http://i
 http://internal.thm/phpmyadmin           (Status: 301) [Size: 317] [--> http://internal.thm/phpmyadmin/]
 http://internal.thm/server-status        (Status: 403) [Size: 277]                                      
 ```                                                                       
+
+2. Since we can see a wordpress site we can run wpscan and enumerate. ``wpscan --url http://internal.thm/wordpress/ -v -e vp``
+```shell
+Server: Apache/2.4.29 (Ubuntu)
+[+] XML-RPC seems to be enabled: http://internal.thm/wordpress/xmlrpc.php
+ | Found By: Direct Access (Aggressive Detection)
+ | Confidence: 100%
+ | References:
+ |  - http://codex.wordpress.org/XML-RPC_Pingback_API
+ |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_ghost_scanner/
+ |  - https://www.rapid7.com/db/modules/auxiliary/dos/http/wordpress_xmlrpc_dos/
+ |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_xmlrpc_login/
+ |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_pingback_access/
+``` 
+
 
 ##### [](#header-5)Answer the questions below
 
