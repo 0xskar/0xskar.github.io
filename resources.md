@@ -3,12 +3,13 @@ layout: page
 title: Resources
 ---
 
-## [](#header-2)Useful Privilege Escalation Tools
+## [](#header-2)Useful Tools
 
 - [GTFO Bins](https://gtfobins.github.io/) - Linux Binaries
 - [LOLBAS](https://lolbas-project.github.io/#) - GTFO Bins for Windows
 - [RevShells](https://www.revshells.com/) - Reverse Shell Generator 
 - [PenTest.WS]()
+- [Hacktricks.xyz](https://book.hacktricks.xyz/welcome/readme)
 
 
 ## [](#header-2)Misc Tools
