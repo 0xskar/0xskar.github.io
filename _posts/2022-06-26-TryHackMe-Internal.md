@@ -52,6 +52,7 @@ PORT   STATE SERVICE REASON         VERSION
 ### [](###header-3)Port 22 SSH Audit
 
 1. ``python3 ~/scripts/ssh-audit-2.5.0/ssh-audit.py -p 22 10.10.224.66`` finds us:
+
 ```shell
 security
 (cve) CVE-2018-15473 -- (CVSSv2: 5.3) enumerate usernames due to timing discrepencies
