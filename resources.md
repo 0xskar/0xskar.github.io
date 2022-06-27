@@ -9,8 +9,11 @@ title: Resources
 - [LOLBAS](https://lolbas-project.github.io/#) - GTFO Bins for Windows
 - [RevShells](https://www.revshells.com/) - Reverse Shell Generator 
 - [PenTest.WS]()
-- [Hacktricks.xyz](https://book.hacktricks.xyz/welcome/readme)
 
+## [](#header-2)Useful Guides
+
+- [Hacktricks.xyz Pentesting Methodology](https://book.hacktricks.xyz/welcome/readme)
+- [Buffer Overflow Exploit Guide](https://github.com/Tib3rius/Pentest-Cheatsheets/blob/master/exploits/buffer-overflows.rst)
 
 ## [](#header-2)Misc Tools
 
