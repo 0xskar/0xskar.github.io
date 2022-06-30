@@ -19,6 +19,7 @@ title: Resources
 
 - [FileSEC.io](https://filesec.io/) - latest file extensions being used by attackers 
 - [LOTS Project](https://lots-project.com/) - Attackers are using popular legitimate domains when conducting phishing, C&C, exfiltration and downloading tools to evade detection. The list of websites below allow attackers to use their domain or subdomain.
+- [Responder](https://www.kali.org/tools/responder/) - Steal NTLM hashes. LLMNR NBT-NS, MDNS poisoner
 
 ## [](#header-2)Hashing
 
