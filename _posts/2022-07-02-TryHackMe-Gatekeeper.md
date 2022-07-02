@@ -30,6 +30,8 @@ Defeat the Gatekeeper to break the chains.  But beware, fire awaits on the other
 | 49155/tcp | open | unknown | syn-ack ttl 125 |
 | 49161/tcp | open | unknown | syn-ack ttl 125 |
 
+* * * 
+
 ### [](###header-3)Port 135 - MSRPC
 
 - Microsoft Windows RPC
@@ -39,22 +41,25 @@ Defeat the Gatekeeper to break the chains.  But beware, fire awaits on the other
 - 10.10.119.214:135     - 30b044a5-a225-43f0-b3a4-e060df91f9c1 v1.0 PIPE (\PIPE\atsvc) \\GATEKEEPER 
 - Task Scheduler, used to remote execute commands
 - 10.10.119.214:135     - 30b044a5-a225-43f0-b3a4-e060df91f9c1 v1.0 PIPE (\PIPE\srvsvc) \\GATEKEEPER 
+- Service control manager and server services, used to remotely start and stop services and execute commands
 
-
-
-
-##### [](###header-5)``msf6 auxiliary(scanner/dcerpc/tcp_dcerpc_auditor) > run``
+##### [](###header-4)``msf6 auxiliary(scanner/dcerpc/tcp_dcerpc_auditor) > run``
 - 10.10.119.214 - UUID 99fcfec4-5260-101b-bbcb-00aa0021347a 0.0 OPEN VIA 135 ACCESS GRANTED 00000000000000000000000000000000000000000000000005000000
 
+* * *
 
 ### [](###header-3)Port 139 - NetBios
 
 - Microsoft Windows netbois-ssn
 
+* * *
+
 ### [](###header-3)Port 445 - SMB
 
 - Windows 7 Professional 7601 Service Pack 1 microsoft-ds (workgroup: WORKGROUP)
 - Downloaded Files - but doesnt seem to be anything of worth  maybeupload something here later
+
+* * *
 
 ### [](###header-3)Port 3389 - RDP - Remote Desktop
 
@@ -96,17 +101,21 @@ Defeat the Gatekeeper to break the chains.  But beware, fire awaits on the other
 |_-----END CERTIFICATE-----
 ```
 
+* * *
+
 ### [](###header-3)Port 31337 - Elite
 
 - Seems to be webserver ot something?
+
+* * * 
 
 ### [](###header-3)Port 49153, 49153, 49154, 49155, 49161
 
 - Microsoft Remote Procedure Call RPC?
 
+* * *
+
 ##### [](#header-5)Answer the questions below
-
-
 
 **Locate and find the User Flag.**
 
