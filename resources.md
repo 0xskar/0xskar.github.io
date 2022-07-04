@@ -63,5 +63,6 @@ title: Resources
 
 - [Full list of operators](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/where-object?view=powershell-7.2&viewFallbackFrom=powershell-6)
 - [Full List of Approved Verbs](https://docs.microsoft.com/en-us/powershell/scripting/developer/cmdlet/approved-verbs-for-windows-powershell-commands?view=powershell-7)
+- [Learn Powershell in Y Minutes](https://learnxinyminutes.com/docs/powershell/)
 
 * * *

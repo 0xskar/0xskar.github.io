@@ -97,9 +97,184 @@ Where ``-operator`` is a list of the following operators:
   - Contains: if any item in the property value is an exact match for the specified value
   - EQ: if the property value is the same as the specified value
   - GT: if the property value is greater than the specified value
+  - Match: Actually works where EQ doesnt
 
 [A full list of operators](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/where-object?view=powershell-7.2&viewFallbackFrom=powershell-6).
 
+Example for Get-Service where Services are running: ``Get-Service | Where-Object -Property Status -eq Running`` 
 
+#### [](#header-4)Sort Object
+
+- When cmdlet's output a lot of info, we can sort it to extract the information more efficiently. 
+- We can do this bu pupe lining the output to the ``Sort-Object`` cmdlet
+- Example format: ``Verb-Noun | Sort-Object``
+
+Now Lets try some commands out.
+
+##### [](#header-5)Answer the questions below
+
+**What is the location of the file "interesting-file.txt"**
+
+- ``Get-ChildItem -Path C:\ -Recurse -Filter interesting-file.* -ErrorAction SilentlyContinue``
+
+**Specify the contents of this file**
+
+- ``Get-Content -Path 'C:\Program Files\interesting-file.txt.txt'``
+
+**How many cmdlets are installed on the system(only cmdlets, not functions and aliases)?**
+
+- ``Get-Command -CommandType Cmdlet | Measure-Object``
+
+**Get the MD5 hash of interesting-file.txt**
+
+- ``Get-FileHash .\interesting-file.txt.txt -Algorithm MD5``
+
+**What is the command to get the current working directory?**
+
+- ``Get-Location``
+
+**Does the path "C:\Users\Administrator\Documents\Passwords" Exist(Y/N)?**
+
+- ``Get-Content -Path 'C:\Users\Administrator\Documents\Passwords' -Force``
+
+**What command would you use to make a request to a web server?**
+
+- ``Invoke-WebRequest``
+
+**Base64 decode the file b64.txt on Windows.**
+
+- ``Get-Childitem -Path C:\ -Recurse -Filter b64.* -ErrorAction SilentlyContinue``
+
+1. ``certutil -decode "C:\Users\Administrator\Desktop\b64.txt" decode.txt``
+2. ``Get-Content .\decode.txt``
+
+* * * 
+
+## [](#header-2)Task 4 - Enumeration
+
+The first step when you have gained initial access to any machine would be to enumerate. We'll be enumerating the following:
+
+- users
+- basic networking information
+- file permissions
+- registry permissions
+- scheduled and running tasks
+- insecure files
+
+##### [](#header-5)Answer the questions below
+
+**How many users are there on the machine?**
+
+- ``Get-Localuser``
+
+**Which local user does this SID(S-1-5-21-1394777289-3961777894-1791813945-501) belong to?**
+
+- ``Get-LocalUser | select Name,SID``
+
+**How many users have their password required values set to False?**
+
+- ``Get-Localuser | Format-List``
+- ``Get-LocalUser | Where-Object -Property PasswordRequired -Match False``
+
+**How many local groups exist?**
+
+- ``Get-LocalGroup | Measure-Object``
+
+**What command did you use to get the IP address info?**
+
+- ``Get-NetIPAddress``
+
+**How many ports are listed as listening?**
+
+- ``Get-NetTCPConnection | where -Property state -EQ listen | measure``
+
+**What is the remote address of the local port listening on port 445?**
+
+- ``Get-NetTCPConnection | where -Property LocalPort -EQ 445 | Format-List``
+
+**How many patches have been applied?**
+
+- ``Get-hotfix | measure``
+
+**When was the patch with ID KB4023834 installed?**
+
+- `` Get-Hotfix | where -Property HotFixID -EQ KB4023834 | Format-list``
+
+**Find the contents of a backup file.**
+
+- ``Get-ChildItem -Path C:\ -Recurse -Filter *.bak* -ErrorAction SilentlyContinue``
+- ``Get-Content "C:\Program Files (x86)\Internet Explorer\passwords.bak.txt"``
+
+**Search for all files containing API_KEY**
+
+- ``Get-ChildItem C:\* -Recurse | Select-String -pattern API_KEY``
+
+**What command do you do to list all the running processes?**
+
+- ``Get-Process``
+
+**What is the path of the scheduled task called new-sched-task?**
+
+- ``Get-ScheduledTask | where TaskName -eq new-sched-task | Format-List``
+
+**Who is the owner of the C:**
+
+- ``Get-Acl c:``
+
+* * * 
+
+## [](#header-2)Task 5 - Basic Scripting Challenge 
+
+##### [](#header-5)Answer the questions below
+
+**What file contains the password?**
+
+```shell
+$path = "C:\Users\Administrator\Desktop\emails"
+$string_pattern = "password"
+$command = Get-ChildItem -Path $path -Recurse | Select-String -Pattern $string_pattern
+echo $command
+```
+
+**What is the password?**
+
+```shell
+$path = "C:\Users\Administrator\Desktop\emails"
+$string_pattern = "password"
+$command = Get-ChildItem -Path $path -Recurse | Select-String -Pattern $string_pattern
+echo $command
+```
+
+**What files contains an HTTPS link?**
+
+```shell
+$path = "C:\Users\Administrator\Desktop\emails"
+$string_pattern = "https"
+$command = Get-ChildItem -Path $path -Recurse | Select-String -Pattern $string_pattern
+echo $command
+```
+
+* * *
+
+## [](#header-2)Task 6 Intermediate Scripting 
+
+Now that you've learnt a little bit about how scripting works - let's try something a bit more interesting. Sometimes we may not have utilities like nmap and python available, and we are forced to write scripts to do very rudimentary tasks. Why don't you try writing a simple port scanner using Powershell. Here's the general approach to use: 
+
+   - Determine IP ranges to scan(in this case it will be localhost) and you can provide the input in any way you want
+   - Determine the port ranges to scan
+   - Determine the type of scan to run(in this case it will be a simple TCP Connect Scan)
+
+##### [](#header-5)Answer the questions below
+
+**How many open ports did you find between 130 and 140(inclusive of those two)?**
+
+```shell
+$portlow = 130
+$porthigh = 140
+
+for($i=$portlow; $i -le $porthigh; $i++){
+    Test-NetConnection localhost -Port $i | Where TcpTestSucceeded -EQ True
+}
+```
 
 * * * 
