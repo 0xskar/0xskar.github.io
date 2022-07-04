@@ -3,9 +3,9 @@ title: File Inclusion
 published: true
 ---
 
-[https://tryhackme.com/room/fileinc](https://tryhackme.com/room/fileinc)
-
 File inclusion vulnerabilities, including Local File Inclusion (LFI), Remote File Inclusion (RFI), and directory traversal.
+
+[https://tryhackme.com/room/fileinc](https://tryhackme.com/room/fileinc)
 
 ## [](#header-2)Task 1 What is File Inclusion?
 

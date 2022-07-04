@@ -3,9 +3,9 @@ title: Box - Relevant
 published: true
 ---
 
-[https://tryhackme.com/room/relevant](https://tryhackme.com/room/relevant)
-
 Penetration Testing Challenge
+
+[https://tryhackme.com/room/relevant](https://tryhackme.com/room/relevant)
 
 ![](/assets/matrix.webp)
 

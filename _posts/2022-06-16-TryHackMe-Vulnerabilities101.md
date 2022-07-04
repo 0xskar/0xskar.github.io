@@ -3,9 +3,9 @@ title: Vulnerabilities 101
 published: true
 ---
 
-[https://tryhackme.com/room/vulnerabilities101](https://tryhackme.com/room/vulnerabilities101)
-
 Understand the flaws of an application and apply your researching skills on some vulnerability databases.
+
+[https://tryhackme.com/room/vulnerabilities101](https://tryhackme.com/room/vulnerabilities101)
 
 * * *
 

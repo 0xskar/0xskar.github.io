@@ -3,9 +3,9 @@ title: Windows Privilege Escalation
 published: true
 ---
 
-[https://tryhackme.com/room/windowsprivesc20](https://tryhackme.com/room/windowsprivesc20)
-
 Learn the fundamentals of Windows privilege escalation techniques.
+
+[https://tryhackme.com/room/windowsprivesc20](https://tryhackme.com/room/windowsprivesc20)
 
 * * *
 

@@ -3,9 +3,9 @@ title: SQL Injection
 published: true
 ---
 
-[https://tryhackme.com/room/sqlinjectionlm](https://tryhackme.com/room/sqlinjectionlm)
-
 Learn how to detect and exploit SQL Injection vulnerabilities
+
+[https://tryhackme.com/room/sqlinjectionlm](https://tryhackme.com/room/sqlinjectionlm)
 
 * * *
 

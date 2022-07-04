@@ -3,9 +3,9 @@ title: Attacking Kerberos
 published: true
 ---
 
-[https://tryhackme.com/room/attackingkerberos](https://tryhackme.com/room/attackingkerberos)
-
 Learn how to abuse the Kerberos Ticket Granting Service inside of a Windows Domain Controller
+
+[https://tryhackme.com/room/attackingkerberos](https://tryhackme.com/room/attackingkerberos)
 
 ![](/assets/kerberos01.png)
 

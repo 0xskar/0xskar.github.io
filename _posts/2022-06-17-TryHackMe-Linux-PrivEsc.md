@@ -3,9 +3,9 @@ title: Linux PrivEsc
 published: true
 ---
 
-[https://tryhackme.com/room/linprivesc](https://tryhackme.com/room/linprivesc)
-
 Learn the fundamentals of Linux privilege escalation. From enumeration to exploitation, get hands-on with over 8 different privilege escalation techniques. Netstat and Find.
+
+[https://tryhackme.com/room/linprivesc](https://tryhackme.com/room/linprivesc)
 
 * * *
 

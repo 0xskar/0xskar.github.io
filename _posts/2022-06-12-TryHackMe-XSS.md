@@ -3,9 +3,11 @@ title: Cross-Site Scripting (XSS)
 published: true
 ---
 
+Learn how to detect and exploit XSS vulnerabilities, giving you control of other visitor's browsers.
+
 [https://tryhackme.com/room/xssgi](https://tryhackme.com/room/xssgi)
 
-Learn how to detect and exploit XSS vulnerabilities, giving you control of other visitor's browsers.
+* * * 
 
 ## [](#header-2)Task 1 Room Brief
 

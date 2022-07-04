@@ -3,9 +3,9 @@ title: Protocols and Servers 2
 published: true
 ---
 
-[https://tryhackme.com/room/protocolsandservers2](https://tryhackme.com/room/protocolsandservers2)
-
 Learn about attacks against passwords and cleartext traffic; explore options for mitigation via SSH and SSL/TLS.
+
+[https://tryhackme.com/room/protocolsandservers2](https://tryhackme.com/room/protocolsandservers2)
 
 * * *
 

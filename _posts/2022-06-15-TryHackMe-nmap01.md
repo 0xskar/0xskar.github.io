@@ -3,9 +3,9 @@ title: Nmap Live Host Discovery
 published: true
 ---
 
-[https://tryhackme.com/room/nmap01](https://tryhackme.com/room/nmap01)
-
 Learn how to use Nmap to discover live hosts using ARP scan, ICMP scan, and TCP/UDP ping scan.
+
+[https://tryhackme.com/room/nmap01](https://tryhackme.com/room/nmap01)
 
 * * *
 

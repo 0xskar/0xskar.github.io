@@ -3,9 +3,11 @@ title: IDORs - Insecure Direct Object Refrences
 published: true
 ---
 
+Learn how to find and exploit IDOR vulnerabilities in a web application giving you access to data that you shouldn't have.
+
 [https://tryhackme.com/room/idor](https://tryhackme.com/room/idor)
 
-Learn how to find and exploit IDOR vulnerabilities in a web application giving you access to data that you shouldn't have.
+* * * 
 
 ## [](#header-2)Task 1 What is an IDOR?
 IDOR stands for Insecure Direct Object Reference and is a type of access control vulnerability.

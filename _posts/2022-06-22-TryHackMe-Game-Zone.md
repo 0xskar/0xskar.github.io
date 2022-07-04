@@ -3,9 +3,9 @@ title: Box - Game Zone
 published: true
 ---
 
-[https://tryhackme.com/room/gamezone](https://tryhackme.com/room/gamezone)
-
 Learn to hack into this machine. Understand how to use SQLMap, crack some passwords, reveal services using a reverse SSH tunnel and escalate your privileges to root!
+
+[https://tryhackme.com/room/gamezone](https://tryhackme.com/room/gamezone)
 
 ![](/assets/hitman.jpg)
 

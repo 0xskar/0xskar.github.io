@@ -3,9 +3,9 @@ title: Burp Suite - Other Modules
 published: true
 ---
 
-[https://tryhackme.com/room/burpsuiteom](https://tryhackme.com/room/burpsuiteom)
-
 Take a dive into some of Burp Suite's lesser known modules
+
+[https://tryhackme.com/room/burpsuiteom](https://tryhackme.com/room/burpsuiteom)
 
 * * *
 

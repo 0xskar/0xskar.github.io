@@ -3,9 +3,9 @@ title: Box - Daily Bugle
 published: true
 ---
 
-[https://tryhackme.com/room/dailybugle](https://tryhackme.com/room/dailybugle)
-
 Compromise a Joomla CMS account via SQLi, practise cracking hashes and escalate your privileges by taking advantage of yum.
+
+[https://tryhackme.com/room/dailybugle](https://tryhackme.com/room/dailybugle)
 
 ![](/assets/bugle01.png)
 

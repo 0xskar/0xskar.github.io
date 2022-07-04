@@ -3,9 +3,9 @@ title: Hacking with PowerShell
 published: true
 ---
 
-[https://tryhackme.com/room/powershell](https://tryhackme.com/room/powershell)
-
 Basics of PowerShell and PowerShell Scripting
+
+[https://tryhackme.com/room/powershell](https://tryhackme.com/room/powershell)
 
 ![](/assets/powershell.jpg)
 

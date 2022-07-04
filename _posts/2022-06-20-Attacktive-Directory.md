@@ -3,9 +3,9 @@ title: Attacktive Directory
 published: true
 ---
 
-[https://tryhackme.com/room/attacktivedirectory](https://tryhackme.com/room/attacktivedirectory)
-
 99% of Corporate networks run off of AD. But can you exploit a vulnerable Domain Controller?
+
+[https://tryhackme.com/room/attacktivedirectory](https://tryhackme.com/room/attacktivedirectory)
 
 ![](/assets/rpnessusredux.png)
 

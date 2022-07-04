@@ -3,9 +3,11 @@ title: Server-Side Request Forgery (SSRF)
 published: true
 ---
 
+How to exploit Server-Side Request Forgery (SSRF) vulnerabilities, allowing you to access internal server resources.
+
 [https://tryhackme.com/room/ssrfqi](https://tryhackme.com/room/ssrfqi)
 
-How to exploit Server-Side Request Forgery (SSRF) vulnerabilities, allowing you to access internal server resources.
+* * * 
 
 ## [](#header-2)Task 1 What is an SSRF?
 

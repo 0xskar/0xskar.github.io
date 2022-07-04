@@ -3,9 +3,9 @@ title: Active Reconniassance
 published: true
 ---
 
-[https://tryhackme.com/room/activerecon](https://tryhackme.com/room/activerecon)
-
 Learn how to use simple tools such as traceroute, ping, telnet, and a web browser to gather information.
+
+[https://tryhackme.com/room/activerecon](https://tryhackme.com/room/activerecon)
 
 * * *
 

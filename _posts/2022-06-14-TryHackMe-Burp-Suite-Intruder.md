@@ -3,9 +3,9 @@ title: Burp Suite Intruder
 published: true
 ---
 
-[https://tryhackme.com/room/burpsuiteintruder](https://tryhackme.com/room/burpsuiteintruder)
-
 Learn how to use Intruder to automate requests in Burp Suite
+
+[https://tryhackme.com/room/burpsuiteintruder](https://tryhackme.com/room/burpsuiteintruder)
 
 * * *
 

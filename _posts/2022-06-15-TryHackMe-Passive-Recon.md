@@ -3,9 +3,9 @@ title: Passive Reconniassance
 published: true
 ---
 
-[https://tryhackme.com/room/passiverecon](https://tryhackme.com/room/passiverecon)
-
 Learn about the essential tools for passive reconnaissance, such as whois, nslookup, and dig.
+
+[https://tryhackme.com/room/passiverecon](https://tryhackme.com/room/passiverecon)
 
 * * *
 

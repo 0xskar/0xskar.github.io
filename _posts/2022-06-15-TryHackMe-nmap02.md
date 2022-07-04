@@ -3,9 +3,9 @@ title: Nmap Basic Port Scans
 published: true
 ---
 
-[https://tryhackme.com/room/nmap02](https://tryhackme.com/room/nmap02)
-
 Learn in-depth how nmap TCP connect scan, TCP SYN port scan, and UDP port scan work.
+
+[https://tryhackme.com/room/nmap02](https://tryhackme.com/room/nmap02)
 
 * * *
 

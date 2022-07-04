@@ -3,9 +3,9 @@ title: Box - Gatekeeper
 published: true
 ---
 
-[https://tryhackme.com/room/gatekeeper](https://tryhackme.com/room/gatekeeper)
-
 Can you get past the gate and through the fire?
+
+[https://tryhackme.com/room/gatekeeper](https://tryhackme.com/room/gatekeeper)
 
 ![](/assets/balrog.jpg)
 

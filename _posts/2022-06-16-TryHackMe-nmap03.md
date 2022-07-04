@@ -3,9 +3,9 @@ title: Nmap Advanced Port Scans
 published: true
 ---
 
-[https://tryhackme.com/room/nmap03](https://tryhackme.com/room/nmap03)
-
 Advanced techniques such as null, FIN, Xmas, and idle (zombie) scans, spoofing, in addition to FW and IDS evasion.
+
+[https://tryhackme.com/room/nmap03](https://tryhackme.com/room/nmap03)
 
 * * *
 

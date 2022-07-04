@@ -3,9 +3,9 @@ title: Box - SkyNet
 published: true
 ---
 
-[https://tryhackme.com/room/skynet](https://tryhackme.com/room/skynet)
-
 Hacking a vulnerable Terminator themed Linux machine.
+
+[https://tryhackme.com/room/skynet](https://tryhackme.com/room/skynet)
 
 ![](/assets/skynet.webp)
 

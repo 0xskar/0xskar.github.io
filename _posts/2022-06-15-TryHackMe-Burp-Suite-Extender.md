@@ -3,9 +3,9 @@ title: Burp Suite - Extender
 published: true
 ---
 
-[https://tryhackme.com/room/burpsuiteextender](https://tryhackme.com/room/burpsuiteextender)
-
 Learn how to use Extender to broaden the functionality of Burp Suite
+
+[https://tryhackme.com/room/burpsuiteextender](https://tryhackme.com/room/burpsuiteextender)
 
 * * *
 

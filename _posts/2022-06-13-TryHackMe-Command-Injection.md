@@ -3,9 +3,9 @@ title: Command Injection
 published: true
 ---
 
-[https://tryhackme.com/room/oscommandinjection](https://tryhackme.com/room/oscommandinjection)
-
 Learn how to detect and exploit XSS vulnerabilities, giving you control of other visitor's browsers.
+
+[https://tryhackme.com/room/oscommandinjection](https://tryhackme.com/room/oscommandinjection)
 
 * * *
 

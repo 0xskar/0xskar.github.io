@@ -3,9 +3,11 @@ title: Buffer Overflow Prep
 published: true
 ---
 
+Practicing stack based buffer overflows!
+
 [https://tryhackme.com/room/bufferoverflowprep](https://tryhackme.com/room/bufferoverflowprep)
 
-Practicing stack based buffer overflows!
+* * * 
 
 **What is Buffer Overflow**
 

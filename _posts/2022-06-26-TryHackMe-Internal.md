@@ -3,9 +3,9 @@ title: Box - Internal
 published: true
 ---
 
-[https://tryhackme.com/room/internal](https://tryhackme.com/room/internal)
-
 Penetration Testing Challenge
+
+[https://tryhackme.com/room/internal](https://tryhackme.com/room/internal)
 
 ![](/assets/hacker-900-350.jpg)
 
