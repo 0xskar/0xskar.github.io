@@ -201,4 +201,6 @@ export TERM=xterm
 - https://gtfobins.github.io/gtfobins/man/#sudo
 - break out with a root shell!
 
+![](/assets/brainpan07.png)
+
 * * * 
