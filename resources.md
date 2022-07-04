@@ -59,4 +59,9 @@ title: Resources
 - ``wpscan`` - preinstalled on kali - scans WordPress CMS'
 - [wpxploit](https://github.com/relarizky/wpxploit/blob/master/README.md) - if XML-RPC is enabled
 
+## [](#header-2)Powershell
+
+- [Full list of operators](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/where-object?view=powershell-7.2&viewFallbackFrom=powershell-6)
+- [Full List of Approved Verbs](https://docs.microsoft.com/en-us/powershell/scripting/developer/cmdlet/approved-verbs-for-windows-powershell-commands?view=powershell-7)
+
 * * *
