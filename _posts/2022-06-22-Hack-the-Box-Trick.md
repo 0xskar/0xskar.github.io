@@ -1,5 +1,5 @@
 ---
-title: Practical - HackTheBox - Trick
+title: Box - HackTheBox - Trick
 published: true
 ---
 

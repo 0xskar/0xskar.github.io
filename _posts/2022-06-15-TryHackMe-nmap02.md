@@ -28,7 +28,7 @@ Oversimplified, we can classify ports in two states:
    1. Open port indicates that there is some service listening on that port.
    2. Closed port indicates that there is no service listening on that port.
 
- In practical situations, we need to consider the impact of firewalls. For instance, a port might be open, but a firewall might be blocking the packets. Therefore, Nmap considers the following six states:
+ In Box situations, we need to consider the impact of firewalls. For instance, a port might be open, but a firewall might be blocking the packets. Therefore, Nmap considers the following six states:
 
    1. **Open**: indicates that a service is listening on the specified port.
    2. **Closed**: indicates that no service is listening on the specified port, although the port is accessible. By accessible, we mean that it is reachable and is not blocked by a firewall or other security appliances/programs.

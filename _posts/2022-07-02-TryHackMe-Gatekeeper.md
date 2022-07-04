@@ -1,5 +1,5 @@
 ---
-title: Practical - Gatekeeper
+title: Box - Gatekeeper
 published: true
 ---
 

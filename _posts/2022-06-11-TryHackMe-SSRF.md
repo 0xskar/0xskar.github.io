@@ -82,7 +82,7 @@ What type of list is used to permit only certain input? Allow List
 
 What type of list is used to stop certain input? Deny List
 
-## [](#header-2) Task 5 SSRF Practical 
+## [](#header-2) Task 5 SSRF Box 
 
 Time to put what we learned to use in a fictional scenario.
 

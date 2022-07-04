@@ -1,5 +1,5 @@
 ---
-title: Practical - Daily Bugle
+title: Box - Daily Bugle
 published: true
 ---
 

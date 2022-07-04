@@ -9,7 +9,7 @@ Learn how to detect and exploit XSS vulnerabilities, giving you control of other
 
 ## [](#header-2)Task 1 Room Brief
 
-Cross-Site Scripting, better known as XSS in the cybersecurity community, is classified as an injection attack where malicious JavaScript gets injected into a web application with the intention of being executed by other users. In this room, you'll learn about the different XSS types, how to create XSS payloads, how to modify your payloads to evade filters, and then end with a practical lab where you can try out your new skills.
+Cross-Site Scripting, better known as XSS in the cybersecurity community, is classified as an injection attack where malicious JavaScript gets injected into a web application with the intention of being executed by other users. In this room, you'll learn about the different XSS types, how to create XSS payloads, how to modify your payloads to evade filters, and then end with a Box lab where you can try out your new skills.
 
 
 Cross-site scripting vulnerabilities are extremely common. Below are a few reports of XSS found in massive applications; you can get paid very well for finding and reporting these vulnerabilities.  
@@ -183,7 +183,7 @@ An XSS polyglot is a string of text which can escape attributes, tags and bypass
 
 ``jaVasCript:/*-/*`/*\`/*'/*"/**/(/* */onerror=alert('THM') )//%0D%0A%0d%0a//</stYle/</titLe/</teXtarEa/</scRipt/--!>\x3csVg/<sVg/oNloAd=alert('THM')//>\x3e``
 
-## [](#header-2) Task 8 Practical Example (Blind XSS) 
+## [](#header-2) Task 8 Box Example (Blind XSS) 
 
 This will only work on the Tryhackme attack box.
 

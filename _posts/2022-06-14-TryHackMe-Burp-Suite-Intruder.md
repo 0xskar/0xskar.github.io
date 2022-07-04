@@ -98,13 +98,13 @@ Like Pitchfork, Cluster bomb allows us to choose multiple payload sets: one per 
 
 * * * 
 
-## [](#header-2)Task 10 - Practical - Example
+## [](#header-2)Task 10 - Box - Example
 
 Here we just go over task files, gain access to the support portal at ``/support/login`` and prepare for our challenge.
 
 * * * 
 
-## [](#header-2)Task 11 - Practical - Challenge 
+## [](#header-2)Task 11 - Box - Challenge 
 
 In the previous task, we gained access to the support system. Now it's time to see what we can do with it!
 

@@ -16,7 +16,7 @@ This room goes over:
    - How to discover the command injection vulnerability
    - How to test and exploit this vulnerability using payloads designed for different operating systems
    - How to prevent this vulnerability in an application
-   - Lastly, you’ll get to apply theory into practice learning in a practical at the end of the room.
+   - Lastly, you’ll get to apply theory into practice learning in a Box at the end of the room.
 
 Command injection is the abuse of an application's behaviour to execute commands on the operating system, using the same privileges that the application on a device is running with. This is also known as **Remote Code Executions** (RCE)
 
@@ -86,7 +86,7 @@ What is the term for the process of "cleaning" user input that is provided to an
 
 * * * 
 
-## [](#header-2)Task 5 - Practical: Command Injection (Deploy)
+## [](#header-2)Task 5 - Box: Command Injection (Deploy)
 
 ##### [](#header-5)Answer the questions below
 

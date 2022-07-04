@@ -1,5 +1,5 @@
 ---
-title: Practical - Relevant
+title: Box - Relevant
 published: true
 ---
 

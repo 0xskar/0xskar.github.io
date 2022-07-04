@@ -1,5 +1,5 @@
 ---
-title: Practical - Internal
+title: Box - Internal
 published: true
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: Practical - Game Zone
+title: Box - Game Zone
 published: true
 ---
 

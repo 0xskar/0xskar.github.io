@@ -1,5 +1,5 @@
 ---
-title: Practical - HackTheBox - Timelapse
+title: Box - HackTheBox - Timelapse
 published: true
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: Practical - SkyNet
+title: Box - SkyNet
 published: true
 ---
 

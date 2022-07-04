@@ -1,5 +1,5 @@
 ---
-title: Practical - Brainstorm
+title: Box - Brainstorm
 published: true
 ---
 

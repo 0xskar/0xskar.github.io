@@ -37,7 +37,7 @@ Moreover, we will cover the following:
 - ``-sF`` FIN scan - The FIN scan sends a TCP packet with the FIN flag set.
 - ``-sX`` Xmas scan - An Xmas scan sets the FIN, PSH, and URG flags simultaneously.
 
-On scenario where these three scan types can be efficient is when scanning a target behind a stateless (non-stateful) firewall. A stateless firewall will check if the incoming packet has the SYN flag set to detect a connection attempt. Using a flag combination that does not match the SYN packet makes it possible to deceive the firewall and reach the system behind it. However, a stateful firewall will practically block all such crafted packets and render this kind of scan useless.
+On scenario where these three scan types can be efficient is when scanning a target behind a stateless (non-stateful) firewall. A stateless firewall will check if the incoming packet has the SYN flag set to detect a connection attempt. Using a flag combination that does not match the SYN packet makes it possible to deceive the firewall and reach the system behind it. However, a stateful firewall will Boxly block all such crafted packets and render this kind of scan useless.
 
 ##### [](#header-5)Answer the questions below
 
