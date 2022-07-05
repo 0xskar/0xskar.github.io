@@ -30,6 +30,7 @@ title: Resources
 - [Hacktricks Windows Local Privilege Escalation Checklist](https://book.hacktricks.xyz/windows-hardening/checklist-windows-privilege-escalation)
 - [Hacktricks Linux Privilege Escalation Checklist](https://book.hacktricks.xyz/linux-hardening/linux-privilege-escalation-checklist)
 - [Payload All the THings](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Windows%20-%20Privilege%20Escalation.md)
+- [Useful Linux PrivEsc Commands](https://0xskar.github.io/TryHackMe-Linux-PrivEsc)
 
 ## [](#header-2)Command Line
 
