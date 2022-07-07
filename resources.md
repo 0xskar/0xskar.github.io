@@ -35,6 +35,7 @@ title: Resources
 ## [](#header-2)Command Line
 
 - [SS64](https://ss64.com/) - Command line refrences for all systems
+- [ExplainShell](https://www.explainshell.com/)
 
 ## [](#header-2)SQL Tools
 

