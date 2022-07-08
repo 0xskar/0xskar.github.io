@@ -1,5 +1,5 @@
 ---
-title: OhSINT
+title: Walkthrough - OhSINT
 published: true
 ---
 
