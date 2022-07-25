@@ -9,6 +9,7 @@ title: Resources
 - [LOLBAS](https://lolbas-project.github.io/#) - GTFO Bins for Windows
 - [RevShells](https://www.revshells.com/) - Reverse Shell Generator 
 - [PenTest.WS]()
+- https://gchq.github.io/CyberChef/
 
 ## [](#header-2)Useful Guides
 
