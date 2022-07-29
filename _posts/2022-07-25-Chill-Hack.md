@@ -1,6 +1,6 @@
 ---
 title: Walkthrough - Chill Hack
-published: false
+published: true
 ---
 
 Chill the Hack out of the Machine.
