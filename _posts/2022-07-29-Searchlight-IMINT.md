@@ -1,6 +1,6 @@
 ---
 title: Walkthrough - Searchlight - IMINT
-published: false
+published: True
 ---
 
 OSINT challenges in the imagery intelligence category
@@ -77,29 +77,90 @@ When you have completed this room you should be comfortable applying tools and m
 
 ![](/assets/searchlight-imint05.png)
 
+- [https://www.facebook.com/weecoffeeshop/](https://www.facebook.com/weecoffeeshop/)
+
 **Which city is this coffee shop located in?**
 
 - sl{Blairgowrie}
 
 **Which street is this coffee shop located in?**
 
-
+- sl{allan street}
 
 **What is their phone number?**
 
-
+- sl{+44 7878 839128}
 
 **What is their email address?**
 
-
+- sl{theweecoffeeshop@aol.com}
 
 **What is the surname of the owners?**
 
-
+- sl{cochrane} found in the comments
 
 * * * 
 
+## [](#header-2)Task 6 Reverse your thinking
 
+![](/assets/searchlight-imint06.png)
 
+**Which restaurant was this picture taken at?**
 
+- sl{Katz's Deli}
 
+**What is the name of the Bon Appétit editor that worked 24 hours at this restaurant?**
+
+- sl{Andrew Knowlton}
+
+* * * 
+
+## [](#header-2)Task 7 Locate this sculpture
+
+![](/assets/searchlight-imint07.png)
+
+This challenge will require you to apply some the techniques I have touched on so far: Scanning the image for visual clues, reverse image searching and Google dorking. Tools should not be your primary focus - don't underestimate how far you can get with dorking and scrolling search results. 
+
+**What is the name of this statue?**
+
+- sl{Rudolph the chrome-nosed reindeer}
+
+**Who took this image?**
+
+- sl{Kjersti Stensrud}
+
+* * * 
+
+## [](#header-2)Task 8 ...and justice for all
+
+This challenge is a step up in difficulty from the previous challenges and you shouldn't expect to solve this quickly, especially if you are new to IMINT. While you can certainly apply the techniques and tools you've used to s far, this challenge may force you to revise your thinking and your approach while you're working on solving this challenge. 
+
+I highly recommend watching this Ted talk by Amy Herman on visual intelligence - "[A lesson on looking](https://www.youtube.com/watch?v=_jHmjs2270A)" if you want a unique view on how you perceive visual data.
+
+![](/assets/searchlight-imint08.png)
+
+**What is the name of the character that the statue depicts?**
+
+- sl{lady justice}
+
+**where is this statue located?**
+
+- sl{alexandria, virginia} - Located in Courthouse Square, Alexandria, VA, USA, the Albert V. Bryan United States Courthouse has a statue of blind justice above its entrance.
+
+**What is the name of the building opposite from this statue?**
+
+- [https://www.google.com/maps/place/Courthouse+Square,+Alexandria,+VA+22314,+USA/@38.8027807,-77.0658489,18.75z/data=!4m5!3m4!1s0x89b7b1a8dd0b0467:0x76143771218d9dae!8m2!3d38.8027273!4d-77.065216](https://www.google.com/maps/place/Courthouse+Square,+Alexandria,+VA+22314,+USA/@38.8027807,-77.0658489,18.75z/data=!4m5!3m4!1s0x89b7b1a8dd0b0467:0x76143771218d9dae!8m2!3d38.8027273!4d-77.065216) - sl{the westin alexandria old town}
+
+* * * 
+
+## [](#header-2)Task 9 The view from my hotel room
+
+Geolocating videos aren't much different from geolocating images. A video is just a string of images, usually played at 24 frames(or images) per second. In other words, a video will hold a whole lot more images that can be analyzed, reversed and scrutinized by you. 
+
+Here's a good writeup by Nixintel on a tool called FFmpeg, which will help you extract the key images from the video that you may need to solve this challenge. Download the attached video and follow Nixintel's guide!
+
+**What is the name of the hotel that my friend stayed in a few years ago?**
+
+- sl{Novotel Singapore Clarke Quay}
+
+* * * 
