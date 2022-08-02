@@ -53,6 +53,8 @@ title: Resources
 - ``shodan`` - search for various types of servers connected to the internet using a variety of filters.
 - ``theHarvester`` - a tool for gathering subdomain names, e-mail addresses, virtual hosts, open ports/ banners, and employee names from different public sources
 - [joomblah](https://github.com/stefanlucas/Exploit-Joomla/blob/master/README.md) -  SQL Injection for Joomla - it will dump the users and session tables
+- ``nikto``
+
 
 ## [](#header-2)Active Directory
 
@@ -68,5 +70,9 @@ title: Resources
 - [Full list of operators](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/where-object?view=powershell-7.2&viewFallbackFrom=powershell-6)
 - [Full List of Approved Verbs](https://docs.microsoft.com/en-us/powershell/scripting/developer/cmdlet/approved-verbs-for-windows-powershell-commands?view=powershell-7)
 - [Learn Powershell in Y Minutes](https://learnxinyminutes.com/docs/powershell/)
+
+## [](#header-2)OSINT
+
+- [ViewDNS.info](https://viewdns.info) - DNS History
 
 * * *
