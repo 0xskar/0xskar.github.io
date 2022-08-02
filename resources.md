@@ -54,6 +54,7 @@ title: Resources
 - ``theHarvester`` - a tool for gathering subdomain names, e-mail addresses, virtual hosts, open ports/ banners, and employee names from different public sources
 - [joomblah](https://github.com/stefanlucas/Exploit-Joomla/blob/master/README.md) -  SQL Injection for Joomla - it will dump the users and session tables
 - ``nikto``
+- ``feroxbuster`` -  a tool designed to perform Forced Browsing. Forced browsing is an attack where the aim is to enumerate and access resources that are not referenced by the web application, but are still accessible by an attacker.
 
 
 ## [](#header-2)Active Directory
