@@ -3,7 +3,7 @@ title: Walkthrough - Mustacchio
 published: true
 ---
 
-XXE, Enumeration, PrivEsc, Web. Boot2Root Machine
+XXE, Enumeration, PrivEsc, Web, PATH. Boot2Root Machine
 
 [https://tryhackme.com/room/mustacchio](https://tryhackme.com/room/mustacchio)
 
