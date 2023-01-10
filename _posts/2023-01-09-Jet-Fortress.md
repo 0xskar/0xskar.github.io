@@ -1,18 +1,16 @@
 ---
-layout: post
-title: Jet Fortress
-published: true
-category: Fortress
-system: linux
-walkthrough-type: htb
-source: https://app.hackthebox.com/fortresses/
-Description: 
-tags: 
+title: Jet
+author: 0xskar
+date: 2023-01-09 18:32:00 -0500
+categories: [Walkthrough, Hackthebox, CTF]
+tags: [linux, nmap]
 ---
+
+<https://app.hackthebox.com/fortresses/>
 
 - nmap to discover services
 
-```
+```bash
 PORT     STATE SERVICE     REASON
 22/tcp   open  ssh         syn-ack ttl 63
 53/tcp   open  domain      syn-ack ttl 63
@@ -24,6 +22,8 @@ PORT     STATE SERVICE     REASON
 9999/tcp open  abyss       syn-ack ttl 63
 ```
 
-- `nmap -sC -sV -O secondary nmap scan`
+```bash
+nmap -sC -sV -O secondary nmap scan
+```
+{: .nolineno}
 
-s.
