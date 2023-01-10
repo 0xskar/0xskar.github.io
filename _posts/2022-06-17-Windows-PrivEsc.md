@@ -1,14 +1,13 @@
 ---
 title: Windows Privilege Escalation
-
-date: 2022-06-16 18:32:00 -0500
+date: 2022-06-17 18:32:00 -0500
 categories: [Lesson, Tutorial]
 tags: [privesc, windows]
 ---
 
 Learn the fundamentals of Windows privilege escalation techniques.
 
-[https://tryhackme.com/room/windowsprivesc20](https://tryhackme.com/room/windowsprivesc20)
+<https://tryhackme.com/room/windowsprivesc20>
 
 * * *
 

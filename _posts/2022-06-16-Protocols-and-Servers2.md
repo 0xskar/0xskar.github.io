@@ -1,7 +1,8 @@
 ---
-layout: post
-title: Protocols and Servers 2
-published: true
+title: Protocols and Servers
+date: 2022-06-16 18:32:00 -0500
+categories: [Lesson, Tutorial]
+tags: [tcpdump, mitm, protocols, OSI]
 ---
 
 Learn about attacks against passwords and cleartext traffic; explore options for mitigation via SSH and SSL/TLS.

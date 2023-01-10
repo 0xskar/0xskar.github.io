@@ -1,6 +1,5 @@
 ---
 title: File Inclusion
-
 date: 2022-06-09 18:32:00 -0500
 categories: [Lesson, Tutorial]
 tags: [google analytics, pageviews]
