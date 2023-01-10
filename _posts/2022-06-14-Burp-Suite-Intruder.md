@@ -1,6 +1,6 @@
 ---
 title: Burp Suite Intruder
-author: 0xskar
+
 date: 2022-06-14 18:32:00 -0500
 categories: [Lesson, Tutorial]
 tags: [Burp, TryHackMe]

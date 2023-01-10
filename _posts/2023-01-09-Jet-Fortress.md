@@ -1,6 +1,5 @@
 ---
 title: Jet
-author: 0xskar
 date: 2023-01-09 18:32:00 -0500
 categories: [Walkthrough, Hackthebox, CTF]
 tags: [linux, nmap]

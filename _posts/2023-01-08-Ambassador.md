@@ -1,6 +1,5 @@
 ---
 title: Ambassador
-author: 0xskar
 date: 2023-01-08 18:32:00 -0500
 categories: [Walkthrough, Hackthebox, CTF]
 tags: [grafana, curl, devops, sqlite, mysql, linux, cve-2021-43798, consul, git]

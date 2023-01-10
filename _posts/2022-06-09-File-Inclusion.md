@@ -1,6 +1,6 @@
 ---
 title: File Inclusion
-author: 0xskar
+
 date: 2022-06-09 18:32:00 -0500
 categories: [Lesson, Tutorial]
 tags: [google analytics, pageviews]

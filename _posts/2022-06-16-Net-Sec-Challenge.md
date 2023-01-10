@@ -1,6 +1,6 @@
 ---
 title: Network Secutiry Challenge
-author: 0xskar
+
 date: 2022-06-16 18:32:00 -0500
 categories: [Lesson, Tutorial]
 tags: [nmap, telnet, hydra, Enumeration, TryHackMe]
