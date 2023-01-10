@@ -5,11 +5,9 @@ categories: [Walkthrough, Hackthebox, CTF]
 tags: [linux, nmap]
 ---
 
-<https://app.hackthebox.com/fortresses/>
-
 - nmap to discover services
 
-```bash
+```
 PORT     STATE SERVICE     REASON
 22/tcp   open  ssh         syn-ack ttl 63
 53/tcp   open  domain      syn-ack ttl 63
@@ -21,8 +19,6 @@ PORT     STATE SERVICE     REASON
 9999/tcp open  abyss       syn-ack ttl 63
 ```
 
-```bash
-nmap -sC -sV -O secondary nmap scan
-```
-{: .nolineno}
+- `nmap -sC -sV -O secondary nmap scan`
 
+s.

@@ -1,13 +1,10 @@
 ---
+layout: post
 title: Ambassador
 date: 2023-01-08 18:32:00 -0500
 categories: [Walkthrough, Hackthebox, CTF]
 tags: [grafana, curl, devops, sqlite, mysql, linux, cve-2021-43798, consul, git]
 ---
-
-<https://app.hackthebox.com/machines/>
-
-Break into a linux devops box exploiting LFI through an out of date analytics web app. Take advantage of the devops git to find a way to the root flag. 
 
 - `sudo nmap -p- -T4 10.10.11.183 -vvvv`
 
