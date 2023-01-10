@@ -21,7 +21,7 @@ timezone: America/Vancouver
 
 title: 0xskar                          # the main title
 
-tagline: Hacktivities   # it will display as the sub-title
+tagline: My Hacktivities   # it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
   A collection of my walkthroughs and lessons.
@@ -78,10 +78,10 @@ theme_mode:   # [light|dark]
 # will be added to all image (site avatar & posts' images) paths starting with '/'
 #
 # e.g. 'https://cdn.com'
-img_cdn: 'https://0xskar.github.io'
+img_cdn: 'https://chirpy-img.netlify.app'
 
 # the avatar on sidebar, support local or CORS resources
-avatar: '/assets/profile-icon.png'
+avatar: '/commons/avatar.jpg'
 
 # boolean type, the global switch for ToC in posts.
 toc: true
