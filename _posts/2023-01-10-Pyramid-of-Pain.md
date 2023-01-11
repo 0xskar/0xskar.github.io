@@ -7,7 +7,7 @@ tags: [SOC, SOC Analyst, Threat Hunting, Hashes]
 
 ![Pyramid of Pain](/assets/pop2.png)
 
-Learn what is the Pyramid of Pain and how to utilize this model to determine the level of difficulty it will cause for an adversary to change the indicators associated with them, and their campaign. 
+The Pyramid of pain visualizes the level of difficulty it will cause for an adversary to change the indicators associated with them, and their attack campaign. 
 
 # Hash Values (Trivial)
 
@@ -38,6 +38,11 @@ Fast Flux is a DNS technique used by botnets to hide phishing, web proxying, mal
 The concent of fast flux is having many different IP addresses that are associated with a domain name which is constantly changing.
 
 # Domain Names (Simple)
+
+Domain names are a little harder for an attacker to change as they will have to purchase new domain, register it, then modidy the DNS records. Also because DNS providers care more about money then security they have loose standards and supply APIs which make it fairly easy and fast for an experienced attacked to change the domain.
+
+
+
 
 
 Source(s): <https://tryhackme.com/room/pyramidofpainax> 
