@@ -11,7 +11,7 @@ Ports open: 22,80,3000,3006
 
 - `sudo nmap -p22,80,3000,3306 -sC -sV -O 10.10.11.183 -vvvv`
 
-## # Port 80
+## Port 80
 
 Nothing here I ran feroxbuster with medium raft directories but we do get a note
 
@@ -19,7 +19,7 @@ We get a note
 
 - Use the **developer** account to SSH, DevOps will give you the password.
 
-## # Port 3000 
+## Port 3000 
 
 Here we find a Grafana instance. Grafana is an open-source monitoring playform that allows you to alert and querty and visualize different data sourced, like databases. The key must be here? running feroxbuster yeild a shitload of nothing, checking the source of the grafana page and searching for "version" we find the Grafana version 8.2.0.
 
@@ -97,7 +97,7 @@ All of the other databases we dont have access to.
 
 and we are into the system!
 
-# Privilege Escalation 
+## Privilege Escalation 
 
 
 r-- 1 developer developer 93 Sep  2 02:28 /home/developer/.gitconfig
