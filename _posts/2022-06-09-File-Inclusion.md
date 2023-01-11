@@ -96,7 +96,7 @@ In this case, it works because there isn't a directory specified in the include 
 
 Now apply what we discussed and try to read /etc/passwd file. Also, answer question #1 below.
 
-![0xskar](/assets/fileinc-lab1.png)
+![0xskar](/assets/fileinc-flag1.png)
 
 2. Next, In the following code, the developer decided to specify the directory inside the function.
 
