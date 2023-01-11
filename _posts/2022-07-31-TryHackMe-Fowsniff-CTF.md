@@ -1,5 +1,4 @@
 ---
-
 title: Walkthrough - Fowsniff CTF
 published: true
 ---

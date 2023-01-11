@@ -1,5 +1,4 @@
 ---
-
 title: Walkthrough - Smag Grotto
 published: true
 ---

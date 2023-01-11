@@ -1,11 +1,5 @@
 ---
-layout: recipe
 title: Thin Breakfast Crepe Recipe
-category: Recipes
-system: life
-walkthrough-type: food
-source: 0xskar
-published: true
 ---
 
 # Thin Breakfast Crepes

@@ -1,5 +1,4 @@
 ---
-
 title: Box - Mr Robot CTF
 published: true
 ---

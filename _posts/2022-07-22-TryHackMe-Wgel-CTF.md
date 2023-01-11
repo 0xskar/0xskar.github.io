@@ -1,5 +1,4 @@
 ---
-
 title: Walkthrough - Wgel CTF	
 published: true
 ---

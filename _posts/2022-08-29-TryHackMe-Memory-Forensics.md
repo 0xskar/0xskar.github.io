@@ -1,5 +1,4 @@
 ---
-
 title: Walkthrough - Memory Forensics
 published: true
 ---

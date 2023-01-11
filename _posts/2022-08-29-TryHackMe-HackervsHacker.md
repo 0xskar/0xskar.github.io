@@ -1,5 +1,4 @@
 ---
-
 title: Walkthrough - Hacker vs. Hacker
 published: true
 ---

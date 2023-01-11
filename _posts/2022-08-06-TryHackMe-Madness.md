@@ -1,5 +1,4 @@
 ---
-
 title: Walkthrough - Madness
 published: true
 ---

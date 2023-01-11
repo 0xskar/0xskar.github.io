@@ -1,5 +1,4 @@
 ---
-
 title: Corp
 published: true
 ---

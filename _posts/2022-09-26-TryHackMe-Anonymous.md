@@ -1,5 +1,4 @@
 ---
-
 title: Walkthrough - Anonymous
 published: true
 ---

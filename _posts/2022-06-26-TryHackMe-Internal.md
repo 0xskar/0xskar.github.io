@@ -1,6 +1,5 @@
 ---
 title: Internal
-
 date: 2022-06-26 18:32:00 -0500
 categories: [Tryhackme, Walkthrough]
 tags: [jenkins]

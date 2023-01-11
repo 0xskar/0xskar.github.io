@@ -1,5 +1,4 @@
 ---
-
 title: Walkthrough - Cat Pictures
 published: true
 ---

@@ -1,5 +1,4 @@
 ---
-
 title: Walkthrough - Brooklyn Nine Nine
 published: true
 ---

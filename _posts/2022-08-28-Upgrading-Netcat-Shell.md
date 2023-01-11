@@ -1,5 +1,4 @@
 ---
-
 title: Upgrading Netcat Shell
 published: false
 ---

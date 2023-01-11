@@ -1,14 +1,10 @@
 ---
-
 title: GoldenEye
 published: true
-category: CTF
-system: email
-walkthrough-type: thm
-source: https://tryhackme.com/room/goldeneye
-Description: Bond, James Bond. A guided CTF.
-tags: hydra, nmap, email, enumeration
+tags: [hydra, nmap, email, enumeration]
 ---
+
+<https://tryhackme.com/room/goldeneye> Bond, James Bond. A guided CTF.
 
 <img src="/assets/tumblr_nbnjulmxcW1tpfnxwo4_500.gif" alt="Goldeneye">
 

@@ -1,20 +1,13 @@
 ---
-title: Hack Park 
-date: 2022-06-20 18:32:00 -0500
-categories: [Walkthrough, Tryhackme, CTF]
-tags: [hydra, windows]
----
-
-
----
-
 title: Attacking Kerberos
-published: true
+date: 2022-06-20 18:32:00 -0500
+categories: [Lesson, Tryhackme]
+tags: [kerberos, windows]
 ---
 
 Learn how to abuse the Kerberos Ticket Granting Service inside of a Windows Domain Controller
 
-[https://tryhackme.com/room/attackingkerberos](https://tryhackme.com/room/attackingkerberos)
+<https://tryhackme.com/room/attackingkerberos>
 
 ![0xskar](/assets/kerberos01.png)
 

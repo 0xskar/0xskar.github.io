@@ -1,5 +1,4 @@
 ---
-
 title: Walkthrough - WebOSINT
 published: true
 ---

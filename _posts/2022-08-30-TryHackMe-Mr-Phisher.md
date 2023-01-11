@@ -1,5 +1,4 @@
 ---
-
 title: Walkthrough - Mr. Phisher
 published: True
 ---

@@ -1,5 +1,4 @@
 ---
-
 title: Intro to Digital Forensics
 published: true
 ---

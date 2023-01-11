@@ -1,5 +1,4 @@
 ---
-
 title: Walkthrough - Startup
 published: true
 ---

@@ -1,5 +1,4 @@
 ---
-
 title: Walkthrough - Ignite
 published: true
 ---

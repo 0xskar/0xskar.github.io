@@ -1,5 +1,4 @@
 ---
-
 title: Walkthrough - Res
 published: true
 ---

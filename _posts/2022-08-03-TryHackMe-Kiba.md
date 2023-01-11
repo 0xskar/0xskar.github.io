@@ -1,5 +1,4 @@
 ---
-
 title: Walkthrough - Kiba
 published: true
 ---

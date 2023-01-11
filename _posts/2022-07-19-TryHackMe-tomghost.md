@@ -1,5 +1,4 @@
 ---
-
 title: Walkthrough - tomghost
 published: true
 ---

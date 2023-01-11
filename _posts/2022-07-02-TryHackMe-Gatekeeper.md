@@ -1,5 +1,4 @@
 ---
-
 title: Box - Gatekeeper
 published: true
 ---

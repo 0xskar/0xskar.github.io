@@ -1,5 +1,4 @@
 ---
-
 title: Walkthrough - JPGChat
 published: true
 ---

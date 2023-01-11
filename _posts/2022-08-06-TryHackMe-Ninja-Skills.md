@@ -1,5 +1,4 @@
 ---
-
 title: Walkthrough - Ninja Skills
 published: true
 ---

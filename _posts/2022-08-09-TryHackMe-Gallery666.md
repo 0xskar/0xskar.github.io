@@ -1,5 +1,4 @@
 ---
-
 title: Walkthrough - Gallery 666
 published: true
 ---

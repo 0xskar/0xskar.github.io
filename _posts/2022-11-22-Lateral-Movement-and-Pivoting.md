@@ -1,13 +1,8 @@
 ---
-
 title: Lateral Movement and Pivoting
-published: true
-category: Lessons
-system: Windows
-walkthrough-type: thm
-source: https://tryhackme.com/room/lateralmovementandpivoting
-Description: Common techniques used to move laterally across a Windows network.
 ---
+
+<https://tryhackme.com/room/lateralmovementandpivoting> Common techniques used to move laterally across a Windows network.
 
 * * * 
 

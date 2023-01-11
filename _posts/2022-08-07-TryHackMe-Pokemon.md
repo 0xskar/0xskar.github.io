@@ -1,5 +1,4 @@
 ---
-
 title: Walkthrough - Gotta Catch'em All!
 published: true
 ---

@@ -1,5 +1,4 @@
 ---
-
 title: Walkthrough - Poster
 published: true
 ---

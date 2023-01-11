@@ -1,5 +1,4 @@
 ---
-
 title: Walkthrough - Confidential
 published: true
 ---

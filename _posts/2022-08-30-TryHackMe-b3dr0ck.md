@@ -1,5 +1,4 @@
 ---
-
 title: Walkthrough - b3dr0ck
 published: true
 ---

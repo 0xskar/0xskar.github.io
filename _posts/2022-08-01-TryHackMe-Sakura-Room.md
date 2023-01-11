@@ -1,5 +1,4 @@
 ---
-
 title: Walkthrough - Sakura Room
 published: true
 ---

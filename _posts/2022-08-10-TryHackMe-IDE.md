@@ -1,5 +1,4 @@
 ---
-
 title: Walkthrough - IDE
 published: true
 ---

@@ -1,14 +1,10 @@
 ---
-
 title: Boiler CTF   
 published: true
-category: Lessons
-system: Webmin
-walkthrough-type: thm
-source: https://tryhackme.com/room/boilerctf2
-Description: Intermediate level CTF
-tags: CTF, FTP, SSH, Webmin
+tags: [CTF, FTP, SSH, Webmin]
 ---
+
+<https://tryhackme.com/room/boilerctf2> Intermediate level CTF
 
 * * * 
 

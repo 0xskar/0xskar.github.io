@@ -1,5 +1,4 @@
 ---
-
 title: Walkthrough - Wonderland
 published: true
 category: TryHackMe Walkthrough

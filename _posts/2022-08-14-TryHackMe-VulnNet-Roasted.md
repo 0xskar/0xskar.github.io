@@ -1,5 +1,4 @@
 ---
-
 title: Walkthrough - VulnNet Roasted
 published: true
 ---

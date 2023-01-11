@@ -1,7 +1,8 @@
 ---
-
-title: Box - Daily Bugle
-published: true
+title: Daily Bugle
+date: 2022-06-22 18:32:00 -0500
+categories: [Tryhackme, CTF, Walkthrough]
+tags: [joomla, sqli, john, hashcat]
 ---
 
 Compromise a Joomla CMS account via SQLi, practise cracking hashes and escalate your privileges by taking advantage of yum.

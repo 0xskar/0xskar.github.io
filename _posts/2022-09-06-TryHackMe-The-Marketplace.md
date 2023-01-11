@@ -1,5 +1,4 @@
 ---
-
 title: Walkthrough - The Marketplace
 published: true
 ---

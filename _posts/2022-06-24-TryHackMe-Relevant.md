@@ -1,7 +1,8 @@
 ---
-
-title: Box - Relevant
-published: true
+title: Relevant
+date: 2022-06-24 18:00:00 -0500
+categories: [Tryhackme, CTF, Walkthrough]
+tags: [smb, gobuster]
 ---
 
 Penetration Testing Challenge

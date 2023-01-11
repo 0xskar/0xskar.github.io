@@ -1,5 +1,4 @@
 ---
-
 title: Walkthrough - Chill Hack
 published: true
 ---

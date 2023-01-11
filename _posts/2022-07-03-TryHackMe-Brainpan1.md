@@ -1,5 +1,4 @@
 ---
-
 title: Box - Brainpan1
 published: true
 ---

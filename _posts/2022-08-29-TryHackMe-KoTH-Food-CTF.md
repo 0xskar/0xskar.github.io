@@ -1,5 +1,4 @@
 ---
-
 title: Walkthrough - KoTH Food CTF
 published: true
 ---

@@ -1,7 +1,6 @@
 ---
-
 title: Enumeration 
-published: True
+published: true
 ---
 
 * * *

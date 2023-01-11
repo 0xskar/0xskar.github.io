@@ -1,5 +1,4 @@
 ---
-
 title: Box - HackTheBox - Timelapse
 published: true
 ---

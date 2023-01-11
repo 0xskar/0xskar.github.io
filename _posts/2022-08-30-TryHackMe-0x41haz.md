@@ -1,5 +1,4 @@
 ---
-
 title: Walkthrough - 0x41haz
 published: true
 ---

@@ -1,5 +1,4 @@
 ---
-
 title: Box - SimpleCTF
 published: true
 ---

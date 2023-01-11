@@ -1,5 +1,4 @@
 ---
-
 title: Walkthrough - Investigating Windows
 published: true
 ---

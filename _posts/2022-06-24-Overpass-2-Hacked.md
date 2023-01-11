@@ -1,7 +1,8 @@
 ---
-
-title: Box - Overpass 2 - Hacked
-published: true
+title: Overpass 2 - Hacked
+date: 2022-06-24 18:00:00 -0500
+categories: [Tryhackme, CTF, Walkthrough]
+tags: [overpass, pcap, wireshark, hashcat]
 ---
 
 Overpass has been hacked! Can you analyse the attacker's actions and hack back in?

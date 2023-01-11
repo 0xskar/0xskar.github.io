@@ -1,6 +1,5 @@
 ---
 title: Anonymous
-
 date: 2022-12-17 18:32:00 -0500
 categories: [Tryhackme, Walkthrough]
 tags: [Enumeration, security, linux, permissions, medium]

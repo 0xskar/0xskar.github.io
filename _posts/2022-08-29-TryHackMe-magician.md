@@ -1,5 +1,4 @@
 ---
-
 title: Walkthrough - Magician
 published: true
 ---

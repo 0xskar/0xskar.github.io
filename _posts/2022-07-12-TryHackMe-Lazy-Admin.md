@@ -1,5 +1,4 @@
 ---
-
 title: Walkthrough - Lazy Admin
 published: true
 ---
