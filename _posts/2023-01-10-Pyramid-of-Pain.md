@@ -7,7 +7,7 @@ tags: [SOC, SOC Analyst, Threat Hunting, Hashes]
 
 ![Pyramid of Pain](/assets/pop2.png)
 
-<https://tryhackme.com/room/pyramidofpainax> Learn what is the Pyramid of Pain and how to utilize this model to determine the level of difficulty it will cause for an adversary to change the indicators associated with them, and their campaign. 
+Learn what is the Pyramid of Pain and how to utilize this model to determine the level of difficulty it will cause for an adversary to change the indicators associated with them, and their campaign. 
 
 # Hash Values (Trivial)
 
@@ -17,3 +17,11 @@ A hash is the result of a hashing algorithm. A hash value is a unique value that
 - **SHA-1 (Secure Hashing Algorithm 1)** - Was designed by the bad guys at the NSA. of couse they build backdoors into algorithm just like the CIA did. It's not secure and banned for its use now because it's succeptable to brute force attacks.
 - **SHA-2 (Secure Hashing Algorihm 2)** - 
 
+
+
+
+
+
+
+
+Source(s): <https://tryhackme.com/room/pyramidofpainax> 
