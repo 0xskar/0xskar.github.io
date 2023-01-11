@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Lateral Movement and Pivoting
 published: true
 category: Lessons

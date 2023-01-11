@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Lazy Admin
 published: true
 ---

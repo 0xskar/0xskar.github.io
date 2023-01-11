@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - KoTH Food CTF
 published: true
 ---

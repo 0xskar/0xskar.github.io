@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Biohazard
 published: true
 category: CTF

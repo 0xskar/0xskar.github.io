@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Box - Mr Robot CTF
 published: true
 ---

@@ -1,5 +1,4 @@
 ---
-layout: post
 title: Box - HackTheBox - Trick
 published: true
 ---

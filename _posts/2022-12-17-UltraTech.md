@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: UltraTech
 published: true
 category: CTF

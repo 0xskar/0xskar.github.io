@@ -1,7 +1,8 @@
 ---
-layout: post
 title: Attacktive Directory
-published: true
+date: 2022-06-20 18:32:00 -0500
+categories: [Walkthrough, Tryhackme, CTF]
+tags: [nmap, enum4linux, Active Directory, john, smb]
 ---
 
 99% of Corporate networks run off of AD. But can you exploit a vulnerable Domain Controller?

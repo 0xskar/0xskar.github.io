@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Disk Analysis & Autopsy
 published: true
 category: CTF

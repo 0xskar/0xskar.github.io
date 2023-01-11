@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Volatility With Volatility3
 published: true
 ---

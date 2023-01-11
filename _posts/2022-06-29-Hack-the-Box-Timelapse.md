@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Box - HackTheBox - Timelapse
 published: true
 ---

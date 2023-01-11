@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Year of the Rabbit
 published: false
 ---

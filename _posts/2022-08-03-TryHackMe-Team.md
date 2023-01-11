@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Team
 published: true
 ---

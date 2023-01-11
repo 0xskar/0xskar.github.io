@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Ninja Skills
 published: true
 ---

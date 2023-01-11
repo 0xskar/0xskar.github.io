@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Box - Brainstorm
 published: true
 ---

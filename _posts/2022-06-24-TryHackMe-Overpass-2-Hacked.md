@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Box - Overpass 2 - Hacked
 published: true
 ---

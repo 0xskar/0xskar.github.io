@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Odin Project - Javascript Fundamentals 
 category: Walkthrough
 system: Java

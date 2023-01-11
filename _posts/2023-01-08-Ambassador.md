@@ -1,5 +1,4 @@
 ---
-layout: post
 title: Ambassador
 date: 2023-01-08 18:32:00 -0500
 categories: [Walkthrough, Hackthebox, CTF]

@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Wordpress CVE-2021-29447
 published: false
 ---

@@ -8,7 +8,7 @@ tags: [jenkins]
 
 
 ---
-layout: post
+
 title: Box - Internal
 published: true
 ---

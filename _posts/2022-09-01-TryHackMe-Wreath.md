@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Wreath
 published: true
 ---

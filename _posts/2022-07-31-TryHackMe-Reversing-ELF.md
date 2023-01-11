@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Reversing ELF
 published: true
 ---

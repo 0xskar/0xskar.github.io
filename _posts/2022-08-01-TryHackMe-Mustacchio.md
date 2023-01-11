@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Mustacchio
 published: true
 ---

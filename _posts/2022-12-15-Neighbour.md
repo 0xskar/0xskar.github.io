@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Neighbour 
 published: true
 category: Lessons

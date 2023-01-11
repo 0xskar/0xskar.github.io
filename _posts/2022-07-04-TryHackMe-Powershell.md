@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Hacking with PowerShell
 published: true
 ---

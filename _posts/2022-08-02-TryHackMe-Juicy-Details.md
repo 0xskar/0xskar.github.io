@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Juicy Details
 published: true
 ---

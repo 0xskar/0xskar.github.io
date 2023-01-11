@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Chocolate Factory
 published: True
 ---

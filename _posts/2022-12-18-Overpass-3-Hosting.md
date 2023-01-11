@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Overpass 3 - Hosting
 published: true
 category: CTF

@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Enumeration 
 published: True
 ---

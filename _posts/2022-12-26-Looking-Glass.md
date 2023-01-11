@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Looking Glass
 published: true
 category: CTF

@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Boiler CTF   
 published: true
 category: Lessons

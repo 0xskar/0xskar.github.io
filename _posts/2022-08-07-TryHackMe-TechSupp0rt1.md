@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Tech_Supp0rt 1
 published: true
 ---

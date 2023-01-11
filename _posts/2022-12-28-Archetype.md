@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Archetype
 published: true
 category: CTF

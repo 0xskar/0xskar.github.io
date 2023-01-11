@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Bounty Hacker - Linux/Tar/PrivESC/Security
 published: true
 ---

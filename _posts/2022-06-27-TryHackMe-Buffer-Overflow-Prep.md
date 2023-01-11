@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Buffer Overflow Prep
 published: true
 ---

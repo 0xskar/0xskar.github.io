@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Crack the Hash - hash/hashcat/johntheripper/cracking
 published: true
 ---

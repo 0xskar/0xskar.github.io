@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Tony the Tiger
 published: true
 ---

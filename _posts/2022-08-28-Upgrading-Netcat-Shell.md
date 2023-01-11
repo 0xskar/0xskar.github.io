@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Upgrading Netcat Shell
 published: false
 ---

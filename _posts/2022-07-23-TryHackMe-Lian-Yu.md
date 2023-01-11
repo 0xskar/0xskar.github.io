@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Lian_Yu
 published: true
 ---

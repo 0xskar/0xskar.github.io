@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Dear QA
 published: true
 ---

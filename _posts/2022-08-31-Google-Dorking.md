@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Google Dorking
 published: True
 ---

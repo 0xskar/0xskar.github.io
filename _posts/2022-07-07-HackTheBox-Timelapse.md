@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Box - Timelapse
 published: true
 ---

@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Tokyo Ghoul
 published: true
 category: CTF

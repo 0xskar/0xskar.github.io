@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: GoldenEye
 published: true
 category: CTF

@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Agent Sudo
 published: true
 ---
