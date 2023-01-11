@@ -12,7 +12,7 @@ tags: security, linux
 
 # What is the MD5 hash of the E01 image?
 
-<img src="/assets/disk-analysis01.png">
+<img src="/assets/disk-analysis01.png" alt="Disk Analysis">
 
 # What is the computer Account name?
 

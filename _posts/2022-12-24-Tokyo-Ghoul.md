@@ -10,7 +10,7 @@ Description: Help kaneki escape jason room
 tags: security, web, hash, lfi
 ---
 
-<img src="/assets/tuzTqo4.gif">
+<img src="/assets/tuzTqo4.gif" alt="Tokyo Ghoul">
 
 # Where am I?
 

@@ -10,7 +10,7 @@ Description: Step through the looking glass. A sequel to the Wonderland challeng
 tags: wonderland, ctf, alce, ssh
 ---
 
-<img src="/assets/Aliceroom2.jpg">
+<img src="/assets/Aliceroom2.jpg" alt="lOOKING gLASS">
 
 A sequel to the <a href="https://0xskar.github.io/tryhackme%20walkthrough/2022/09/19/TryHackMe-Wonderland.html">Wonderland</a> room.
 

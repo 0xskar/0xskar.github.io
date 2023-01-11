@@ -9,7 +9,7 @@ tags: [nmap, enum4linux, Active Directory, john, smb]
 
 [https://tryhackme.com/room/attacktivedirectory](https://tryhackme.com/room/attacktivedirectory)
 
-![](/assets/rpnessusredux.png)
+![Attacktive Directory Nessus](/assets/rpnessusredux.png)
 
 * * *
 

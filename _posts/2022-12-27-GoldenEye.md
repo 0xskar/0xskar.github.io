@@ -10,7 +10,7 @@ Description: Bond, James Bond. A guided CTF.
 tags: hydra, nmap, email, enumeration
 ---
 
-<img src="/assets/tumblr_nbnjulmxcW1tpfnxwo4_500.gif">
+<img src="/assets/tumblr_nbnjulmxcW1tpfnxwo4_500.gif" alt="Goldeneye">
 
 Using nmap to scan the network for all ports: `nmap -p-`, followed up by `nmap -sC -sV -sT -O -p25,80,55006,55007 goldeneye.thm`
 

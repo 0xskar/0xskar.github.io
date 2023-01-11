@@ -1,14 +1,11 @@
 ---
-
 title: Overpass 3 - Hosting
-published: true
-category: CTF
-system: linux
-walkthrough-type: thm
-source: https://tryhackme.com/room/overpass3hosting
-Description: You know them, you love them, your favourite group of broke computer science students have another business venture! Show them that they probably should hire someone for security...
-tags: overpass, centOS, linux, privesc
+date: 2022-12-18 18:32:00 -0500
+categories: [Walkthrough, Tryhackme, CTF]
+tags: [overpass, centOS, linux, privesc]
 ---
+
+<https://tryhackme.com/room/overpass3hosting> You know them, you love them, your favourite group of broke computer science students have another business venture! Show them that they probably should hire someone for security...
 
 # Notes
 
