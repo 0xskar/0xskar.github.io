@@ -1,14 +1,11 @@
 ---
-
 title: Disk Analysis & Autopsy
-published: true
-category: CTF
-system: linux
-walkthrough-type: thm
-source: https://tryhackme.com/room/autopsy2ze0
-Description: Ready for a challenge? Use Autopsy to investigate artifacts from a disk image.
-tags: security, linux
+date: 2022-12-21 18:32:00 -0500
+categories: [Walkthrough, Tryhackme, CTF]
+tags: [linux, security, disk analysis]
 ---
+
+<https://tryhackme.com/room/autopsy2ze0> Ready for a challenge? Use Autopsy to investigate artifacts from a disk image.
 
 # What is the MD5 hash of the E01 image?
 

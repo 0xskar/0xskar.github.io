@@ -1,14 +1,11 @@
 ---
-
 title: Looking Glass
-published: true
-category: CTF
-system: linux
-walkthrough-type: thm
-source: https://tryhackme.com/room/lookingglass
-Description: Step through the looking glass. A sequel to the Wonderland challenge room. 
-tags: wonderland, ctf, alce, ssh
+date: 2022-12-26 18:32:00 -0500
+categories: [Walkthrough, Tryhackme, CTF]
+tags: [wonderland, ctf, alice, ssh]
 ---
+
+<https://tryhackme.com/room/lookingglass> Step through the looking glass. A sequel to the Wonderland challenge room. 
 
 <img src="/assets/Aliceroom2.jpg" alt="lOOKING gLASS">
 
