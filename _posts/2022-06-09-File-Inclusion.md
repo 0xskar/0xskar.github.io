@@ -2,7 +2,7 @@
 title: File Inclusion
 date: 2022-06-09 18:32:00 -0500
 categories: [Lesson, Tutorial]
-tags: [google analytics, pageviews]
+tags: [LFI, RFI, Directory Traversal]
 ---
 
 File inclusion vulnerabilities, including Local File Inclusion (LFI), Remote File Inclusion (RFI), and directory traversal.
@@ -24,10 +24,6 @@ File inclusion vulnerabilities are commonly found and exploited in various progr
 **What is the risk of File inclusion?**
 
 If the attacker can use file inclusion vulnerabilities to read sensitive data. In that case, the successful attack causes to leak of sensitive data, including code and files related to the web application, credentials for back-end systems. Moreover, if the attacker somehow can write to the server such as  /tmp directory, then it is possible to gain remote command execution RCE. However, it won't be effective if file inclusion vulnerability is found with no access to sensitive data and no writing ability to the server.
-
-## Task 2 Deploy the VM
-
-![0xskar](/assets/file-inclusion-lab-1.png)
 
 ## Task 3 Path Traversal
 
