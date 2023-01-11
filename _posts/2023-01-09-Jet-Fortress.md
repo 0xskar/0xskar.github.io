@@ -1,7 +1,7 @@
 ---
 title: Jet
 date: 2023-01-09 18:32:00 -0500
-categories: [Walkthrough, Hackthebox, CTF]
+categories: [Walkthrough, Hackthebox, Fortress]
 tags: [linux, nmap]
 ---
 

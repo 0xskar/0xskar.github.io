@@ -1,13 +1,11 @@
 ---
-title: Walkthrough - Wonderland
-published: true
-category: TryHackMe Walkthrough
+title: Wonderland
+date: 2022-09-19 18:32:00 -0500
+categories: [Walkthrough, Tryhackme, CTF]
+tags: [stegseek, sudo, PATH, Linux]
 ---
 
-Tags: CTF, Alice in Wonderland, PrivESC, Linux.
-Description: Fall down the rabbit hole and enter wonderland.
-Difficulty: Easy
-URL: [https://tryhackme.com/room/wonderland](https://tryhackme.com/room/wonderland)
+Fall down the rabbit hole and enter wonderland.
 
 * * *
 
@@ -58,3 +56,4 @@ running linpeas eariar we found perl has setuid capabilities. GTFO bins get us r
 
 * * * 
 
+Source: <https://tryhackme.com/room/wonderland>
