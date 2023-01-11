@@ -8,7 +8,7 @@ TryHackMe CTF Box - Remote access comes in different flavors.
 
 [https://tryhackme.com/room/annie](https://tryhackme.com/room/annie)
 
-![0xskar](/assets/annie01.jpg)
+![0xskar](/assets/annie01.webp)
 
 * * *
 
