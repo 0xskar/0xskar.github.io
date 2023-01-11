@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Box - RootMe
 published: true
 ---
@@ -8,7 +8,7 @@ TryHackMe CTF Box - Can you root me?
 
 [https://tryhackme.com/room/rrootme](https://tryhackme.com/room/rrootme)
 
-![](/assets/rootme01.jpg)
+![0xskar](/assets/rootme01.jpg)
 
 * * *
 
@@ -73,7 +73,7 @@ Find a form to upload and get a reverse shell, and find the flag.
 
 - upgrade shell ``python -c 'import pty; pty.spawn("/bin/bash")'``
 
-![](/assets/rootme02.png)
+![0xskar](/assets/rootme02.png)
 
 * * * 
 
@@ -94,7 +94,7 @@ Now that we have a shell, let's escalate our privileges to root.
 
 **root.txt**
 
-![](/assets/rootme03.png)
+![0xskar](/assets/rootme03.png)
 
 * * * 
 

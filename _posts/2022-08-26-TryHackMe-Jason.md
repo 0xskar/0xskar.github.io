@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Jason
 published: true
 ---
@@ -29,7 +29,7 @@ URL: [https://tryhackme.com/room/jason](https://tryhackme.com/room/jason)
 
 ## user.txt?
 
-![](/assets/jason01.png)
+![0xskar](/assets/jason01.png)
 
 * * * 
 
@@ -47,7 +47,7 @@ User dylan may run the following commands on jason:
 - `echo '{"scripts": {"start": "/bin/bash"}}' > ./package.json`
 - `sudo npm run start`
 
-![](/assets/jason02.png)
+![0xskar](/assets/jason02.png)
 
 * * * 
 

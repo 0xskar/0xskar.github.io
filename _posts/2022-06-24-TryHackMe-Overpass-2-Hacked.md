@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Box - Overpass 2 - Hacked
 published: true
 ---
@@ -8,7 +8,7 @@ Overpass has been hacked! Can you analyse the attacker's actions and hack back i
 
 [https://tryhackme.com/room/overpass2hacked](https://tryhackme.com/room/overpass2hacked)
 
-![](/assets/wireshark.jpg)
+![0xskar](/assets/wireshark.jpg)
 
 * * *
 

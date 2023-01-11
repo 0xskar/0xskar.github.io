@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Nax
 published: true
 ---
@@ -46,7 +46,7 @@ PORT     STATE SERVICE    VERSION
 
 Upon visiting the site and runnning gobuster scans we find a Nagios XL installation and a homepage filled with elements.
 
-![](/assets/nax01.png)
+![0xskar](/assets/nax01.png)
 
 * * * 
 
@@ -101,7 +101,7 @@ Searchsploit `Nagios XI ` and we have authentication so find the CVE with `cat 4
 
 ## Compromise the machine and locate user.txt Locate root.txt
 
-![](/assets/nax02.png)
+![0xskar](/assets/nax02.png)
 
 * * * 
 

@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Box - Brainpan1
 published: true
 ---
@@ -8,7 +8,7 @@ Reverse engineer a Windows executable, find a buffer overflow and exploit it on 
 
 [https://tryhackme.com/room/brainpan](https://tryhackme.com/room/brainpan)
 
-![](/assets/brainpan01.jpg)
+![0xskar](/assets/brainpan01.jpg)
 
 * * *
 
@@ -46,12 +46,12 @@ Reverse engineer a Windows executable, find a buffer overflow and exploit it on 
 - We can send through 5000 a's with our a.py ``print("A" *5000)``
 - We have an EBP and EIP overwrite so we should be able to overflow the buffer and and ECX Shitstorm!?
 
-![](/assets/brainpan02.png)
+![0xskar](/assets/brainpan02.png)
 
 - Finding the offset
 - ``msf-pattern_create -l 5000`` and send and note the EIP "35724134"
 
-![](/assets/brainpan03.png)
+![0xskar](/assets/brainpan03.png)
 
 - ``msf-pattern_offset -l 5000 -q 35724134``
 - we have an exact match at offset 524
@@ -127,7 +127,7 @@ except:
 - try to find jump point with our badchars
 - ``!mona jmp -r esp -cpb "\x00``
 
-![](/assets/brainpan04.png)
+![0xskar](/assets/brainpan04.png)
 
 - 311712F3 Jump Point
 - Convert to little endian ``\xf3\x12\x17\x31``
@@ -185,7 +185,7 @@ except:
 
 **Gain initial access**
 
-![](/assets/brainpan05.png) 
+![0xskar](/assets/brainpan05.png) 
 
 **Escalate your privileges to root.**
 
@@ -202,6 +202,6 @@ export TERM=xterm
 - https://gtfobins.github.io/gtfobins/man/#sudo
 - break out with a root shell!
 
-![](/assets/brainpan07.png)
+![0xskar](/assets/brainpan07.png)
 
 * * * 

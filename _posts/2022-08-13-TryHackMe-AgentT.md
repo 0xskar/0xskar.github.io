@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Agent T
 published: true
 ---
@@ -14,7 +14,7 @@ Security, PHP, Backdoor. Something seems a little off with the server.
 
 Simple nmap scan shows us one port 80 webserver that contains a simple admin dashboard that doesnt seem to go anywhere. After fumbling around for a bit capturing the site in burpsuite, find that the site is powered by php/8.1.0-dev. 
 
-![](/assets/agentt01.png)
+![0xskar](/assets/agentt01.png)
 
 Easy enough to find [an exploit on exploitDB](https://www.exploit-db.com/exploits/49933). 
 
@@ -24,7 +24,7 @@ The exploit on exploitdb isn't very good. It wont let us travel through director
 
 ## What is the flag?
 
-![](/assets/agentt02.png)
+![0xskar](/assets/agentt02.png)
 
 * * * 
 

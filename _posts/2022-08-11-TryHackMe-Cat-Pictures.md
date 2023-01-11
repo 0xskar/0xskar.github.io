@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Cat Pictures
 published: true
 ---
@@ -55,7 +55,7 @@ Visiting the phpbb on port 8080 and checking the version `/styles/prosilver/styl
 
 - we can find a user `user` and a possible hint on their post
 
-![](/assets/cat-pictures01.png)
+![0xskar](/assets/cat-pictures01.png)
 
 ```
 POST ALL YOUR CAT PICTURES HERE :)
@@ -80,7 +80,7 @@ We only have limited options and in order to check out the runme file we have to
 
 Looking at the file it looks like it needs a password and upon success it will send back a SSH key. Going to open in `ghidra` as well to get another look.
 
-![](/assets/cat-pictures02.png)
+![0xskar](/assets/cat-pictures02.png)
 
 Our password for runme is `rebecca` when we enter this the function it creates an ssh key in the user dir.
 
@@ -90,7 +90,7 @@ Using this key we can ssh in as catlover and it turns out to be root!
 
 ## What is the flag 1?
 
-![](/assets/cat-pictures03.png)
+![0xskar](/assets/cat-pictures03.png)
 
 Turns out this is only root for flag 1. We are stuck in a docker container and must get out for the real root flag.
 
@@ -100,7 +100,7 @@ Inside of the `/opt/clean` directory there is a script that cleans the /tmp/ dir
 
 ## What is the root flag?
 
-![](/assets/cat-pictures04.png)
+![0xskar](/assets/cat-pictures04.png)
 
 * * * 
 

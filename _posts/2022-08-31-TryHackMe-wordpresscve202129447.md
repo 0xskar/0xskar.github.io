@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Wordpress CVE-2021-29447
 published: false
 ---
@@ -56,7 +56,7 @@ viewing the website we find the author `test-corp` now need the password which i
 ```
 5. Launch http server `php -S 0.0.0:80` and upload the .wav
 
-![](/assets/wordpresscve202129447-01.png)
+![0xskar](/assets/wordpresscve202129447-01.png)
 
 * * * 
 
@@ -214,7 +214,7 @@ or
 
 - with the above credentials we can access the admin's wordpress dashboard. here we can edit a template to send us a reverse shell.
 
-![](/assets/wordpresscve202129447-03.png)
+![0xskar](/assets/wordpresscve202129447-03.png)
 
 * * * 
 

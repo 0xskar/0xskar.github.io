@@ -1,6 +1,5 @@
 ---
 title: File Inclusion
-
 date: 2022-06-09 18:32:00 -0500
 categories: [Lesson, Tutorial]
 tags: [google analytics, pageviews]
@@ -16,7 +15,7 @@ Information about file inclusion vulnerabilities; Local File Inclusions (LFIs), 
 
 Some web application are written to request access to files on a system, including images, static text, and so on via parameters. Parameters are query parameter string attached to the URL that could be used to retrieve data or perform actions based on user input. See pic below.
 
-![](/assets/file-incursion.png)
+![0xskar](/assets/file-incursion.png)
 
 **Why do File inclusion vulnerabilities happen?**
 
@@ -26,10 +25,6 @@ File inclusion vulnerabilities are commonly found and exploited in various progr
 
 If the attacker can use file inclusion vulnerabilities to read sensitive data. In that case, the successful attack causes to leak of sensitive data, including code and files related to the web application, credentials for back-end systems. Moreover, if the attacker somehow can write to the server such as  /tmp directory, then it is possible to gain remote command execution RCE. However, it won't be effective if file inclusion vulnerability is found with no access to sensitive data and no writing ability to the server.
 
-## Task 2 Deploy the VM
-
-![](/assets/file-inclusion-lab-1.png)
-
 ## Task 3 Path Traversal
 
 Also known as Directory traversal, a web security vulnerability allows an attacker to read operating system resources, such as local files on the server running an application. The attacker exploits this vulnerability by manipulating and abusing the web application's URL to locate and access files or directories stored outside the application's root directory.
@@ -38,17 +33,17 @@ Path traversal vulnerabilities occur when the user's input is passed to a functi
 
 The following graph shows how a web application stores files in /var/www/app. The happy path would be the user requesting the contents of userCV.pdf from a defined path /var/www/app/CVs.
 
-![](/assets/directory-traversal.png)
+![0xskar](/assets/directory-traversal.png)
 
 We can test out the URL parameter by adding payloads to see how the web application behaves. Path traversal attacks, also known as the dot-dot-slash attack, take advantage of moving the directory one step up using the double dots ../. If the attacker finds the entry point, which in this case get.php?file=, then the attacker may send something as follows, http://webapp.thm/get.php?file=../../../../etc/passwd
 
 Suppose there isn't input validation, and instead of accessing the PDF files at /var/www/app/CVs location, the web application retrieves files from other directories, which in this case /etc/passwd. Each .. entry moves one directory until it reaches the root directory /. Then it changes the directory to /etc, and from there, it read the passwd file.
 
-![](/assets/directory-traversal2.png)
+![0xskar](/assets/directory-traversal2.png)
 
 As a result, the web application sends back the file's content to the user.
 
-![](/assets/directory-traversal3.png)
+![0xskar](/assets/directory-traversal3.png)
 
 Similarly, if the web application runs on a Windows server, the attacker needs to provide Windows paths. For example, if the attacker wants to read the boot.ini file located in c:\boot.ini, then the attacker can try the following depending on the target OS version:
 
@@ -100,8 +95,6 @@ Theoretically, we can access and display any readable file on the server from th
 In this case, it works because there isn't a directory specified in the include function and no input validation.
 
 Now apply what we discussed and try to read /etc/passwd file. Also, answer question #1 below.
-
-![](/assets/fileinc-lab1.png)
 
 2. Next, In the following code, the developer decided to specify the directory inside the function.
 
@@ -273,7 +266,7 @@ https://www.iana.org/assignments/media-types/media-types.xhtml
 
 Adding `Content-Encoding: application/x-www-form-urlencoded` and then changing from `GET` to `POST` and using the paramater `file=../../../etc/flag1` will get us our first flag. See pic below.
 
-![](/assets/fileinc-flag1.png)
+![0xskar](/assets/fileinc-flag1.png)
 
 **Capture Flag2 at /etc/flag2**
 

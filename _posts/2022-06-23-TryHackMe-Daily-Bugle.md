@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Box - Daily Bugle
 published: true
 ---
@@ -8,7 +8,7 @@ Compromise a Joomla CMS account via SQLi, practise cracking hashes and escalate 
 
 [https://tryhackme.com/room/dailybugle](https://tryhackme.com/room/dailybugle)
 
-![](/assets/bugle01.png)
+![0xskar](/assets/bugle01.png)
 
 * * *
 
@@ -39,7 +39,7 @@ PORT     STATE SERVICE VERSION
 
 **Access the web server, who robbed the bank?**
 
-![](/assets/bugle02.png)
+![0xskar](/assets/bugle02.png)
 
 - spiderman
 
@@ -49,7 +49,7 @@ PORT     STATE SERVICE VERSION
 
 Hack into the machine and obtain the root user's credentials.
 
-![](/assets/bugle03.png)
+![0xskar](/assets/bugle03.png)
 
 ##   Answer the questions below
 

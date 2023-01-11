@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Heartbleed
 published: false
 ---
@@ -60,7 +60,7 @@ Heartbleed is a bug due to the implementation in the OpenSSL library from versio
 
 * * * 
 
-![](/assets/heartbleed01.png)
+![0xskar](/assets/heartbleed01.png)
 
 * * * 
 

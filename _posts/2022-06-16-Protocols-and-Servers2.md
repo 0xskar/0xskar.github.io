@@ -1,7 +1,8 @@
 ---
-layout: post
-title: Protocols and Servers 2
-published: true
+title: Protocols and Servers
+date: 2022-06-16 18:32:00 -0500
+categories: [Lesson, Tutorial]
+tags: [tcpdump, mitm, protocols, OSI]
 ---
 
 Learn about attacks against passwords and cleartext traffic; explore options for mitigation via SSH and SSL/TLS.
@@ -54,7 +55,7 @@ Any time you browse over HTTP, you are susceptible to a MITM attack, and the sca
 
 The common protocols we have covered so far send the data in cleartext; this makes it possible for anyone with access to the network to capture, save and analyze the exchanged messages. The image below shows the ISO/OSI network layers. The protocols we have covered so far in this room are on the application layer. Consider the ISO/OSI model; we can add encryption to our protocols via the presentation layer. Consequently, data will be presented in an encrypted format (ciphertext) instead of its original form.
 
-![](/assets/protocolsandservers01.png)
+![0xskar](/assets/protocolsandservers01.png)
 
 TLS is more secure than SSL, and it has Boxly replaced SSL. We could have dropped SSL and just written TLS instead of SSL/TLS, but we will continue to mention the two to avoid any ambiguity because the term SSL is still in wide use. However, we can expect all modern servers to be using TLS.
 
@@ -70,7 +71,7 @@ An existing cleartext protocol can be upgraded to use encryption via SSL/TLS. We
 
 To establish an SSL/TLS connection, the client needs to perform the proper handshake with the server. Based on RFC 6101, the SSL connection establishment will look like the figure below.
 
-![](/assets/protocolsandservers02.png)
+![0xskar](/assets/protocolsandservers02.png)
 
 ##   Answer the questions below
 

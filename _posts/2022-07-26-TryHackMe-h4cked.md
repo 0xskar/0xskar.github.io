@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - h4cked
 published: true
 ---

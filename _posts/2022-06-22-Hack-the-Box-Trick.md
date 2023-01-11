@@ -1,12 +1,11 @@
 ---
-layout: post
 title: Box - HackTheBox - Trick
 published: true
 ---
 
 Hack the Box's Trick Room Walkthrough
 
-![](/assets/hydra.jpeg)
+![0xskar](/assets/hydra.jpeg)
 
 * * *
 

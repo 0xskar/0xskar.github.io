@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Library
 published: true
 ---
@@ -48,7 +48,7 @@ checking sudo -l we can see the user can run the python script as sudo so deleti
 
 ## What is the content of root.txt?
 
-![](/assets/library01.png)
+![0xskar](/assets/library01.png)
 
 * * * 
 

@@ -1,14 +1,11 @@
 ---
-layout: post
 title: Archetype
-published: true
-category: CTF
-system: windows
-walkthrough-type: htb
-source: https://app.hackthebox.com/starting-point
-Description: Easy hackthebox machine from nmap to root with some impacket and smb.
-tags: Network, Protocols, MSSQL, SMB, Impacket, Powershell, Penetration Tester Level 1, Reconnaissance, Remote Code Execution, Clear Text Credentials, Information Disclosure, Anonymous/Guest Access
+date: 2022-12-28 18:32:00 -0500
+categories: [Walkthrough, Hackthebox, CTF]
+tags: [Network, Protocols, MSSQL, SMB, Impacket, Powershell, Penetration Tester Level 1, Reconnaissance, Remote Code Execution, Clear Text Credentials, Information Disclosure, Anonymous/Guest Access, Windows]
 ---
+
+<https://app.hackthebox.com/starting-point> Easy hackthebox machine from nmap to root with some impacket and smb.
 
 Start off with an nmap after adding archetype to `/etc/hosts`.
 

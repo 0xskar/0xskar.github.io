@@ -1,12 +1,12 @@
 ---
-layout: post
+
 title: Walkthrough - Blueprint
 published: true
 ---
 
 Security, Windows. Hack into this Windows machine and escalaye privileges to admin.
 
-![](/assets/blueprint01.png)
+![0xskar](/assets/blueprint01.png)
 
 [https://tryhackme.com/room/blueprint](https://tryhackme.com/room/blueprint)
 
@@ -73,7 +73,7 @@ Port 8080 has an osCommerce site version 2.3.4. searchsploit oscommerce 2.3.4. `
 
 - ``python3 ~/exploitdb/exploits/php/webapps/50128.py http://10.10.22.83:8080/oscommerce-2.3.4/catalog``
 
-![](/assets/blueprint02.png)
+![0xskar](/assets/blueprint02.png)
 
 - ``whoami /priv`` can see SeImpersonatePrivilege is Enabled.
 
@@ -101,7 +101,7 @@ Lab:1000:aad3b435b51404eeaad3b435b51404ee:30e87bf999828446a1c1209ddde4c450:::
 
 ## root.txt
 
-![](/assets/blueprint03.png)
+![0xskar](/assets/blueprint03.png)
 
 * * * 
 

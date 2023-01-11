@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Magician
 published: true
 ---
@@ -24,7 +24,7 @@ PORT     STATE SERVICE         REASON
 
 Visiting the website we have a `Whitelabel Error Page`
 
-![](/assets/magician01.png)
+![0xskar](/assets/magician01.png)
 
 - `gobuster dir -u http://magician:8080 -w /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt -t 100` yeilds us a few results
 
@@ -55,7 +55,7 @@ pop graphic.context
 
 ## user.txt?
 
-![](/assets/magician02.png)
+![0xskar](/assets/magician02.png)
 
 * * * 
 

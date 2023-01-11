@@ -1,12 +1,12 @@
 ---
-layout: post
+
 title: Intro to Digital Forensics
 published: true
 ---
 
 Learn about digital forensics and related processes and experiment with a practical example.
 
-![](/assets/a6d116dd4d78321fba7b8af0024f138d.jpg)
+![0xskar](/assets/a6d116dd4d78321fba7b8af0024f138d.jpg)
 
 Security/Digital Forensics/Forensics/Metadata
 
@@ -22,7 +22,7 @@ Think about the following scenario. The law enforcement agents arrive at a crime
 - How to transfer the digital evidence? Are there certain best practices to follow when moving computers, for instance?
 - How to analyze the collected digital evidence? Personal device storage ranges between tens of gigabytes to several terabytes; how can this be analyzed.
 
-![](/assets/6c4cacca5b9f799f4812bcefd4a9ed53.jpg)
+![0xskar](/assets/6c4cacca5b9f799f4812bcefd4a9ed53.jpg)
 
 Assuming this employee is suspected in the figure above, we can quickly see the digital devices that might be of interest to an investigation. We notice a tablet, a smartphone, a digital camera, and a USB flash memory in addition to a desktop computer. Any of these devices might contain a trove of information that can help with an investigation. Processing these as evidence would require digital forensics.
 
@@ -37,7 +37,7 @@ Whether investigating a crime or a corporate policy violation, part of the evide
 
 ## Digital Forensics Process 
 
-![](/assets/47a572d7e16ff71099381b3a3914407c.jpg)
+![0xskar](/assets/47a572d7e16ff71099381b3a3914407c.jpg)
 
 As a digital forensics investigator, you arrive at a scene similar to the one shown in the image above. What should you do as a digital forensics investigator? After getting the proper legal authorization, the basic plan goes as follows:
 
@@ -140,7 +140,7 @@ If you take the above coordinates and search one of the online maps, you will le
 
 **Using exiftool or any similar tool, try to find where the kidnappers took the image they attached to their document. What is the name of the street?**
 
-![](/assets/intro-digital-forensics01.png)
+![0xskar](/assets/intro-digital-forensics01.png)
 
 **What is the model name of the camera used to take this photo?**
 

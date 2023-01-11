@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - OhSINT
 published: true
 ---
@@ -10,7 +10,7 @@ Use open source intelligence to solve this challenge.
 
 ## What Information Can We Get With One Photo?
 
-![](/assets/WindowsXP.jpg)
+![0xskar](/assets/WindowsXP.jpg)
 
 * * *
 

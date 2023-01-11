@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Sakura Room
 published: true
 ---
@@ -151,7 +151,7 @@ Although many users share their username across different platforms, it isn't un
 
 We get a few clues: 
 
-![](/assets/sakura-room01.png)
+![0xskar](/assets/sakura-room01.png)
 
 Along with:
 

@@ -1,12 +1,13 @@
 ---
-layout: post
 title: Vulnerabilities 101
-published: true
+date: 2022-06-16 18:32:00 -0500
+categories: [Lesson, Tutorial]
+tags: [vulnerabilities]
 ---
 
 Understand the flaws of an application and apply your researching skills on some vulnerability databases.
 
-[https://tryhackme.com/room/vulnerabilities101](https://tryhackme.com/room/vulnerabilities101)
+<https://tryhackme.com/room/vulnerabilities101>
 
 * * *
 

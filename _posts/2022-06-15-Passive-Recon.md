@@ -1,6 +1,5 @@
 ---
 title: Passive Recon
-
 date: 2022-06-15 18:32:00 -0500
 categories: [Lesson, Tutorial]
 tags: [Enumeration, TryHackMe, whois, nslookup, dig]
@@ -53,7 +52,7 @@ Active reconnaissance, on the other hand, cannot be achieved so discreetly. It r
 
 ## Task 3 - Whois 
 
-![](/assets/passiverecon1.png)
+![0xskar](/assets/passiverecon1.png)
 
 **When was TryHackMe.com registered?** 20180705
 

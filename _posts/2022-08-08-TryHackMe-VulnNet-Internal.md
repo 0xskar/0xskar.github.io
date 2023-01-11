@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - VulnNet Internal
 published: true
 ---
@@ -163,7 +163,7 @@ OK
 5) "tmp"
 ```
 
-![](/assets/vulnnet-internal01.png)
+![0xskar](/assets/vulnnet-internal01.png)
 
 - ``LRANGE authlist 1 100`` give us a base64 to decode
 
@@ -195,13 +195,13 @@ and finally
 
 ## What is the internal flag? ("internal flag")
 
-![](/assets/vulnnet-internal01.png)
+![0xskar](/assets/vulnnet-internal01.png)
 
 * * * 
 
 ## What is the user flag? (user.txt)
 
-![](/assets/vulnnet-internal02.png)
+![0xskar](/assets/vulnnet-internal02.png)
 
 * * * 
 
@@ -217,7 +217,7 @@ and finally
 
 - ``ssh -L 8111:localhost:8111 sys-internal@10.10.115.21 -i vulnnet`` this creates a tunnel to port 8111 we can access on our localhost.
 
-![](/assets/vulnnet-internal03.png)
+![0xskar](/assets/vulnnet-internal03.png)
 
 > The authentication token is automatically generated on every server start. The token is printed in the server console and teamcity-server.log under the TeamCity\logs directory (search for the "Super user authentication token" text). The line is printed on the server start and on any login page submit without a username specified.
 
@@ -237,7 +237,7 @@ So because teamcity is being ran as root if we can get it to run a reverse shell
 
 Setup a netcat listen to recieve the connection, and select run in teamcity.
 
-![](/assets/vulnnet-internal04.png)
+![0xskar](/assets/vulnnet-internal04.png)
 
 * * * 
 

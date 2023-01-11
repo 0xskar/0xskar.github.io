@@ -1,14 +1,11 @@
 ---
-layout: post
 title: UltraTech
-published: true
-category: CTF
-system: web
-walkthrough-type: thm
-source: https://tryhackme.com/room/ultratech1
-Description: The basics of Penetration Testing, Enumeration, Privilege Escalation and WebApp testing
-tags: security, pentest, enumeration, web
+date: 2022-12-17 18:32:00 -0500
+categories: [Walkthrough, Tryhackme, CTF]
+tags: [security, pentest, enumeration, web]
 ---
+
+<https://tryhackme.com/room/ultratech1> The basics of Penetration Testing, Enumeration, Privilege Escalation and WebApp testing
 
 # Notes
 

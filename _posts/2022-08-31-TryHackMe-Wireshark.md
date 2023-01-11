@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Plotted-TMS
 published: true
 ---

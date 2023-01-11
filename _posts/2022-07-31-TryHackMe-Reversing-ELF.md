@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Reversing ELF
 published: true
 ---
@@ -86,7 +86,7 @@ Now that our binary is analyzed we can jump to a section where there is code. th
 
 I was unable to find anything using rabin. Kind of a noob. But opening the file in Ghidra and browsing around I managed to find the password I was looking for.
 
-![](/assets/reverselfiles01.png)
+![0xskar](/assets/reverselfiles01.png)
 
 * * * 
 
@@ -98,7 +98,7 @@ What is the flag ?
 
 Changing the local 14 and saving the program we can get the key by accessing crackme7 again and inputting the number we modified.
 
-![](/assets/reverselfiles02.png)
+![0xskar](/assets/reverselfiles02.png)
 
 * * * 
 
@@ -110,6 +110,6 @@ Analyze the binary and obtain the flag
 
 Using the same steps as the last and converting the main param 1 IVar2 to binary we can use that to access the last flag.
 
-![](/assets/reverselfiles03.png)
+![0xskar](/assets/reverselfiles03.png)
 
 * * * 

@@ -1,5 +1,13 @@
 ---
-layout: post
+title: Hack Park 
+date: 2022-06-20 18:32:00 -0500
+categories: [Walkthrough, Tryhackme, CTF]
+tags: [hydra, windows]
+---
+
+
+---
+
 title: Attacking Kerberos
 published: true
 ---
@@ -8,7 +16,7 @@ Learn how to abuse the Kerberos Ticket Granting Service inside of a Windows Doma
 
 [https://tryhackme.com/room/attackingkerberos](https://tryhackme.com/room/attackingkerberos)
 
-![](/assets/kerberos01.png)
+![0xskar](/assets/kerberos01.png)
 
 * * *
 
@@ -39,7 +47,7 @@ Learn how to abuse the Kerberos Ticket Granting Service inside of a Windows Doma
 
 ##  Kerberos Authentication Overview
 
-![](/assets/kerberos02.png)
+![0xskar](/assets/kerberos02.png)
 
 - AS-REQ - 1.) The client requests an Authentication Ticket or Ticket Granting Ticket (TGT).
 - AS-REP - 2.) The Key Distribution Center verifies the client and sends back an encrypted TGT.
@@ -70,7 +78,7 @@ Learn how to abuse the Kerberos Ticket Granting Service inside of a Windows Doma
 
 ## Task 2 - Enumeration w/ Kerbrute 
 
-![](/assets/kerbrute03.png)
+![0xskar](/assets/kerberos03.png)
 
 sudo /opt/kerbrute/kerbrute userenum --dc CONTROLLER.local -d CONTROLLER.local User.txt
 
@@ -391,7 +399,7 @@ Before password spraying with Rubeus, you need to add the domain controller doma
 
 During pre-authentication, the users hash will be used to encrypt a timestamp that the domain controller will attempt to decrypt to validate that the right hash is being used and is not replaying a previous request. After validating the timestamp the KDC will then issue a TGT for the user. If pre-authentication is disabled you can request any authentication data for any user and the KDC will return an encrypted TGT that can be cracked offline because the KDC skips the step of validating that the user is really who they say that they are.
 
-![](/assets/kerberos04.png)
+![0xskar](/assets/kerberos04.png)
 
 ##  Dumping KRBASREP5 Hashes w/ RUBEUS
 
@@ -491,7 +499,7 @@ controller\administrator@CONTROLLER-1 C:\Users\Administrator\Downloads>Rubeus.ex
 
 Pass the ticket works by dumping the TGT from the LSASS memory of the machine. The Local Security Authority Subsystem Service (LSASS) is a memory process that stores credentials on an active directory server and can store Kerberos ticket along with other credential types to act as the gatekeeper and accept or reject the credentials provided. You can dump the Kerberos Tickets from the LSASS memory just like you can dump hashes. When you dump the tickets with mimikatz it will give us a .kirbi ticket which can be used to gain domain admin if a domain admin ticket is in the LSASS memory. This attack is great for privilege escalation and lateral movement if there are unsecured domain service account tickets laying around. The attack allows you to escalate to domain admin if you dump a domain admin's ticket and then impersonate that ticket using mimikatz PTT attack allowing you to act as that domain admin. You can think of a pass the ticket attack like reusing an existing ticket were not creating or destroying any tickets here were simply reusing an existing ticket from another user on the domain and impersonating that ticket.
 
-![](/assets/kerberos05.png)
+![0xskar](/assets/kerberos05.png)
 
 ##  Prepare Mimikatz & Dump Tickets 
 
@@ -532,7 +540,7 @@ In order to fully understand how these attacks work you need to understand what 
 
 A golden ticket attack works by dumping the ticket-granting ticket of any user on the domain this would preferably be a domain admin however for a golden ticket you would dump the krbtgt ticket and for a silver ticket, you would dump any service or domain admin ticket. This will provide you with the service/domain admin account's SID or security identifier that is a unique identifier for each user account, as well as the NTLM hash. You then use these details inside of a mimikatz golden ticket attack in order to create a TGT that impersonates the given service account information.
 
-![](/assets/kerberos06.png)
+![0xskar](/assets/kerberos06.png)
 
 ##  Dump the krbtgt hash
 

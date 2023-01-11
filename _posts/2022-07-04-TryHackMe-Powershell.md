@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Hacking with PowerShell
 published: true
 ---
@@ -8,7 +8,7 @@ Basics of PowerShell and PowerShell Scripting
 
 [https://tryhackme.com/room/powershell](https://tryhackme.com/room/powershell)
 
-![](/assets/powershell.jpg)
+![0xskar](/assets/powershell.jpg)
 
 * * *
 
@@ -69,14 +69,14 @@ In this room, we'll be exploring the following concepts:
 - To view these details pass the output of a cmdlet to the Get-Member cmdlet
 - ``Verb-Noun | Get-Member`` example of running this to view members for the Get-Command is ``Get-Command | Get-Member -MemberType Method`` we can select between ``Method`` and ``-MemberType Properties``
 
-![](/assets/powershell02.png)
+![0xskar](/assets/powershell02.png)
 
 ##   Creating Objects From Previous cmdlets
 
 - We can manipulate objects by pulling out the peoperties from the output of a cmdlet and creating a new object with ``Select-Object``
 - Example of listing the Directories and selecting mode and name
 
-![](/assets/powershell03.png)
+![0xskar](/assets/powershell03.png)
 
 We can also use these flags to select information:
    - first - gets the first x object

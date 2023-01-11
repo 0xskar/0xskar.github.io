@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - b3dr0ck
 published: true
 ---
@@ -90,7 +90,7 @@ Password hint: d1ad7c0a3805955a35eb260dab4180dd (user = 'Barney Rubble')
 
 We can SSH into the server with the above credentials and get barneys flag.
 
-![](/assets/b3dr0ck01.png)
+![0xskar](/assets/b3dr0ck01.png)
 
 ```
 barney@b3dr0ck:~$ sudo -l
@@ -192,7 +192,7 @@ mBJmhsM=
 
 ## What is the fred.txt flag?
 
-![](/assets/b3dr0ck02.png)
+![0xskar](/assets/b3dr0ck02.png)
 
 * * * 
 
@@ -210,6 +210,6 @@ User fred may run the following commands on b3dr0ck:
 
 Decode from base64 to base32 to md5 and throw it at crackstation to get root password then su
 
-![](/assets/b3dr0ck03.png)
+![0xskar](/assets/b3dr0ck03.png)
 
 * * * 

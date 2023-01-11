@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Box - Brainstorm
 published: true
 ---
@@ -8,7 +8,7 @@ Penetration Testing Challenge
 
 [https://tryhackme.com/room/internal](https://tryhackme.com/room/internal)
 
-![](/assets/hacker-900-350.jpg)
+![0xskar](/assets/hacker-900-350.jpg)
 
 * * *
 

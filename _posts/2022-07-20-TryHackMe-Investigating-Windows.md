@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Investigating Windows
 published: true
 ---

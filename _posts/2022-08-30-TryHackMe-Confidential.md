@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Confidential
 published: true
 ---
@@ -19,7 +19,7 @@ URL: [https://tryhackme.com/room/confidential](https://tryhackme.com/room/confid
 
 ## Uncover and scan the QR code to retrieve the flag.
 
-![](/assets/confidential01.png)
+![0xskar](/assets/confidential01.png)
 
 * * * 
 

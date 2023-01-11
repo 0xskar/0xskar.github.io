@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Box - Relevant
 published: true
 ---
@@ -8,7 +8,7 @@ Penetration Testing Challenge
 
 [https://tryhackme.com/room/relevant](https://tryhackme.com/room/relevant)
 
-![](/assets/matrix.webp)
+![0xskar](/assets/matrix.webp)
 
 * * *
 
@@ -181,11 +181,11 @@ Looking up common IIS web application language we can see the common languages a
 
 Travel to Bob's desktop to access his flag
 
-![](/assets/relevant01.png)
+![0xskar](/assets/relevant01.png)
 
 After getting Administrator privileges access the admin desktop for the flag.
 
-![](/assets/relevant02.png)
+![0xskar](/assets/relevant02.png)
 
 * * *
 

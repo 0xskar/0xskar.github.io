@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Fowsniff CTF
 published: true
 ---

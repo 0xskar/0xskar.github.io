@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Year of the Rabbit
 published: false
 ---
@@ -111,7 +111,7 @@ now we get to a page where we can possibly lfi using the paramater ``cmd``
 
 ## What is the user flag?
 
-![](/assets/jack-of-all-trades05.png)
+![0xskar](/assets/jack-of-all-trades05.png)
 
 - ``scp -P 80 jack@10.10.86.12:/home/jack/user.jpg .``
 

@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - IDE
 published: true
 ---
@@ -70,7 +70,7 @@ we can login to drac with these creds.
 
 ## What is the user flag?
 
-![](/assets/ide01.png)
+![0xskar](/assets/ide01.png)
 
 - `sudo -l`
 
@@ -110,7 +110,7 @@ WantedBy=multi-user.target
 
 ## What is the root flag?
 
-![](/assets/ide02.png)
+![0xskar](/assets/ide02.png)
 
 * * * 
 

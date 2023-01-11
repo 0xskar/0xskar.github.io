@@ -1,7 +1,8 @@
 ---
-layout: post
 title: Linux PrivEsc
-published: true
+date: 2022-06-17 18:32:00 -0500
+categories: [Lesson, Tutorial]
+tags: [PrivEsc, Linux, Enumeration, Netstat, Find]
 ---
 
 Learn the fundamentals of Linux privilege escalation. From enumeration to exploitation, get hands-on with over 8 different privilege escalation techniques. Netstat and Find.
@@ -130,7 +131,7 @@ Time to get familiar with ``find``, ``locate``, ``grep``, ``cut``, ``sort``.
 
 **What is the content of the flag1.txt file?**
 
-![](/assets/linprivesc01.png)
+![0xskar](/assets/linprivesc01.png)
 
 * * * 
 

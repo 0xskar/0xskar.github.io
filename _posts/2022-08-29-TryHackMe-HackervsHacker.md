@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Hacker vs. Hacker
 published: true
 ---
@@ -81,7 +81,7 @@ Upgrade-Insecure-Requests: 1
 
 ## user.txt?
 
-![](/assets/hackervshacker.png)
+![0xskar](/assets/hackervshacker.png)
 
 * * * 
 

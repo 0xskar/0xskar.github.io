@@ -1,6 +1,5 @@
 ---
 title: Command Injection
-
 date: 2022-06-13 18:32:00 -0500
 categories: [Lesson, Tutorial]
 tags: [Command Injection, TryHackMe]

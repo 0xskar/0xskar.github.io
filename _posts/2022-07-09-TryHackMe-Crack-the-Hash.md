@@ -1,12 +1,12 @@
 ---
-layout: post
+
 title: Walkthrough - Crack the Hash - hash/hashcat/johntheripper/cracking
 published: true
 ---
 
 Hash Cracking Challenges
 
-![](/assets/crackthehash01.jpg)
+![0xskar](/assets/crackthehash01.jpg)
 
 * * *
 

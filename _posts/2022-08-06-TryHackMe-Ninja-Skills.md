@@ -1,12 +1,12 @@
 ---
-layout: post
+
 title: Walkthrough - Ninja Skills
 published: true
 ---
 
 Linux, Basics, CTF. Practice linux skills and complete challenges.
 
-![](/assets/ninja-skills01.png)
+![0xskar](/assets/ninja-skills01.png)
 
 [https://tryhackme.com/room/ninjaskills](https://tryhackme.com/room/ninjaskills)
 

@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Ignite
 published: true
 ---
@@ -39,7 +39,7 @@ Reading the fuel CMS default page gives us default credentials admin:admin. We c
 - ``python3 50477.py -u http://10.10.1.30`` will give us a shell
 - wget a php reverse shell over and setup netcat listener
 
-![](/assets/ignite01.png)
+![0xskar](/assets/ignite01.png)
 
 * * * 
 

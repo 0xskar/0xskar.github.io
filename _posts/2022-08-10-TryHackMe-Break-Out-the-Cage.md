@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Break Out the Cage
 published: true
 ---
@@ -67,7 +67,7 @@ Iz glww A ykftef.... Qjhsvbouuoexcmvwkwwatfllxughhbbcmydizwlkbsidiuscwl
 
 Not much in all os these directories i tried stegseek on all the images but cant find a password, and still unable to crack the dad_tasts, but there is a mp3 file to look at in `/auditions/`.
 
-![](/assets/break-out-the-cage01.png)
+![0xskar](/assets/break-out-the-cage01.png)
 
 After messing with audacity settings it reveals a hidden message "namelesstwo". This is the key to the vigenere cipher.
 

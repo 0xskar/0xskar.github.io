@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - CTF Collection Vol. 1
 published: true
 ---

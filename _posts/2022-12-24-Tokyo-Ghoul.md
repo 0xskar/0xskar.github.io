@@ -1,16 +1,11 @@
 ---
-layout: post
 title: Tokyo Ghoul
-published: true
-category: CTF
-system: web
-walkthrough-type: thm
-source: https://tryhackme.com/room/tokyoghoul666
-Description: Help kaneki escape jason room 
-tags: security, web, hash, lfi
+date: 2022-12-24 18:32:00 -0500
+categories: [Walkthrough, Tryhackme, CTF]
+tags: [security, web, hash, lfi]
 ---
 
-<img src="/assets/tuzTqo4.gif">
+<img src="/assets/tuzTqo4.gif" alt="Tokyo Ghoul"> Help kaneki escape jason room 
 
 # Where am I?
 

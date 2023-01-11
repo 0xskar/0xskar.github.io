@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Couch
 published: true
 ---
@@ -76,7 +76,7 @@ Web, Docket, Linux, CouchDB.
 - check `.bash_history` and run `docker -H 127.0.0.1:2375 run --rm -it --privileged --net=host -v /:/mnt alpine`
 - cat `/root/root.txt`
 
-![](/assets/couch01.png)
+![0xskar](/assets/couch01.png)
 
 * * * 
 

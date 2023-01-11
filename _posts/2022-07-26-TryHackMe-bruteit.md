@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Brute It
 published: true
 ---

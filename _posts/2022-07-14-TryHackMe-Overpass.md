@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Overpass
 published: true
 ---
@@ -22,7 +22,7 @@ nmap -p- -T4 10.10.198.148 -vvv
 
 - Checking the /admin page discovered using dirb we discover inspecting elements and checking login.js that we can set sessiontoken to gain access to this ssh key
 
-![](/assets/overpass01.png)
+![0xskar](/assets/overpass01.png)
 
 - now that we have a user "James" and sshkey we can login to ssh
 - save the rsa key and ssh2john and feed to john
@@ -110,6 +110,6 @@ ff02::2 ip6-allrouters
 
 - edit with vim and create /downloads/src/buildscript.sh with reverse shell on attacker
 
-![](/assets/overpass02.png)
+![0xskar](/assets/overpass02.png)
 
 * * * 

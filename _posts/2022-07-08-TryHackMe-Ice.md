@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Walkthrough - Icecast CVE-2004-1561
 published: true
 ---

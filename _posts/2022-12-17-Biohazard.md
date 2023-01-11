@@ -1,14 +1,11 @@
 ---
-layout: post
 title: Biohazard
-published: true
-category: CTF
-system: linux
-walkthrough-type: thm
-source: https://tryhackme.com/room/biohazard
-Description: A CTF room based on the old-time survival horror game, Resident Evil. Can you survive until the end?
-tags: cipher, base, stego, root
+date: 2022-12-27 18:32:00 -0500
+categories: [Walkthrough, Tryhackme, CTF]
+tags: [cipher, base, stego, root, linux]
 ---
+
+<https://tryhackme.com/room/biohazard> A CTF room based on the old-time survival horror game, Resident Evil. Can you survive until the end?
 
 # Notes
 
