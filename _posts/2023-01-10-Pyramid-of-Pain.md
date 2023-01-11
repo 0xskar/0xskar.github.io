@@ -41,6 +41,33 @@ The concent of fast flux is having many different IP addresses that are associat
 
 Domain names are a little harder for an attacker to change as they will have to purchase new domain, register it, then modidy the DNS records. Also because DNS providers care more about money then security they have loose standards and supply APIs which make it fairly easy and fast for an experienced attacked to change the domain.
 
+Attackers can use a few tricks to hide their domain names from the uninformed. They can use [Punycode](https://www.wandera.com/punycode-attacks/) to redirect users to a malicious domain name that looks legitimate at the first glance. For example a URL that looks like `adıdas.de` will actually take you to `http://xn--addas-o4a.de/`
+
+To detect malicious domains we can check proxy or server logs.
+
+Attackers can also hide their domains using URL Shorteners, such as:
+
+   - bit.ly
+   - goo.gl
+   - ow.ly
+   - s.id
+   - smarturl.it
+   - tiny.pl
+   - tinyurl.com
+   - x.co
+
+You can see where the shortened link will send you by appending "+" to it. Ex: `goo.gl/mcvc4mc+` or `bit.ly/mvJm43+`
+
+# Host Artifacts (Annoying)
+
+At the upper part of the pyramid attackers will be getting more and more annoyed if we can detect these attacks. If we can detect at this level the attacker will need to go back to their previous steps and change their attack tools and methods. This can be time-consuming for the attacker.
+
+Host artifacts are traces or observables that the attackers have left on the system, like registry values, sus process executions, IOCs (Indicators of Compromise), files, or anything releated to the threat.
+
+So a suspicious process execution followed by a series of strange events would be a good sign that we have come accross some host artifact.
+
+# Network Artifacts (Annoying)
+
 
 
 

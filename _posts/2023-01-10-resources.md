@@ -90,6 +90,7 @@ A collection of links i've found useful. Tools/Guides/Websites.
 - [https://dmarcian.com/](https://dmarcian.com/) Check DMARC and SPF records
 - [The DFIR Report](https://thedfirreport.com/)
 - [FireEye Threat Research Blogs](https://www.fireeye.com/blog/threat-research.html)
+- [AnyRun](https://any.run/) - Interactive Malware Hunting Service
 
 # Memory Analysis
 
