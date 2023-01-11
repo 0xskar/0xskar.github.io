@@ -9,7 +9,7 @@ tags: [SOC, SOC Analyst, Threat Hunting, Hashes]
 
 The Pyramid of pain visualizes the level of difficulty it will cause for an adversary to change the indicators associated with them, and their attack campaign. 
 
-# Hash Values (Trivial)
+## Hash Values (Trivial)
 
 A hash is the result of a hashing algorithm. A hash value is a unique value that identifies data. Some of the most common hashing algorithms are:
 
@@ -25,7 +25,7 @@ We can use online tooks to do hash lookups, such as:- [VirusTotal](https://www.v
 
 Now as we can see its pretty easy to determine if a file is malicious or not if we have its hash right? Wrong. It is trivial for an attacker to modify malware if they know what they are going and they can easily modify just a character in the code to produce a new hash value, which makes threat hunting using file hashes a very difficult task.
 
-# IP Address (Easy)
+## IP Address (Easy)
 
 IP addresses are used to identify any decive connected to any network. From a defenders standpoint knowing where the malicious attacks are coming from is super valuable. If we have an IP address we can block, drop, or deny requests from them via a firewall. This tactic only works until the attacker can find another IP address and an experienced attacker has no trouble getting a new one.
 
@@ -37,7 +37,7 @@ Fast Flux is a DNS technique used by botnets to hide phishing, web proxying, mal
 
 The concent of fast flux is having many different IP addresses that are associated with a domain name which is constantly changing.
 
-# Domain Names (Simple)
+## Domain Names (Simple)
 
 Domain names are a little harder for an attacker to change as they will have to purchase new domain, register it, then modidy the DNS records. Also because DNS providers care more about money then security they have loose standards and supply APIs which make it fairly easy and fast for an experienced attacked to change the domain.
 
@@ -58,7 +58,7 @@ Attackers can also hide their domains using URL Shorteners, such as:
 
 You can see where the shortened link will send you by appending "+" to it. Ex: `goo.gl/mcvc4mc+` or `bit.ly/mvJm43+`
 
-# Host Artifacts (Annoying)
+## Host Artifacts (Annoying)
 
 At the upper part of the pyramid attackers will be getting more and more annoyed if we can detect these attacks. If we can detect at this level the attacker will need to go back to their previous steps and change their attack tools and methods. This can be time-consuming for the attacker.
 
@@ -66,7 +66,7 @@ Host artifacts are traces or observables that the attackers have left on the sys
 
 So a suspicious process execution followed by a series of strange events would be a good sign that we have come accross some host artifact.
 
-# Network Artifacts (Annoying)
+## Network Artifacts (Annoying)
 
 
 
