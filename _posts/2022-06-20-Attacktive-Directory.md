@@ -9,6 +9,8 @@ tags: [nmap, enum4linux, Active Directory, john, smb]
 
 [https://tryhackme.com/room/attacktivedirectory](https://tryhackme.com/room/attacktivedirectory)
 
+![Attacktive Directory Nessus](/assets/rpnessusredux.png)
+
 * * *
 
 ## Task 3 - Welcome to Attacktive Directory 

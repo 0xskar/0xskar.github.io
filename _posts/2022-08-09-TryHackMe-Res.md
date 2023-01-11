@@ -170,5 +170,7 @@ Easy enough...
 
 - ``sudo vi -c ':!/bin/sh' /dev/null``
 
+![0xskar](/assets/res03.png)
+
 * * * 
 

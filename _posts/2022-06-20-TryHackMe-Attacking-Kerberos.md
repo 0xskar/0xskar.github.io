@@ -78,7 +78,7 @@ Learn how to abuse the Kerberos Ticket Granting Service inside of a Windows Doma
 
 ## Task 2 - Enumeration w/ Kerbrute 
 
-![0xskar](/assets/kerberos03.png)
+![0xskar](/assets/kerbrute03.png)
 
 sudo /opt/kerbrute/kerbrute userenum --dc CONTROLLER.local -d CONTROLLER.local User.txt
 

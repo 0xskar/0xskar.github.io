@@ -235,7 +235,7 @@ except:
 
 - send once more for reverse shell hopefully
 
-![0xskar](/assets/gatekeeper10.png)
+![0xskar](/gatekeeper10.png)
 
 - now we can update the exploit with new msfvenom output with openvpn ip and run it against our target
 

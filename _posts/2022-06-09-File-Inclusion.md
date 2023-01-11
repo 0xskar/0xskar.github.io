@@ -25,6 +25,10 @@ File inclusion vulnerabilities are commonly found and exploited in various progr
 
 If the attacker can use file inclusion vulnerabilities to read sensitive data. In that case, the successful attack causes to leak of sensitive data, including code and files related to the web application, credentials for back-end systems. Moreover, if the attacker somehow can write to the server such as  /tmp directory, then it is possible to gain remote command execution RCE. However, it won't be effective if file inclusion vulnerability is found with no access to sensitive data and no writing ability to the server.
 
+## Task 2 Deploy the VM
+
+![0xskar](/assets/file-inclusion-lab-1.png)
+
 ## Task 3 Path Traversal
 
 Also known as Directory traversal, a web security vulnerability allows an attacker to read operating system resources, such as local files on the server running an application. The attacker exploits this vulnerability by manipulating and abusing the web application's URL to locate and access files or directories stored outside the application's root directory.
@@ -95,6 +99,8 @@ Theoretically, we can access and display any readable file on the server from th
 In this case, it works because there isn't a directory specified in the include function and no input validation.
 
 Now apply what we discussed and try to read /etc/passwd file. Also, answer question #1 below.
+
+![0xskar](/assets/fileinc-lab1.png)
 
 2. Next, In the following code, the developer decided to specify the directory inside the function.
 
