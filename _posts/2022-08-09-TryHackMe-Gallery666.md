@@ -103,6 +103,6 @@ User mike may run the following commands on gallery:
 - ``cat /opt/rootkit.sh``
 - this shell script when set to read runs nano as sudo so we can use it to get root. Run the script and "read" and then ``^R^X`` then ``reset; sh 1>&0 2>&0`` to get root
 
-![](/assets/gallery66601.png)
+![0xskar](/assets/gallery66601.png)
 
 * * * 

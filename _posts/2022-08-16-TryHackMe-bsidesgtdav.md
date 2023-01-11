@@ -54,7 +54,7 @@ Progress: [=============================>] 100.0% of 2585 bytes succeeded.
 
 ## What is the content of user.txt?
 
-![](/assets/bsidesgtdav01.png)
+![0xskar](/assets/bsidesgtdav01.png)
 
 * * * 
 

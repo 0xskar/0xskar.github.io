@@ -28,19 +28,19 @@ Open up the developer console in firefox; storage > cookies > change to the deco
 
 Setup burpsuite to send a shell and setup listener to recieve:
 
-![](/assets/glitch02.png)
+![0xskar](/assets/glitch02.png)
 
 * * * 
 
 ## What is your access token?
 
-![](/assets/glitch01.png)
+![0xskar](/assets/glitch01.png)
 
 * * * 
 
 ## What is the content of user.txt?
 
-![](/assets/glitch03.png)
+![0xskar](/assets/glitch03.png)
 
 * * * 
 
@@ -51,11 +51,11 @@ Setup burpsuite to send a shell and setup listener to recieve:
 - `tar -cvf firefox.tgz .firefox`
 - download and extract and run firefox using the users profile `firefox --profile .firefox/b5w4643p.default-release --allow-downgrade`
 
-![](/assets/glitch04.png)
+![0xskar](/assets/glitch04.png)
 
 - we can use these credentials to login to v0id. Then we can use `doas` which lets us run commands as another user "do-as". Since it has the suid bit set that means we can run it as root and spawn a shell without the root password.
 
-![](/assets/glitch05.png)
+![0xskar](/assets/glitch05.png)
 
 * * * 
 

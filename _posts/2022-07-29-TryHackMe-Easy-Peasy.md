@@ -40,7 +40,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 - gobuster found ``/hidden/whatever`` inside the source code we find base64 ``ZmxhZ3tmMXJzN19mbDRnfQ==`` and our first flag
 - time to gobust the other server on port 65524
 
-![](/assets/easy-peasy-flag03.png)
+![0xskar](/assets/easy-peasy-flag03.png)
 
 - we find robots.txt on 65524
 
@@ -58,7 +58,7 @@ This Flag Can Enter But Only This Flag No More Exceptions
 
 - after a few hours i guess haveto be more careful about looking through source code. Found base encoded data that i threw into cyberchef to decode. it's not your regular base32 or 64 or 58 encode. This leads us to another hidden directory.
 
-![](/assets/easy-peasy04.png)
+![0xskar](/assets/easy-peasy04.png)
 
 - lets check out ``/n0th1ng3ls3m4tt3r``
 - download the jpg.

@@ -52,7 +52,7 @@ Active reconnaissance, on the other hand, cannot be achieved so discreetly. It r
 
 ## Task 3 - Whois 
 
-![](/assets/passiverecon1.png)
+![0xskar](/assets/passiverecon1.png)
 
 **When was TryHackMe.com registered?** 20180705
 

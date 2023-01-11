@@ -6,7 +6,7 @@ published: true
 
 You found a secret server located under the deep sea. Your task is to hack inside the server and reveal the truth. 
 
-![](/assets/agent-sudo01.png)
+![0xskar](/assets/agent-sudo01.png)
 
 Enumerate/Exploit/Brute-Force/Hash-Cracking
 
@@ -105,7 +105,7 @@ chris
 
 ##   What is the user flag?
 
-![](/assets/agent-sudo02.png)
+![0xskar](/assets/agent-sudo02.png)
 
 ##   What is the incident of the photo called?
 

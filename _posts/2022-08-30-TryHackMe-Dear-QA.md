@@ -67,7 +67,7 @@ So this should be vulnerable to buffer ovrflow however I only have experience do
 
 For windows I would use Immunity debugger to find if the files has protections but in linux we can use `gdb` and `gef` to find the protections
 
-![](/assets/dear-qa01.png)
+![0xskar](/assets/dear-qa01.png)
 
 This shows us that the file has all of the security protections turned off. So now what we need to do is find the offset where we can overflow the binary.
 
@@ -75,13 +75,13 @@ This shows us that the file has all of the security protections turned off. So n
 
 We then use `r` in gef to run the program and it should crash. so lets examine the memory address. 
 
-![](/assets/dear-qa02.png)
+![0xskar](/assets/dear-qa02.png)
 
 We can use `x/xg $rsp` to call the memory address then after getting the address use `pattern offset 0x6161616161616166` We can now test to show control of the RSP, by running the binary again and replacing the RSP with all B's.
 
 - create our pattern `python3 -c "print('A' * 40 + 'B' * 8)"` and run the code again pasting in our new pattern.
 
-![](/assets/dear-qa03.png)
+![0xskar](/assets/dear-qa03.png)
 
 So since we confirmed we have control of the RSP variable, if we were to put a valid address on the RSP we can cause the program to continue through execution of the program. So we can use this to jump to the vuln function. 
 
@@ -130,7 +130,7 @@ Not easy!
 
 ## flag
 
-![](/assets/dear-qa04.png)
+![0xskar](/assets/dear-qa04.png)
 
 * * * 
 

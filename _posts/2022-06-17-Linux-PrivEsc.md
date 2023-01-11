@@ -131,7 +131,7 @@ Time to get familiar with ``find``, ``locate``, ``grep``, ``cut``, ``sort``.
 
 **What is the content of the flag1.txt file?**
 
-![](/assets/linprivesc01.png)
+![0xskar](/assets/linprivesc01.png)
 
 * * * 
 

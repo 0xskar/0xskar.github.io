@@ -26,11 +26,11 @@ We are Spice Hut, a new startup company that just made it big! We offer a variet
 
 ## What is the secret spicy soup recipe? 
 
-![](/assets/startup01.png)
+![0xskar](/assets/startup01.png)
 
 - ``gobuster dir -u http://10.10.52.133/ -w /usr/share/seclists/Discovery/Web-Content/raft-medium-directories.txt -x txt,html,php --no-error -t 100``
 
-![](/assets/startup02.png)
+![0xskar](/assets/startup02.png)
 
 - We get a username "Maya" from ``notice.txt`` try to use this with hydra to get access to ftp or ssh
 - ``hydra -l maya -P /usr/share/seclists/Passwords/rockyou.txt -t 16 10.10.52.133 ftp``
@@ -48,7 +48,7 @@ We are Spice Hut, a new startup company that just made it big! We offer a variet
 - checking this out can see a few things such as an attacker uploading a shell.php like me and an incorrect login attempts using ``c4ntg3t3n0ughsp1c3`` as a password....we also see ``lennie``...
 - we can login as lennie! and find the flag in their home directory.
 
-![](/assets/startup03.png)
+![0xskar](/assets/startup03.png)
 
 * * * 
 

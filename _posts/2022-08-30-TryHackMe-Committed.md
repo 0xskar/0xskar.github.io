@@ -30,7 +30,7 @@ CHECKING LOGS. pretty sure found the commit that they're looking for, now how to
 
 ## Discover the flag in the repo
 
-![](/assets/committed01.png)
+![0xskar](/assets/committed01.png)
 
 * * * 
 

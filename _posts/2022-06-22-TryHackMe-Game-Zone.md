@@ -8,7 +8,7 @@ Learn to hack into this machine. Understand how to use SQLMap, crack some passwo
 
 [https://tryhackme.com/room/gamezone](https://tryhackme.com/room/gamezone)
 
-![](/assets/hitman.jpg)
+![0xskar](/assets/hitman.jpg)
 
 * * *
 
@@ -104,7 +104,7 @@ Table: users
 
 ## Task 4 - Cracking a password with JohnTheRipper 
 
-![](/assets/johntheripper.png)
+![0xskar](/assets/johntheripper.png)
 
 ##   Answer the questions below
 

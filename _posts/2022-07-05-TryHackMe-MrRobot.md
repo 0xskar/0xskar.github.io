@@ -8,7 +8,7 @@ Based on the Mr. Robot show, can you root this box?
 
 [https://tryhackme.com/room/mrrobot](https://tryhackme.com/room/mrrobot)
 
-![](/assets/mrrobot01.jpg)
+![0xskar](/assets/mrrobot01.jpg)
 
 * * *
 
@@ -43,11 +43,11 @@ Based on the Mr. Robot show, can you root this box?
 - open up netcat listener and change the theme to php reverse shell
 - upgrade shell ``python -c 'import pty; pty.spawn("/bin/bash")'``
 
-![](/assets/mrrobot02.png)
+![0xskar](/assets/mrrobot02.png)
 
 - John the ripper the raw-md5 hash in robot dir in order to su to robot ``john password.raw-md5 --wordlist=fsocity.dic --format=Raw-MD5``
 
-![](/assets/mrrobot03.png)
+![0xskar](/assets/mrrobot03.png)
 
 ##   Linpeas.sh - PrivESC Vectors
 
@@ -71,6 +71,6 @@ root
 
 ##  What is key 3?
 
-![](/assets/mrrobot04.png)
+![0xskar](/assets/mrrobot04.png)
 
 * * * 

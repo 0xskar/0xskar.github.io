@@ -51,7 +51,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 - login to wp-admin with the credentials and use the appearance editor to edit the main index template - index.php with php monkey reverse shell. 
 
-![](/assets/c0ld01.png)
+![0xskar](/assets/c0ld01.png)
 
 - ``find / -perm -u=s -type f 2>/dev/null``
 - ``/usr/bin/find`` has suid set

@@ -36,7 +36,7 @@ So if we create a executable and get it into the program files folder we can get
 2. Give everyone permissions `icacls C:\Users\Sage\Service.exe /grant Everyone:F`
 3. Copy the service.exe to the Development Files directory and rename Devservice.exe.
 
-![](/assets/quotient01.png)
+![0xskar](/assets/quotient01.png)
 
 We dont have permissions to start and stop the service but a restart of the system will do this, and should send us a shell.
 
@@ -44,7 +44,7 @@ We dont have permissions to start and stop the service but a restart of the syst
 
 ## Admin Flag
 
-![](/assets/quotient02.png)
+![0xskar](/assets/quotient02.png)
 
 * * * 
 

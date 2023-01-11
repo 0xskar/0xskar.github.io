@@ -64,7 +64,7 @@ Using [REPORT] and then using `;` to end the function followed by a bash revshel
 
 ## What is the content of user.txt?
 
-![](/assets/jpgchat01.png)
+![0xskar](/assets/jpgchat01.png)
 
 * * * 
 

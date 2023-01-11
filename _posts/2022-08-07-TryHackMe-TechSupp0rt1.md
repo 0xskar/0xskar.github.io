@@ -85,7 +85,7 @@ lets check out /subrion
 
 - end up finding the panel @ ``http://techsupport.thm/subrion/panel.php`` but we have to get the magical formula for the password. I am assuming this is "cooked" with cyberchef
 
-![](/assets/techsupp0rt1-01.png)
+![0xskar](/assets/techsupp0rt1-01.png)
 
 - now we have creds ``admin:Scam2021``
 - nagivate to uploads and upload a revshell. since .htaccess disallowes certain file extensions we are using a pentestmoney php rev shell that has the ``.phar`` file extension.

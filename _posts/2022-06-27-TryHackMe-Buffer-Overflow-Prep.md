@@ -14,7 +14,7 @@ Practicing stack based buffer overflows!
 
 Buffers are memory storage regions that temporarily hold data while being transfered to one location from another. The buffer overflow occurs when the volume of data exceeds the storage capacity of the memory buffer, and as a result the program attempting to write the data to the buffer, overwrites adjacent memory locations.
 
-![](/assets/buffer-overflow-cyber-attack.png)
+![0xskar](/assets/buffer-overflow-cyber-attack.png)
 
 For example, a buffer for log-in credentials may be designed to expect username and password inputs of 8 bytes, so if a transaction involves an input of 10 bytes (that is, 2 bytes more than expected), the program may write the excess data past the buffer boundary.
 
@@ -166,7 +166,7 @@ The first badchar in the list should be the null byte (\x00) since we already re
 
 Restart oscp.exe in Immunity and run the modified exploit.py script again. Repeat the badchar comparison until the results status returns "Unmodified". This indicates that no more badchars exist.
 
-![](/assets/buffer-overflow04.png)
+![0xskar](/assets/buffer-overflow04.png)
 
 ##  Finding a Jump Point
 
@@ -210,7 +210,7 @@ Start a netcat listener on your Kali box using the LPORT you specified in the ms
 
 Restart oscp.exe in Immunity and run the modified exploit.py script again. Your netcat listener should catch a reverse shell!
 
-![](/assets/buffer-overflow05.png)
+![0xskar](/assets/buffer-overflow05.png)
 
 ##   Answer the questions below
 
@@ -294,7 +294,7 @@ The first badchar in the list should be the null byte (\x00) since we already re
 
 Restart oscp.exe in Immunity and run the modified exploit.py script again. Repeat the badchar comparison until the results status returns "Unmodified". This indicates that no more badchars exist.
 
-![](/assets/buffer-overflow04.png)
+![0xskar](/assets/buffer-overflow04.png)
 
 ##  Finding a Jump Point
 
@@ -338,7 +338,7 @@ Start a netcat listener on your Kali box using the LPORT you specified in the ms
 
 Restart oscp.exe in Immunity and run the modified exploit.py script again. Your netcat listener should catch a reverse shell!
 
-![](/assets/buffer-overflow05.png)
+![0xskar](/assets/buffer-overflow05.png)
 
 ##   Answer the questions below
 
@@ -424,7 +424,7 @@ The first badchar in the list should be the null byte (\x00) since we already re
 
 Restart oscp.exe in Immunity and run the modified exploit.py script again. Repeat the badchar comparison until the results status returns "Unmodified". This indicates that no more badchars exist.
 
-![](/assets/buffer-overflow04.png)
+![0xskar](/assets/buffer-overflow04.png)
 
 ##  Finding a Jump Point
 
@@ -468,7 +468,7 @@ Start a netcat listener on your Kali box using the LPORT you specified in the ms
 
 Restart oscp.exe in Immunity and run the modified exploit.py script again. Your netcat listener should catch a reverse shell!
 
-![](/assets/buffer-overflow05.png)
+![0xskar](/assets/buffer-overflow05.png)
 
 ##   Answer the questions below
 
@@ -556,7 +556,7 @@ Restart oscp.exe in Immunity and run the modified exploit.py script again. Repea
 
 - ``!mona compare -f C:\mona\oscp\bytearray.bin -a 0196FA30``
 
-![](/assets/buffer-overflow04.png)
+![0xskar](/assets/buffer-overflow04.png)
 
 ##  Finding a Jump Point
 
@@ -600,7 +600,7 @@ Start a netcat listener on your Kali box using the LPORT you specified in the ms
 
 Restart oscp.exe in Immunity and run the modified exploit.py script again. Your netcat listener should catch a reverse shell!
 
-![](/assets/buffer-overflow05.png)
+![0xskar](/assets/buffer-overflow05.png)
 
 ##   Answer the questions below
 
@@ -688,7 +688,7 @@ Restart oscp.exe in Immunity and run the modified exploit.py script again. Repea
 
 - ``!mona compare -f C:\mona\oscp\bytearray.bin -a 018BFA30``
 
-![](/assets/buffer-overflow04.png)
+![0xskar](/assets/buffer-overflow04.png)
 
 ##  Finding a Jump Point
 
@@ -732,7 +732,7 @@ Start a netcat listener on your Kali box using the LPORT you specified in the ms
 
 Restart oscp.exe in Immunity and run the modified exploit.py script again. Your netcat listener should catch a reverse shell!
 
-![](/assets/buffer-overflow05.png)
+![0xskar](/assets/buffer-overflow05.png)
 
 ##   Answer the questions below
 
@@ -820,7 +820,7 @@ Restart oscp.exe in Immunity and run the modified exploit.py script again. Repea
 
 - ``!mona compare -f C:\mona\oscp\bytearray.bin -a 01A2FA30``
 
-![](/assets/buffer-overflow04.png)
+![0xskar](/assets/buffer-overflow04.png)
 
 ##  Finding a Jump Point
 
@@ -864,7 +864,7 @@ Start a netcat listener on your Kali box using the LPORT you specified in the ms
 
 Restart oscp.exe in Immunity and run the modified exploit.py script again. Your netcat listener should catch a reverse shell!
 
-![](/assets/buffer-overflow05.png)
+![0xskar](/assets/buffer-overflow05.png)
 
 ##   Answer the questions below
 
@@ -952,7 +952,7 @@ Restart oscp.exe in Immunity and run the modified exploit.py script again. Repea
 
 - ``!mona compare -f C:\mona\oscp\bytearray.bin -a 019FFA30``
 
-![](/assets/buffer-overflow04.png)
+![0xskar](/assets/buffer-overflow04.png)
 
 ##  Finding a Jump Point
 
@@ -996,7 +996,7 @@ Start a netcat listener on your Kali box using the LPORT you specified in the ms
 
 Restart oscp.exe in Immunity and run the modified exploit.py script again. Your netcat listener should catch a reverse shell!
 
-![](/assets/buffer-overflow05.png)
+![0xskar](/assets/buffer-overflow05.png)
 
 ##   Answer the questions below
 
@@ -1084,7 +1084,7 @@ Restart oscp.exe in Immunity and run the modified exploit.py script again. Repea
 
 - ``!mona compare -f C:\mona\oscp\bytearray.bin -a 01A4FA30``
 
-![](/assets/buffer-overflow04.png)
+![0xskar](/assets/buffer-overflow04.png)
 
 ##  Finding a Jump Point
 
@@ -1128,7 +1128,7 @@ Start a netcat listener on your Kali box using the LPORT you specified in the ms
 
 Restart oscp.exe in Immunity and run the modified exploit.py script again. Your netcat listener should catch a reverse shell!
 
-![](/assets/buffer-overflow05.png)
+![0xskar](/assets/buffer-overflow05.png)
 
 ##   Answer the questions below
 
@@ -1216,7 +1216,7 @@ Restart oscp.exe in Immunity and run the modified exploit.py script again. Repea
 
 - ``!mona compare -f C:\mona\oscp\bytearray.bin -a 01A4FA30``
 
-![](/assets/buffer-overflow04.png)
+![0xskar](/assets/buffer-overflow04.png)
 
 ##  Finding a Jump Point
 
@@ -1260,7 +1260,7 @@ Start a netcat listener on your Kali box using the LPORT you specified in the ms
 
 Restart oscp.exe in Immunity and run the modified exploit.py script again. Your netcat listener should catch a reverse shell!
 
-![](/assets/buffer-overflow05.png)
+![0xskar](/assets/buffer-overflow05.png)
 
 ##   Answer the questions below
 

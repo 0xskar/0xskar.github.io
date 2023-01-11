@@ -6,7 +6,7 @@ published: true
 
 SGBD, Enumeration, RCE, Cracking. Hack into a vulnerable database server with an in-memory data-structure in this semi-guided challenge!
 
-![](/assets/redis01.png)
+![0xskar](/assets/redis01.png)
 
 [https://tryhackme.com/room/res](https://tryhackme.com/room/res)
 
@@ -104,7 +104,7 @@ python3 -c 'import pty;pty.spawn("/bin/bash")'
 www-data@ubuntu:/var/www/html$ 
 ```
 
-![](/assets/redis02.png)
+![0xskar](/assets/redis02.png)
 
 * * * 
 
@@ -170,7 +170,7 @@ Easy enough...
 
 - ``sudo vi -c ':!/bin/sh' /dev/null``
 
-![](/assets/res03.png)
+![0xskar](/assets/res03.png)
 
 * * * 
 

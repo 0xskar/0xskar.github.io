@@ -6,7 +6,7 @@ published: true
 
 Hash Cracking Challenges
 
-![](/assets/crackthehash01.jpg)
+![0xskar](/assets/crackthehash01.jpg)
 
 * * *
 

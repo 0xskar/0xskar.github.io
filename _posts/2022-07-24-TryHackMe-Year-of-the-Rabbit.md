@@ -38,9 +38,9 @@ Time to enter the warren... Can you hack into the Year of the Rabbit box without
 
 - now running the request to ``/sup3r_s3cr3t_fl4g.php`` and capturing with burp proxy we see a hudden dir. ``/WExYY2Cv-qU``
 
-![](/assets/rabbit01.png)
+![0xskar](/assets/rabbit01.png)
 
-![](/assets/rabbit0.png)
+![0xskar](/assets/rabbit0.png)
 
 - download the hot babe she's hiding something.
 - running ``strings`` on her we get the information needed to access the ftp server

@@ -81,7 +81,7 @@ Upgrade-Insecure-Requests: 1
 
 ## user.txt?
 
-![](/assets/hackervshacker.png)
+![0xskar](/assets/hackervshacker.png)
 
 * * * 
 

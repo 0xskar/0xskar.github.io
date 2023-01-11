@@ -26,7 +26,7 @@ When you have completed this room you should be comfortable applying tools and m
 
 ## Task 2 - Your first challenge! 
 
-![](/assets/searchlight-imint01.png)
+![0xskar](/assets/searchlight-imint01.png)
 
 **What is the name of the street where this image was taken?**
 
@@ -36,7 +36,7 @@ When you have completed this room you should be comfortable applying tools and m
 
 ## Task 3 Just Google it! 
 
-![](/assets/searchlight-imint03.png)
+![0xskar](/assets/searchlight-imint03.png)
 
 **Which city is the tube station located in?**
 
@@ -58,7 +58,7 @@ When you have completed this room you should be comfortable applying tools and m
 
 ## Task 4 Keep at it!  
 
-![](/assets/searchlight-imint04.png)
+![0xskar](/assets/searchlight-imint04.png)
 
 **Which building is this photo taken in?**
 
@@ -76,7 +76,7 @@ When you have completed this room you should be comfortable applying tools and m
 
 ## Task 5 Coffee and a light lunch 
 
-![](/assets/searchlight-imint05.png)
+![0xskar](/assets/searchlight-imint05.png)
 
 - [https://www.facebook.com/weecoffeeshop/](https://www.facebook.com/weecoffeeshop/)
 
@@ -104,7 +104,7 @@ When you have completed this room you should be comfortable applying tools and m
 
 ## Task 6 Reverse your thinking
 
-![](/assets/searchlight-imint06.png)
+![0xskar](/assets/searchlight-imint06.png)
 
 **Which restaurant was this picture taken at?**
 
@@ -118,7 +118,7 @@ When you have completed this room you should be comfortable applying tools and m
 
 ## Task 7 Locate this sculpture
 
-![](/assets/searchlight-imint07.png)
+![0xskar](/assets/searchlight-imint07.png)
 
 This challenge will require you to apply some the techniques I have touched on so far: Scanning the image for visual clues, reverse image searching and Google dorking. Tools should not be your primary focus - don't underestimate how far you can get with dorking and scrolling search results. 
 
@@ -138,7 +138,7 @@ This challenge is a step up in difficulty from the previous challenges and you s
 
 I highly recommend watching this Ted talk by Amy Herman on visual intelligence - "[A lesson on looking](https://www.youtube.com/watch?v=_jHmjs2270A)" if you want a unique view on how you perceive visual data.
 
-![](/assets/searchlight-imint08.png)
+![0xskar](/assets/searchlight-imint08.png)
 
 **What is the name of the character that the statue depicts?**
 

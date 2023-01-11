@@ -130,13 +130,13 @@ Configure an appropriate position and payload (the tickets are stored at values 
 
 **Either using the Response tab in the Attack Results window or by looking at each successful (i.e. 200 code) request manually in your browser, find the ticket that contains the flag. What is the flag?**
 
-![](/assets/burpsuiteintruder1.png)
+![0xskar](/assets/burpsuiteintruder1.png)
 
 * * *
 
 ## Task 12 - Extra Mile - CSRF Token Bypass 
 
-![](/assets/burpsuiteintruder2.png)
+![0xskar](/assets/burpsuiteintruder2.png)
 
 * * *
 

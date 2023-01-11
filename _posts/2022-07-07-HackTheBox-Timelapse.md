@@ -7,7 +7,7 @@ published: true
 HackTheBox CTF Box - Remote access comes in different flavors.
 
 
-![](/assets/timelapse01.jpg)
+![0xskar](/assets/timelapse01.jpg)
 
 * * *
 
@@ -150,7 +150,7 @@ Now that we're connected we can continue with enumeration.
 
 - Not much but there is Console History
 
-![](/assets/timelapse02.png)
+![0xskar](/assets/timelapse02.png)
 
 - Because svc_deploy is being used here - We can reuse these credentials to pass commands via PS-Remoting using this formula ``invoke-command -computername localhost -credential $c -port 5986 -usessl -SessionOption $so -scriptblock {net user svc_deploy}``
 

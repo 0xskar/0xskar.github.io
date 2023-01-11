@@ -27,7 +27,7 @@ Gobuster doesnt yeild much just shows us the login that we can find by visiting 
 
 Checking the firefox inspector, the session cookie seems to base64.
 
-![](/assets/vulnnet-node01.png)
+![0xskar](/assets/vulnnet-node01.png)
 
 ```
 ┌──(0xskar㉿cocokali)-[~/Documents/TryHackMe/VulnNet-Node]
@@ -69,7 +69,7 @@ Using this we can privesc to serv-manage
 
 ## user.txt?
 
-![](/assets/vulnnet-node02.png)
+![0xskar](/assets/vulnnet-node02.png)
 
 * * * 
 

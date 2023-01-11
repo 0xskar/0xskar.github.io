@@ -6,7 +6,7 @@ published: true
 
 Security, Steganography, Web, Challenge. Will you be consumed by madness?
 
-![](/assets/madness01.png)
+![0xskar](/assets/madness01.png)
 
 [https://tryhackme.com/room/madness](https://tryhackme.com/room/madness)
 
@@ -28,7 +28,7 @@ Inspect source and find comment
 - ``hexeditor`` shows this jpg is set as a png. lets try to edit the file signature to be able to read it.
 - using JFIF file signature header (``FF D8 FF E0 00 10 4A 46 49 46 00 01``) with ``hexeditor`` we can now read the file in ``ristretto``
 
-![](/assets/madness02.png)
+![0xskar](/assets/madness02.png)
 
 - found hidden directory ``/th1s_1s_h1dd3n``
 - inspecting the source
@@ -109,7 +109,7 @@ Here take my password
 
 ## What is the user flag?
 
-![](/assets/madness03.png)
+![0xskar](/assets/madness03.png)
 
 * * * 
 
@@ -122,7 +122,7 @@ Potential Escalation Vectors
 - ``cp /usr/share/exploitdb/exploits/linux/local/41154.sh .``
 - wget it over and ``./41154.sh`` to get root
 
-![](/assets/madness04.png)
+![0xskar](/assets/madness04.png)
 
 * * * 
 

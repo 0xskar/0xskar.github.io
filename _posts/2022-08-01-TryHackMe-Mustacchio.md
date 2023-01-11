@@ -78,7 +78,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 ## What is the user flag?
 
-![](/assets/mustacchio02.png)
+![0xskar](/assets/mustacchio02.png)
 
 * * * 
 

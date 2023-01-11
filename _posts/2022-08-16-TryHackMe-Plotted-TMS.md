@@ -137,7 +137,7 @@ plot_admin is running a script
 3. make a symbolic force link between the created script.sh with the bash and the plot_admins backup.sh `ln -sf script.sh backup.sh`
 4. run the shell to get escalate to plot_admin `/home/plot_admin/pa_shell -p`
 
-![](/assets/plotted-tms01.png)
+![0xskar](/assets/plotted-tms01.png)
 
 add our ssh key to the user dir so we can ssh in as the user.
 
@@ -170,7 +170,7 @@ IMPLEMENT_DYNAMIC_BIND_FN(bind)
 IMPLEMENT_DYNAMIC_CHECK_FN()
 ```
 
-![](/assets/plotted-tms02.png)
+![0xskar](/assets/plotted-tms02.png)
 
 * * * 
 
