@@ -96,11 +96,11 @@ A collection of links i've found useful. Tools/Guides/Websites.
 
 - [Volatilty Cheatsheet](https://blog.onfvp.com/post/volatility-cheatsheet/)
 
-## Practice/Testing
+# Practice/Testing
 
 - [Testing XSS Skills](https://www.acunetix.com/blog/web-security-zone/test-xss-skills-vulnerable-sites/)
 
-## Evasion Techniques
+# Evasion Techniques
 
 - [Fast Flux](https://unit42.paloaltonetworks.com/fast-flux-101/) - How Cybercriminals Improve the Resilience of Their Infrastructure to Evade Detection and Law Enforcement Takedowns
 
