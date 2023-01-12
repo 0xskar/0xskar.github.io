@@ -9,7 +9,7 @@ tags: [SOC, SOC Analyst, Threat Hunting, Hashes]
 
 The Pyramid of pain visualizes the level of difficulty it will cause for an adversary to change the indicators associated with them, and their attack campaign. 
 
-# Hash Values (Trivial)
+## Hash Values (Trivial)
 
 A hash is the result of a hashing algorithm. A hash value is a unique value that identifies data. Some of the most common hashing algorithms are:
 
