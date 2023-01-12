@@ -127,7 +127,7 @@ The apex of the pyramid.
 
 TTPs are Tactics, Techniques and Protocols, as described by the [MITRE ATT&CK Matrix](https://attack.mitre.org/tactics/enterprise/). Which is all the steps the adversary takes to achieve their goals, starting from phising attemps to persistance to data exfiltration.
 
-If we can detect and respons to the TTPs quickly, they have amost no change to fight back and will have to stat of right from the bottom of the pyramid. If we can detect a [Pass-the-Hash](https://www.beyondtrust.com/resources/glossary/pass-the-hash-pth-attack) attack using Windows Event Log Monitoring and remediate it, we can find the compromised host pretty quickly and stop pivoting inside the network. They would then have to go back, reconfigure their customer tools or give up and try another, easiar target.
+If we can detect and respons to the TTPs quickly, they have amost no chance to fight back and will have to stat of right from the bottom of the pyramid. If we can detect a [Pass-the-Hash](https://www.beyondtrust.com/resources/glossary/pass-the-hash-pth-attack) attack using Windows Event Log Monitoring and remediate it, we can find the compromised host pretty quickly and stop pivoting inside the network. They would then have to go back, reconfigure their customer tools or give up and try another, easiar target.
 
 ## Conclusion
 
