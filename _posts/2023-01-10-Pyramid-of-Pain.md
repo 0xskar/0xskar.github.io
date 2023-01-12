@@ -9,7 +9,7 @@ tags: [SOC, SOC Analyst, Threat Hunting, Hashes]
 
 The Pyramid of pain visualizes the level of difficulty it will cause for an adversary to change the indicators associated with them, and their attack campaign. 
 
-## Hash Values (Trivial)
+# Hash Values (Trivial)
 
 A hash is the result of a hashing algorithm. A hash value is a unique value that identifies data. Some of the most common hashing algorithms are:
 
@@ -68,8 +68,71 @@ So a suspicious process execution followed by a series of strange events would b
 
 ## Network Artifacts (Annoying)
 
+Network artifacts can be user-agent strings, Command and Control information or URI patterns followed by HTTP Post requests. You might see user-agent strings that look strange or havent been observed in your logs before. The user-agent is defined by [RFC2616](https://datatracker.ietf.org/doc/html/rfc2616#page-145) as the request-header field that contains information about the user-agent making the request.
 
+We can detect network artifacts in Wireshark PCAPs by using network protocol analyzers like [TShark](https://www.wireshark.org/docs/wsug_html_chunked/AppToolstshark.html) or by checking our IDS (Intrusion Defence System) logging from a source like [Snort](https://www.snort.org/).
 
+> An example showing an HTTP POST request containing suspicious strings:
+{: .prompt-info }
 
+![Example of an HTTP POST request containing suspicious strings](/assets/a6e36c7601f7b4ec07ce2a102ffb33ab.png)
+
+> Using TShark command to filter out the User-Agent strings:
+{: .prompt-info }
+
+```bash
+tshark --Y http.request -T fields -e http.host -e http.user_agent -r analysis_file.pcap 
+```
+
+![](/assets/642cac93b8c5b7bf8c82d448cb48c1d1.png)
+
+The above are common user-agent strings used by the [Emotet Downloader Trojan](https://www.mcafee.com/blogs/other-blogs/mcafee-labs/emotet-downloader-trojan-returns-in-force/).
+
+If you can detect these attacks you might be able to block them creating more obstacles for the attacker and make their attemps to compromise the network more difficult.
+
+## Tools (Challenging)
+
+We have levelled up our detection capabilities against the artifacts. The attacker would most likely give up trying to break into your network or go back and try to create a new tool that serves the same purpose. It will be a game over for the attackers as they would need to invest some money into building a new tool (if they are capable of doing so), find the tool that has the same potential, or even gets some training to learn how to be proficient in a certain tool. 
+
+Attackers would use the utilities to create malicious macro documents (maldocs) for spearphishing attempts, a backdoor that can be used to establish C2 ([Command and Control Infrastructure](https://www.varonis.com/blog/what-is-c2/)), any custom .EXE, and .DLL files, payloads, or password crackers.
+
+> A trojan dropping a suspicious exe in the temp folder
+{: .prompt-info }
+
+![A trojan dropping a suspicious exe in the temp folder](/assets/20624b49722fd8d0ba062d6206c1d021.png)
+
+> The executions of the suspicious binary
+{: .prompt-info }
+
+![executions of the suspicious binary](/assets/8638b80dc730bfc88e37633f648b15e2.png)
+
+We can use antivirus signatures, detection rules and YARA rules as weapons against attackers at this stage.
+
+YARA is a tool that allows users to create descriptions, or "rules," of malware and other malicious files based on their characteristics, such as file name, size, and data strings. These rules can then be used to scan files and determine if they match any known malware.
+
+[MalwareBazaar](https://bazaar.abuse.ch/) and [Malshare](https://malshare.com/) are good resources to provide you with access to the samples, malicious feeds, and YARA results - these all can be very helpful when it comes to threat hunting and incident response. 
+
+For detection rules, [SOC Prime Threat Detection Marketplace](https://tdm.socprime.com/) is a great platform, where security professionals share their detection rules for different kinds of threats including the latest CVE's that are being exploited in the wild by adversaries. 
+
+Fuzzy hashing (Context Triggered Piecewise Hash or CTPH) is also a strong weapon against the attacker's tools. Fuzzy hashing helps you to perform similarity analysis - match two files with minor differences based on the fuzzy hash values. One of the examples of fuzzy hashing is the usage of SSDeep; on the [SSDeep official website](https://ssdeep-project.github.io/ssdeep/index.html), you can also find the complete explanation for fuzzy hashing. 
+
+> Example of SSDeep from VirusTotal
+{: .prompt-info }
+
+![SSDeep example](/assets/ssdeep.png)
+
+## TTPs (Tough)
+
+The apex of the pyramid.
+
+TTPs are Tactics, Techniques and Protocols, as described by the [MITRE ATT&CK Matrix](https://attack.mitre.org/tactics/enterprise/). Which is all the steps the adversary takes to achieve their goals, starting from phising attemps to persistance to data exfiltration.
+
+If we can detect and respons to the TTPs quickly, they have amost no change to fight back and will have to stat of right from the bottom of the pyramid. If we can detect a [Pass-the-Hash](https://www.beyondtrust.com/resources/glossary/pass-the-hash-pth-attack) attack using Windows Event Log Monitoring and remediate it, we can find the compromised host pretty quickly and stop pivoting inside the network. They would then have to go back, reconfigure their customer tools or give up and try another, easiar target.
+
+## Conclusion
+
+We've learned the concept of the Pyramid of Pain.
+
+You can pick any APT (Advanced Persistent Threat Groups) as another exercise. A good place to look at would be [FireEye Advanced Persistent Threat Groups](https://www.fireeye.com/current-threats/apt-groups.html). When you have determined the APT Group you want to research - find their indicators and ask yourself: " What can I do or what detection rules and approach can I create to detect the adversary's activity?", and "Where does this activity or detection fall on the Pyramid of Pain?”
 
 Source(s): <https://tryhackme.com/room/pyramidofpainax> 
