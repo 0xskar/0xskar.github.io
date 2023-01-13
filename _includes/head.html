@@ -77,14 +77,28 @@
     <link rel="preconnect" href="https://www.google-analytics.com" crossorigin="use-credentials">
     <link rel="dns-prefetch" href="https://www.google-analytics.com">
 
-    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin="anonymous">
-    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5ZJ77NXFJ5"></script>
+      <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-5ZJ77NXFJ5');
+    </script>
 
     {% if site.google_analytics.pv.proxy_endpoint %}
       {% assign proxy_url = site.google_analytics.pv.proxy_endpoint
           | replace: "https://", "" | split: "/" | first | prepend: "https://" %}
-      <link rel="preconnect" href="{{ proxy_url }}" crossorigin="use-credentials">
-      <link rel="dns-prefetch" href="{{ proxy_url }}">
+      <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5ZJ77NXFJ5"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-5ZJ77NXFJ5');
+     </script>
     {% endif %}
   {% endif %}
 
