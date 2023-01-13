@@ -1,7 +1,7 @@
 ---
 title: Minecraft Dedicated Server Setup
 date: 2023-01-11 20:58:00 -0500
-categories: [Walkthrough, Other]
+categories: [Minecraft, Walkthrough, Other]
 tags: [Minecraft, User Management, Linux]
 ---
 
