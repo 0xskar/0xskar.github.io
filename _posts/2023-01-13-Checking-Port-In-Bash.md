@@ -1,13 +1,13 @@
 ---
-title: Check IP Address Function
+title: Check Port Use Function
 date: 2023-01-11 20:58:00 -0500
 categories: [Scripting, Walkthrough, Bash]
 tags: [Bash, Walkthrough, Scripting, Linux, if statement, functions]
 ---
 
-## Check IP Function.
+## Check Port Function.
 
-This simple bash script goes through a process of checking certain variables, and if an ip is in use before continuing.
+This simple bash script goes through a process of checking certain variables, to see if a port is in use before continuing.
 
 ```bash
 		process=$((0))
