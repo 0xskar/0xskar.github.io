@@ -1,8 +1,7 @@
 ---
 title: Resources
-date: 2023-01-10 23:49:00 -0500
 categories: [Resources]
-tags: [Resources]
+tags: [tools, guides, hashes, privesc, command line, linux, windows, sql, powershell, practice, evasion]
 pin: true 
 ---
 
@@ -19,6 +18,8 @@ A collection of links i've found useful. Tools/Guides/Websites.
 - [Bash Scripting Cheatsheet](https://devhints.io/bash)
 - [Google Hacking Database](https://www.exploit-db.com/google-hacking-database) - Useful google dorking
 - [XSS Cheatsheet](https://3os.org/penetration-testing/cheatsheets/xss-cheatsheet/#img-onerror-and-javascript-alert-encode)- a series of XSS attacks that can be used to bypass certain XSS defensive filters
+- [Custom Word List generator](https://github.com/digininja/CeWL) - Web crawler.
+- With [TTPassGen](https://github.com/tp7309/TTPassGen) we can create wordlists from scratch.
 
 ## Useful Guides
 
@@ -37,6 +38,11 @@ A collection of links i've found useful. Tools/Guides/Websites.
 - [https://cirt.net/passwords](https://cirt.net/passwords) - default passwords
 - [https://default-password.info/](https://default-password.info/) - default passwords
 - [https://datarecovery.com/rd/default-passwords/](https://datarecovery.com/rd/default-passwords/) - default passwords
+- [Haiti](https://noraj.github.io/haiti/#/pages/install) - A ruby based hash identifier
+- [wordlistctl](https://github.com/BlackArch/wordlistctl) is a python script that fetches, installs, updates, and searches for wordlist archives from different websites with more than 6400 avalable.
+- [proper rules syntax](https://www.openwall.com/john/doc/RULES.shtml).
+- [Mentalist](https://github.com/sc0tfree/mentalist) - Import a wordlist, add some Case, Substitution, Append/Prepend rules.
+
 
 ## Privilege Escalation
 

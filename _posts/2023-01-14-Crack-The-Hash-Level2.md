@@ -3,10 +3,12 @@ title: Crack the Hash Level 2
 date: 2023-01-14 05:39:00 -0500
 categories: [Walkthrough, Tryhackme, CTF]
 tags: [hash, hashcat, john the ripper, cracking, hash identification, haiti, wordlistctl, mentalist, CeWL, ttpassgen]
-published: false
+published: true
 ---
 
 Tryhackme's sequel to their [crackthehash level 1](https://tryhackme.com/room/crackthehash). The last ones baby you through pretty good so lets see if this is a challenge. They say password cracking is part of a pentesters job, but I am not one, hopefully someday. It seems interesting.
+
+![Password Cracking](/assets/hackerman.jpg)
 
 ## Hash Identification
 
@@ -137,5 +139,35 @@ With [TTPassGen](https://github.com/tp7309/TTPassGen) we can create wordlists fr
 
 > Generating combined wordlists can create massive files. The combination.txt above creates a file 1.64 GB for example.
 {: .prompt-danger }
+
+## Crack Hashes
+
+We have to crack a series of hashes. Each hash has a scenario that will suggest rules. We will have to build a wordlist or use specialized data to crack the hash.
+
+### b16f211a8ad7f97778e5006c7cecdf31
+
+```bash
+┌──(oskar㉿kali)-[~/Documents/thm/crackthehash2]
+└─$ haiti b16f211a8ad7f97778e5006c7cecdf31
+MD5 [HC: 0] [JtR: raw-md5]
+LM [HC: 3000] [JtR: lm]
+NTLM [HC: 1000] [JtR: nt]
+MD2 [JtR: md2]
+MD4 [HC: 900] [JtR: raw-md4]
+Haval-128 (4 rounds) [JtR: haval-128-4]
+Lotus Notes/Domino 5 [HC: 8600] [JtR: lotus5]
+Skype [HC: 23]
+IPB 2.x (Invision Power Board) [HC: 2810]
+Keyed MD5: RIPv2, OSPF, BGP, SNMPv2 [JtR: net-md5]
+RIPEMD-128 [JtR: ripemd-128]
+Snefru-128 [JtR: snefru-128]
+Domain Cached Credentials (DCC), MS Cache [HC: 1100] [JtR: mscash]
+Domain Cached Credentials 2 (DCC2), MS Cache 2 [HC: 2100] [JtR: mscash2]
+DNSSEC (NSEC3) [HC: 8300]
+RAdmin v2.x [HC: 9900] [JtR: radmin]
+Umbraco HMAC-SHA1 [HC: 24800]
+Bitcoin WIF private key (P2PKH), compressed [HC: 28501]
+Bitcoin WIF private key (P2PKH), uncompressed [HC: 28502]
+```
 
 
