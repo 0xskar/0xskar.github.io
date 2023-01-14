@@ -1,8 +1,8 @@
 ---
-title: Minecraft Python Installer
+title: Minecraft Bash Installer
 date: 2023-01-11 20:58:00 -0500
 categories: [Programming, Lesson, Other]
-tags: [Minecraft, scripting, Linux, python]
+tags: [Minecraft, scripting, Linux, bash]
 ---
 
 So just fooling around and wanted to make an installation script to install a Minecraft dedicated server on Linux. I've done a little research so going to try to put together some sort of an application.
@@ -22,10 +22,10 @@ Going to start off with the application structure.
 ```bash
 minecraft_installer
 ├── build.sh
-├── dist
-│   └── server.jar
-└── makeself_stage
-    └── installer.sh
+└── dist
+    ├── server.properties
+	├── other server files
+    └── server.jar
 ```
 
 The main folder is going to contain the nessecary files to build the application, and best practice is to have a script for the package creation seperated in a `build.sh` file.
@@ -231,8 +231,6 @@ install_main ()
 	echo "max-world-size=29999984" >> dist/server.properties
 	echo "max-world-size=29999984"
 
-	# server.properties setup completed tar and extract to designated folder
-	echo "server.properties setup completed."
 }
 
 build ()
@@ -252,17 +250,64 @@ I was going to make this installation process more abstract, but I am going to t
 But for now we need to create a process for the program to check for and create a valid directory. Then extract to the directory.
 
 
+```bash
+	# server.properties setup completed tar and extract to designated folder
+	echo "server.properties setup completed."
+	echo "############################################################"
+	echo "#		CHOOSE FOLDER 										 "
+	echo "############################################################"
+}
 
+install_final ()
+{
+	exists=0
+	#check folder for installation
+	user_folder=$(getent passwd $USER | cut -d: -f6)
+	echo "Enter folder for installation."
+	echo "This will be located at /tmp$user_folder"
+	read install_folder
+	install_dir="${user_folder}/${install_folder}"
+	echo "$install_dir"
+	sleep 0.2
 
+	# check user folder 
+	if [[ -d /tmp$install_dir ]]; then
+		if [[ $exists -eq 0 ]]; then
+			echo "The directory /tmp$install_dir already exists."
+			echo "Try again."
+			exists=1
+		fi
+		install_final
+	else
+		echo "installing at /tmp$install_dir"
+		# create directory
+		mkdir -p /tmp$install_dir
+		echo "Successfully created at /tmp$install_dir"
+		sleep 0.2
+	fi
+```
+{: file="./build.sh" }
 
 ## Tar and extract
 
-With our package and installation ready we can use makeself to package.
+With our package and installation ready we can use use a simple but powerful command to tar and extract.
 
 ```bash
-makeself ./minecraft_installer/makeself_stage/
+	# tar and extract to folder
+	(cd ./dist && tar cv .) | (cd /tmp/home/oskar/minecraft && tar xvf -)
+	echo "COMPLETED"
+}
+
+build ()
+{
+	install_agree
+	install_main
+	install_final
+}
+
+build
 ```
-{: file=/minecraft_installer}
+{: file="./build.sh" }
 
 
 

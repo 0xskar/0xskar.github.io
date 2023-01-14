@@ -20,13 +20,13 @@ There are five basic operators in bash/shell scripting:
 
 These operators are used to perform normal arithmetics/mathematical operations. There are seven arithmetic operators:
 
-- Addition `+`: Binary operation used to add two operands.
-- Subtraction `-`: Binary operation used to subtract two operands.
-- Multiplication `*`: Binary operation used to multiply two operands.
-- Division `/`: Binary operation used to divide two operands.
-- Modulus `%`: Binary operation used to find remainder of two operands.
-- Increment Operator `++`: Unary operator used to increase the value of operand by one.
-- Decrement Operator `–`: Unary operator used to decrease the value of a operand by one
+- Addition `+` Binary operation used to add two operands.
+- Subtraction `-` Binary operation used to subtract two operands.
+- Multiplication `*` Binary operation used to multiply two operands.
+- Division `/` Binary operation used to divide two operands.
+- Modulus `%` Binary operation used to find remainder of two operands.
+- Increment Operator `++` Unary operator used to increase the value of operand by one.
+- Decrement Operator `–` Unary operator used to decrease the value of a operand by one
 
 ## Relational Operators
 
@@ -43,20 +43,20 @@ Relational operators are those operators which define the relation between two 
 
 They are also known as boolean operators. These are used to perform logical operations. There are three types:
 
-- Logical AND `&&`: This is a binary operator, which returns true if both the operands are true otherwise returns false.
-- Logical OR `||`: This is a binary operator, which returns true if either of the operands is true or both the operands are true and returns false if none of them is false.
-- Not Equal to `!`: This is a unary operator which returns true if the operand is false and returns false if the operand is true.
+- Logical AND `&&` This is a binary operator, which returns true if both the operands are true otherwise returns false.
+- Logical OR `||` This is a binary operator, which returns true if either of the operands is true or both the operands are true and returns false if none of them is false.
+- Not Equal to `!` This is a unary operator which returns true if the operand is false and returns false if the operand is true.
 
 ## Bitwise Operators
     
 A bitwise operator is an operator used to perform bitwise operations on bit patterns. There are six types.
 
-- Bitwise And `&`: Bitwise & operator performs binary AND operation bit by bit on the operands.
-- Bitwise OR `|`: Bitwise | operator performs binary OR operation bit by bit on the operands.
-- Bitwise XOR `^`: Bitwise ^ operator performs binary XOR operation bit by bit on the operands.
-- Bitwise compliment `~`: Bitwise ~ operator performs binary NOT operation bit by bit on the operand.
-- Left Shift `<<`: This operator shifts the bits of the left operand to left by number of times specified by right operand.
-- Right Shift `>>`: This operator shifts the bits of the left operand to right by number of times specified by right operand.
+- Bitwise And `&` Bitwise & operator performs binary AND operation bit by bit on the operands.
+- Bitwise OR `|` Bitwise | operator performs binary OR operation bit by bit on the operands.
+- Bitwise XOR `^` Bitwise ^ operator performs binary XOR operation bit by bit on the operands.
+- Bitwise compliment `~` Bitwise ~ operator performs binary NOT operation bit by bit on the operand.
+- Left Shift `<<` This operator shifts the bits of the left operand to left by number of times specified by right operand.
+- Right Shift `>>` This operator shifts the bits of the left operand to right by number of times specified by right operand.
 
 ## File Test Operators
 
