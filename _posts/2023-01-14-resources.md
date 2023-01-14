@@ -1,5 +1,6 @@
 ---
 title: Resources
+date: 2023-01-14 13:35:00 -0500
 categories: [Resources]
 tags: [tools, guides, hashes, privesc, command line, linux, windows, sql, powershell, practice, evasion]
 pin: true 
