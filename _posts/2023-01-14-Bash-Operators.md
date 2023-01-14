@@ -12,7 +12,7 @@ There are five basic operators in bash/shell scripting:
 
 1. [Arithmetic Operators](#arithmetic-operators)
 2. [Relational Operators](#relational-operators)
-3. [Logigal Operators](#logical-operators)
+3. [Logical Operators](#logical-operators)
 4. [Bitwise Operators](#bitwise-operators)
 5. [File Test Operators](#file-test-operators)
 
