@@ -1,7 +1,7 @@
 ---
 title: NahamStore
-date: 2022-12-28 18:32:00 -0500
-categories: [Tryhackme, Walkthrough, CTF]
+date: 2023-01-13 18:32:00 -0500
+categories: [Walkthrough, Tryhackme, CTF]
 tags: [security, web, bug bounty]
 ---
 
