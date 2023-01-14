@@ -3,17 +3,18 @@ title: Linux Bash Operators
 date: 2023-01-14 04:20:00 -0500
 categories: [Scripting, Bash, Walkthrough]
 tags: [Bash, Walkthrough, Scripting, Linux, operators,]
+pin: true
 ---
 
 ## Operators in Shell Scripts
 
 There are five basic operators in bash/shell scripting:
 
-1. Arithmetic Operators
-2. Relational Operators
-3. Boolean Operators
-4. Bitwise Operators
-5. File Test Operators
+1. [Arithmetic Operators](#arithmetic-operators)
+2. [Relational Operators](#relational-operators)
+3. [Logigal Operators](#logical-operators)
+4. [Bitwise Operators](#bitwise-operators)
+5. [File Test Operators](#file-test-operators)
 
 ## Arithmetic Operators
 
@@ -57,7 +58,7 @@ A bitwise operator is an operator used to perform bitwise operations on bit patt
 - Left Shift `<<`: This operator shifts the bits of the left operand to left by number of times specified by right operand.
 - Right Shift `>>`: This operator shifts the bits of the left operand to right by number of times specified by right operand.
 
-## File Test Operator
+## File Test Operators
 
 These operators are used to test a particular property of a file.
 
