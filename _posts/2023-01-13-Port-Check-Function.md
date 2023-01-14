@@ -1,7 +1,7 @@
 ---
 title: Port use Check Function
 date: 2023-01-11 20:58:00 -0500
-categories: [Scripting, Walkthrough, Bash]
+categories: [Scripting, Bash, Walkthrough]
 tags: [Bash, Walkthrough, Scripting, Linux, if statement, functions]
 ---
 
@@ -12,10 +12,11 @@ This simple bash script goes through a process of checking certain variables, to
 ```bash
 #!/bin/bash
 
-process=$((0))
+
 
 port_check ()
 {
+	process=0
     echo "Enter port for the server between 20000-30000 but not default: "
     read port_choice
 		if [[ $port_choice != '^[0-9]+$' ]] && [[ $port_choice -ge 20000 && $port_choice -le 30000 ]];	then 

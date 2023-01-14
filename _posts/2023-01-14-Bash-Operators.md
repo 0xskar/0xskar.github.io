@@ -1,7 +1,7 @@
 ---
 title: Linux Bash Operators
 date: 2023-01-14 04:20:00 -0500
-categories: [Scripting, Walkthrough, Bash]
+categories: [Scripting, Bash, Walkthrough]
 tags: [Bash, Walkthrough, Scripting, Linux, operators,]
 ---
 
