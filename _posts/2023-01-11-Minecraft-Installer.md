@@ -310,4 +310,6 @@ build
 {: file="./build.sh" }
 
 
+Everything together should be a working script.
 
+I am going to probably work on making a web frontend to manipulate the server variables which would be cool to test some things I have learned. See if i can make it secure.

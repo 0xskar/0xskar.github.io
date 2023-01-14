@@ -21,7 +21,7 @@ timezone: America/Vancouver
 
 title: 0xskar                          # the main title
 
-tagline: hacktivities   # it will display as the sub-title
+tagline: Some of my resources, notes, and a collection of walkthroughs for boxes I've managed to exploit.   # it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
   A collection of my walkthroughts and journey through information security.
