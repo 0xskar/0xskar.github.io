@@ -1,5 +1,5 @@
 ---
-title: Bash Operators
+title: Linux Bash Operators
 date: 2023-01-14 20:58:00 -0500
 categories: [Scripting, Walkthrough, Bash]
 tags: [Bash, Walkthrough, Scripting, Linux, operators,]
