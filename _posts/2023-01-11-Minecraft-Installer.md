@@ -294,7 +294,7 @@ With our package and installation ready we can use use a simple but powerful com
 
 ```bash
 	# tar and extract to folder
-	(cd ./dist && tar cv .) | (cd /tmp/home/oskar/minecraft && tar xvf -)
+	(cd ./dist && tar cv .) | (cd /tmp/$install_dir && tar xvf -)
 	echo "COMPLETED"
 }
 
@@ -310,6 +310,6 @@ build
 {: file="./build.sh" }
 
 
-Everything together should be a working script.
+Everything together should be a working script. Except it will extract the files to `/tmp` for testing purposes, which wouldn't be idea. Anyways was good practice. 
 
 I am going to probably work on making a web frontend to manipulate the server variables which would be cool to test some things I have learned. See if i can make it secure.

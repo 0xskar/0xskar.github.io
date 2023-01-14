@@ -51,12 +51,12 @@ They are also known as boolean operators. These are used to perform logical oper
     
 A bitwise operator is an operator used to perform bitwise operations on bit patterns. There are six types.
 
-- `&` Bitwise And - Bitwise & operator performs binary AND operation bit by bit on the operands.
-- `|` Bitwise OR - Bitwise | operator performs binary OR operation bit by bit on the operands.
-- `^` Bitwise XOR - Bitwise ^ operator performs binary XOR operation bit by bit on the operands.
-- `~` Bitwise compliment - Bitwise ~ operator performs binary NOT operation bit by bit on the operand.
-- `<<` Left Shift - This operator shifts the bits of the left operand to left by number of times specified by right operand.
-- `>>` Right Shift - This operator shifts the bits of the left operand to right by number of times specified by right operand.
+- `&` Bitwise And - Performs binary AND operation bit by bit on the operands.
+- `|` Bitwise OR - Performs binary OR operation bit by bit on the operands.
+- `^` Bitwise XOR - Performs binary XOR operation bit by bit on the operands.
+- `~` Bitwise compliment - Performs binary NOT operation bit by bit on the operand.
+- `<<` Left Shift - Shifts the bits of the left operand to left by number of times specified by right operand.
+- `>>` Right Shift - Shifts the bits of the left operand to right by number of times specified by right operand.
 
 ## File Test Operators
 
