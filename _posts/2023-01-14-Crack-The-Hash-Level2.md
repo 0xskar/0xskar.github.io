@@ -52,10 +52,10 @@ There are a lot of different types of wordlists for hash cracking, and we can ma
 | Function | Outcome |
 |----------|---------|
 | `search <term>` | searches for term online |
-| `fetch -l <term>` | downloads and installs locally |
-| `search -l <term>` | searches locally for list |
+| `search -l <term>` | searches for list locally |
+| `fetch <term>` | downloads wordlists |
 | `fetch <term> -d` | decompresses a locally stored .tar | 
-| `list -g <term>` | search for a specific category |
+| `list -g <term> ` | search for a specific category |
 
 I have also setup an alias in my .zshrc for quick access. That way only have to use `wlctl`.
 
@@ -80,7 +80,7 @@ The main idea of rules is that they mute the wordlists to follow a rule we want 
 
 | Rule | Idea/Usecase |
 |------|--------------|
-| Border mutation | commonly used combinations of digits and special symbols can be added at the end or at the beginning, or both |
+| Border mutation | combinations of digits and special added at the end or at the beginning, or both |
 | Freak mutation | letters are replaced with similarly looking special symbols |
 | Case mutation | the program checks all variations of uppercase/lowercase letters for any character |
 | Order mutation | character order is reversed |
@@ -118,7 +118,7 @@ Rules are generally the better way to go to save space and time but there are in
 
 ### Mentalist
 
-[Mentalist](https://github.com/sc0tfree/mentalist) is another awesome tool at our disposal. We can import a wordlist, add some Case, Substitution, Append/Prepend rules.
+[Mentalist](https://github.com/sc0tfree/mentalist) is a tool at our disposal. We can import a wordlist, add some Case, Substitution, Append/Prepend rules. It can make some pretty big files though so rules save a lot of space. It is pretty good for putting a few lists together and simple rules though.
 
 ### CeWL
 
@@ -146,6 +146,8 @@ We have to crack a series of hashes. Each hash has a scenario that will suggest 
 
 ### b16f211a8ad7f97778e5006c7cecdf31
 
+![Crack the hash 1](/assets/crackthehash02.png)
+
 ```bash
 ┌──(oskar㉿kali)-[~/Documents/thm/crackthehash2]
 └─$ haiti b16f211a8ad7f97778e5006c7cecdf31
@@ -168,6 +170,29 @@ RAdmin v2.x [HC: 9900] [JtR: radmin]
 Umbraco HMAC-SHA1 [HC: 24800]
 Bitcoin WIF private key (P2PKH), compressed [HC: 28501]
 Bitcoin WIF private key (P2PKH), uncompressed [HC: 28502]
+```
+
+#### Information
+
+- His name is John Neige (british name?)
+- Password is usually the name of his son
+- Use border mutation. 
+- Combination (so two) of digits and special symbols at the end or beginning, or both.
+
+Need a wordlist of british names
+
+```bash
+wordlistctl search british
+wordlistctl fetch -d british
+```
+
+Open up the wordlist in Mentalist and add a rule for border mutation. Border mutation is a combinations of digits and special symbols can be added at the end or at the beginning, or both.
+
+We can create a rule for this first.
+
+```bash
+[List.Rules:OSKAR01]
+$[0-9]$[0-9]
 ```
 
 
