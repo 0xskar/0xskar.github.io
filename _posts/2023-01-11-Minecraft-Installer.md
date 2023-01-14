@@ -7,14 +7,6 @@ tags: [Minecraft, scripting, Linux, bash]
 
 So just fooling around and wanted to make an installation script to install a Minecraft dedicated server on Linux. I've done a little research so going to try to put together some sort of an application.
 
-## Tools
-
-| Tools | Description |
-|-------|-------------|
-| [Pyarmor](https://wiki.python.org/moin/Pyarmor) | Pyarmor is a command line tool used to obfuscate python scripts, bind obfuscated scripts to fixed machine or expire obfuscated scripts. |
-| [Makeself](https://makeself.io/) | Allows creating a self-extracting distribution package in Unix systems. |
-| [PyInstaller](https://pyinstaller.readthedocs.io/en/stable/usage.html) | It Bundles a Python application and all its dependencies into a single package. |
-
 ## Application Structure
 
 Going to start off with the application structure.
@@ -29,32 +21,6 @@ minecraft_installer
 ```
 
 The main folder is going to contain the nessecary files to build the application, and best practice is to have a script for the package creation seperated in a `build.sh` file.
-
-This file will have multiple steps. We will start by declaring the pyarmor path.
-
-```bash
-PYARMOR="$HOME/.local/bin/pyarmor"
-```
-{: file="minecraft/build.sh" }
-
-We are going to use this file to build our dependent modules, like copying binaries and libraries to a folder.
-
-Now we will generate distribution packages with pyarmor. This option uses pyinstaller for creating the package bundle. Also, you can use the option “-e” to pass extra options to pyinstaller
-
-```bash
-#!/bin/sh
-PYARMOR="$HOME/.local/bin/pyarmor"
-${PYARMOR} pack --clean -e '--paths='path_to_search_imports:.' --hidden-import='PIL._tkinter_finder' --add-binary='path_to_lib.so:.' --exclude-module=modules_not_needed --add-data='./Config:Config' --add-data='./*.png:.'' install.py
-```
-{: file="minecraft/build.sh" }
-
-Pyarmor will create the default bundled package in `/dist`. We can change this by using the `-O` or output option.
-
-Setup makeself so we can create self-extracting archives from the package folder created by pyarmor.
-
-```bash
-sudo nala install makeself
-```
 
 ## Payload
 
@@ -74,14 +40,11 @@ java -Xmx1024M -Xms1024M -jar server.jar nogui
 
 This will allow us to modify and automate the process of setting up the server. After we have configured everything we can tar for delivery.
 
-## Create Package for delivery
-tar -cvf serverfiles.tar *
-
 ## User Configuration 
 
-It's time to create the installation script that will install the `dist/server.jar` file. We can pretty much modify this script to do anything for us. 
+It's time to create a script that will install and configure our `./dist` files. We can pretty much modify this script to do anything for us. 
 
-We setup an agreement for the installation and also a configuration for the port to use for the installation.
+We need to setup a script that checks for open ports as well as acceptable folders that will install our configured server files. So lets go.
 
 ```bash
 install_main ()
@@ -310,6 +273,6 @@ build
 {: file="./build.sh" }
 
 
-Everything together should be a working script. Except it will extract the files to `/tmp` for testing purposes, which wouldn't be idea. Anyways was good practice. 
+Everything together should be a working script. Except it will extract the files to `/tmp` for testing purposes, which wouldn't be ideal. Anyways was good practice. 
 
 I am going to probably work on making a web frontend to manipulate the server variables which would be cool to test some things I have learned. See if i can make it secure.
