@@ -8,6 +8,8 @@ pin: true
 
 A collection of links i've found useful. Tools/Guides/Websites.
 
+![Cosmic Nebula](/assets/Digital_Space_Galaxy_Universe_Cosmic_Nebula-High_Quality_HD_Wallpaper_1366x768.jpg)
+
 ## Useful Tools
 
 - [GTFO Bins](https://gtfobins.github.io/) - Linux Binaries
@@ -42,7 +44,9 @@ A collection of links i've found useful. Tools/Guides/Websites.
 - [Haiti](https://noraj.github.io/haiti/#/pages/install) - A ruby based hash identifier
 - [wordlistctl](https://github.com/BlackArch/wordlistctl) is a python script that fetches, installs, updates, and searches for wordlist archives from different websites with more than 6400 avalable.
 - [proper rules syntax](https://www.openwall.com/john/doc/RULES.shtml).
+- [John the Ripper Rules](https://charlesreid1.com/wiki/John_the_Ripper/Rules) - good collection of rules to add to `/etc/john/john.conf`
 - [Mentalist](https://github.com/sc0tfree/mentalist) - Import a wordlist, add some Case, Substitution, Append/Prepend rules.
+
 
 
 ## Privilege Escalation
