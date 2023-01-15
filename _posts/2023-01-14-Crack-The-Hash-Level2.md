@@ -186,7 +186,7 @@ wordlistctl search british
 wordlistctl fetch -d british
 ```
 
-Open up the wordlist in Mentalist and add a rule for border mutation. Border mutation is a combinations of digits and special symbols can be added at the end or at the beginning, or both.
+Border mutation is a combinations of digits and special symbols can be added at the end or at the beginning, or both.
 
 We can create a rule for this first.
 
