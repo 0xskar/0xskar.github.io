@@ -6,6 +6,8 @@ tags: [Bash, Scripting, Linux, operators,]
 pin: true
 ---
 
+![Cyberpunk Hacker](/assets/cyberpunk-hacker.jpg)
+
 ## Operators in Shell Scripts
 
 There are 6 operators in bash/shell scripting:

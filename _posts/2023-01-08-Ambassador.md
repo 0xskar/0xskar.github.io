@@ -5,6 +5,8 @@ categories: [Walkthrough, Hackthebox, CTF]
 tags: [grafana, curl, devops, sqlite, mysql, linux, cve-2021-43798, consul, git]
 ---
 
+![Hacker in a hood](/assets/hacker-hoodie.jpg)
+
 - `sudo nmap -p- -T4 10.10.11.183 -vvvv`
 
 Ports open: 22,80,3000,3006
