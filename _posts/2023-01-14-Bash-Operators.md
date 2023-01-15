@@ -8,13 +8,14 @@ pin: true
 
 ## Operators in Shell Scripts
 
-There are five basic operators in bash/shell scripting:
+There are 6 operators in bash/shell scripting:
 
 1. [Arithmetic Operators](#arithmetic-operators)
 2. [Relational Operators](#relational-operators)
 3. [Logical Operators](#logical-operators)
 4. [Bitwise Operators](#bitwise-operators)
 5. [File Test Operators](#file-test-operators)
+6. [Integer Comparison](#integer-comparison) 
 
 ## Arithmetic Operators
 
@@ -71,3 +72,11 @@ These operators are used to test a particular property of a file.
 - `-x` operator: This operator checks whether the given file has execute access or not. If it has execute access then it returns true otherwise returns false.
 - `-s` operator: This operator checks the size of the given file. If the size of given file is greater than 0 then it returns true otherwise it returns false.
 
+## Integer Comparison 
+
+- `-eq` is equal to `if [ "$a" -eq "$b" ]`
+- `-ne` is not equal to `if [ "$a" -ne "$b" ]`
+- `-gt` is greater than `if [ "$a" -gt "$b" ]`
+- `-ge` is greater than or equal to `if [ "$a" -ge "$b" ]`
+- `-lt` is less than `if [ "$a" -lt "$b" ]`
+- `-le` is less than or equal to `if [ "$a" -le "$b" ]`
