@@ -5,7 +5,7 @@ categories: [Resources, CSS, Web]
 tags: [html, css, color schemes]
 ---
 
-Going to work on designing something and wanted to keep this information for reference.
+Color schemes are a good way to plan in advance for a project design. I was going to work on designing something new and wanted to keep this information for reference.
 
 <https://colorffy.com/color-scheme-generator>
 
