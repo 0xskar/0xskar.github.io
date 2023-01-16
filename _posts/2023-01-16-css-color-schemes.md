@@ -1,9 +1,8 @@
 ---
 title: CSS Color Schemes
 date: 2023-01-16 04:20:00 -0500
-categories: [Resources, CSS, Walkthrough]
+categories: [Resources, CSS, Web]
 tags: [html, css, color schemes]
-pin: true
 ---
 
 Going to work on designing something and wanted to keep this information for reference.
