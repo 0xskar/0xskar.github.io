@@ -2,63 +2,23 @@
 title: CSS Color Schemes
 date: 2023-01-16 04:20:00 -0500
 categories: [Resources, CSS, Web]
-tags: [html, css, color schemes]
+tags: [html, css, color schemes, fonts]
 ---
 
 Color schemes are a good way to plan in advance for a project design. I was going to work on designing something new and wanted to keep this information for reference.
 
+## Colorffy
+
 <https://colorffy.com/color-scheme-generator>
 
-## Reference Pic:
+### Reference Pic:
 
 ![Reference Red Scheme](/assets/css-color-schemes.png)
 
-### Shades of #822222
+This site is pretty useful as it gives multiple versions of shades and tints, will keep it around for later for sure.
 
-The color shades scheme is a group of colors that are variations of a single hue,
-with different levels of lightness and darkness. This scheme creates a cohesive and subtle look.
+## Google fonts
 
-#822222
+A good resource and fonts able to download and use for the web.
 
-#73201f
-
-#651e1c
-
-#571c19
-
-#491916
-
-#3b1613
-
-#2e1310
-
-#22100b
-
-#160805
-
-#000000
-
-### Tints of #822222
-
-The color tints scheme is a group of colors that are variations of a single hue,
-with added white to create a lighter and more delicate look.
-
-#822222
-
-#923c37
-
-#a2544d
-
-#b16c64
-
-#c0847c
-
-#cd9c95
-
-#dbb4ae
-
-#e7cdc8
-
-#f3e6e3
-
-#ffffff
+<https://fonts.google.com/knowledge>
