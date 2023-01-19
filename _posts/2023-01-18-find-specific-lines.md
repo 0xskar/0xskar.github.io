@@ -1,11 +1,11 @@
 ---
-title: Shell LeetCode
+title: Find Specific Lines in Bash
 date: 2023-01-19 04:20:00 -0500
 categories: [Resources, Bash, Walkthrough]
 tags: [Bash, Scripting, Linux, shell, leetcode, grep, egrep, sed, awk]
 ---
 
-## egrep phone numbers
+## grep phone numbers
 
 Given a text file file.txt that contains a list of phone numbers (one per line), write a one-liner bash script to print all valid phone numbers.
 
