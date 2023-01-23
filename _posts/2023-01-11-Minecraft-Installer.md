@@ -36,7 +36,7 @@ Then we need to extract the jar files then delete the server.jar
 ```bash
 java -Xmx1024M -Xms1024M -jar server.jar nogui
 ```
-{: file="dist/}
+{: file="dist/" }
 
 This will allow us to modify and automate the process of setting up the server. After we have configured everything we can tar for delivery.
 

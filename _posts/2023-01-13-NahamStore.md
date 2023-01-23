@@ -27,3 +27,4 @@ feroxbuster -u http://nahamstore.thm -w /usr/share/dirbuster/wordlists/directory
 wfuzz -Z -c -u http://FUZZ.nahamstore.htm -w /usr/share/seclists/Discovery/DNS/bitquark-subdomains-top100000.txt --sc 200,202,204,301,302,307,403
 ```
 
+`
