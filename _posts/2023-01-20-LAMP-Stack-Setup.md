@@ -21,6 +21,12 @@ We are going to setup a network of 4 computers and a load balancer which will he
 ![Stack Setup](/assets/stack-setup.png)
 
 
+## Table of Contents:
+
+1. [How to How to Setup nginx, PHP, and PHP-FPM](#how-to-setup-nginx-php-and-php-fpm)
+2. 
+
+
 ## How to Setup nginx, PHP, and PHP-FPM
 
 1. [Install Nginx on Ubuntu](#install-nginx-on-ubuntu).
@@ -51,12 +57,12 @@ and verify the server is operational
 systemctl status nginx
 ```
 
-### Install the php-fpm for Nginx package
+### Install the php-fpm packages 
 
 We can install php-fpm with the apt-get command. We have to make sure we install php-fpm and not php for conflicts will arise, it will install apache2 which will conflict with our nginx installation.
 
 ```bash
-apt install php8.1-fpm
+apt install php8.1-fpm php8.1-common php8.1-mysql php8.1-xml php8.1-xmlrpc php8.1-curl php8.1-gd php8.1-imagick php8.1-cli php8.1-dev php8.1-imap php8.1-mbstring php8.1-opcache php8.1-redis php8.1-soap php8.1-zip -y
 ```
 
 and make sure the service is running
@@ -132,7 +138,7 @@ server {
 ```
 {: file="/etc/nginx/sites-available/default" }
 
-We can validate a nginx config file with `ngint -t`
+We can validate a nginx config file with `nginx -t`
 
 ```bash
 root@0xskar-webserver01:/home/oskar# nginx -t
@@ -145,7 +151,7 @@ nginx: configuration file /etc/nginx/nginx.conf test is successful
 We can add info.php to the webdirectory to check everything is working correctly
 
 ```php
-<?php echo phpinfo();?>
+<?php echo phpinfo();?>x
 ```
 {: file="/var/www/wordpress/html/info.php" }
 
@@ -164,6 +170,10 @@ env[TMP] = /tmp
 ```
 {: file="/etc/php/8.1/fpm/pool.d/wordpress.conf" }
 
-Upon doing all of this we can restart all of the services and visit the `info.php`.
+Upon doing all of this we can restart all of the services and visit the `info.php`. Should see at the top the server API is using FPM/FastCGI.
 
 ![lamp php-fpm setup](/assets/lamp-stack-php-fpm02.png)
+
+We can do this again lets say for a joomla user and install a joomla website for them.
+
+I've done this on one server with a wordpress at home.osk and a joomla site at joomla.home.osk, also another wordpress site at home2.osk on another nginx server. Going to setup mysql replication now.
