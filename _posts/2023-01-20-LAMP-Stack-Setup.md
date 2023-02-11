@@ -30,7 +30,7 @@ We are going to setup a network of 4 computers and a load balancer which will he
 ## How to Setup nginx, PHP, and PHP-FPM
 
 1. [Install Nginx on Ubuntu](#install-nginx-on-ubuntu).
-2. [Install the php-fpm for Nginx package](#install-the-php-fpm-for-nginx-package).
+2. [Install the php-fpm for Nginx package](#install-the-php-fpm-packages).
 3. [Edit the server’s default config file to support PHP in Nginx](#add-php-support-to-nginx).
 4. [Add a new pool configuration file](#add-a-new-pool-configuration-file).
 5. [Add a PHP file to Nginx’s html directory, Test the PHP, Nginx and PHP-FPM configuration.](#add-a-php-file-to-nginxs-html-directory).
