@@ -105,6 +105,8 @@ To make your dataset a little more realistic, insert a little random noise into 
 
 Don't rely on broadcasting. Instead, create a noise array having the same dimension as label.
 
+### Code
+
 ```python
 #task 2 problemset
 noise = np.random.random([15] * 4) - 2
