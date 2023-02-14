@@ -99,3 +99,16 @@ label = (3 * feature) + 4
 print(label)
 ```
 
+## Task 2: Add Some Noise to the Dataset
+
+To make your dataset a little more realistic, insert a little random noise into each element of the label array you already created. To be more precise, modify each value assigned to label by adding a different random floating-point value between -2 and +2.
+
+Don't rely on broadcasting. Instead, create a noise array having the same dimension as label.
+
+```python
+#task 2 problemset
+noise = np.random.random([15] * 4) - 2
+print(noise)
+label = label + noise
+print(label)
+```
