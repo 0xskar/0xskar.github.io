@@ -27,6 +27,8 @@ import tensorflow as tf
 from matplotlib import pyplot as plt
 ```
 
+We also need numpy but later versions have errors, `pip install numpy==1.21.6`
+
 ## Define functions that build and train a model
 
 The following code defines two functions:
@@ -170,3 +172,4 @@ trained_weight, trained_bias, epochs, rmse = train_model(my_model, my_feature,
 plot_the_model(trained_weight, trained_bias, my_feature, my_label)
 plot_the_loss_curve(epochs, rmse)
 ```
+
