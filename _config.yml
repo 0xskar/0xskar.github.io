@@ -21,7 +21,7 @@ timezone: America/Vancouver
 
 title: 0xskar                          # the main title
 
-tagline: random internet and computer resources   #it will display as the sub-title
+tagline: my collection of walkthroughs and resources   #it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
   A tech-blog type website that contains a collection of walkthroughts and resources for information security.
