@@ -3,7 +3,7 @@ title: Machine Learning
 date: 2023-02-10 01:40:00 -0500
 categories: [Resources, machine learning]
 tags: [machine learning, data]
-published: true
+published: false
 ---
 
 These are my notes from [Google's Introduyctino to Machine Learning Problem Framing](https://developers.google.com/machine-learning/problem-framing).

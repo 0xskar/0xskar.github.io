@@ -3,7 +3,7 @@ title: NumPy UltraQuick Tutorial
 date: 2023-02-13 01:40:00 -0500
 categories: [Resources, machine learning]
 tags: [machine learning, data, numpy, python, tensorflow]
-published: true
+published: false
 ---
 
 Using the `tf.keras` module of tensorflow for requires at least a little understanding of `NumPy`. So just going over their tutorial for quick reference.
