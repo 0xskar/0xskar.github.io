@@ -23,6 +23,7 @@ A collection of links i've found useful. Tools/Guides/Websites.
 - [XSS Cheatsheet](https://3os.org/penetration-testing/cheatsheets/xss-cheatsheet/#img-onerror-and-javascript-alert-encode)- a series of XSS attacks that can be used to bypass certain XSS defensive filters
 - [Custom Word List generator](https://github.com/digininja/CeWL) - Web crawler.
 - With [TTPassGen](https://github.com/tp7309/TTPassGen) we can create wordlists from scratch.
+- [NoSQL Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/NoSQL%20Injection#authentication-bypass) - NoSQL payload allthethings
 
 ## Useful Guides
 
