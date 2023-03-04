@@ -116,4 +116,10 @@ A collection of links i've found useful. Tools/Guides/Websites.
 
 - [Fast Flux](https://unit42.paloaltonetworks.com/fast-flux-101/) - How Cybercriminals Improve the Resilience of Their Infrastructure to Evade Detection and Law Enforcement Takedowns
 
+## Tutorials/Process Explainations
+
+- [Hacking NodeJS and MongoDB](https://blog.websecurify.com/2014/08/hacking-nodejs-and-mongodb)
+
+
+
 * * *
