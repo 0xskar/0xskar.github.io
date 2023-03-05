@@ -8,8 +8,6 @@ pin: true
 
 A collection of links i've found useful. Tools/Guides/Websites.
 
-![Cosmic Nebula](/assets/Digital_Space_Galaxy_Universe_Cosmic_Nebula-High_Quality_HD_Wallpaper_1366x768.jpg)
-
 ## Useful Tools
 
 - [GTFO Bins](https://gtfobins.github.io/) - Linux Binaries
@@ -121,5 +119,6 @@ A collection of links i've found useful. Tools/Guides/Websites.
 - [Hacking NodeJS and MongoDB](https://blog.websecurify.com/2014/08/hacking-nodejs-and-mongodb)
 
 
+![Cosmic Nebula](/assets/Digital_Space_Galaxy_Universe_Cosmic_Nebula-High_Quality_HD_Wallpaper_1366x768.jpg)
 
 * * *

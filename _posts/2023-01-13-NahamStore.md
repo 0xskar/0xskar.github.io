@@ -95,11 +95,44 @@ The vulnerability affects `http://nahamstore.thm/product`
 
 URL encoded GET input name was set to `Sticker Pack</title><script>alert()</script>`
 
+### JS Variable Escape
+
+```javascript
+var search = '';
+$.get('/search-products?q=' + search,function(resp){
+    if( resp.length == 0 ){
+
+        $('.product-list').html('<div class="text-center" style="margin:10px">No matching products found</div>');
+
+    }else {
+        $.each(resp, function (a, b) {
+            $('.product-list').append('<div class="col-md-4">' +
+                '<div class="product_holder" style="border:1px solid #ececec;padding: 15px;margin-bottom:15px">' +
+                '<div class="image text-center"><a href="/product?id=' + b.id + '"><img class="img-thumbnail" src="/product/picture/?file=' + b.img + '.jpg"></a></div>' +
+                '<div class="text-center" style="font-size:20px"><strong><a href="/product?id=' + b.id + '">' + b.name + '</a></strong></div>' +
+                '<div class="text-center"><strong>$' + b.cost + '</strong></div>' +
+                '<div class="text-center" style="margin-top:10px"><a href="/product?id=' + b.id + '" class="btn btn-success">View</a></div>' +
+                '</div>' +
+                '</div>');
+        });
+    }
+````
+
 ### Returns Page
 
 - we can escape the textarea with `</textarea>` and `<script>alert()</script>`
 
+### Value of H1 Tag
 
+When you hit a nonexisting endpoint `http://nahamstore.thm/0xskar` an error page reflects the path entered.
+
+### Hidden Parameter
+
+On a product page (eg. `http://nahamstore.thm/product?id=1&added=1`), you can enter a discount code. The name of the POST parameter is discount:
+
+```html
+<div style="margin-bottom:10px"><input placeholder="Discount Code" class="form-control" name="discount" value=""></div>
+```
 
 ## SQL Injection
 
