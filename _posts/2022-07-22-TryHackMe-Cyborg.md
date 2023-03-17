@@ -1,5 +1,5 @@
 ---
-title: Walkthrough - Cyborg	
+title: Walkthrough - Cyborg
 published: true
 ---
 

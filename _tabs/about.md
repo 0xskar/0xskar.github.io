@@ -38,3 +38,13 @@ Practiced the majority of practical skills required for the CompTIA PenTest+.
 
 Experience with security tools, reconnaissance, exploitation techniques, vulnerability scanning, network and Windows exploitation, cryptography, advanced computer exploitation, and computing fundamentals.
 
+
+## Some THM Certs
+
+![Pentest+](/assets/THM-9HQHO6JG6Y.png)
+
+![Jr. Penetration Tester](/assets/THM-DXRWRKUM29.png)
+
+![Offensive Pentesting](/assets/THM-PX9IWA4Q7P.png)
+
+![Intro to cybersec](/assets/THM-QWDKQLKDNR.png)

@@ -1,5 +1,5 @@
 ---
-title: Walkthrough - Wgel CTF	
+title: Walkthrough - Wgel CTF
 published: true
 ---
 
