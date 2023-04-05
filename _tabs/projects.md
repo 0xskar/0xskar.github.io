@@ -8,7 +8,7 @@ Collection of some of my python Projects from newest to oldest
 
 ## ISS Tracker/User Tracker
 
-![iss tracker](assets/iss-tracker01.png)
+![iss tracker](https://raw.githubusercontent.com/0xskar/python/main/assets/iss-tracker01.png)
 
 An django ISS Tracker, where users can create accounts that will then translate their location to geocoordinates, latitude/longitude. The user can login/logout and change their profile information such as location or name.
 
