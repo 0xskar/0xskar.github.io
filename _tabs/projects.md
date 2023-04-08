@@ -6,6 +6,16 @@ order: 1
 
 Collection of some of my python Projects from newest to oldest
 
+## Watermark Wizard
+
+![Wiz Upload](https://raw.githubusercontent.com/0xskar/python/main/assets/watermarkwiz01.png)
+
+A flask application that uses Pillow to watermark images
+
+![Wiz watermarked](https://raw.githubusercontent.com/0xskar/python/main/assets/watermarkwiz02.png)
+
+View repo [here](https://github.com/0xskar/Watermark-Wizard).
+
 ## ISS Tracker/User Tracker
 
 ![iss tracker](https://raw.githubusercontent.com/0xskar/python/main/assets/iss-tracker01.png)
