@@ -6,6 +6,14 @@ order: 1
 
 Collection of some of my python Projects from newest to oldest
 
+## Breakout 
+
+My version of Wozniak's breakout.
+
+![Breakout](https://github.com/0xskar/python/raw/main/assets/breakout.png)
+
+[Repository](https://github.com/0xskar/Breakout)
+
 ## tkTyper
 
 A simple typing speedtest in tkinter. Uses API to get random paragraphs then calculates your WPM.
