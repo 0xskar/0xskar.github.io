@@ -98,6 +98,8 @@ Once logged into the user check /opt/minecraft for the server flag and a note. A
 
 once we su to cybercrafted `sudo -l` lets us see we can run screen as root.
 
-`sudo scree`
+`sudo screen`
 
-using screen commands we can drop a shell with `control+a` then `c`
+using screen commands we can drop a shell with `control+a` then `c` then get the root flag withing the root directory.
+
+okay, fun box that lets you use some different tools.
