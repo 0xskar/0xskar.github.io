@@ -4,31 +4,6 @@ icon: fas fa-info-circle
 order: 1
 ---
 
-Collection of some of my python Projects from newest to oldest
-
-## Breakout 
-
-My version of Wozniak's breakout.
-
-![Breakout](https://github.com/0xskar/python/raw/main/assets/breakout.png)
-
-[Repository](https://github.com/0xskar/Breakout)
-
-## tkTyper
-
-A simple typing speedtest in tkinter. Uses API to get random paragraphs then calculates your WPM.
-
-![tkTyper](https://github.com/0xskar/python/raw/main/assets/tktyper.png)
-
-## Watermark Wizard
-
-![Wiz Upload](https://raw.githubusercontent.com/0xskar/python/main/assets/watermarkwiz01.png)
-
-A flask application that uses Pillow to watermark images
-
-![Wiz watermarked](https://raw.githubusercontent.com/0xskar/python/main/assets/watermarkwiz02.png)
-
-View repo [here](https://github.com/0xskar/Watermark-Wizard).
 
 ## ISS Tracker/User Tracker
 
