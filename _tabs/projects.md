@@ -4,6 +4,34 @@ icon: fas fa-info-circle
 order: 1
 ---
 
+## Dating App
+
+Work in progress dating app designed to match users based on core factors like religion, politics, handling money, hygiene, and lifestyle choices. Users can specify how they would like their potential matches to respond to the same questions and weight these responses based on importance.
+
+This project is still very much in early stages of construction.
+
+### Features
+
+- User Registration ✅
+- User Login (with options for Google and Facebook login) ✅
+- Profile Management ❌
+- Matching Algorithm ❌
+- Messaging System ❌
+- Privacy Settings ❌
+- Event-Based Dating ❌
+
+## Requirements
+
+- Python 3.x
+- Flask
+- SQLAlchemy
+- Flask-Migrate
+- Flask-Login
+- Flask-OAuthLib
+- PostgreSQL
+- Docker (for containerization)
+
+You can check the repo out [here](https://github.com/0xskar/bestdate-docker).
 
 ## ISS Tracker/User Tracker
 
